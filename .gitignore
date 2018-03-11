@@ -261,4 +261,4 @@ __pycache__/
 *.pyc
 
 # MySQL Workbench backup
-app2000v.mwb.bak
+*.mwb.bak

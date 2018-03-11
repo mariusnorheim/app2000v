@@ -1,6 +1,6 @@
 ﻿namespace HMS
 {
-    partial class Brukere
+    partial class Content
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // Content
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.ClientSize = new System.Drawing.Size(800, 600);
+            this.ForeColor = System.Drawing.Color.White;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "Content";
+            this.Text = "Content";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

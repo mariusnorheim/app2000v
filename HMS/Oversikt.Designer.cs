@@ -28,16 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // Oversikt
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(1000, 650);
-            this.Name = "Oversikt";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            this.components = new System.ComponentModel.Container();
         }
 
         #endregion

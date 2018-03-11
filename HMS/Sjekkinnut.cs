@@ -8,12 +8,11 @@ using System.Windows.Forms;
 
 namespace HMS
 {
-    public partial class Sjekkinnut : HMS.UserInterface
+    public partial class Sjekkinnut : HMS.Content
     {
         public Sjekkinnut()
         {
             InitializeComponent();
-            this.labelHeading.Text = "Sjekk inn";
         }
     }
 }

@@ -5,8 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Security.Cryptography;
-
-using MySql.Data;
 using MySql.Data.MySqlClient;
 
 namespace HMS
@@ -24,16 +22,12 @@ namespace HMS
             set;
         }
 
-        public string statusmsg
-        {
-            get;
-            set;
-        }
-
         public DBConn()
         {
             Init();
         }
+
+        StatusLine status = new StatusLine();
 
         private void Init()
         {
@@ -55,7 +49,7 @@ namespace HMS
         {
             try
             {
-                //MessageBox.Show = "Kobler til MySQL database...";
+                status.Message = "Kobler til MySQL database...";
                 conn.Open();
                 return true;
             }
@@ -64,15 +58,15 @@ namespace HMS
                 switch (ex.Number)
                 {
                     case 0:
-                        statusmsg = "Kan ikke koble til MySQL server. Kontakt administrator";
+                        status.Message = "Kan ikke koble til MySQL server. Kontakt administrator";
                         break;
 
                     case 1045:
-                        statusmsg = "Ugyldig brukernavn eller passord til MySQL server. Kontakt administrator";
+                        status.Message = "Ugyldig brukernavn eller passord til MySQL server. Kontakt administrator";
                         break;
 
                     default:
-                        statusmsg = ex.Message;
+                        status.Message = ex.Message;
                         break;
                 }
                 return false;
@@ -89,7 +83,7 @@ namespace HMS
             }
             catch (MySqlException ex)
             {
-                statusmsg = ex.Message;
+                status.Message = ex.Message;
                 return false;
             }
         }
@@ -105,6 +99,7 @@ namespace HMS
                 // Create Mysql Command
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 // ExecuteScalar will return one value
+                status.Message = "Henter resultat fra database";
                 Count = int.Parse(cmd.ExecuteScalar() + "");
                 // Close Connection
                 this.CloseConnection();
@@ -123,21 +118,21 @@ namespace HMS
 
             if (this.OpenConnection() == true)
             {
-                // Create a new data adapter based on the specified query.
+                // Create a new data adapter based on the specified query
                 da = new MySqlDataAdapter(query, conn);
 
                 // Create a command builder to generate SQL update, insert, and
-                // delete commands based on selectCommand. These are used to
-                // update the database.
+                // delete commands. These are used to update the database
+                status.Message = "Henter resultat fra database";
                 MySqlCommandBuilder cb = new MySqlCommandBuilder(da);
 
-                // Populate a new data table and bind it to the BindingSource.
+                // Populate a new data set
                 ds = new DataSet();
                 da.Fill(ds);
                 /*
                 dataGridView1.DataSource = ds;
 
-                // Resize the DataGridView columns to fit the newly loaded content.
+                // Resize the DataGridView columns to fit the newly loaded content
                 dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
                 */
 

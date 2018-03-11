@@ -8,12 +8,11 @@ using System.Windows.Forms;
 
 namespace HMS
 {
-    public partial class Oversikt : HMS.UserInterface
+    public partial class Oversikt : HMS.Content
     {
         public Oversikt()
         {
             InitializeComponent();
-            this.labelHeading.Text = "Oversikt";
         }
     }
 }

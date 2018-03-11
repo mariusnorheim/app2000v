@@ -8,12 +8,11 @@ using System.Windows.Forms;
 
 namespace HMS
 {
-    public partial class Folio : HMS.UserInterface
+    public partial class Folio : HMS.Content
     {
         public Folio()
         {
             InitializeComponent();
-            this.labelHeading.Text = "Folio";
         }
     }
 }

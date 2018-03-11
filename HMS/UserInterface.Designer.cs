@@ -49,6 +49,7 @@
             this.labelTitle = new System.Windows.Forms.Label();
             this.labelHeading = new System.Windows.Forms.Label();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+            this.panelContent = new System.Windows.Forms.Panel();
             this.panelStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.SuspendLayout();
@@ -297,10 +298,10 @@
             // labelStatus
             // 
             this.labelStatus.AutoSize = true;
-            this.labelStatus.Font = new System.Drawing.Font("Andale Mono", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelStatus.Location = new System.Drawing.Point(4, 4);
+            this.labelStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelStatus.Location = new System.Drawing.Point(2, 2);
             this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(0, 13);
+            this.labelStatus.Size = new System.Drawing.Size(0, 15);
             this.labelStatus.TabIndex = 0;
             // 
             // labelTitle
@@ -317,7 +318,7 @@
             // 
             this.labelHeading.AutoSize = true;
             this.labelHeading.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelHeading.Location = new System.Drawing.Point(206, 50);
+            this.labelHeading.Location = new System.Drawing.Point(210, 44);
             this.labelHeading.Name = "labelHeading";
             this.labelHeading.Size = new System.Drawing.Size(0, 19);
             this.labelHeading.TabIndex = 19;
@@ -332,6 +333,13 @@
             this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBoxLogo.TabIndex = 22;
             this.pictureBoxLogo.TabStop = false;
+            // 
+            // panelContent
+            // 
+            this.panelContent.Location = new System.Drawing.Point(200, 30);
+            this.panelContent.Name = "panelContent";
+            this.panelContent.Size = new System.Drawing.Size(800, 600);
+            this.panelContent.TabIndex = 23;
             // 
             // UserInterface
             // 
@@ -358,6 +366,7 @@
             this.Controls.Add(this.buttonMinimize);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.splitterMenu);
+            this.Controls.Add(this.panelContent);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -390,9 +399,10 @@
         private System.Windows.Forms.Button buttonMenu9;
         private System.Windows.Forms.Button buttonMenu10;
         private System.Windows.Forms.Label labelTitle;
-        private System.Windows.Forms.Panel panelStatus;
-        protected System.Windows.Forms.Label labelStatus;
         protected System.Windows.Forms.Label labelHeading;
         private System.Windows.Forms.PictureBox pictureBoxLogo;
+        private System.Windows.Forms.Panel panelContent;
+        private System.Windows.Forms.Panel panelStatus;
+        public System.Windows.Forms.Label labelStatus;
     }
 }

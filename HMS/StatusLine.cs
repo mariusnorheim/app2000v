@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace HMS
 {
-    public class HashResult
+    class StatusLine
     {
-        public string Digest
+        public string Message
         {
             get;
             set;
         }
 
-        public HashResult(string digest)
+        public StatusLine()
         {
-            Digest = digest;
+            //UserInterface.labelStatus.Text = Message;
         }
     }
 }

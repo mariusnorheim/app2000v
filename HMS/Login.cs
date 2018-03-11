@@ -38,8 +38,8 @@ namespace HMS
                 UserInfo.SuperUser = su;
 
                 // Open main program and hide login screen
-                Oversikt oversiktForm = new Oversikt();
-                oversiktForm.Show();
+                UserInterface UIForm = new UserInterface();
+                UIForm.Show();
                 this.Hide();
             }
             else
