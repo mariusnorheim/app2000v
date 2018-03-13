@@ -44,13 +44,10 @@
             this.buttonMenu8 = new System.Windows.Forms.Button();
             this.buttonMenu9 = new System.Windows.Forms.Button();
             this.buttonMenu10 = new System.Windows.Forms.Button();
-            this.panelStatus = new System.Windows.Forms.Panel();
-            this.labelStatus = new System.Windows.Forms.Label();
             this.labelTitle = new System.Windows.Forms.Label();
             this.labelHeading = new System.Windows.Forms.Label();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.panelContent = new System.Windows.Forms.Panel();
-            this.panelStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,7 +67,7 @@
             this.buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonExit.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonExit.ForeColor = System.Drawing.Color.Silver;
-            this.buttonExit.Location = new System.Drawing.Point(972, 0);
+            this.buttonExit.Location = new System.Drawing.Point(1072, 0);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(28, 28);
             this.buttonExit.TabIndex = 1;
@@ -84,7 +81,7 @@
             this.buttonMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMinimize.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonMinimize.ForeColor = System.Drawing.Color.Silver;
-            this.buttonMinimize.Location = new System.Drawing.Point(944, 0);
+            this.buttonMinimize.Location = new System.Drawing.Point(1044, 0);
             this.buttonMinimize.Name = "buttonMinimize";
             this.buttonMinimize.Size = new System.Drawing.Size(28, 28);
             this.buttonMinimize.TabIndex = 2;
@@ -286,29 +283,11 @@
             this.buttonMenu10.UseVisualStyleBackColor = false;
             this.buttonMenu10.Click += new System.EventHandler(this.buttonMenu10_Click);
             // 
-            // panelStatus
-            // 
-            this.panelStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.panelStatus.Controls.Add(this.labelStatus);
-            this.panelStatus.Location = new System.Drawing.Point(200, 630);
-            this.panelStatus.Name = "panelStatus";
-            this.panelStatus.Size = new System.Drawing.Size(800, 20);
-            this.panelStatus.TabIndex = 15;
-            // 
-            // labelStatus
-            // 
-            this.labelStatus.AutoSize = true;
-            this.labelStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelStatus.Location = new System.Drawing.Point(2, 2);
-            this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(0, 15);
-            this.labelStatus.TabIndex = 0;
-            // 
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
             this.labelTitle.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTitle.Location = new System.Drawing.Point(510, 6);
+            this.labelTitle.Location = new System.Drawing.Point(560, 6);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(185, 16);
             this.labelTitle.TabIndex = 13;
@@ -338,7 +317,7 @@
             // 
             this.panelContent.Location = new System.Drawing.Point(200, 30);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(800, 600);
+            this.panelContent.Size = new System.Drawing.Size(900, 620);
             this.panelContent.TabIndex = 23;
             // 
             // UserInterface
@@ -346,10 +325,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.ClientSize = new System.Drawing.Size(1000, 650);
+            this.ClientSize = new System.Drawing.Size(1100, 650);
             this.Controls.Add(this.pictureBoxLogo);
             this.Controls.Add(this.labelHeading);
-            this.Controls.Add(this.panelStatus);
             this.Controls.Add(this.labelTitle);
             this.Controls.Add(this.buttonMenu10);
             this.Controls.Add(this.buttonMenu9);
@@ -373,8 +351,6 @@
             this.Name = "UserInterface";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hotel Management System";
-            this.panelStatus.ResumeLayout(false);
-            this.panelStatus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -402,7 +378,5 @@
         protected System.Windows.Forms.Label labelHeading;
         private System.Windows.Forms.PictureBox pictureBoxLogo;
         private System.Windows.Forms.Panel panelContent;
-        private System.Windows.Forms.Panel panelStatus;
-        public System.Windows.Forms.Label labelStatus;
     }
 }

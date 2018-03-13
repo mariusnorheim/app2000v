@@ -76,7 +76,9 @@ namespace HMS
 
         private void buttonMenu5_Click(object sender, EventArgs e)
         {
-
+            Arkiv arkivForm = new Arkiv();
+            DisplayChildForm(arkivForm);
+            this.labelHeading.Text = "Arkiv";
         }
 
         private void buttonMenu6_Click(object sender, EventArgs e)

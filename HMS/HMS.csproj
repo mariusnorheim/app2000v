@@ -85,13 +85,13 @@
       <DependentUpon>Oversikt.cs</DependentUpon>
     </Compile>
     <Compile Include="PasswordHasher.cs" />
+    <Compile Include="RNG.cs" />
     <Compile Include="Sjekkinnut.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Sjekkinnut.Designer.cs">
       <DependentUpon>Sjekkinnut.cs</DependentUpon>
     </Compile>
-    <Compile Include="StatusLine.cs" />
     <Compile Include="UserInfo.cs" />
     <Compile Include="UserInterface.cs">
       <SubType>Form</SubType>
@@ -103,6 +103,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Arkiv.resx">
       <DependentUpon>Arkiv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Booking.resx">
+      <DependentUpon>Booking.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Content.resx">
       <DependentUpon>Content.cs</DependentUpon>
