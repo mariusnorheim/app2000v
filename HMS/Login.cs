@@ -25,7 +25,7 @@ namespace HMS
         {
             // Generate new salt and hash password
             PasswordHasher pwHasher = new PasswordHasher();
-            HashResult hashedPassword = pwHasher.HashNewSalt("adminpw321", 32, SHA512.Create());
+            HashResult hashedPassword = pwHasher.HashNewSalt("adminpw321", 20, SHA512.Create());
 
             MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString);
             try
@@ -34,8 +34,10 @@ namespace HMS
                 conn.Open();
                 // Create command and assign the query and connection from the constructor
                 query = "INSERT INTO admin (admin_name, admin_username, admin_password, admin_salt, admin_superuser)" +
-                "VALUES('Nerd Herd administrator', 'nhadmin', '" + hashedPassword.Digest + "', '" + hashedPassword.Salt + "', '1');";
+                "VALUES('Nerd Herd administrator', 'nhadmin', @admin_pw, @salt, '1');";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@salt", hashedPassword.Salt);
+                cmd.Parameters.AddWithValue("@admin_pw", hashedPassword.Digest);
                 // Execute command
                 cmd.ExecuteNonQuery();
                 // Close connection

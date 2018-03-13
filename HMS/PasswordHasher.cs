@@ -11,13 +11,14 @@ namespace HMS
         {
             // Instanserer Random Number Generator (RNG)
             RNG rng = new RNG();
-            byte[] saltBytes = rng.GenerateRandomCryptographicBytes(saltLength);
+            string saltdata = rng.GenerateRandomCryptographicKey(saltLength);
+            byte[] saltBytes = Encoding.UTF8.GetBytes(saltdata);
             byte[] passwordAsBytes = Encoding.UTF8.GetBytes(password);
             List<byte> passwordWithSaltBytes = new List<byte>();
             passwordWithSaltBytes.AddRange(passwordAsBytes);
             passwordWithSaltBytes.AddRange(saltBytes);
             byte[] digestBytes = hashAlgo.ComputeHash(passwordWithSaltBytes.ToArray());
-            return new HashResult(Convert.ToBase64String(saltBytes), Convert.ToBase64String(digestBytes));
+            return new HashResult(Encoding.UTF8.GetString(saltBytes), Convert.ToBase64String(digestBytes));
         }
 
         public HashResult HashStoredSalt(string password, string salt, HashAlgorithm hashAlgo)
@@ -28,7 +29,7 @@ namespace HMS
             passwordWithSaltBytes.AddRange(passwordAsBytes);
             passwordWithSaltBytes.AddRange(saltBytes);
             byte[] digestBytes = hashAlgo.ComputeHash(passwordWithSaltBytes.ToArray());
-            return new HashResult(Convert.ToBase64String(saltBytes), Convert.ToBase64String(digestBytes));
+            return new HashResult(Encoding.UTF8.GetString(saltBytes), Convert.ToBase64String(digestBytes));
         }
     }
 }
