@@ -21,11 +21,11 @@ namespace HMS
         private void LoadData()
         {
             MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString);
-            DataSet ds;
             string query;
 
             // Connect to database
             conn.Open();
+
             // Create a new data adapter
             query = "SELECT G.guest_name, RT.room_type_name, RR.room_reservation_amount, " +
                 "RR.room_reservation_datefrom, RR.room_reservation_dateto, RR.room_reservation_remark " +
@@ -36,11 +36,10 @@ namespace HMS
                 "ON RR.room_reservation_guestid = G.guestid";
             MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
             // Populate a new data set
-            ds = new DataSet();
+            DataSet ds = new DataSet();
             adapter.Fill(ds, "room_reservation");
             dataGridView1.DataSource = ds;
             dataGridView1.DataMember = "room_reservation";
-
             // Make readable table headers
             dataGridView1.Columns[0].HeaderText = "Guest";
             dataGridView1.Columns[1].HeaderText = "Room type";
