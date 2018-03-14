@@ -48,35 +48,35 @@ namespace HMS
         // Click handler for menu buttons
         private void buttonMenu1_Click(object sender, EventArgs e)
         {
-            Oversikt oversiktForm = new Oversikt();
+            Form oversiktForm = new Oversikt();
             DisplayChildForm(oversiktForm);
             this.labelHeading.Text = "Oversikt";
         }
 
         private void buttonMenu2_Click(object sender, EventArgs e)
         {
-            Booking bookingForm = new Booking();
+            Form bookingForm = new Booking();
             DisplayChildForm(bookingForm);
             this.labelHeading.Text = "Booking";
         }
 
         private void buttonMenu3_Click(object sender, EventArgs e)
         {
-            Sjekkinnut sjekkinnutForm = new Sjekkinnut();
+            Form sjekkinnutForm = new Sjekkinnut();
             DisplayChildForm(sjekkinnutForm);
             this.labelHeading.Text = "Sjekk inn/ut";
         }
 
         private void buttonMenu4_Click(object sender, EventArgs e)
         {
-            Folio folioForm = new Folio();
+            Form folioForm = new Folio();
             DisplayChildForm(folioForm);
             this.labelHeading.Text = "Folio";
         }
 
         private void buttonMenu5_Click(object sender, EventArgs e)
         {
-            Arkiv arkivForm = new Arkiv();
+            Form arkivForm = new Arkiv();
             DisplayChildForm(arkivForm);
             this.labelHeading.Text = "Arkiv";
         }
