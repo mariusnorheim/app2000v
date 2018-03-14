@@ -71,9 +71,21 @@ namespace HMS
         /*
         private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-        EditForm editForm = new EditForm();
-        editForm.Show();
         }
         */
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DatabaseRecord.Name = this.dataGridView1.CurrentRow.Cells[1].Value.ToString();
+            Form editForm = new PopupForm();
+            editForm.Show();
+        }
+
+        private void buttonEndre_Click(object sender, EventArgs e)
+        {
+            DatabaseRecord.Name = this.dataGridView1.CurrentRow.Cells[1].Value.ToString();
+            Form editForm = new PopupForm();
+            editForm.Show();
+        }
     }
 }
