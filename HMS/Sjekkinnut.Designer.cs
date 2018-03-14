@@ -34,6 +34,8 @@
             this.buttonSubMenu1 = new System.Windows.Forms.Button();
             this.buttonSubMenu2 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.buttonEndre = new System.Windows.Forms.Button();
+            this.buttonNew = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,7 +47,7 @@
             this.buttonSubMenu1.Font = new System.Drawing.Font("Ubuntu", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSubMenu1.Location = new System.Drawing.Point(335, 10);
             this.buttonSubMenu1.Name = "buttonSubMenu1";
-            this.buttonSubMenu1.Size = new System.Drawing.Size(120, 26);
+            this.buttonSubMenu1.Size = new System.Drawing.Size(120, 30);
             this.buttonSubMenu1.TabIndex = 39;
             this.buttonSubMenu1.Text = "Sjekk inn";
             this.buttonSubMenu1.UseVisualStyleBackColor = false;
@@ -58,7 +60,7 @@
             this.buttonSubMenu2.Font = new System.Drawing.Font("Ubuntu", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSubMenu2.Location = new System.Drawing.Point(460, 10);
             this.buttonSubMenu2.Name = "buttonSubMenu2";
-            this.buttonSubMenu2.Size = new System.Drawing.Size(120, 26);
+            this.buttonSubMenu2.Size = new System.Drawing.Size(120, 30);
             this.buttonSubMenu2.TabIndex = 40;
             this.buttonSubMenu2.Text = "Sjekk ut";
             this.buttonSubMenu2.UseVisualStyleBackColor = false;
@@ -104,10 +106,40 @@
             this.dataGridView1.Size = new System.Drawing.Size(870, 300);
             this.dataGridView1.TabIndex = 41;
             // 
+            // buttonEndre
+            // 
+            this.buttonEndre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonEndre.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonEndre.FlatAppearance.BorderSize = 0;
+            this.buttonEndre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEndre.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonEndre.Location = new System.Drawing.Point(110, 355);
+            this.buttonEndre.Name = "buttonEndre";
+            this.buttonEndre.Size = new System.Drawing.Size(90, 32);
+            this.buttonEndre.TabIndex = 43;
+            this.buttonEndre.Text = "Endre";
+            this.buttonEndre.UseVisualStyleBackColor = false;
+            // 
+            // buttonNew
+            // 
+            this.buttonNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonNew.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonNew.FlatAppearance.BorderSize = 0;
+            this.buttonNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonNew.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonNew.Location = new System.Drawing.Point(15, 355);
+            this.buttonNew.Name = "buttonNew";
+            this.buttonNew.Size = new System.Drawing.Size(90, 32);
+            this.buttonNew.TabIndex = 42;
+            this.buttonNew.Text = "Ny";
+            this.buttonNew.UseVisualStyleBackColor = false;
+            // 
             // Sjekkinnut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(900, 620);
+            this.Controls.Add(this.buttonEndre);
+            this.Controls.Add(this.buttonNew);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.buttonSubMenu2);
             this.Controls.Add(this.buttonSubMenu1);
@@ -115,6 +147,8 @@
             this.Controls.SetChildIndex(this.buttonSubMenu1, 0);
             this.Controls.SetChildIndex(this.buttonSubMenu2, 0);
             this.Controls.SetChildIndex(this.dataGridView1, 0);
+            this.Controls.SetChildIndex(this.buttonNew, 0);
+            this.Controls.SetChildIndex(this.buttonEndre, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
@@ -124,5 +158,7 @@
         private System.Windows.Forms.Button buttonSubMenu1;
         private System.Windows.Forms.Button buttonSubMenu2;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button buttonEndre;
+        private System.Windows.Forms.Button buttonNew;
     }
 }

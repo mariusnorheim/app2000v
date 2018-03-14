@@ -297,7 +297,7 @@
             // 
             this.labelHeading.AutoSize = true;
             this.labelHeading.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelHeading.Location = new System.Drawing.Point(210, 44);
+            this.labelHeading.Location = new System.Drawing.Point(210, 46);
             this.labelHeading.Name = "labelHeading";
             this.labelHeading.Size = new System.Drawing.Size(0, 19);
             this.labelHeading.TabIndex = 19;
