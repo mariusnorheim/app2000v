@@ -62,7 +62,7 @@
             this.buttonSubMenu2.Name = "buttonSubMenu2";
             this.buttonSubMenu2.Size = new System.Drawing.Size(120, 30);
             this.buttonSubMenu2.TabIndex = 39;
-            this.buttonSubMenu2.Text = "Sluttoppgjør";
+            this.buttonSubMenu2.Text = "Regning";
             this.buttonSubMenu2.UseVisualStyleBackColor = false;
             // 
             // buttonEndre
