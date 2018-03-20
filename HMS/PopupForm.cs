@@ -21,11 +21,5 @@ namespace HMS
                 Application.OpenForms.OfType<PopupForm>().First().Close();
             }
         }
-
-        private void buttonFormExit_Click(object sender, EventArgs e)
-        {
-            // Click handler for exit button
-            this.Close();
-        }
     }
 }
