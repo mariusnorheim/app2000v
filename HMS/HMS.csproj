@@ -64,8 +64,13 @@
     <Compile Include="Content.Designer.cs">
       <DependentUpon>Content.cs</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseRecord.cs" />
     <Compile Include="DBConn.cs" />
+    <Compile Include="EditBookingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditBookingForm.Designer.cs">
+      <DependentUpon>EditBookingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PopupForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Content.resx">
       <DependentUpon>Content.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditBookingForm.resx">
+      <DependentUpon>EditBookingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PopupForm.resx">
       <DependentUpon>PopupForm.cs</DependentUpon>
