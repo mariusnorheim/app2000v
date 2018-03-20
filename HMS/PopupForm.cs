@@ -16,10 +16,12 @@ namespace HMS
         {
             InitializeComponent();
             // Prevent opening more than one popup form
+            /*
             if (Application.OpenForms.OfType<PopupForm>().Count() == 1)
             {
                 Application.OpenForms.OfType<PopupForm>().First().Close();
             }
+            */
         }
     }
 }

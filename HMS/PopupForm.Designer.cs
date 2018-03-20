@@ -43,10 +43,11 @@
             this.Location = new System.Drawing.Point(800, 400);
             this.MaximizeBox = false;
             this.Name = "PopupForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Hotel Management System";
             this.TopMost = true;
             this.ResumeLayout(false);
+
         }
 
         #endregion
