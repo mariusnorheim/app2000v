@@ -40,7 +40,8 @@ namespace HMS
                     "JOIN room_type RT " +
                     "ON RR.room_reservation_typeid = RT.room_typeid " +
                     "JOIN guest G " +
-                    "ON RR.room_reservation_guestid = G.guestid";
+                    "ON RR.room_reservation_guestid = G.guestid " +
+                    "ORDER BY room_reservation_datefrom, guest_name";
                 MySqlDataAdapter bookingTableAdapter = new MySqlDataAdapter(query, conn);
                 // Populate a new data set
                 DataSet bookingDS = new DataSet();
@@ -80,16 +81,16 @@ namespace HMS
         private void buttonNewGuest_Click(object sender, EventArgs e)
         {
             // New guest form
-            Form newForm = new PopupForm();
-            newForm.ShowDialog();
+            NewGuestForm guestForm = new NewGuestForm();
+            guestForm.ShowDialog();
         }
 
         // Button 'Ny booking', open new form
         private void buttonNewBooking_Click(object sender, EventArgs e)
         {
             // New booking form
-            Form newForm = new PopupForm();
-            newForm.ShowDialog();
+            Form bookingForm = new NewBookingForm();
+            bookingForm.ShowDialog();
         }
 
         // Button 'Endre', identical to datagridview double click
@@ -120,7 +121,8 @@ namespace HMS
                 MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString);
                 // Connect to database
                 conn.Open();
-                
+
+                // Create a new data adapter
                 query = "SELECT RR.room_reservationid, G.guest_name, RT.room_type_name, " +
                     "RR.room_reservation_amount, RR.room_reservation_datefrom, RR.room_reservation_dateto, " +
                     "RR.room_reservation_remark FROM room_reservation RR " +
@@ -128,9 +130,8 @@ namespace HMS
                     "ON RR.room_reservation_typeid = RT.room_typeid " +
                     "JOIN guest G " +
                     "ON RR.room_reservation_guestid = G.guestid " +
-                    "WHERE guest_name LIKE @search";
-
-                // Create a new data adapter
+                    "WHERE guest_name LIKE @search " +
+                    "ORDER BY guest_name";
                 MySqlCommand cmdGetSearch = new MySqlCommand(query, conn);
                 cmdGetSearch.Parameters.AddWithValue("@search", "%" + search_input + "%");
                 MySqlDataAdapter bookingSearchTableAdapter = new MySqlDataAdapter(cmdGetSearch);
@@ -141,12 +142,12 @@ namespace HMS
                 dataGridView1.DataMember = "room_reservation";
                 // Hide ID and make readable table headers
                 dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Guest";
-                dataGridView1.Columns[2].HeaderText = "Room type";
-                dataGridView1.Columns[3].HeaderText = "Room amount";
-                dataGridView1.Columns[4].HeaderText = "Arrival";
-                dataGridView1.Columns[5].HeaderText = "Departure";
-                dataGridView1.Columns[6].HeaderText = "Remark";
+                dataGridView1.Columns[1].HeaderText = "Gjest";
+                dataGridView1.Columns[2].HeaderText = "Romtype";
+                dataGridView1.Columns[3].HeaderText = "Romantall";
+                dataGridView1.Columns[4].HeaderText = "Ankomst";
+                dataGridView1.Columns[5].HeaderText = "Avreise";
+                dataGridView1.Columns[6].HeaderText = "Anmerkning";
 
                 // Close database connection
                 conn.Close();
