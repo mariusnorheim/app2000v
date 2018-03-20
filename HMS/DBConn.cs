@@ -12,5 +12,6 @@ namespace HMS
     public class DBConn
     {
         public static string ConnectionString = "server=localhost;uid=root;password=;database=app2000v";
+        public static string QueryID;
     }
 }
