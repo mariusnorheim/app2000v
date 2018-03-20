@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.buttonNew = new System.Windows.Forms.Button();
-            this.buttonEndre = new System.Windows.Forms.Button();
+            this.buttonNewBooking = new System.Windows.Forms.Button();
+            this.buttonNewGuest = new System.Windows.Forms.Button();
+            this.buttonEditBooking = new System.Windows.Forms.Button();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -41,86 +42,88 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.GridColor = System.Drawing.Color.Gray;
             this.dataGridView1.Location = new System.Drawing.Point(15, 50);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dataGridView1.Size = new System.Drawing.Size(870, 300);
             this.dataGridView1.TabIndex = 36;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
-            // buttonNew
+            // buttonNewGuest
             // 
-            this.buttonNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.buttonNew.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonNew.FlatAppearance.BorderSize = 0;
-            this.buttonNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonNew.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNew.Location = new System.Drawing.Point(15, 355);
-            this.buttonNew.Name = "buttonNew";
-            this.buttonNew.Size = new System.Drawing.Size(90, 32);
-            this.buttonNew.TabIndex = 37;
-            this.buttonNew.Text = "Ny";
-            this.buttonNew.UseVisualStyleBackColor = false;
+            this.buttonNewGuest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonNewGuest.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonNewGuest.FlatAppearance.BorderSize = 0;
+            this.buttonNewGuest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonNewGuest.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonNewGuest.Location = new System.Drawing.Point(15, 355);
+            this.buttonNewGuest.Name = "buttonNewGuest";
+            this.buttonNewGuest.Size = new System.Drawing.Size(90, 32);
+            this.buttonNewGuest.TabIndex = 38;
+            this.buttonNewGuest.Text = "Ny gjest";
+            this.buttonNewGuest.UseVisualStyleBackColor = false;
+            this.buttonNewGuest.Click += new System.EventHandler(this.buttonNewGuest_Click);
             // 
-            // buttonEndre
+            // buttonNewBooking
             // 
-            this.buttonEndre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.buttonEndre.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonEndre.FlatAppearance.BorderSize = 0;
-            this.buttonEndre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonEndre.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonEndre.Location = new System.Drawing.Point(110, 355);
-            this.buttonEndre.Name = "buttonEndre";
-            this.buttonEndre.Size = new System.Drawing.Size(90, 32);
-            this.buttonEndre.TabIndex = 38;
-            this.buttonEndre.Text = "Endre";
-            this.buttonEndre.UseVisualStyleBackColor = false;
-            this.buttonEndre.Click += new System.EventHandler(this.buttonEndre_Click);
+            this.buttonNewBooking.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonNewBooking.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonNewBooking.FlatAppearance.BorderSize = 0;
+            this.buttonNewBooking.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonNewBooking.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonNewBooking.Location = new System.Drawing.Point(110, 355);
+            this.buttonNewBooking.Name = "buttonNewBooking";
+            this.buttonNewBooking.Size = new System.Drawing.Size(90, 32);
+            this.buttonNewBooking.TabIndex = 37;
+            this.buttonNewBooking.Text = "Ny booking";
+            this.buttonNewBooking.UseVisualStyleBackColor = false;
+            this.buttonNewBooking.Click += new System.EventHandler(this.buttonNewBooking_Click);
             // 
-            // buttonSearch
+            // buttonEditBooking
             // 
-            this.buttonSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.buttonSearch.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonSearch.FlatAppearance.BorderSize = 0;
-            this.buttonSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSearch.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSearch.Location = new System.Drawing.Point(835, 355);
-            this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(50, 32);
-            this.buttonSearch.TabIndex = 39;
-            this.buttonSearch.Text = "Søk";
-            this.buttonSearch.UseVisualStyleBackColor = false;
+            this.buttonEditBooking.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonEditBooking.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonEditBooking.FlatAppearance.BorderSize = 0;
+            this.buttonEditBooking.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEditBooking.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonEditBooking.Location = new System.Drawing.Point(205, 355);
+            this.buttonEditBooking.Name = "buttonEditBooking";
+            this.buttonEditBooking.Size = new System.Drawing.Size(90, 32);
+            this.buttonEditBooking.TabIndex = 41;
+            this.buttonEditBooking.Text = "Endre";
+            this.buttonEditBooking.UseVisualStyleBackColor = false;
+            this.buttonEditBooking.Click += new System.EventHandler(this.buttonEditBooking_Click);
             // 
             // textBoxSearch
             // 
@@ -136,23 +139,41 @@
             this.textBoxSearch.Size = new System.Drawing.Size(300, 30);
             this.textBoxSearch.TabIndex = 40;
             this.textBoxSearch.Text = "Søketekst";
+            this.textBoxSearch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxSearch_MouseClick);
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonSearch.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonSearch.FlatAppearance.BorderSize = 0;
+            this.buttonSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSearch.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSearch.Location = new System.Drawing.Point(835, 355);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(50, 32);
+            this.buttonSearch.TabIndex = 39;
+            this.buttonSearch.Text = "Søk";
+            this.buttonSearch.UseVisualStyleBackColor = false;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
             // Booking
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(900, 620);
+            this.Controls.Add(this.buttonNewGuest);
+            this.Controls.Add(this.buttonNewBooking);
+            this.Controls.Add(this.buttonEditBooking);
             this.Controls.Add(this.textBoxSearch);
             this.Controls.Add(this.buttonSearch);
-            this.Controls.Add(this.buttonEndre);
-            this.Controls.Add(this.buttonNew);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Booking";
             this.Load += new System.EventHandler(this.Booking_Load);
             this.Controls.SetChildIndex(this.dataGridView1, 0);
-            this.Controls.SetChildIndex(this.buttonNew, 0);
-            this.Controls.SetChildIndex(this.buttonEndre, 0);
+            this.Controls.SetChildIndex(this.buttonNewBooking, 0);
+            this.Controls.SetChildIndex(this.buttonNewGuest, 0);
             this.Controls.SetChildIndex(this.buttonSearch, 0);
             this.Controls.SetChildIndex(this.textBoxSearch, 0);
+            this.Controls.SetChildIndex(this.buttonEditBooking, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -162,9 +183,10 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button buttonNew;
-        private System.Windows.Forms.Button buttonEndre;
-        private System.Windows.Forms.Button buttonSearch;
+        private System.Windows.Forms.Button buttonNewGuest;
+        private System.Windows.Forms.Button buttonNewBooking;
+        private System.Windows.Forms.Button buttonEditBooking;
         private System.Windows.Forms.TextBox textBoxSearch;
+        private System.Windows.Forms.Button buttonSearch;
     }
 }
