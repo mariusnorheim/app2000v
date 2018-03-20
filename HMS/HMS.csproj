@@ -71,6 +71,18 @@
     <Compile Include="EditBookingForm.Designer.cs">
       <DependentUpon>EditBookingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewBookingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewBookingForm.Designer.cs">
+      <DependentUpon>NewBookingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewGuestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewGuestForm.Designer.cs">
+      <DependentUpon>NewGuestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PopupForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +136,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditBookingForm.resx">
       <DependentUpon>EditBookingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewBookingForm.resx">
+      <DependentUpon>NewBookingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewGuestForm.resx">
+      <DependentUpon>NewGuestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PopupForm.resx">
       <DependentUpon>PopupForm.cs</DependentUpon>
