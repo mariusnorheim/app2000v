@@ -43,13 +43,13 @@
             this.textBoxRemark = new System.Windows.Forms.TextBox();
             this.buttonSearchBookingGuest = new System.Windows.Forms.Button();
             this.buttonEditBookingConfirm = new System.Windows.Forms.Button();
-            this.buttonCancelBookingConfirm = new System.Windows.Forms.Button();
+            this.buttonEditBookingCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(75, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(36, 16);
@@ -59,7 +59,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(75, 105);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 16);
@@ -69,7 +69,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(75, 165);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 16);
@@ -79,7 +79,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(75, 195);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 16);
@@ -89,7 +89,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(75, 225);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 16);
@@ -99,7 +99,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(75, 255);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(78, 16);
@@ -179,6 +179,8 @@
             // 
             // buttonSearchBookingGuest
             // 
+            this.buttonSearchBookingGuest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonSearchBookingGuest.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.buttonSearchBookingGuest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSearchBookingGuest.Font = new System.Drawing.Font("Bahnschrift", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSearchBookingGuest.Location = new System.Drawing.Point(410, 21);
@@ -186,11 +188,13 @@
             this.buttonSearchBookingGuest.Size = new System.Drawing.Size(50, 23);
             this.buttonSearchBookingGuest.TabIndex = 13;
             this.buttonSearchBookingGuest.Text = "Søk";
-            this.buttonSearchBookingGuest.UseVisualStyleBackColor = true;
+            this.buttonSearchBookingGuest.UseVisualStyleBackColor = false;
             this.buttonSearchBookingGuest.Click += new System.EventHandler(this.buttonSearchBookingGuest_Click);
             // 
             // buttonEditBookingConfirm
             // 
+            this.buttonEditBookingConfirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonEditBookingConfirm.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.buttonEditBookingConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonEditBookingConfirm.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonEditBookingConfirm.Location = new System.Drawing.Point(190, 310);
@@ -198,26 +202,28 @@
             this.buttonEditBookingConfirm.Size = new System.Drawing.Size(60, 28);
             this.buttonEditBookingConfirm.TabIndex = 14;
             this.buttonEditBookingConfirm.Text = "Endre";
-            this.buttonEditBookingConfirm.UseVisualStyleBackColor = true;
+            this.buttonEditBookingConfirm.UseVisualStyleBackColor = false;
             this.buttonEditBookingConfirm.Click += new System.EventHandler(this.buttonEditBookingConfirm_Click);
             // 
-            // buttonCancelBookingConfirm
+            // buttonEditBookingCancel
             // 
-            this.buttonCancelBookingConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCancelBookingConfirm.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCancelBookingConfirm.Location = new System.Drawing.Point(256, 310);
-            this.buttonCancelBookingConfirm.Name = "buttonCancelBookingConfirm";
-            this.buttonCancelBookingConfirm.Size = new System.Drawing.Size(60, 28);
-            this.buttonCancelBookingConfirm.TabIndex = 15;
-            this.buttonCancelBookingConfirm.Text = "Avbryt";
-            this.buttonCancelBookingConfirm.UseVisualStyleBackColor = true;
-            this.buttonCancelBookingConfirm.Click += new System.EventHandler(this.buttonCancelBookingConfirm_Click);
+            this.buttonEditBookingCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonEditBookingCancel.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonEditBookingCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEditBookingCancel.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonEditBookingCancel.Location = new System.Drawing.Point(256, 310);
+            this.buttonEditBookingCancel.Name = "buttonEditBookingCancel";
+            this.buttonEditBookingCancel.Size = new System.Drawing.Size(60, 28);
+            this.buttonEditBookingCancel.TabIndex = 15;
+            this.buttonEditBookingCancel.Text = "Avbryt";
+            this.buttonEditBookingCancel.UseVisualStyleBackColor = false;
+            this.buttonEditBookingCancel.Click += new System.EventHandler(this.buttonEditBookingCancel_Click);
             // 
             // EditBookingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(500, 350);
-            this.Controls.Add(this.buttonCancelBookingConfirm);
+            this.Controls.Add(this.buttonEditBookingCancel);
             this.Controls.Add(this.buttonEditBookingConfirm);
             this.Controls.Add(this.buttonSearchBookingGuest);
             this.Controls.Add(this.textBoxRemark);
@@ -235,7 +241,6 @@
             this.Controls.Add(this.label1);
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "EditBookingForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hotel Management System - Endre booking";
             this.Load += new System.EventHandler(this.EditBookingForm_Load);
             this.ResumeLayout(false);
@@ -260,6 +265,6 @@
         private System.Windows.Forms.TextBox textBoxRemark;
         private System.Windows.Forms.Button buttonSearchBookingGuest;
         private System.Windows.Forms.Button buttonEditBookingConfirm;
-        private System.Windows.Forms.Button buttonCancelBookingConfirm;
+        private System.Windows.Forms.Button buttonEditBookingCancel;
     }
 }

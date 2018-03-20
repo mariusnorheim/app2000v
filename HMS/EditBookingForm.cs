@@ -71,7 +71,8 @@ namespace HMS
 
                 // Fill room types listbox
                 query = "SELECT room_typeid, room_type_name " +
-                    "FROM room_type";
+                    "FROM room_type " +
+                    "ORDER BY room_typeid";
                 MySqlCommand cmdGetAllRoomtypes = new MySqlCommand(query, conn);
                 DataTable roomtypeTable = new DataTable();
                 MySqlDataAdapter editBookingRoomtypeAdapter = new MySqlDataAdapter(cmdGetAllRoomtypes);
@@ -106,6 +107,9 @@ namespace HMS
                             break;
                         case "5":
                             listBoxRoomType.SelectedIndex = 4;
+                            break;
+                        case "6":
+                            listBoxRoomType.SelectedIndex = 5;
                             break;
                     }
                 }
@@ -163,7 +167,7 @@ namespace HMS
         }
 
         // 'Avbryt' button
-        private void buttonCancelBookingConfirm_Click(object sender, EventArgs e)
+        private void buttonEditBookingCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
