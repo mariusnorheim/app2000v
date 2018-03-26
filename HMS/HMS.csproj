@@ -65,17 +65,29 @@
       <DependentUpon>Content.cs</DependentUpon>
     </Compile>
     <Compile Include="DBConn.cs" />
-    <Compile Include="EditBookingForm.cs">
+    <Compile Include="EditBookingRoom.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditBookingForm.Designer.cs">
-      <DependentUpon>EditBookingForm.cs</DependentUpon>
+    <Compile Include="EditBookingRoom.Designer.cs">
+      <DependentUpon>EditBookingRoom.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewBookingForm.cs">
+    <Compile Include="Folio.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewBookingForm.Designer.cs">
-      <DependentUpon>NewBookingForm.cs</DependentUpon>
+    <Compile Include="Folio.Designer.cs">
+      <DependentUpon>Folio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gjest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gjest.Designer.cs">
+      <DependentUpon>Gjest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewBookingRoom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewBookingRoom.Designer.cs">
+      <DependentUpon>NewBookingRoom.cs</DependentUpon>
     </Compile>
     <Compile Include="NewGuestForm.cs">
       <SubType>Form</SubType>
@@ -88,12 +100,6 @@
     </Compile>
     <Compile Include="PopupForm.Designer.cs">
       <DependentUpon>PopupForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Folio.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Folio.Designer.cs">
-      <DependentUpon>Folio.cs</DependentUpon>
     </Compile>
     <Compile Include="HashResult.cs" />
     <Compile Include="Login.cs">
@@ -110,12 +116,6 @@
     </Compile>
     <Compile Include="PasswordHasher.cs" />
     <Compile Include="RNG.cs" />
-    <Compile Include="Sjekkinnut.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sjekkinnut.Designer.cs">
-      <DependentUpon>Sjekkinnut.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserInfo.cs" />
     <Compile Include="UserInterface.cs">
       <SubType>Form</SubType>
@@ -134,11 +134,17 @@
     <EmbeddedResource Include="Content.resx">
       <DependentUpon>Content.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditBookingForm.resx">
-      <DependentUpon>EditBookingForm.cs</DependentUpon>
+    <EmbeddedResource Include="EditBookingRoom.resx">
+      <DependentUpon>EditBookingRoom.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewBookingForm.resx">
-      <DependentUpon>NewBookingForm.cs</DependentUpon>
+    <EmbeddedResource Include="Folio.resx">
+      <DependentUpon>Folio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gjest.resx">
+      <DependentUpon>Gjest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewBookingRoom.resx">
+      <DependentUpon>NewBookingRoom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewGuestForm.resx">
       <DependentUpon>NewGuestForm.cs</DependentUpon>
@@ -146,14 +152,8 @@
     <EmbeddedResource Include="PopupForm.resx">
       <DependentUpon>PopupForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Folio.resx">
-      <DependentUpon>Folio.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sjekkinnut.resx">
-      <DependentUpon>Sjekkinnut.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface.resx">
       <DependentUpon>UserInterface.cs</DependentUpon>
