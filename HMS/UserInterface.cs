@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace HMS
 {
@@ -31,6 +32,24 @@ namespace HMS
             childForm.Activate();
             childForm.BringToFront();
             childForm.Show();
+        }
+
+        // Enable top panel dragging
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        private void panelTop_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
         }
 
         // Click handler for exit button
@@ -62,9 +81,9 @@ namespace HMS
 
         private void buttonMenu3_Click(object sender, EventArgs e)
         {
-            Form sjekkinnutForm = new Sjekkinnut();
-            DisplayChildForm(sjekkinnutForm);
-            this.labelHeading.Text = "Sjekk inn/ut";
+            Form gjestForm = new Gjest();
+            DisplayChildForm(gjestForm);
+            this.labelHeading.Text = "Gjest";
         }
 
         private void buttonMenu4_Click(object sender, EventArgs e)
@@ -76,9 +95,9 @@ namespace HMS
 
         private void buttonMenu5_Click(object sender, EventArgs e)
         {
-            Form arkivForm = new Arkiv();
-            DisplayChildForm(arkivForm);
-            this.labelHeading.Text = "Arkiv";
+            Form folioForm = new Form();
+            DisplayChildForm(folioForm);
+            this.labelHeading.Text = "Folio";
         }
 
         private void buttonMenu6_Click(object sender, EventArgs e)
@@ -105,6 +124,5 @@ namespace HMS
         {
 
         }
-
     }
 }
