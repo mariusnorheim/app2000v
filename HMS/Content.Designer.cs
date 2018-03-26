@@ -35,11 +35,11 @@
             // 
             // panelStatus
             // 
-            this.panelStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.panelStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.panelStatus.Controls.Add(this.labelStatus);
-            this.panelStatus.Location = new System.Drawing.Point(0, 600);
+            this.panelStatus.Location = new System.Drawing.Point(0, 650);
             this.panelStatus.Name = "panelStatus";
-            this.panelStatus.Size = new System.Drawing.Size(900, 20);
+            this.panelStatus.Size = new System.Drawing.Size(1000, 20);
             this.panelStatus.TabIndex = 16;
             // 
             // labelStatus
@@ -56,7 +56,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            this.ClientSize = new System.Drawing.Size(900, 620);
+            this.ClientSize = new System.Drawing.Size(1000, 670);
             this.Controls.Add(this.panelStatus);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
