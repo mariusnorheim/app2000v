@@ -12,6 +12,8 @@ namespace HMS
 {
     public partial class Booking : HMS.Content
     {
+        private string query;
+
         public Booking()
         {
             InitializeComponent();
@@ -19,144 +21,252 @@ namespace HMS
 
         private void Booking_Load(object sender, System.EventArgs e)
         {
-            //ThreadPool.QueueUserWorkItem(LoadData);
-            LoadData();
+            LoadDataRoom();
         }
-        string query;
 
-        //private void LoadData(Object threadContext)
-        private void LoadData()
+        private void LoadDataRoom()
         {
-            try
-            {
-                MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString);
-                // Connect to database
-                conn.Open();
+            // Set button visibility
+            this.buttonNewBookingHall.Visible = false;
+            this.buttonEditBookingHall.Visible = false;
+            this.buttonDeleteBookingHall.Visible = false;
+            this.buttonSjekkinnHall.Visible = false;
+            this.buttonSjekkutHall.Visible = false;
+            this.buttonSearchBookingHall.Visible = false;
+            this.dataGridViewHall.Visible = false;
+            this.buttonNewBookingRoom.Visible = true;
+            this.buttonEditBookingRoom.Visible = true;
+            this.buttonDeleteBookingRoom.Visible = true;
+            this.buttonSjekkinnRoom.Visible = true;
+            this.buttonSjekkutRoom.Visible = true;
+            this.buttonSearchBookingRoom.Visible = true;
+            this.dataGridViewRoom.Visible = true;
+            this.AcceptButton = this.buttonSearchBookingRoom;
 
-                // Create a new data adapter
-                query = "SELECT RR.room_reservationid, G.guest_name, RT.room_type_name, " +
-                    "RR.room_reservation_amount, RR.room_reservation_datefrom, RR.room_reservation_dateto, " +
-                    "RR.room_reservation_remark FROM room_reservation RR " +
-                    "JOIN room_type RT " +
-                    "ON RR.room_reservation_typeid = RT.room_typeid " +
-                    "JOIN guest G " +
-                    "ON RR.room_reservation_guestid = G.guestid " +
-                    "ORDER BY room_reservation_datefrom, guest_name";
-                MySqlDataAdapter bookingTableAdapter = new MySqlDataAdapter(query, conn);
-                // Populate a new data set
-                DataSet bookingDS = new DataSet();
-                bookingTableAdapter.Fill(bookingDS, "room_reservation");
-                dataGridView1.DataSource = bookingDS;
-                dataGridView1.DataMember = "room_reservation";
-                // Hide ID and make readable table headers
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Gjest";
-                dataGridView1.Columns[2].HeaderText = "Romtype";
-                dataGridView1.Columns[3].HeaderText = "Romantall";
-                dataGridView1.Columns[4].HeaderText = "Ankomst";
-                dataGridView1.Columns[5].HeaderText = "Avreise";
-                dataGridView1.Columns[6].HeaderText = "Anmerkning";
-
-                // Close database connection
-                conn.Close();
-            }
-            // Catch exceptions and display in labelStatus
-            catch (Exception ex)
+            using (MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString))
             {
-                this.labelStatus.Text = ex.Message;
+                // Prepare MySQL query
+                query = "SELECT RR.room_reservationid, CONCAT(G.firstname, ' ', G.lastname) AS guest_name, " +
+                        "R.roomid, RT.name, RR.datefrom, RR.dateto, RR.remark FROM room_reservation RR " +
+                        "JOIN guest G " +
+                        "ON RR.guestid = G.guestid " +
+                        "JOIN room R " +
+                        "ON RR.roomid = R.roomid " +
+                        "JOIN room_type RT " +
+                        "ON R.room_typeid = RT.room_typeid " +
+                        "ORDER BY datefrom, lastname, firstname";
+                using (MySqlDataAdapter bookingRoomTableAdapter = new MySqlDataAdapter(query, conn))
+                {
+                    try
+                    {
+                        // Connect to database
+                        conn.Open();
+
+                        // Populate a new data set to datagridview
+                        DataSet bookingRoomDS = new DataSet();
+                        bookingRoomTableAdapter.Fill(bookingRoomDS, "room_reservation");
+                        dataGridViewRoom.DataSource = bookingRoomDS;
+                        dataGridViewRoom.DataMember = "room_reservation";
+                        // Hide ID and make readable table headers
+                        dataGridViewRoom.Columns[0].Visible = false;
+                        dataGridViewRoom.Columns[1].HeaderText = "Gjest";
+                        dataGridViewRoom.Columns[2].HeaderText = "Rom";
+                        dataGridViewRoom.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        dataGridViewRoom.Columns[3].HeaderText = "Romtype";
+                        dataGridViewRoom.Columns[4].HeaderText = "Ankomst";
+                        dataGridViewRoom.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        dataGridViewRoom.Columns[5].HeaderText = "Avreise";
+                        dataGridViewRoom.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        dataGridViewRoom.Columns[6].HeaderText = "Anmerkning";
+
+                        conn.Close();
+                        conn.Dispose();
+                    }
+                    // Catch exceptions and display in labelStatus
+                    catch (Exception ex) { this.labelStatus.Text = ex.Message; }
+                    // Make sure connection is closed
+                    finally
+                    {
+                        if (conn.State == System.Data.ConnectionState.Open) { conn.Close(); }
+                    }
+                }
             }
         }
 
-        // DataGridView double click, open edit form
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void LoadDataHall()
+        {
+            this.buttonNewBookingRoom.Visible = false;
+            this.buttonEditBookingRoom.Visible = false;
+            this.buttonDeleteBookingRoom.Visible = false;
+            this.buttonSjekkinnRoom.Visible = false;
+            this.buttonSjekkutRoom.Visible = false;
+            this.buttonSearchBookingRoom.Visible = false;
+            this.dataGridViewRoom.Visible = false;
+            this.buttonNewBookingHall.Visible = true;
+            this.buttonEditBookingHall.Visible = true;
+            this.buttonDeleteBookingHall.Visible = true;
+            this.buttonSjekkinnHall.Visible = true;
+            this.buttonSjekkutHall.Visible = true;
+            this.buttonSearchBookingHall.Visible = true;
+            this.dataGridViewHall.Visible = true;
+            this.AcceptButton = this.buttonSearchBookingHall;
+        }
+
+        private void buttonSubMenu1_Click(object sender, EventArgs e)
+        {
+            LoadDataRoom();
+        }
+
+        private void buttonSubMenu2_Click(object sender, EventArgs e)
+        {
+            LoadDataHall();
+        }
+
+        // DataGridViewRoom double click, open edit form
+        private void dataGridViewRoom_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             // Set database record ID for reference
-            DBConn.QueryID = this.dataGridView1.CurrentRow.Cells[0].Value.ToString();
-            // New edit form
-            EditBookingForm editForm = new EditBookingForm();
+            DBConn.QueryID = this.dataGridViewRoom.CurrentRow.Cells[0].Value.ToString();
+            Form editForm = new EditBookingRoom();
             editForm.ShowDialog();
         }
 
-        // Button 'Ny gjest', open new form
-        private void buttonNewGuest_Click(object sender, EventArgs e)
+        // Button 'Ny' in the room section, open new form
+        private void buttonNewBookingRoom_Click(object sender, EventArgs e)
         {
-            // New guest form
-            NewGuestForm guestForm = new NewGuestForm();
-            guestForm.ShowDialog();
-        }
-
-        // Button 'Ny booking', open new form
-        private void buttonNewBooking_Click(object sender, EventArgs e)
-        {
-            // New booking form
-            Form bookingForm = new NewBookingForm();
+            Form bookingForm = new NewBookingRoom();
             bookingForm.ShowDialog();
         }
 
-        // Button 'Endre', identical to datagridview double click
-        private void buttonEditBooking_Click(object sender, EventArgs e)
+        // Button 'Endre' in the room section, identical to datagridview double click
+        private void buttonEditBookingRoom_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedCells.Count > 0)
+            if (dataGridViewRoom.SelectedCells.Count > 0)
             {
                 // Set database record ID for reference
-                DBConn.QueryID = this.dataGridView1.CurrentRow.Cells[0].Value.ToString();
-                // New edit form
-                EditBookingForm editForm = new EditBookingForm();
+                DBConn.QueryID = this.dataGridViewRoom.CurrentRow.Cells[0].Value.ToString();
+                Form editForm = new EditBookingRoom();
                 editForm.ShowDialog();
             }
         }
 
-        // TextBox 'Search' click event, empty placeholder text
+        // Button 'Slett' in the room section, remove isactive trigger on selected record
+        private void buttonDeleteBookingRoom_Click(object sender, EventArgs e)
+        {
+            // TODO: Update MySQL parameter isactive to 0
+        }
+
+        // Button 'Sjekk inn' in the room section
+        private void buttonSjekkinnRoom_Click(object sender, EventArgs e)
+        {
+            // TODO: Checkin process
+            // Check that room is clean -> create folio -> create folio_item for room rental
+        }
+
+        // Button 'Sjekk ut' in the room section
+        private void buttonSjekkutRoom_Click(object sender, EventArgs e)
+        {
+            // TODO: Checkout process
+            // Check and deliver messages -> Mark room to 'Need inspection' for housekeeping -> payment process -> set paiddate -> set booking to isactive 0
+        }
+
+        // Button 'Søk' in the room section, searches result in relevant tables from textinput
+        private void buttonSearchBookingRoom_Click(object sender, EventArgs e)
+        {
+            string search_input = @textBoxSearch.Text.Trim();
+            using (MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString))
+            {
+                // Prepare MySQL query
+                query = "SELECT RR.room_reservationid, CONCAT(G.firstname, ' ', G.lastname) AS guest_name, " +
+                        "R.roomid, RT.name, RR.datefrom, RR.dateto, RR.remark FROM room_reservation RR " +
+                        "JOIN guest G " +
+                        "ON RR.guestid = G.guestid " +
+                        "JOIN room R " +
+                        "ON RR.roomid = R.roomid " +
+                        "JOIN room_type RT " +
+                        "ON R.room_typeid = RT.room_typeid " +
+                        "WHERE CONCAT(G.firstname, ' ', G.lastname) LIKE @search " +
+                        "OR R.roomid LIKE @search " +
+                        "ORDER BY datefrom, lastname, firstname";
+                using (MySqlCommand bookingRoomSearchCmd = new MySqlCommand(query, conn))
+                {
+                    bookingRoomSearchCmd.Parameters.AddWithValue("@search", "%" + search_input + "%");
+                    using (MySqlDataAdapter bookingRoomSearchAdapter = new MySqlDataAdapter(bookingRoomSearchCmd))
+                    {
+                        try
+                        {
+                            // Connect to database
+                            conn.Open();
+
+                            // Populate a new data set to datagridview
+                            DataSet bookingRoomSearchDS = new DataSet();
+                            bookingRoomSearchAdapter.Fill(bookingRoomSearchDS, "room_reservation");
+                            dataGridViewRoom.DataSource = bookingRoomSearchDS;
+                            dataGridViewRoom.DataMember = "room_reservation";
+                            // Hide ID and make readable table headers
+                            dataGridViewRoom.Columns[0].Visible = false;
+                            dataGridViewRoom.Columns[1].HeaderText = "Gjest";
+                            dataGridViewRoom.Columns[2].HeaderText = "Rom";
+                            dataGridViewRoom.Columns[3].HeaderText = "Romtype";
+                            dataGridViewRoom.Columns[4].HeaderText = "Ankomst";
+                            dataGridViewRoom.Columns[5].HeaderText = "Avreise";
+                            dataGridViewRoom.Columns[6].HeaderText = "Anmerkning";
+
+                            conn.Close();
+                        }
+                        // Catch exceptions and display in labelStatus
+                        catch (Exception ex) { this.labelStatus.Text = ex.Message; }
+                        // Make sure connection is closed
+                        finally
+                        {
+                            if (conn.State == System.Data.ConnectionState.Open) { conn.Close(); }
+                        }
+                    }
+                }
+            }
+        }
+
+        // TextBox 'Search' click event, empty text
         private void textBoxSearch_MouseClick(object sender, MouseEventArgs e)
         {
             this.textBoxSearch.Text = "";
         }
 
-        // Button 'Søk', searches result in relevant tables from textinput
-        private void buttonSearch_Click(object sender, EventArgs e)
+        // Button 'Ny' in the hall section, open new form
+        private void buttonNewBookingHall_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string search_input = @textBoxSearch.Text.Trim();
-                MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString);
-                // Connect to database
-                conn.Open();
+            // TODO: Same as new room, but for hall
+        }
 
-                // Create a new data adapter
-                query = "SELECT RR.room_reservationid, G.guest_name, RT.room_type_name, " +
-                    "RR.room_reservation_amount, RR.room_reservation_datefrom, RR.room_reservation_dateto, " +
-                    "RR.room_reservation_remark FROM room_reservation RR " +
-                    "JOIN room_type RT " +
-                    "ON RR.room_reservation_typeid = RT.room_typeid " +
-                    "JOIN guest G " +
-                    "ON RR.room_reservation_guestid = G.guestid " +
-                    "WHERE guest_name LIKE @search " +
-                    "ORDER BY guest_name";
-                MySqlCommand cmdGetSearch = new MySqlCommand(query, conn);
-                cmdGetSearch.Parameters.AddWithValue("@search", "%" + search_input + "%");
-                MySqlDataAdapter bookingSearchTableAdapter = new MySqlDataAdapter(cmdGetSearch);
-                // Populate a new data set
-                DataSet bookingSearchDS = new DataSet();
-                bookingSearchTableAdapter.Fill(bookingSearchDS, "room_reservation");
-                dataGridView1.DataSource = bookingSearchDS;
-                dataGridView1.DataMember = "room_reservation";
-                // Hide ID and make readable table headers
-                dataGridView1.Columns[0].Visible = false;
-                dataGridView1.Columns[1].HeaderText = "Gjest";
-                dataGridView1.Columns[2].HeaderText = "Romtype";
-                dataGridView1.Columns[3].HeaderText = "Romantall";
-                dataGridView1.Columns[4].HeaderText = "Ankomst";
-                dataGridView1.Columns[5].HeaderText = "Avreise";
-                dataGridView1.Columns[6].HeaderText = "Anmerkning";
+        // Button 'Endre' in the hall section, open new form
+        private void buttonEditBookingHall_Click(object sender, EventArgs e)
+        {
+            // TODO: Same as edit room, but for hall
+        }
 
-                // Close database connection
-                conn.Close();
-            }
-            // Catch exceptions and display in labelStatus
-            catch (Exception ex)
-            {
-                this.labelStatus.Text = ex.Message;
-            }
+        // Button 'Slett' in the hall section, remove isactive trigger on selected record
+        private void buttonDeleteBookingHall_Click(object sender, EventArgs e)
+        {
+            // TODO: Update MySQL parameter isactive to 0
+        }
+
+        // Button 'Søk' in the hall section, searches result in relevant tables from textinput
+        private void buttonSearchBookingHall_Click(object sender, EventArgs e)
+        {
+            // TODO: Same as search room, but for hall
+        }
+
+        // Button 'Sjekk inn' in the hall section
+        private void buttonSjekkinnHall_Click(object sender, EventArgs e)
+        {
+            // TODO: Checkin process
+            // Create folio -> create folio_item for hall rental
+        }
+
+        private void buttonSjekkutHall_Click(object sender, EventArgs e)
+        {
+            // TODO: Checkout process
+            // Check and deliver messages -> payment process -> set paiddate -> set booking to isactive 0
         }
     }
 }
