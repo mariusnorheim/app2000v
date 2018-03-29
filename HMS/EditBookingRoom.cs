@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
@@ -14,6 +11,7 @@ namespace HMS
         Booking bookingForm = (Booking)Application.OpenForms["Booking"];
         private Boolean roomchecked;
         private Boolean validinput;
+        private int reservationid = DBConn.QueryID;
         private string roomid;
         private string query;
 
@@ -62,13 +60,13 @@ namespace HMS
                     }
 
                     // Fetch selected values
-                    query = "SELECT RR.guestid, RT.room_typeid, RR.datefrom, RR.dateto FROM room_reservation AS RR " +
+                    query = "SELECT RR.guestid, RT.room_typeid, RR.datefrom, RR.dateto, RR.remark FROM room_reservation AS RR " +
                             "LEFT JOIN room AS R ON RR.roomid = R.roomid " +
                             "LEFT JOIN room_type AS RT ON R.room_typeid = RT.room_typeid " +
-                            "WHERE RR.room_reservationid = @queryid";
+                            "WHERE RR.room_reservationid = @reservationid";
                     using (MySqlCommand getValuesCmd = new MySqlCommand(query, conn))
                     {
-                        getValuesCmd.Parameters.AddWithValue("@queryid", DBConn.QueryID);
+                        getValuesCmd.Parameters.AddWithValue("@reservationid", reservationid);
                         using (MySqlDataReader getValuesResult = getValuesCmd.ExecuteReader())
                         {
                             if (getValuesResult.Read())
@@ -81,12 +79,13 @@ namespace HMS
                                 comboBoxRoomType.SelectedValue = roomtypeid;
                                 datePickerArrival.Value = datearrive;
                                 datePickerDeparture.Value = datedepart;
+                                if (!getValuesResult.IsDBNull(4)) { textBoxRemark.Text = getValuesResult.GetString(4); }
                             }
                         }
                     }
                 }
-                // Catch exceptions and display in labelStatus
-                catch (Exception ex) { bookingForm.labelStatus.Text = ex.Message; }
+                // Catch exceptions and display in MessageBox
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
                 // Make sure connection is closed
                 finally
                 {
@@ -124,8 +123,8 @@ namespace HMS
                         }
                     }
                 }
-                // Catch exceptions and display in labelStatus
-                catch (Exception ex) { bookingForm.labelStatus.Text = ex.Message; }
+                // Catch exceptions and display in MessageBox
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
                 // Make sure connection is closed
                 finally
                 {
@@ -204,8 +203,8 @@ namespace HMS
                             }
                         }
                     }
-                    // Catch exceptions and display in labelStatus
-                    catch (Exception ex) { bookingForm.labelStatus.Text = ex.Message; }
+                    // Catch exceptions and display in MessageBox
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
                     // Make sure connection is closed
                     finally
                     {
@@ -216,7 +215,7 @@ namespace HMS
         }
 
         // Button 'Lagre'
-        // Validate input and update record
+        // Validate input and update database record
         private void buttonEditBookingConfirm_Click(object sender, EventArgs e)
         {
             // Validation variables
@@ -227,7 +226,6 @@ namespace HMS
             string datefrom = datePickerArrival.Value.ToString("yyyy-MM-dd");
             string dateto = datePickerDeparture.Value.ToString("yyyy-MM-dd");
             int guestid = Convert.ToInt32(listBoxGuest.SelectedValue);
-            int reservationid = DBConn.QueryID;
             string remark;
             if (string.IsNullOrWhiteSpace(textBoxRemark.Text)) { remark = null; }
             else { remark = textBoxRemark.Text; }
@@ -312,7 +310,7 @@ namespace HMS
                         }
                     }
                     // Catch exceptions and display in labelStatus
-                    catch (Exception ex) { bookingForm.labelStatus.Text = ex.Message; }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
                     // Make sure connection is closed
                     finally
                     {

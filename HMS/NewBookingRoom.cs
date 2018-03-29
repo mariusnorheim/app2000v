@@ -61,8 +61,8 @@ namespace HMS
                         comboBoxRoomType.DataSource = roomTypeBoxDS.Tables["room_type"];
                     }
                 }
-                // Catch exceptions and display in labelStatus
-                catch (Exception ex) { bookingForm.labelStatus.Text = ex.Message; }
+                // Catch exceptions and display in MessageBox
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
                 // Make sure connection is closed
                 finally
                 {
@@ -100,8 +100,8 @@ namespace HMS
                         }
                     }
                 }
-                // Catch exceptions and display in labelStatus
-                catch (Exception ex) { bookingForm.labelStatus.Text = ex.Message; }
+                // Catch exceptions and display in MessageBox
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
                 // Make sure connection is closed
                 finally
                 {
@@ -180,8 +180,8 @@ namespace HMS
                             }
                         }
                     }
-                    // Catch exceptions and display in labelStatus
-                    catch (Exception ex) { bookingForm.labelStatus.Text = ex.Message; }
+                    // Catch exceptions and display in MessageBox
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
                     // Make sure connection is closed
                     finally
                     {
