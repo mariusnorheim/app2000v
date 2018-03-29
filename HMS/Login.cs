@@ -43,101 +43,87 @@ namespace HMS
                 // Close connection
                 conn.Close();
             }
-            catch (Exception ex)
-            {
-                this.labelStatus.Text = ex.Message;
-            }
+            catch (Exception ex) { this.labelStatus.Text = ex.Message; }
         }
 
         private void CheckLogin()
         {
+            string uid = textBoxUsername.Text;
+            string upw = textBoxPassword.Text;
             // Check for input
-            if(!(string.IsNullOrEmpty(textBoxUsername.Text)) && !(string.IsNullOrEmpty(textBoxPassword.Text)))
+            if (!string.IsNullOrWhiteSpace(uid) && !string.IsNullOrWhiteSpace(upw))
             {
-                MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString);
-                string uid = textBoxUsername.Text;
-
-                try
+                using (MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString))
                 {
-                    // Connect to database
-                    conn.Open();
-
-                    // Create mysql command and data reader
-                    query = "SELECT admin_salt FROM admin WHERE admin_username=@uid";
-                    string salt = "";
-                    MySqlCommand cmdGetSalt = new MySqlCommand(query, conn);
-                    cmdGetSalt.Parameters.AddWithValue("@uid", uid);
-                    MySqlDataReader saltResult = cmdGetSalt.ExecuteReader();
-                    // Check if the reader has data
-                    if (saltResult.HasRows)
+                    try
                     {
-                        // Grab salt from database
-                        saltResult.Read();
-                        salt = saltResult.GetString(saltResult.GetOrdinal("admin_salt"));
-                    }
-                    saltResult.Close();
+                        // Connect to database
+                        conn.Open();
 
-                    // Hash password with salt
-                    PasswordHasher pwHasher = new PasswordHasher();
-                    HashResult hashedPassword = pwHasher.HashStoredSalt(textBoxPassword.Text, salt, SHA512.Create());
-
-                    // Check database for login input match
-                    int matchLogin = 0;
-                    query = "SELECT COUNT(*) FROM admin WHERE admin_username=@uid AND admin_password=@admin_pw";
-                    // Create mysql command and return value
-                    MySqlCommand cmdMatchLogin = new MySqlCommand(query, conn);
-                    cmdMatchLogin.Parameters.AddWithValue("@uid", uid);
-                    cmdMatchLogin.Parameters.AddWithValue("@admin_pw", hashedPassword.Digest);
-                    matchLogin = int.Parse(cmdMatchLogin.ExecuteScalar() + "");
-
-                    // Correct username/password combination
-                    if (matchLogin == 1)
-                    {
-                        // Create mysql command and data reader
-                        query = "SELECT admin_superuser FROM admin WHERE admin_username=@uid";
-                        int su = 0;
-                        MySqlCommand cmdGetSu = new MySqlCommand(query, conn);
-                        cmdGetSu.Parameters.AddWithValue("@uid", uid);
-                        MySqlDataReader suResult = cmdGetSu.ExecuteReader();
-                        if(suResult.HasRows)
+                        // Fetch salt and superuser status
+                        // Prepare MySQL query
+                        query = "SELECT salt, superuser FROM admin " +
+                                "WHERE admin_username = @uid";
+                        Boolean validlogin = false;
+                        string salt;
+                        int su;
+                        using (MySqlCommand getValuesCmd = new MySqlCommand(query, conn))
                         {
-                            // Grab superuser status from database
-                            suResult.Read();
-                            su = suResult.GetInt16(suResult.GetOrdinal("admin_superuser"));
+                            getValuesCmd.Parameters.AddWithValue("@uid", uid);
+                            using (MySqlDataReader getValuesResult = getValuesCmd.ExecuteReader())
+                            {
+                                if (getValuesResult.Read())
+                                {
+                                    salt = getValuesResult.GetString(0);
+                                    su = getValuesResult.GetInt32(1);
+
+                                    // Hash password with salt
+                                    PasswordHasher pwHasher = new PasswordHasher();
+                                    HashResult hashedPassword = pwHasher.HashStoredSalt(upw, salt, SHA512.Create());
+
+                                    // Check database for login input match
+                                    // Prepare MySQL query
+                                    query = "SELECT COUNT(*) FROM admin " +
+                                            "WHERE adminid = @uid AND admin_password = @upw";
+                                    using (MySqlCommand matchLoginCmd = new MySqlCommand(query, conn))
+                                    {
+                                        matchLoginCmd.Parameters.AddWithValue("@uid", uid);
+                                        matchLoginCmd.Parameters.AddWithValue("@upw", hashedPassword.Digest);
+                                        if (int.Parse(matchLoginCmd.ExecuteScalar() + "") == 1)
+                                        {
+                                            validlogin = true;
+                                        }
+                                    }
+
+                                    // Correct username/password combination
+                                    if (validlogin)
+                                    {
+                                        // Save user information in static variables through the UserInfo class
+                                        UserInfo.UserID = uid;
+                                        UserInfo.SuperUser = su;
+
+                                        // Open main program and hide login screen
+                                        UserInterface UIForm = new UserInterface();
+                                        UIForm.Show();
+                                        this.Hide();
+                                    }
+                                    // Wrong username/password combination
+                                    else
+                                    { this.labelStatus.Text = "Feil brukernavn eller passord, forsøk på nytt."; }
+                                }
+                            }
                         }
-                        suResult.Close();
-
-                        // Save user information in static variables through the UserInfo class
-                        UserInfo.UserID = uid;
-                        UserInfo.SuperUser = su;
-
-                        // Open main program and hide login screen
-                        UserInterface UIForm = new UserInterface();
-                        UIForm.Show();
-                        this.Hide();
                     }
-                    // Wrong username/password combination
-                    else
-                    {
-                        this.labelStatus.Text = "Feil brukernavn eller passord, forsøk på nytt.";
+                    // Catch exceptions and display in labelStatus
+                    catch (Exception ex) { this.labelStatus.Text = ex.Message; }
+                    // Make sure connection is closed
+                    finally {
+                        if (conn.State == System.Data.ConnectionState.Open) { conn.Close(); }
                     }
-                }
-                // Catch exceptions and display in labelStatus
-                catch (Exception ex)
-                {
-                    this.labelStatus.Text = ex.Message;
-                }
-                // Close connection
-                finally
-                {
-                    conn.Close();
                 }
             }
             // No input
-            else
-            {
-                this.labelStatus.Text = "Brukernavn eller passord felt tomt, forsøk på nytt.";
-            }
+            else { this.labelStatus.Text = "Brukernavn eller passord felt tomt, forsøk på nytt."; }
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
