@@ -58,6 +58,7 @@
     <Compile Include="Booking.Designer.cs">
       <DependentUpon>Booking.cs</DependentUpon>
     </Compile>
+    <Compile Include="CalculateDate.cs" />
     <Compile Include="Content.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +71,12 @@
     </Compile>
     <Compile Include="EditBookingRoom.Designer.cs">
       <DependentUpon>EditBookingRoom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditGuest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditGuest.Designer.cs">
+      <DependentUpon>EditGuest.cs</DependentUpon>
     </Compile>
     <Compile Include="Folio.cs">
       <SubType>Form</SubType>
@@ -89,11 +96,11 @@
     <Compile Include="NewBookingRoom.Designer.cs">
       <DependentUpon>NewBookingRoom.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewGuestForm.cs">
+    <Compile Include="NewGuest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewGuestForm.Designer.cs">
-      <DependentUpon>NewGuestForm.cs</DependentUpon>
+    <Compile Include="NewGuest.Designer.cs">
+      <DependentUpon>NewGuest.cs</DependentUpon>
     </Compile>
     <Compile Include="PopupForm.cs">
       <SubType>Form</SubType>
@@ -137,6 +144,9 @@
     <EmbeddedResource Include="EditBookingRoom.resx">
       <DependentUpon>EditBookingRoom.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditGuest.resx">
+      <DependentUpon>EditGuest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Folio.resx">
       <DependentUpon>Folio.cs</DependentUpon>
     </EmbeddedResource>
@@ -146,8 +156,8 @@
     <EmbeddedResource Include="NewBookingRoom.resx">
       <DependentUpon>NewBookingRoom.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewGuestForm.resx">
-      <DependentUpon>NewGuestForm.cs</DependentUpon>
+    <EmbeddedResource Include="NewGuest.resx">
+      <DependentUpon>NewGuest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PopupForm.resx">
       <DependentUpon>PopupForm.cs</DependentUpon>
