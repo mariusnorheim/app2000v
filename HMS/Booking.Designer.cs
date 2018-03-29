@@ -34,7 +34,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.dataGridViewRoom = new System.Windows.Forms.DataGridView();
             this.buttonNewBookingRoom = new System.Windows.Forms.Button();
             this.buttonEditBookingRoom = new System.Windows.Forms.Button();
             this.buttonDeleteBookingRoom = new System.Windows.Forms.Button();
@@ -42,18 +41,403 @@
             this.buttonSjekkutRoom = new System.Windows.Forms.Button();
             this.buttonSearchBookingRoom = new System.Windows.Forms.Button();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
-            this.buttonSubMenu2 = new System.Windows.Forms.Button();
             this.buttonSubMenu1 = new System.Windows.Forms.Button();
-            this.dataGridViewHall = new System.Windows.Forms.DataGridView();
+            this.buttonSubMenu2 = new System.Windows.Forms.Button();
+            this.buttonDisplayRoomDay = new System.Windows.Forms.Button();
+            this.buttonDisplayRoomWeek = new System.Windows.Forms.Button();
+            this.buttonDisplayRoomMonth = new System.Windows.Forms.Button();
+            this.buttonDisplayRoomAll = new System.Windows.Forms.Button();
             this.buttonNewBookingHall = new System.Windows.Forms.Button();
             this.buttonEditBookingHall = new System.Windows.Forms.Button();
             this.buttonDeleteBookingHall = new System.Windows.Forms.Button();
             this.buttonSjekkinnHall = new System.Windows.Forms.Button();
             this.buttonSjekkutHall = new System.Windows.Forms.Button();
             this.buttonSearchBookingHall = new System.Windows.Forms.Button();
+            this.buttonDisplayHallMonth = new System.Windows.Forms.Button();
+            this.buttonDisplayHallWeek = new System.Windows.Forms.Button();
+            this.buttonDisplayHallDay = new System.Windows.Forms.Button();
+            this.buttonDisplayHallAll = new System.Windows.Forms.Button();
+            this.dataGridViewRoom = new System.Windows.Forms.DataGridView();
+            this.dataGridViewHall = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHall)).BeginInit();
             this.SuspendLayout();
+            // 
+            // labelStatus
+            // 
+            this.labelStatus.Font = new System.Drawing.Font("Verdana", 9.75F);
+            this.labelStatus.Size = new System.Drawing.Size(0, 16);
+            // 
+            // buttonNewBookingRoom
+            // 
+            this.buttonNewBookingRoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonNewBookingRoom.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonNewBookingRoom.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.buttonNewBookingRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonNewBookingRoom.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonNewBookingRoom.Location = new System.Drawing.Point(15, 580);
+            this.buttonNewBookingRoom.Name = "buttonNewBookingRoom";
+            this.buttonNewBookingRoom.Size = new System.Drawing.Size(80, 30);
+            this.buttonNewBookingRoom.TabIndex = 37;
+            this.buttonNewBookingRoom.Text = "Ny";
+            this.buttonNewBookingRoom.UseVisualStyleBackColor = false;
+            this.buttonNewBookingRoom.Click += new System.EventHandler(this.buttonNewBookingRoom_Click);
+            // 
+            // buttonEditBookingRoom
+            // 
+            this.buttonEditBookingRoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonEditBookingRoom.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonEditBookingRoom.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.buttonEditBookingRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEditBookingRoom.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonEditBookingRoom.Location = new System.Drawing.Point(100, 580);
+            this.buttonEditBookingRoom.Name = "buttonEditBookingRoom";
+            this.buttonEditBookingRoom.Size = new System.Drawing.Size(80, 30);
+            this.buttonEditBookingRoom.TabIndex = 41;
+            this.buttonEditBookingRoom.Text = "Endre";
+            this.buttonEditBookingRoom.UseVisualStyleBackColor = false;
+            this.buttonEditBookingRoom.Click += new System.EventHandler(this.buttonEditBookingRoom_Click);
+            // 
+            // buttonDeleteBookingRoom
+            // 
+            this.buttonDeleteBookingRoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonDeleteBookingRoom.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonDeleteBookingRoom.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.buttonDeleteBookingRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDeleteBookingRoom.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDeleteBookingRoom.Location = new System.Drawing.Point(185, 580);
+            this.buttonDeleteBookingRoom.Name = "buttonDeleteBookingRoom";
+            this.buttonDeleteBookingRoom.Size = new System.Drawing.Size(80, 30);
+            this.buttonDeleteBookingRoom.TabIndex = 46;
+            this.buttonDeleteBookingRoom.Text = "Slett";
+            this.buttonDeleteBookingRoom.UseVisualStyleBackColor = false;
+            this.buttonDeleteBookingRoom.Click += new System.EventHandler(this.buttonDeleteBookingRoom_Click);
+            // 
+            // buttonSjekkinnRoom
+            // 
+            this.buttonSjekkinnRoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonSjekkinnRoom.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonSjekkinnRoom.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.buttonSjekkinnRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSjekkinnRoom.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSjekkinnRoom.Location = new System.Drawing.Point(270, 580);
+            this.buttonSjekkinnRoom.Name = "buttonSjekkinnRoom";
+            this.buttonSjekkinnRoom.Size = new System.Drawing.Size(80, 30);
+            this.buttonSjekkinnRoom.TabIndex = 50;
+            this.buttonSjekkinnRoom.Text = "Sjekk inn";
+            this.buttonSjekkinnRoom.UseVisualStyleBackColor = false;
+            this.buttonSjekkinnRoom.Visible = false;
+            this.buttonSjekkinnRoom.Click += new System.EventHandler(this.buttonSjekkinnRoom_Click);
+            // 
+            // buttonSjekkutRoom
+            // 
+            this.buttonSjekkutRoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonSjekkutRoom.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonSjekkutRoom.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.buttonSjekkutRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSjekkutRoom.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSjekkutRoom.Location = new System.Drawing.Point(355, 580);
+            this.buttonSjekkutRoom.Name = "buttonSjekkutRoom";
+            this.buttonSjekkutRoom.Size = new System.Drawing.Size(80, 30);
+            this.buttonSjekkutRoom.TabIndex = 51;
+            this.buttonSjekkutRoom.Text = "Sjekk ut";
+            this.buttonSjekkutRoom.UseVisualStyleBackColor = false;
+            this.buttonSjekkutRoom.Visible = false;
+            this.buttonSjekkutRoom.Click += new System.EventHandler(this.buttonSjekkutRoom_Click);
+            // 
+            // buttonSearchBookingRoom
+            // 
+            this.buttonSearchBookingRoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonSearchBookingRoom.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.buttonSearchBookingRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSearchBookingRoom.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSearchBookingRoom.Location = new System.Drawing.Point(935, 580);
+            this.buttonSearchBookingRoom.Name = "buttonSearchBookingRoom";
+            this.buttonSearchBookingRoom.Size = new System.Drawing.Size(50, 30);
+            this.buttonSearchBookingRoom.TabIndex = 39;
+            this.buttonSearchBookingRoom.Text = "Søk";
+            this.buttonSearchBookingRoom.UseVisualStyleBackColor = false;
+            this.buttonSearchBookingRoom.Click += new System.EventHandler(this.buttonSearchBookingRoom_Click);
+            // 
+            // textBoxSearch
+            // 
+            this.textBoxSearch.AcceptsTab = true;
+            this.textBoxSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.textBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxSearch.Font = new System.Drawing.Font("Bahnschrift Light", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxSearch.ForeColor = System.Drawing.Color.White;
+            this.textBoxSearch.Location = new System.Drawing.Point(630, 580);
+            this.textBoxSearch.Margin = new System.Windows.Forms.Padding(0);
+            this.textBoxSearch.MaxLength = 80;
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(300, 30);
+            this.textBoxSearch.TabIndex = 40;
+            this.textBoxSearch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxSearch_MouseClick);
+            // 
+            // buttonSubMenu1
+            // 
+            this.buttonSubMenu1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
+            this.buttonSubMenu1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonSubMenu1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonSubMenu1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSubMenu1.Font = new System.Drawing.Font("Ubuntu", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSubMenu1.Location = new System.Drawing.Point(395, 10);
+            this.buttonSubMenu1.Name = "buttonSubMenu1";
+            this.buttonSubMenu1.Size = new System.Drawing.Size(105, 30);
+            this.buttonSubMenu1.TabIndex = 42;
+            this.buttonSubMenu1.Text = "Rom";
+            this.buttonSubMenu1.UseVisualStyleBackColor = false;
+            this.buttonSubMenu1.Click += new System.EventHandler(this.buttonSubMenu1_Click);
+            // 
+            // buttonSubMenu2
+            // 
+            this.buttonSubMenu2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
+            this.buttonSubMenu2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonSubMenu2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonSubMenu2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSubMenu2.Font = new System.Drawing.Font("Ubuntu", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSubMenu2.Location = new System.Drawing.Point(505, 10);
+            this.buttonSubMenu2.Name = "buttonSubMenu2";
+            this.buttonSubMenu2.Size = new System.Drawing.Size(105, 30);
+            this.buttonSubMenu2.TabIndex = 43;
+            this.buttonSubMenu2.Text = "Hall";
+            this.buttonSubMenu2.UseVisualStyleBackColor = false;
+            this.buttonSubMenu2.Click += new System.EventHandler(this.buttonSubMenu2_Click);
+            // 
+            // buttonDisplayRoomDay
+            // 
+            this.buttonDisplayRoomDay.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonDisplayRoomDay.FlatAppearance.BorderSize = 0;
+            this.buttonDisplayRoomDay.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonDisplayRoomDay.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonDisplayRoomDay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDisplayRoomDay.Font = new System.Drawing.Font("Ubuntu", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDisplayRoomDay.Location = new System.Drawing.Point(935, 24);
+            this.buttonDisplayRoomDay.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonDisplayRoomDay.Name = "buttonDisplayRoomDay";
+            this.buttonDisplayRoomDay.Size = new System.Drawing.Size(50, 24);
+            this.buttonDisplayRoomDay.TabIndex = 54;
+            this.buttonDisplayRoomDay.Text = "I dag";
+            this.buttonDisplayRoomDay.UseVisualStyleBackColor = true;
+            this.buttonDisplayRoomDay.Click += new System.EventHandler(this.buttonDisplayRoomDay_Click);
+            // 
+            // buttonDisplayRoomWeek
+            // 
+            this.buttonDisplayRoomWeek.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonDisplayRoomWeek.FlatAppearance.BorderSize = 0;
+            this.buttonDisplayRoomWeek.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonDisplayRoomWeek.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonDisplayRoomWeek.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDisplayRoomWeek.Font = new System.Drawing.Font("Ubuntu", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDisplayRoomWeek.Location = new System.Drawing.Point(852, 24);
+            this.buttonDisplayRoomWeek.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonDisplayRoomWeek.Name = "buttonDisplayRoomWeek";
+            this.buttonDisplayRoomWeek.Size = new System.Drawing.Size(80, 24);
+            this.buttonDisplayRoomWeek.TabIndex = 55;
+            this.buttonDisplayRoomWeek.Text = "Denne uke";
+            this.buttonDisplayRoomWeek.UseVisualStyleBackColor = true;
+            this.buttonDisplayRoomWeek.Click += new System.EventHandler(this.buttonDisplayRoomWeek_Click);
+            // 
+            // buttonDisplayRoomMonth
+            // 
+            this.buttonDisplayRoomMonth.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonDisplayRoomMonth.FlatAppearance.BorderSize = 0;
+            this.buttonDisplayRoomMonth.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonDisplayRoomMonth.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonDisplayRoomMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDisplayRoomMonth.Font = new System.Drawing.Font("Ubuntu", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDisplayRoomMonth.Location = new System.Drawing.Point(764, 24);
+            this.buttonDisplayRoomMonth.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonDisplayRoomMonth.Name = "buttonDisplayRoomMonth";
+            this.buttonDisplayRoomMonth.Size = new System.Drawing.Size(85, 24);
+            this.buttonDisplayRoomMonth.TabIndex = 56;
+            this.buttonDisplayRoomMonth.Text = "Denne mnd";
+            this.buttonDisplayRoomMonth.UseVisualStyleBackColor = true;
+            this.buttonDisplayRoomMonth.Click += new System.EventHandler(this.buttonDisplayRoomMonth_Click);
+            // 
+            // buttonDisplayRoomAll
+            // 
+            this.buttonDisplayRoomAll.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonDisplayRoomAll.FlatAppearance.BorderSize = 0;
+            this.buttonDisplayRoomAll.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonDisplayRoomAll.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonDisplayRoomAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDisplayRoomAll.Font = new System.Drawing.Font("Ubuntu", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDisplayRoomAll.Location = new System.Drawing.Point(721, 24);
+            this.buttonDisplayRoomAll.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonDisplayRoomAll.Name = "buttonDisplayRoomAll";
+            this.buttonDisplayRoomAll.Size = new System.Drawing.Size(40, 24);
+            this.buttonDisplayRoomAll.TabIndex = 60;
+            this.buttonDisplayRoomAll.Text = "Alle";
+            this.buttonDisplayRoomAll.UseVisualStyleBackColor = true;
+            this.buttonDisplayRoomAll.Click += new System.EventHandler(this.buttonDisplayRoomAll_Click);
+            // 
+            // buttonNewBookingHall
+            // 
+            this.buttonNewBookingHall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonNewBookingHall.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonNewBookingHall.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.buttonNewBookingHall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonNewBookingHall.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonNewBookingHall.Location = new System.Drawing.Point(15, 580);
+            this.buttonNewBookingHall.Name = "buttonNewBookingHall";
+            this.buttonNewBookingHall.Size = new System.Drawing.Size(80, 30);
+            this.buttonNewBookingHall.TabIndex = 44;
+            this.buttonNewBookingHall.Text = "Ny";
+            this.buttonNewBookingHall.UseVisualStyleBackColor = false;
+            this.buttonNewBookingHall.Visible = false;
+            this.buttonNewBookingHall.Click += new System.EventHandler(this.buttonNewBookingHall_Click);
+            // 
+            // buttonEditBookingHall
+            // 
+            this.buttonEditBookingHall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonEditBookingHall.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonEditBookingHall.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.buttonEditBookingHall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEditBookingHall.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonEditBookingHall.Location = new System.Drawing.Point(100, 580);
+            this.buttonEditBookingHall.Name = "buttonEditBookingHall";
+            this.buttonEditBookingHall.Size = new System.Drawing.Size(80, 30);
+            this.buttonEditBookingHall.TabIndex = 45;
+            this.buttonEditBookingHall.Text = "Endre";
+            this.buttonEditBookingHall.UseVisualStyleBackColor = false;
+            this.buttonEditBookingHall.Visible = false;
+            this.buttonEditBookingHall.Click += new System.EventHandler(this.buttonEditBookingHall_Click);
+            // 
+            // buttonDeleteBookingHall
+            // 
+            this.buttonDeleteBookingHall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonDeleteBookingHall.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonDeleteBookingHall.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.buttonDeleteBookingHall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDeleteBookingHall.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDeleteBookingHall.Location = new System.Drawing.Point(185, 580);
+            this.buttonDeleteBookingHall.Name = "buttonDeleteBookingHall";
+            this.buttonDeleteBookingHall.Size = new System.Drawing.Size(80, 30);
+            this.buttonDeleteBookingHall.TabIndex = 47;
+            this.buttonDeleteBookingHall.Text = "Slett";
+            this.buttonDeleteBookingHall.UseVisualStyleBackColor = false;
+            this.buttonDeleteBookingHall.Visible = false;
+            this.buttonDeleteBookingHall.Click += new System.EventHandler(this.buttonDeleteBookingHall_Click);
+            // 
+            // buttonSjekkinnHall
+            // 
+            this.buttonSjekkinnHall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonSjekkinnHall.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonSjekkinnHall.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.buttonSjekkinnHall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSjekkinnHall.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSjekkinnHall.Location = new System.Drawing.Point(270, 580);
+            this.buttonSjekkinnHall.Name = "buttonSjekkinnHall";
+            this.buttonSjekkinnHall.Size = new System.Drawing.Size(80, 30);
+            this.buttonSjekkinnHall.TabIndex = 52;
+            this.buttonSjekkinnHall.Text = "Sjekk inn";
+            this.buttonSjekkinnHall.UseVisualStyleBackColor = false;
+            this.buttonSjekkinnHall.Visible = false;
+            this.buttonSjekkinnHall.Click += new System.EventHandler(this.buttonSjekkinnHall_Click);
+            // 
+            // buttonSjekkutHall
+            // 
+            this.buttonSjekkutHall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonSjekkutHall.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonSjekkutHall.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.buttonSjekkutHall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSjekkutHall.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSjekkutHall.Location = new System.Drawing.Point(355, 580);
+            this.buttonSjekkutHall.Name = "buttonSjekkutHall";
+            this.buttonSjekkutHall.Size = new System.Drawing.Size(80, 30);
+            this.buttonSjekkutHall.TabIndex = 53;
+            this.buttonSjekkutHall.Text = "Sjekk ut";
+            this.buttonSjekkutHall.UseVisualStyleBackColor = false;
+            this.buttonSjekkutHall.Visible = false;
+            this.buttonSjekkutHall.Click += new System.EventHandler(this.buttonSjekkutHall_Click);
+            // 
+            // buttonSearchBookingHall
+            // 
+            this.buttonSearchBookingHall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonSearchBookingHall.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.buttonSearchBookingHall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSearchBookingHall.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSearchBookingHall.Location = new System.Drawing.Point(935, 580);
+            this.buttonSearchBookingHall.Name = "buttonSearchBookingHall";
+            this.buttonSearchBookingHall.Size = new System.Drawing.Size(50, 30);
+            this.buttonSearchBookingHall.TabIndex = 48;
+            this.buttonSearchBookingHall.Text = "Søk";
+            this.buttonSearchBookingHall.UseVisualStyleBackColor = false;
+            this.buttonSearchBookingHall.Visible = false;
+            this.buttonSearchBookingHall.Click += new System.EventHandler(this.buttonSearchBookingHall_Click);
+            // 
+            // buttonDisplayHallMonth
+            // 
+            this.buttonDisplayHallMonth.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonDisplayHallMonth.FlatAppearance.BorderSize = 0;
+            this.buttonDisplayHallMonth.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonDisplayHallMonth.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonDisplayHallMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDisplayHallMonth.Font = new System.Drawing.Font("Ubuntu", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDisplayHallMonth.Location = new System.Drawing.Point(764, 24);
+            this.buttonDisplayHallMonth.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonDisplayHallMonth.Name = "buttonDisplayHallMonth";
+            this.buttonDisplayHallMonth.Size = new System.Drawing.Size(85, 24);
+            this.buttonDisplayHallMonth.TabIndex = 59;
+            this.buttonDisplayHallMonth.Text = "Denne mnd";
+            this.buttonDisplayHallMonth.UseVisualStyleBackColor = true;
+            this.buttonDisplayHallMonth.Visible = false;
+            this.buttonDisplayHallMonth.Click += new System.EventHandler(this.buttonDisplayHallMonth_Click);
+            // 
+            // buttonDisplayHallWeek
+            // 
+            this.buttonDisplayHallWeek.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonDisplayHallWeek.FlatAppearance.BorderSize = 0;
+            this.buttonDisplayHallWeek.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonDisplayHallWeek.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonDisplayHallWeek.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDisplayHallWeek.Font = new System.Drawing.Font("Ubuntu", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDisplayHallWeek.Location = new System.Drawing.Point(852, 24);
+            this.buttonDisplayHallWeek.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonDisplayHallWeek.Name = "buttonDisplayHallWeek";
+            this.buttonDisplayHallWeek.Size = new System.Drawing.Size(80, 24);
+            this.buttonDisplayHallWeek.TabIndex = 58;
+            this.buttonDisplayHallWeek.Text = "Denne uke";
+            this.buttonDisplayHallWeek.UseVisualStyleBackColor = true;
+            this.buttonDisplayHallWeek.Visible = false;
+            this.buttonDisplayHallWeek.Click += new System.EventHandler(this.buttonDisplayHallWeek_Click);
+            // 
+            // buttonDisplayHallDay
+            // 
+            this.buttonDisplayHallDay.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonDisplayHallDay.FlatAppearance.BorderSize = 0;
+            this.buttonDisplayHallDay.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonDisplayHallDay.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonDisplayHallDay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDisplayHallDay.Font = new System.Drawing.Font("Ubuntu", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDisplayHallDay.Location = new System.Drawing.Point(935, 24);
+            this.buttonDisplayHallDay.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonDisplayHallDay.Name = "buttonDisplayHallDay";
+            this.buttonDisplayHallDay.Size = new System.Drawing.Size(50, 24);
+            this.buttonDisplayHallDay.TabIndex = 57;
+            this.buttonDisplayHallDay.Text = "I dag";
+            this.buttonDisplayHallDay.UseVisualStyleBackColor = true;
+            this.buttonDisplayHallDay.Visible = false;
+            this.buttonDisplayHallDay.Click += new System.EventHandler(this.buttonDisplayHallDay_Click);
+            // 
+            // buttonDisplayHallAll
+            // 
+            this.buttonDisplayHallAll.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonDisplayHallAll.FlatAppearance.BorderSize = 0;
+            this.buttonDisplayHallAll.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonDisplayHallAll.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonDisplayHallAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDisplayHallAll.Font = new System.Drawing.Font("Ubuntu", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDisplayHallAll.Location = new System.Drawing.Point(721, 24);
+            this.buttonDisplayHallAll.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonDisplayHallAll.Name = "buttonDisplayHallAll";
+            this.buttonDisplayHallAll.Size = new System.Drawing.Size(40, 24);
+            this.buttonDisplayHallAll.TabIndex = 61;
+            this.buttonDisplayHallAll.Text = "Alle";
+            this.buttonDisplayHallAll.UseVisualStyleBackColor = true;
+            this.buttonDisplayHallAll.Visible = false;
+            this.buttonDisplayHallAll.Click += new System.EventHandler(this.buttonDisplayHallAll_Click);
             // 
             // dataGridViewRoom
             // 
@@ -97,138 +481,9 @@
             this.dataGridViewRoom.RowHeadersVisible = false;
             this.dataGridViewRoom.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dataGridViewRoom.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewRoom.Size = new System.Drawing.Size(970, 335);
+            this.dataGridViewRoom.Size = new System.Drawing.Size(970, 525);
             this.dataGridViewRoom.TabIndex = 36;
             this.dataGridViewRoom.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRoom_CellDoubleClick);
-            // 
-            // buttonNewBookingRoom
-            // 
-            this.buttonNewBookingRoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.buttonNewBookingRoom.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.buttonNewBookingRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonNewBookingRoom.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNewBookingRoom.Location = new System.Drawing.Point(15, 390);
-            this.buttonNewBookingRoom.Name = "buttonNewBookingRoom";
-            this.buttonNewBookingRoom.Size = new System.Drawing.Size(80, 30);
-            this.buttonNewBookingRoom.TabIndex = 37;
-            this.buttonNewBookingRoom.Text = "Ny";
-            this.buttonNewBookingRoom.UseVisualStyleBackColor = false;
-            this.buttonNewBookingRoom.Click += new System.EventHandler(this.buttonNewBookingRoom_Click);
-            // 
-            // buttonEditBookingRoom
-            // 
-            this.buttonEditBookingRoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.buttonEditBookingRoom.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.buttonEditBookingRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonEditBookingRoom.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonEditBookingRoom.Location = new System.Drawing.Point(100, 390);
-            this.buttonEditBookingRoom.Name = "buttonEditBookingRoom";
-            this.buttonEditBookingRoom.Size = new System.Drawing.Size(80, 30);
-            this.buttonEditBookingRoom.TabIndex = 41;
-            this.buttonEditBookingRoom.Text = "Endre";
-            this.buttonEditBookingRoom.UseVisualStyleBackColor = false;
-            this.buttonEditBookingRoom.Click += new System.EventHandler(this.buttonEditBookingRoom_Click);
-            // 
-            // buttonDeleteBookingRoom
-            // 
-            this.buttonDeleteBookingRoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.buttonDeleteBookingRoom.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.buttonDeleteBookingRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDeleteBookingRoom.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDeleteBookingRoom.Location = new System.Drawing.Point(185, 390);
-            this.buttonDeleteBookingRoom.Name = "buttonDeleteBookingRoom";
-            this.buttonDeleteBookingRoom.Size = new System.Drawing.Size(80, 30);
-            this.buttonDeleteBookingRoom.TabIndex = 46;
-            this.buttonDeleteBookingRoom.Text = "Slett";
-            this.buttonDeleteBookingRoom.UseVisualStyleBackColor = false;
-            this.buttonDeleteBookingRoom.Click += new System.EventHandler(this.buttonDeleteBookingRoom_Click);
-            // 
-            // buttonSjekkinnRoom
-            // 
-            this.buttonSjekkinnRoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.buttonSjekkinnRoom.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.buttonSjekkinnRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSjekkinnRoom.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSjekkinnRoom.Location = new System.Drawing.Point(270, 390);
-            this.buttonSjekkinnRoom.Name = "buttonSjekkinnRoom";
-            this.buttonSjekkinnRoom.Size = new System.Drawing.Size(80, 30);
-            this.buttonSjekkinnRoom.TabIndex = 50;
-            this.buttonSjekkinnRoom.Text = "Sjekk inn";
-            this.buttonSjekkinnRoom.UseVisualStyleBackColor = false;
-            this.buttonSjekkinnRoom.Visible = false;
-            this.buttonSjekkinnRoom.Click += new System.EventHandler(this.buttonSjekkinnRoom_Click);
-            // 
-            // buttonSjekkutRoom
-            // 
-            this.buttonSjekkutRoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.buttonSjekkutRoom.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.buttonSjekkutRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSjekkutRoom.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSjekkutRoom.Location = new System.Drawing.Point(355, 390);
-            this.buttonSjekkutRoom.Name = "buttonSjekkutRoom";
-            this.buttonSjekkutRoom.Size = new System.Drawing.Size(80, 30);
-            this.buttonSjekkutRoom.TabIndex = 51;
-            this.buttonSjekkutRoom.Text = "Sjekk ut";
-            this.buttonSjekkutRoom.UseVisualStyleBackColor = false;
-            this.buttonSjekkutRoom.Visible = false;
-            this.buttonSjekkutRoom.Click += new System.EventHandler(this.buttonSjekkutRoom_Click);
-            // 
-            // buttonSearchBookingRoom
-            // 
-            this.buttonSearchBookingRoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.buttonSearchBookingRoom.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.buttonSearchBookingRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSearchBookingRoom.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSearchBookingRoom.Location = new System.Drawing.Point(935, 390);
-            this.buttonSearchBookingRoom.Name = "buttonSearchBookingRoom";
-            this.buttonSearchBookingRoom.Size = new System.Drawing.Size(50, 30);
-            this.buttonSearchBookingRoom.TabIndex = 39;
-            this.buttonSearchBookingRoom.Text = "Søk";
-            this.buttonSearchBookingRoom.UseVisualStyleBackColor = false;
-            this.buttonSearchBookingRoom.Click += new System.EventHandler(this.buttonSearchBookingRoom_Click);
-            // 
-            // textBoxSearch
-            // 
-            this.textBoxSearch.AcceptsTab = true;
-            this.textBoxSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.textBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxSearch.Font = new System.Drawing.Font("Bahnschrift Light", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxSearch.ForeColor = System.Drawing.Color.White;
-            this.textBoxSearch.Location = new System.Drawing.Point(630, 390);
-            this.textBoxSearch.Margin = new System.Windows.Forms.Padding(0);
-            this.textBoxSearch.MaxLength = 80;
-            this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(300, 30);
-            this.textBoxSearch.TabIndex = 40;
-            this.textBoxSearch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxSearch_MouseClick);
-            // 
-            // buttonSubMenu2
-            // 
-            this.buttonSubMenu2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
-            this.buttonSubMenu2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonSubMenu2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSubMenu2.Font = new System.Drawing.Font("Ubuntu", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSubMenu2.Location = new System.Drawing.Point(505, 10);
-            this.buttonSubMenu2.Name = "buttonSubMenu2";
-            this.buttonSubMenu2.Size = new System.Drawing.Size(105, 30);
-            this.buttonSubMenu2.TabIndex = 43;
-            this.buttonSubMenu2.Text = "Hall";
-            this.buttonSubMenu2.UseVisualStyleBackColor = false;
-            this.buttonSubMenu2.Click += new System.EventHandler(this.buttonSubMenu2_Click);
-            // 
-            // buttonSubMenu1
-            // 
-            this.buttonSubMenu1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
-            this.buttonSubMenu1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonSubMenu1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSubMenu1.Font = new System.Drawing.Font("Ubuntu", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSubMenu1.Location = new System.Drawing.Point(395, 10);
-            this.buttonSubMenu1.Name = "buttonSubMenu1";
-            this.buttonSubMenu1.Size = new System.Drawing.Size(105, 30);
-            this.buttonSubMenu1.TabIndex = 42;
-            this.buttonSubMenu1.Text = "Rom";
-            this.buttonSubMenu1.UseVisualStyleBackColor = false;
-            this.buttonSubMenu1.Click += new System.EventHandler(this.buttonSubMenu1_Click);
             // 
             // dataGridViewHall
             // 
@@ -271,124 +526,42 @@
             this.dataGridViewHall.RowHeadersVisible = false;
             this.dataGridViewHall.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dataGridViewHall.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewHall.Size = new System.Drawing.Size(970, 335);
+            this.dataGridViewHall.Size = new System.Drawing.Size(970, 525);
             this.dataGridViewHall.TabIndex = 49;
             this.dataGridViewHall.Visible = false;
-            // 
-            // buttonNewBookingHall
-            // 
-            this.buttonNewBookingHall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.buttonNewBookingHall.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.buttonNewBookingHall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonNewBookingHall.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNewBookingHall.Location = new System.Drawing.Point(15, 390);
-            this.buttonNewBookingHall.Name = "buttonNewBookingHall";
-            this.buttonNewBookingHall.Size = new System.Drawing.Size(80, 30);
-            this.buttonNewBookingHall.TabIndex = 44;
-            this.buttonNewBookingHall.Text = "Ny";
-            this.buttonNewBookingHall.UseVisualStyleBackColor = false;
-            this.buttonNewBookingHall.Visible = false;
-            this.buttonNewBookingHall.Click += new System.EventHandler(this.buttonNewBookingHall_Click);
-            // 
-            // buttonEditBookingHall
-            // 
-            this.buttonEditBookingHall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.buttonEditBookingHall.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.buttonEditBookingHall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonEditBookingHall.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonEditBookingHall.Location = new System.Drawing.Point(100, 390);
-            this.buttonEditBookingHall.Name = "buttonEditBookingHall";
-            this.buttonEditBookingHall.Size = new System.Drawing.Size(80, 30);
-            this.buttonEditBookingHall.TabIndex = 45;
-            this.buttonEditBookingHall.Text = "Endre";
-            this.buttonEditBookingHall.UseVisualStyleBackColor = false;
-            this.buttonEditBookingHall.Visible = false;
-            this.buttonEditBookingHall.Click += new System.EventHandler(this.buttonEditBookingHall_Click);
-            // 
-            // buttonDeleteBookingHall
-            // 
-            this.buttonDeleteBookingHall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.buttonDeleteBookingHall.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.buttonDeleteBookingHall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDeleteBookingHall.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDeleteBookingHall.Location = new System.Drawing.Point(185, 390);
-            this.buttonDeleteBookingHall.Name = "buttonDeleteBookingHall";
-            this.buttonDeleteBookingHall.Size = new System.Drawing.Size(80, 30);
-            this.buttonDeleteBookingHall.TabIndex = 47;
-            this.buttonDeleteBookingHall.Text = "Slett";
-            this.buttonDeleteBookingHall.UseVisualStyleBackColor = false;
-            this.buttonDeleteBookingHall.Visible = false;
-            this.buttonDeleteBookingHall.Click += new System.EventHandler(this.buttonDeleteBookingHall_Click);
-            // 
-            // buttonSjekkinnHall
-            // 
-            this.buttonSjekkinnHall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.buttonSjekkinnHall.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.buttonSjekkinnHall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSjekkinnHall.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSjekkinnHall.Location = new System.Drawing.Point(270, 390);
-            this.buttonSjekkinnHall.Name = "buttonSjekkinnHall";
-            this.buttonSjekkinnHall.Size = new System.Drawing.Size(80, 30);
-            this.buttonSjekkinnHall.TabIndex = 52;
-            this.buttonSjekkinnHall.Text = "Sjekk inn";
-            this.buttonSjekkinnHall.UseVisualStyleBackColor = false;
-            this.buttonSjekkinnHall.Visible = false;
-            this.buttonSjekkinnHall.Click += new System.EventHandler(this.buttonSjekkinnHall_Click);
-            // 
-            // buttonSjekkutHall
-            // 
-            this.buttonSjekkutHall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.buttonSjekkutHall.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.buttonSjekkutHall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSjekkutHall.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSjekkutHall.Location = new System.Drawing.Point(355, 390);
-            this.buttonSjekkutHall.Name = "buttonSjekkutHall";
-            this.buttonSjekkutHall.Size = new System.Drawing.Size(80, 30);
-            this.buttonSjekkutHall.TabIndex = 53;
-            this.buttonSjekkutHall.Text = "Sjekk ut";
-            this.buttonSjekkutHall.UseVisualStyleBackColor = false;
-            this.buttonSjekkutHall.Visible = false;
-            this.buttonSjekkutHall.Click += new System.EventHandler(this.buttonSjekkutHall_Click);
-            // 
-            // buttonSearchBookingHall
-            // 
-            this.buttonSearchBookingHall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.buttonSearchBookingHall.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.buttonSearchBookingHall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSearchBookingHall.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSearchBookingHall.Location = new System.Drawing.Point(935, 390);
-            this.buttonSearchBookingHall.Name = "buttonSearchBookingHall";
-            this.buttonSearchBookingHall.Size = new System.Drawing.Size(50, 30);
-            this.buttonSearchBookingHall.TabIndex = 48;
-            this.buttonSearchBookingHall.Text = "Søk";
-            this.buttonSearchBookingHall.UseVisualStyleBackColor = false;
-            this.buttonSearchBookingHall.Visible = false;
-            this.buttonSearchBookingHall.Click += new System.EventHandler(this.buttonSearchBookingHall_Click);
             // 
             // Booking
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1000, 670);
+            this.Controls.Add(this.buttonDisplayHallAll);
+            this.Controls.Add(this.buttonDisplayRoomAll);
+            this.Controls.Add(this.buttonDisplayHallMonth);
+            this.Controls.Add(this.buttonDisplayHallWeek);
+            this.Controls.Add(this.buttonDisplayHallDay);
+            this.Controls.Add(this.buttonDisplayRoomMonth);
+            this.Controls.Add(this.buttonDisplayRoomWeek);
+            this.Controls.Add(this.buttonDisplayRoomDay);
             this.Controls.Add(this.buttonSjekkutHall);
             this.Controls.Add(this.buttonSjekkinnHall);
             this.Controls.Add(this.buttonSjekkutRoom);
             this.Controls.Add(this.buttonSjekkinnRoom);
-            this.Controls.Add(this.dataGridViewHall);
             this.Controls.Add(this.buttonSearchBookingHall);
             this.Controls.Add(this.buttonDeleteBookingHall);
             this.Controls.Add(this.buttonDeleteBookingRoom);
             this.Controls.Add(this.buttonEditBookingHall);
             this.Controls.Add(this.buttonNewBookingHall);
-            this.Controls.Add(this.buttonSubMenu2);
             this.Controls.Add(this.buttonSubMenu1);
+            this.Controls.Add(this.buttonSubMenu2);
             this.Controls.Add(this.buttonEditBookingRoom);
             this.Controls.Add(this.textBoxSearch);
             this.Controls.Add(this.buttonSearchBookingRoom);
             this.Controls.Add(this.buttonNewBookingRoom);
             this.Controls.Add(this.dataGridViewRoom);
+            this.Controls.Add(this.dataGridViewHall);
+            this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Name = "Booking";
             this.Load += new System.EventHandler(this.Booking_Load);
-            this.Controls.SetChildIndex(this.dataGridViewRoom, 0);
             this.Controls.SetChildIndex(this.buttonNewBookingRoom, 0);
             this.Controls.SetChildIndex(this.buttonSearchBookingRoom, 0);
             this.Controls.SetChildIndex(this.textBoxSearch, 0);
@@ -400,11 +573,20 @@
             this.Controls.SetChildIndex(this.buttonDeleteBookingRoom, 0);
             this.Controls.SetChildIndex(this.buttonDeleteBookingHall, 0);
             this.Controls.SetChildIndex(this.buttonSearchBookingHall, 0);
-            this.Controls.SetChildIndex(this.dataGridViewHall, 0);
             this.Controls.SetChildIndex(this.buttonSjekkinnRoom, 0);
             this.Controls.SetChildIndex(this.buttonSjekkutRoom, 0);
             this.Controls.SetChildIndex(this.buttonSjekkinnHall, 0);
             this.Controls.SetChildIndex(this.buttonSjekkutHall, 0);
+            this.Controls.SetChildIndex(this.buttonDisplayRoomDay, 0);
+            this.Controls.SetChildIndex(this.buttonDisplayRoomWeek, 0);
+            this.Controls.SetChildIndex(this.buttonDisplayRoomMonth, 0);
+            this.Controls.SetChildIndex(this.buttonDisplayRoomAll, 0);
+            this.Controls.SetChildIndex(this.buttonDisplayHallDay, 0);
+            this.Controls.SetChildIndex(this.buttonDisplayHallWeek, 0);
+            this.Controls.SetChildIndex(this.buttonDisplayHallMonth, 0);
+            this.Controls.SetChildIndex(this.buttonDisplayHallAll, 0);
+            this.Controls.SetChildIndex(this.dataGridViewRoom, 0);
+            this.Controls.SetChildIndex(this.dataGridViewHall, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRoom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewHall)).EndInit();
             this.ResumeLayout(false);
@@ -414,7 +596,6 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridViewRoom;
         private System.Windows.Forms.Button buttonNewBookingRoom;
         private System.Windows.Forms.Button buttonEditBookingRoom;
         private System.Windows.Forms.Button buttonDeleteBookingRoom;
@@ -422,14 +603,23 @@
         private System.Windows.Forms.Button buttonSjekkutRoom;
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Button buttonSearchBookingRoom;
-        private System.Windows.Forms.Button buttonSubMenu2;
         private System.Windows.Forms.Button buttonSubMenu1;
-        private System.Windows.Forms.DataGridView dataGridViewHall;
+        private System.Windows.Forms.Button buttonSubMenu2;
+        private System.Windows.Forms.Button buttonDisplayRoomDay;
+        private System.Windows.Forms.Button buttonDisplayRoomWeek;
+        private System.Windows.Forms.Button buttonDisplayRoomMonth;
+        private System.Windows.Forms.Button buttonDisplayRoomAll;
         private System.Windows.Forms.Button buttonNewBookingHall;
         private System.Windows.Forms.Button buttonEditBookingHall;
         private System.Windows.Forms.Button buttonDeleteBookingHall;
         private System.Windows.Forms.Button buttonSjekkinnHall;
         private System.Windows.Forms.Button buttonSjekkutHall;
         private System.Windows.Forms.Button buttonSearchBookingHall;
+        private System.Windows.Forms.Button buttonDisplayHallMonth;
+        private System.Windows.Forms.Button buttonDisplayHallWeek;
+        private System.Windows.Forms.Button buttonDisplayHallDay;
+        private System.Windows.Forms.Button buttonDisplayHallAll;
+        private System.Windows.Forms.DataGridView dataGridViewRoom;
+        private System.Windows.Forms.DataGridView dataGridViewHall;
     }
 }
