@@ -120,6 +120,7 @@
             // buttonMenu1
             // 
             this.buttonMenu1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            this.buttonMenu1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMenu1.FlatAppearance.BorderSize = 0;
             this.buttonMenu1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(86)))), ((int)(((byte)(118)))));
             this.buttonMenu1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
@@ -137,6 +138,7 @@
             // buttonMenu2
             // 
             this.buttonMenu2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            this.buttonMenu2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMenu2.FlatAppearance.BorderSize = 0;
             this.buttonMenu2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(86)))), ((int)(((byte)(118)))));
             this.buttonMenu2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
@@ -154,6 +156,7 @@
             // buttonMenu3
             // 
             this.buttonMenu3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            this.buttonMenu3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMenu3.FlatAppearance.BorderSize = 0;
             this.buttonMenu3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(86)))), ((int)(((byte)(118)))));
             this.buttonMenu3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
@@ -171,6 +174,7 @@
             // buttonMenu4
             // 
             this.buttonMenu4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            this.buttonMenu4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMenu4.FlatAppearance.BorderSize = 0;
             this.buttonMenu4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(86)))), ((int)(((byte)(118)))));
             this.buttonMenu4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
@@ -188,6 +192,7 @@
             // buttonMenu5
             // 
             this.buttonMenu5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            this.buttonMenu5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMenu5.FlatAppearance.BorderSize = 0;
             this.buttonMenu5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(86)))), ((int)(((byte)(118)))));
             this.buttonMenu5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
@@ -205,6 +210,7 @@
             // buttonMenu6
             // 
             this.buttonMenu6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            this.buttonMenu6.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMenu6.FlatAppearance.BorderSize = 0;
             this.buttonMenu6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(86)))), ((int)(((byte)(118)))));
             this.buttonMenu6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
@@ -222,6 +228,7 @@
             // buttonMenu7
             // 
             this.buttonMenu7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            this.buttonMenu7.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMenu7.FlatAppearance.BorderSize = 0;
             this.buttonMenu7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(86)))), ((int)(((byte)(118)))));
             this.buttonMenu7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
@@ -239,6 +246,7 @@
             // buttonMenu8
             // 
             this.buttonMenu8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            this.buttonMenu8.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMenu8.FlatAppearance.BorderSize = 0;
             this.buttonMenu8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(86)))), ((int)(((byte)(118)))));
             this.buttonMenu8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
@@ -256,6 +264,7 @@
             // buttonMenu9
             // 
             this.buttonMenu9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            this.buttonMenu9.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMenu9.FlatAppearance.BorderSize = 0;
             this.buttonMenu9.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(86)))), ((int)(((byte)(118)))));
             this.buttonMenu9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
@@ -273,6 +282,7 @@
             // buttonMenu10
             // 
             this.buttonMenu10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            this.buttonMenu10.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMenu10.FlatAppearance.BorderSize = 0;
             this.buttonMenu10.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(86)))), ((int)(((byte)(118)))));
             this.buttonMenu10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
@@ -338,6 +348,7 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(86)))), ((int)(((byte)(118)))));
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
