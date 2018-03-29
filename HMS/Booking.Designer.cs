@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonNewBookingRoom = new System.Windows.Forms.Button();
             this.buttonEditBookingRoom = new System.Windows.Forms.Button();
             this.buttonDeleteBookingRoom = new System.Windows.Forms.Button();
@@ -66,7 +66,6 @@
             // labelStatus
             // 
             this.labelStatus.Font = new System.Drawing.Font("Verdana", 9.75F);
-            this.labelStatus.Size = new System.Drawing.Size(0, 16);
             // 
             // buttonNewBookingRoom
             // 
@@ -75,7 +74,7 @@
             this.buttonNewBookingRoom.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.buttonNewBookingRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonNewBookingRoom.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNewBookingRoom.Location = new System.Drawing.Point(15, 580);
+            this.buttonNewBookingRoom.Location = new System.Drawing.Point(15, 605);
             this.buttonNewBookingRoom.Name = "buttonNewBookingRoom";
             this.buttonNewBookingRoom.Size = new System.Drawing.Size(80, 30);
             this.buttonNewBookingRoom.TabIndex = 37;
@@ -90,7 +89,7 @@
             this.buttonEditBookingRoom.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.buttonEditBookingRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonEditBookingRoom.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonEditBookingRoom.Location = new System.Drawing.Point(100, 580);
+            this.buttonEditBookingRoom.Location = new System.Drawing.Point(100, 605);
             this.buttonEditBookingRoom.Name = "buttonEditBookingRoom";
             this.buttonEditBookingRoom.Size = new System.Drawing.Size(80, 30);
             this.buttonEditBookingRoom.TabIndex = 41;
@@ -105,7 +104,7 @@
             this.buttonDeleteBookingRoom.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.buttonDeleteBookingRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonDeleteBookingRoom.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDeleteBookingRoom.Location = new System.Drawing.Point(185, 580);
+            this.buttonDeleteBookingRoom.Location = new System.Drawing.Point(185, 605);
             this.buttonDeleteBookingRoom.Name = "buttonDeleteBookingRoom";
             this.buttonDeleteBookingRoom.Size = new System.Drawing.Size(80, 30);
             this.buttonDeleteBookingRoom.TabIndex = 46;
@@ -120,7 +119,7 @@
             this.buttonSjekkinnRoom.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.buttonSjekkinnRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSjekkinnRoom.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSjekkinnRoom.Location = new System.Drawing.Point(270, 580);
+            this.buttonSjekkinnRoom.Location = new System.Drawing.Point(270, 605);
             this.buttonSjekkinnRoom.Name = "buttonSjekkinnRoom";
             this.buttonSjekkinnRoom.Size = new System.Drawing.Size(80, 30);
             this.buttonSjekkinnRoom.TabIndex = 50;
@@ -136,7 +135,7 @@
             this.buttonSjekkutRoom.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.buttonSjekkutRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSjekkutRoom.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSjekkutRoom.Location = new System.Drawing.Point(355, 580);
+            this.buttonSjekkutRoom.Location = new System.Drawing.Point(355, 605);
             this.buttonSjekkutRoom.Name = "buttonSjekkutRoom";
             this.buttonSjekkutRoom.Size = new System.Drawing.Size(80, 30);
             this.buttonSjekkutRoom.TabIndex = 51;
@@ -151,7 +150,7 @@
             this.buttonSearchBookingRoom.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.buttonSearchBookingRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSearchBookingRoom.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSearchBookingRoom.Location = new System.Drawing.Point(935, 580);
+            this.buttonSearchBookingRoom.Location = new System.Drawing.Point(935, 605);
             this.buttonSearchBookingRoom.Name = "buttonSearchBookingRoom";
             this.buttonSearchBookingRoom.Size = new System.Drawing.Size(50, 30);
             this.buttonSearchBookingRoom.TabIndex = 39;
@@ -166,7 +165,7 @@
             this.textBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxSearch.Font = new System.Drawing.Font("Bahnschrift Light", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxSearch.ForeColor = System.Drawing.Color.White;
-            this.textBoxSearch.Location = new System.Drawing.Point(630, 580);
+            this.textBoxSearch.Location = new System.Drawing.Point(630, 605);
             this.textBoxSearch.Margin = new System.Windows.Forms.Padding(0);
             this.textBoxSearch.MaxLength = 80;
             this.textBoxSearch.Name = "textBoxSearch";
@@ -279,7 +278,7 @@
             this.buttonNewBookingHall.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.buttonNewBookingHall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonNewBookingHall.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNewBookingHall.Location = new System.Drawing.Point(15, 580);
+            this.buttonNewBookingHall.Location = new System.Drawing.Point(15, 605);
             this.buttonNewBookingHall.Name = "buttonNewBookingHall";
             this.buttonNewBookingHall.Size = new System.Drawing.Size(80, 30);
             this.buttonNewBookingHall.TabIndex = 44;
@@ -295,7 +294,7 @@
             this.buttonEditBookingHall.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.buttonEditBookingHall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonEditBookingHall.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonEditBookingHall.Location = new System.Drawing.Point(100, 580);
+            this.buttonEditBookingHall.Location = new System.Drawing.Point(100, 605);
             this.buttonEditBookingHall.Name = "buttonEditBookingHall";
             this.buttonEditBookingHall.Size = new System.Drawing.Size(80, 30);
             this.buttonEditBookingHall.TabIndex = 45;
@@ -311,7 +310,7 @@
             this.buttonDeleteBookingHall.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.buttonDeleteBookingHall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonDeleteBookingHall.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDeleteBookingHall.Location = new System.Drawing.Point(185, 580);
+            this.buttonDeleteBookingHall.Location = new System.Drawing.Point(185, 605);
             this.buttonDeleteBookingHall.Name = "buttonDeleteBookingHall";
             this.buttonDeleteBookingHall.Size = new System.Drawing.Size(80, 30);
             this.buttonDeleteBookingHall.TabIndex = 47;
@@ -327,7 +326,7 @@
             this.buttonSjekkinnHall.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.buttonSjekkinnHall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSjekkinnHall.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSjekkinnHall.Location = new System.Drawing.Point(270, 580);
+            this.buttonSjekkinnHall.Location = new System.Drawing.Point(270, 605);
             this.buttonSjekkinnHall.Name = "buttonSjekkinnHall";
             this.buttonSjekkinnHall.Size = new System.Drawing.Size(80, 30);
             this.buttonSjekkinnHall.TabIndex = 52;
@@ -343,7 +342,7 @@
             this.buttonSjekkutHall.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.buttonSjekkutHall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSjekkutHall.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSjekkutHall.Location = new System.Drawing.Point(355, 580);
+            this.buttonSjekkutHall.Location = new System.Drawing.Point(355, 605);
             this.buttonSjekkutHall.Name = "buttonSjekkutHall";
             this.buttonSjekkutHall.Size = new System.Drawing.Size(80, 30);
             this.buttonSjekkutHall.TabIndex = 53;
@@ -358,7 +357,7 @@
             this.buttonSearchBookingHall.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.buttonSearchBookingHall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSearchBookingHall.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSearchBookingHall.Location = new System.Drawing.Point(935, 580);
+            this.buttonSearchBookingHall.Location = new System.Drawing.Point(935, 605);
             this.buttonSearchBookingHall.Name = "buttonSearchBookingHall";
             this.buttonSearchBookingHall.Size = new System.Drawing.Size(50, 30);
             this.buttonSearchBookingHall.TabIndex = 48;
@@ -448,40 +447,40 @@
             this.dataGridViewRoom.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewRoom.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
             this.dataGridViewRoom.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle31.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewRoom.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewRoom.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewRoom.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            dataGridViewCellStyle32.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle32.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewRoom.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewRoom.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewRoom.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewRoom.GridColor = System.Drawing.Color.DimGray;
             this.dataGridViewRoom.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dataGridViewRoom.Location = new System.Drawing.Point(15, 50);
             this.dataGridViewRoom.Name = "dataGridViewRoom";
-            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle33.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle33.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle33.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewRoom.RowHeadersDefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewRoom.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewRoom.RowHeadersVisible = false;
             this.dataGridViewRoom.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dataGridViewRoom.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewRoom.Size = new System.Drawing.Size(970, 525);
+            this.dataGridViewRoom.Size = new System.Drawing.Size(970, 550);
             this.dataGridViewRoom.TabIndex = 36;
             this.dataGridViewRoom.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRoom_CellDoubleClick);
             // 
@@ -494,51 +493,54 @@
             this.dataGridViewHall.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewHall.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
             this.dataGridViewHall.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle34.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle34.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle34.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle34.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewHall.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewHall.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewHall.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle35.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            dataGridViewCellStyle35.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle35.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle35.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle35.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewHall.DefaultCellStyle = dataGridViewCellStyle35;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewHall.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewHall.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewHall.GridColor = System.Drawing.Color.DimGray;
             this.dataGridViewHall.Location = new System.Drawing.Point(15, 50);
             this.dataGridViewHall.Name = "dataGridViewHall";
-            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle36.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle36.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle36.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle36.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle36.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewHall.RowHeadersDefaultCellStyle = dataGridViewCellStyle36;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewHall.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewHall.RowHeadersVisible = false;
             this.dataGridViewHall.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dataGridViewHall.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewHall.Size = new System.Drawing.Size(970, 525);
+            this.dataGridViewHall.Size = new System.Drawing.Size(970, 550);
             this.dataGridViewHall.TabIndex = 49;
             this.dataGridViewHall.Visible = false;
+            this.dataGridViewHall.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewHall_CellDoubleClick);
             // 
             // Booking
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1000, 670);
+            this.Controls.Add(this.dataGridViewHall);
+            this.Controls.Add(this.dataGridViewRoom);
             this.Controls.Add(this.buttonDisplayHallAll);
-            this.Controls.Add(this.buttonDisplayRoomAll);
             this.Controls.Add(this.buttonDisplayHallMonth);
             this.Controls.Add(this.buttonDisplayHallWeek);
             this.Controls.Add(this.buttonDisplayHallDay);
+            this.Controls.Add(this.buttonDisplayRoomAll);
             this.Controls.Add(this.buttonDisplayRoomMonth);
             this.Controls.Add(this.buttonDisplayRoomWeek);
             this.Controls.Add(this.buttonDisplayRoomDay);
@@ -551,14 +553,12 @@
             this.Controls.Add(this.buttonDeleteBookingRoom);
             this.Controls.Add(this.buttonEditBookingHall);
             this.Controls.Add(this.buttonNewBookingHall);
-            this.Controls.Add(this.buttonSubMenu1);
             this.Controls.Add(this.buttonSubMenu2);
+            this.Controls.Add(this.buttonSubMenu1);
             this.Controls.Add(this.buttonEditBookingRoom);
             this.Controls.Add(this.textBoxSearch);
             this.Controls.Add(this.buttonSearchBookingRoom);
             this.Controls.Add(this.buttonNewBookingRoom);
-            this.Controls.Add(this.dataGridViewRoom);
-            this.Controls.Add(this.dataGridViewHall);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Name = "Booking";
             this.Load += new System.EventHandler(this.Booking_Load);

@@ -52,6 +52,8 @@ namespace HMS
                         dataGridViewRoom.Columns[5].HeaderText = "Avreise";
                         dataGridViewRoom.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                         dataGridViewRoom.Columns[6].HeaderText = "Merknad";
+                        dataGridViewRoom.Columns[7].HeaderText = "Innsjekket";
+                        dataGridViewRoom.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                     }
                 }
                 // Catch exceptions and display in labelStatus
@@ -118,6 +120,8 @@ namespace HMS
                         dataGridViewHall.Columns[5].HeaderText = "Til";
                         dataGridViewHall.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                         dataGridViewHall.Columns[6].HeaderText = "Merknad";
+                        dataGridViewHall.Columns[7].HeaderText = "Innsjekket";
+                        dataGridViewHall.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                     }
                 }
                 // Catch exceptions and display in labelStatus
@@ -168,7 +172,7 @@ namespace HMS
             string startdate = startofmonth.ToString("yyyy-MM-dd");
             string enddate = endofmonth.ToString("yyyy-MM-dd");
             query = "SELECT RR.room_reservationid, CONCAT(G.firstname, ' ', G.lastname) AS guest_name, " +
-                    "R.roomid, RT.name, RR.datefrom, RR.dateto, RR.remark FROM room_reservation AS RR " +
+                    "R.roomid, RT.name, RR.datefrom, RR.dateto, RR.remark, RR.ischeckedin FROM room_reservation AS RR " +
                     "JOIN guest AS G " +
                     "ON RR.guestid = G.guestid " +
                     "JOIN room AS R " +
@@ -186,7 +190,7 @@ namespace HMS
         public void DisplayDefaultHall()
         {
             query = "SELECT HR.hall_reservationid, CONCAT(G.firstname, ' ', G.lastname) AS guest_name, " +
-                    "H.name, HT.name, HR.datetimefrom, HR.datetimeto, HR.remark FROM hall_reservation AS HR " +
+                    "H.name, HT.name, HR.datetimefrom, HR.datetimeto, HR.remark, HR.ischeckedin FROM hall_reservation AS HR " +
                     "JOIN guest AS G " +
                     "ON HR.guestid = G.guestid " +
                     "JOIN hall AS H " +
@@ -304,7 +308,7 @@ namespace HMS
                             }
                         }
 
-                        if (checkedin) { this.labelStatus.Text = "Romreservasjon har allerede foretatt innsjekking og kan ikke endres."; }
+                        if (checkedin) { this.labelStatus.Text = "Romreservasjonen har allerede foretatt innsjekking og kan ikke endres."; }
                         else
                         {
                             // Set database record ID for reference
@@ -352,7 +356,7 @@ namespace HMS
                             }
                         }
 
-                        if (checkedin) { this.labelStatus.Text = "Romreservasjon har allerede foretatt innsjekking og kan ikke slettes."; }
+                        if (checkedin) { this.labelStatus.Text = "Romreservasjonen har allerede foretatt innsjekking og kan ikke slettes."; }
                         else
                         {
                             // Save entry to database
@@ -941,74 +945,6 @@ namespace HMS
             }
         }
 
-        // Button 'I dag' in the room section
-        // Display room reservations for today
-        private void buttonDisplayRoomDay_Click(object sender, EventArgs e)
-        {
-            DateTime today = DateTime.Today;
-            string date = today.ToString("yyyy-MM-dd");
-            query = "SELECT RR.room_reservationid, CONCAT(G.firstname, ' ', G.lastname) AS guest_name, " +
-                    "R.roomid, RT.name, RR.datefrom, RR.dateto, RR.remark FROM room_reservation AS RR " +
-                    "JOIN guest AS G " +
-                    "ON RR.guestid = G.guestid " +
-                    "JOIN room AS R " +
-                    "ON RR.roomid = R.roomid " +
-                    "JOIN room_type AS RT " +
-                    "ON R.room_typeid = RT.room_typeid " +
-                    "WHERE (datefrom = '" + date + "' OR dateto ='" + date + "') " +
-                    "AND RR.isactive = '1' " +
-                    "ORDER BY datefrom, lastname, firstname";
-            LoadDataRoom(query);
-        }
-
-        // Button 'Denne uke' in the room section
-        // Display room reservation for this week
-        private void buttonDisplayRoomWeek_Click(object sender, EventArgs e)
-        {
-            // Find this weeks start date and convert to readable format for MySQL
-            DateTime startofweek = CalculateDate.GetFirstDayOfWeek(DateTime.Today);
-            DateTime endofweek = startofweek.AddDays(7);
-            string startdate = startofweek.ToString("yyyy-MM-dd");
-            string enddate = endofweek.ToString("yyyy-MM-dd");
-            query = "SELECT RR.room_reservationid, CONCAT(G.firstname, ' ', G.lastname) AS guest_name, " +
-                    "R.roomid, RT.name, RR.datefrom, RR.dateto, RR.remark FROM room_reservation AS RR " +
-                    "JOIN guest AS G " +
-                    "ON RR.guestid = G.guestid " +
-                    "JOIN room AS R " +
-                    "ON RR.roomid = R.roomid " +
-                    "JOIN room_type AS RT " +
-                    "ON R.room_typeid = RT.room_typeid " +
-                    "WHERE (datefrom BETWEEN '" + startdate + "' AND '" + enddate + "' " +
-                    "OR dateto BETWEEN '" + startdate + "' AND '" + enddate +  "') " +
-                    "AND RR.isactive = '1' " +
-                    "ORDER BY datefrom, lastname, firstname";
-            LoadDataRoom(query);
-        }
-
-        // Button 'Denne mnd' in the room section
-        // Display room reservations for this month (default view)
-        private void buttonDisplayRoomMonth_Click(object sender, EventArgs e)
-        {
-            DisplayDefaultRoom();
-        }
-
-        // Button 'Alle' in the room section
-        // Display all room reservations
-        private void buttonDisplayRoomAll_Click(object sender, EventArgs e)
-        {
-            query = "SELECT RR.room_reservationid, CONCAT(G.firstname, ' ', G.lastname) AS guest_name, " +
-                    "R.roomid, RT.name, RR.datefrom, RR.dateto, RR.remark FROM room_reservation AS RR " +
-                    "JOIN guest AS G " +
-                    "ON RR.guestid = G.guestid " +
-                    "JOIN room AS R " +
-                    "ON RR.roomid = R.roomid " +
-                    "JOIN room_type AS RT " +
-                    "ON R.room_typeid = RT.room_typeid " +
-                    "WHERE RR.isactive = '1' " +
-                    "ORDER BY datefrom, lastname, firstname";
-            LoadDataRoom(query);
-        }
-
         // Button 'Søk' in the room section
         // Searches result in relevant tables from textinput
         private void buttonSearchBookingRoom_Click(object sender, EventArgs e)
@@ -1022,7 +958,7 @@ namespace HMS
                     // Connect to database
                     conn.Open();
                     query = "SELECT RR.room_reservationid, CONCAT(G.firstname, ' ', G.lastname) AS guest_name, " +
-                            "R.roomid, RT.name, RR.datefrom, RR.dateto, RR.remark FROM room_reservation RR " +
+                            "R.roomid, RT.name, RR.datefrom, RR.dateto, RR.remark, RR.ischeckedin FROM room_reservation RR " +
                             "JOIN guest G " +
                             "ON RR.guestid = G.guestid " +
                             "JOIN room R " +
@@ -1059,9 +995,78 @@ namespace HMS
                 // Make sure connection is closed
                 finally
                 {
-                    if (conn.State == System.Data.ConnectionState.Open) { conn.Close(); }
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    { conn.Close(); }
                 }
             }
+        }
+
+        // Button 'I dag' in the room section
+        // Display room reservations for today
+        private void buttonDisplayRoomDay_Click(object sender, EventArgs e)
+        {
+            DateTime today = DateTime.Today;
+            string date = today.ToString("yyyy-MM-dd");
+            query = "SELECT RR.room_reservationid, CONCAT(G.firstname, ' ', G.lastname) AS guest_name, " +
+                    "R.roomid, RT.name, RR.datefrom, RR.dateto, RR.remark, RR.ischeckedin FROM room_reservation AS RR " +
+                    "JOIN guest AS G " +
+                    "ON RR.guestid = G.guestid " +
+                    "JOIN room AS R " +
+                    "ON RR.roomid = R.roomid " +
+                    "JOIN room_type AS RT " +
+                    "ON R.room_typeid = RT.room_typeid " +
+                    "WHERE (datefrom = '" + date + "' OR dateto ='" + date + "') " +
+                    "AND RR.isactive = '1' " +
+                    "ORDER BY datefrom, lastname, firstname";
+            LoadDataRoom(query);
+        }
+
+        // Button 'Denne uke' in the room section
+        // Display room reservation for this week
+        private void buttonDisplayRoomWeek_Click(object sender, EventArgs e)
+        {
+            // Find this weeks start date and convert to readable format for MySQL
+            DateTime startofweek = CalculateDate.GetFirstDayOfWeek(DateTime.Today);
+            DateTime endofweek = startofweek.AddDays(7);
+            string startdate = startofweek.ToString("yyyy-MM-dd");
+            string enddate = endofweek.ToString("yyyy-MM-dd");
+            query = "SELECT RR.room_reservationid, CONCAT(G.firstname, ' ', G.lastname) AS guest_name, " +
+                    "R.roomid, RT.name, RR.datefrom, RR.dateto, RR.remark, RR.ischeckedin FROM room_reservation AS RR " +
+                    "JOIN guest AS G " +
+                    "ON RR.guestid = G.guestid " +
+                    "JOIN room AS R " +
+                    "ON RR.roomid = R.roomid " +
+                    "JOIN room_type AS RT " +
+                    "ON R.room_typeid = RT.room_typeid " +
+                    "WHERE (datefrom BETWEEN '" + startdate + "' AND '" + enddate + "' " +
+                    "OR dateto BETWEEN '" + startdate + "' AND '" + enddate +  "') " +
+                    "AND RR.isactive = '1' " +
+                    "ORDER BY datefrom, lastname, firstname";
+            LoadDataRoom(query);
+        }
+
+        // Button 'Denne mnd' in the room section
+        // Display room reservations for this month (default view)
+        private void buttonDisplayRoomMonth_Click(object sender, EventArgs e)
+        {
+            DisplayDefaultRoom();
+        }
+
+        // Button 'Alle' in the room section
+        // Display all room reservations
+        private void buttonDisplayRoomAll_Click(object sender, EventArgs e)
+        {
+            query = "SELECT RR.room_reservationid, CONCAT(G.firstname, ' ', G.lastname) AS guest_name, " +
+                    "R.roomid, RT.name, RR.datefrom, RR.dateto, RR.remark, RR.ischeckedin FROM room_reservation AS RR " +
+                    "JOIN guest AS G " +
+                    "ON RR.guestid = G.guestid " +
+                    "JOIN room AS R " +
+                    "ON RR.roomid = R.roomid " +
+                    "JOIN room_type AS RT " +
+                    "ON R.room_typeid = RT.room_typeid " +
+                    "WHERE RR.isactive = '1' " +
+                    "ORDER BY datefrom, lastname, firstname";
+            LoadDataRoom(query);
         }
 
         //
