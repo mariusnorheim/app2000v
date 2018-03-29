@@ -11,58 +11,60 @@ namespace HMS
 {
     public partial class NewBookingRoom : HMS.PopupForm
     {
-        private int roomChecked = 0;
-        Boolean validInput = true;
+        Booking bookingForm = (Booking)Application.OpenForms["Booking"];
+        private Boolean roomchecked;
+        private Boolean validinput;
+        private string roomid;
         private string query;
 
         public NewBookingRoom()
         {
             InitializeComponent();
+            this.AcceptButton = this.buttonSearchGuest;
         }
 
         private void NewBookingRoom_Load(object sender, System.EventArgs e)
         {
-            LoadDataGuest();
+            LoadDataBooking();
         }
 
         // Loading data from database into listBoxGuest and comboBoxRoomType
-        private void LoadDataGuest()
+        private void LoadDataBooking()
         {
-            this.AcceptButton = this.buttonSearchGuest;
             using (MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString))
             {
                 try
                 {
                     // Connect to database
                     conn.Open();
+                    // Populate listBoxGuest
                     // Prepare MySQL query
                     query = "SELECT guestid, CONCAT(firstname, ' ', lastname) AS guest_name FROM guest " +
                             "ORDER BY lastname, firstname";
-                    using (MySqlDataAdapter guestTableAdapter = new MySqlDataAdapter(query, conn))
+                    using (MySqlDataAdapter guestListAdapter = new MySqlDataAdapter(query, conn))
                     {
-                        // Populate listBoxGuest
-                        DataSet guestDS = new DataSet();
-                        guestTableAdapter.Fill(guestDS, "guest");
+                        DataSet guestListDS = new DataSet();
+                        guestListAdapter.Fill(guestListDS, "guest");
                         listBoxGuest.ValueMember = "guestid";
                         listBoxGuest.DisplayMember = "guest_name";
-                        listBoxGuest.DataSource = guestDS.Tables["guest"];
+                        listBoxGuest.DataSource = guestListDS.Tables["guest"];
                     }
 
+                    // Populate comboBoxRoomType
                     // Prepare MySQL query
                     query = "SELECT room_typeid, name FROM room_type " +
                             "ORDER BY room_typeid";
-                    using (MySqlDataAdapter roomTypeTableAdapter = new MySqlDataAdapter(query, conn))
+                    using (MySqlDataAdapter roomTypeBoxAdapter = new MySqlDataAdapter(query, conn))
                     {
-                        // Populate comboBoxRoomType
-                        DataSet roomTypeDS = new DataSet();
-                        roomTypeTableAdapter.Fill(roomTypeDS, "room_type");
+                        DataSet roomTypeBoxDS = new DataSet();
+                        roomTypeBoxAdapter.Fill(roomTypeBoxDS, "room_type");
                         comboBoxRoomType.ValueMember = "room_typeid";
                         comboBoxRoomType.DisplayMember = "name";
-                        comboBoxRoomType.DataSource = roomTypeDS.Tables["room_type"];
+                        comboBoxRoomType.DataSource = roomTypeBoxDS.Tables["room_type"];
                     }
                 }
-                // Catch exceptions and display in message box
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
+                // Catch exceptions and display in statusline
+                catch (Exception ex) { bookingForm.labelStatus.Text = ex.Message; }
                 // Make sure connection is closed
                 finally
                 {
@@ -74,33 +76,33 @@ namespace HMS
         // Button 'Søk gjest'
         private void buttonSearchGuest_Click(object sender, EventArgs e)
         {
-            string search_input = @textBoxSearch.Text.Trim();
+            string searchinput = @textBoxSearch.Text.Trim();
             using (MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString))
             {
                 try
                 {
                     // Connect to database
                     conn.Open();
+                    // Populate Guest listbox
                     // Prepare MySQL query
                     query = "SELECT guestid, CONCAT(firstname, ' ', lastname) AS guest_name FROM guest " +
                             "WHERE CONCAT(firstname, ' ', lastname) LIKE @search " +
                             "ORDER BY lastname, firstname";
-                    using (MySqlCommand guestSearchCmd = new MySqlCommand(query, conn))
+                    using (MySqlCommand guestListSearchCmd = new MySqlCommand(query, conn))
                     {
-                        guestSearchCmd.Parameters.AddWithValue("@search", "%" + search_input + "%");
-                        using (MySqlDataAdapter guestTableAdapter = new MySqlDataAdapter(guestSearchCmd))
+                        guestListSearchCmd.Parameters.AddWithValue("@search", "%" + searchinput + "%");
+                        using (MySqlDataAdapter guestListSearchAdapter = new MySqlDataAdapter(guestListSearchCmd))
                         {
-                            // Populate Guest listbox
-                            DataSet guestDS = new DataSet();
-                            guestTableAdapter.Fill(guestDS, "guest");
+                            DataSet guestListDS = new DataSet();
+                            guestListSearchAdapter.Fill(guestListDS, "guest");
                             listBoxGuest.ValueMember = "guestid";
                             listBoxGuest.DisplayMember = "guest_name";
-                            listBoxGuest.DataSource = guestDS.Tables["guest"];
+                            listBoxGuest.DataSource = guestListDS.Tables["guest"];
                         }
                     }
                 }
-                // Catch exceptions and display in message box
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
+                // Catch exceptions and display in statusline
+                catch (Exception ex) { bookingForm.labelStatus.Text = ex.Message; }
                 // Make sure connection is closed
                 finally
                 {
@@ -114,14 +116,14 @@ namespace HMS
         {
             // Clear flowlayoutpanel and set parameter to enable drag and drop
             flowLayoutPanel1.Controls.Clear();
-            roomChecked = 0;
+            roomchecked = false;
 
             ValidateInput();
-            string roomType = comboBoxRoomType.SelectedValue.ToString();
-            string dateArrive = datePickerArrival.Value.ToString("yyyy-MM-dd");
-            string dateDepart = datePickerDeparture.Value.ToString("yyyy-MM-dd");
+            int roomtype = Convert.ToInt32(comboBoxRoomType.SelectedValue);
+            string datearrive = datePickerArrival.Value.ToString("yyyy-MM-dd");
+            string datedepart = datePickerDeparture.Value.ToString("yyyy-MM-dd");
 
-            if (validInput)
+            if (validinput)
             {
                 // Connect to database
                 using (MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString))
@@ -130,16 +132,18 @@ namespace HMS
                     {
                         // Connect to database
                         conn.Open();
+                        // Fetch data and generate drag and drop panels to indicate available rooms
                         // Prepare MySQL query
-                        query = "SELECT R.roomid, RT.name FROM room as R " +
+                        query = "SELECT R.roomid FROM room as R " +
                                 "INNER JOIN room_type AS RT ON R.room_typeid = RT.room_typeid " +
                                 "WHERE RT.room_typeid =  @roomtype " +
                                 "AND roomid NOT IN ( " +
                                 "SELECT RR.roomid " +
                                 "FROM room_reservation AS RR " +
                                 "LEFT JOIN room AS R ON RR.roomid = R.roomid " +
-                                "WHERE RR.datefrom BETWEEN @datearrive AND @datedepart " +
-                                "OR RR.dateto BETWEEN @datearrive AND @datedepart " +
+                                "WHERE (RR.datefrom BETWEEN @datearrive AND @datedepart " +
+                                "OR RR.dateto BETWEEN @datearrive AND @datedepart) " +
+                                "AND RR.isactive ='1' " +
                                 ") AND roomid NOT IN ( " +
                                 "SELECT R.roomid " +
                                 "FROM room AS R " +
@@ -148,12 +152,11 @@ namespace HMS
                                 ") ORDER BY roomid";
                         using (MySqlCommand roomSearchCmd = new MySqlCommand(query, conn))
                         {
-                            roomSearchCmd.Parameters.AddWithValue("@roomtype", roomType);
-                            roomSearchCmd.Parameters.AddWithValue("@datearrive", dateArrive);
-                            roomSearchCmd.Parameters.AddWithValue("@datedepart", dateDepart);
+                            roomSearchCmd.Parameters.AddWithValue("@roomtype", roomtype);
+                            roomSearchCmd.Parameters.AddWithValue("@datearrive", datearrive);
+                            roomSearchCmd.Parameters.AddWithValue("@datedepart", datedepart);
                             using (MySqlDataReader roomResult = roomSearchCmd.ExecuteReader())
                             {
-                                // Fetch data and generate drag and drop panels to indicate available rooms
                                 while (roomResult.Read())
                                 {
                                     Panel p = new Panel();
@@ -161,9 +164,10 @@ namespace HMS
                                     p.Size = new Size(79, 35);
                                     p.BackColor = Color.Yellow;
                                     p.AllowDrop = true;
-                                    // Setup event handlers for DragOver og DragDrop
+                                    // Setup event handlers for DragOver, DragDrop and Click
                                     p.DragDrop += new System.Windows.Forms.DragEventHandler(this.panelRoom_DragDrop);
                                     p.DragOver += new System.Windows.Forms.DragEventHandler(this.panelRoom_DragOver);
+                                    p.Click += new EventHandler(this.panelRoom_Click);
                                     this.flowLayoutPanel1.Controls.Add(p);
                                     // Draw room number on panel
                                     Font drawFont = new Font("Tahoma", 12);
@@ -175,8 +179,8 @@ namespace HMS
                             }
                         }
                     }
-                    // Catch exceptions and display in message box
-                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+                    // Catch exceptions and display in statusline
+                    catch (Exception ex) { bookingForm.labelStatus.Text = ex.Message; }
                     // Make sure connection is closed
                     finally
                     {
@@ -191,59 +195,45 @@ namespace HMS
         {
             ValidateInput();
 
-            if (validInput)
+            int guestid = Convert.ToInt32(listBoxGuest.SelectedValue);
+            string datearrive = datePickerArrival.Value.ToString("yyyy-MM-dd");
+            string datedepart = datePickerDeparture.Value.ToString("yyyy-MM-dd");
+            string remark;
+            if (string.IsNullOrWhiteSpace(textBoxRemark.Text)) { remark = null; }
+            else { remark = textBoxRemark.Text; }
+            // Check all relevant fields for input
+            if (validinput && roomid != null && guestid != null)
             {
-                string guestid = listBoxGuest.SelectedValue.ToString();
-                string roomid = DBConn.QueryID;
-                string dateArrive = datePickerArrival.Value.ToString("yyyy-MM-dd");
-                string dateDepart = datePickerDeparture.Value.ToString("yyyy-MM-dd");
-                string remark;
-                if (string.IsNullOrWhiteSpace(textBoxRemark.Text))
-                {
-                    remark = null;
-                }
-                else
-                {
-                    remark = textBoxRemark.Text.ToString();
-                }
-
-                // Connect to database
                 using (MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString))
                 {
                     try
                     {
                         // Connect to database
                         conn.Open();
+                        // Save entry to database
                         // Prepare MySQL query
                         query = "INSERT INTO room_reservation (guestid, roomid, datefrom, dateto, remark) " +
                                 "VALUES (@guestid, @roomid, @datearrive, @datedepart, @remark)";
-                        using (MySqlCommand roomBookingCmd = new MySqlCommand(query, conn))
+                        using (MySqlCommand newRoomBookingCmd = new MySqlCommand(query, conn))
                         {
-                            roomBookingCmd.Parameters.AddWithValue("@guestid", guestid);
-                            roomBookingCmd.Parameters.AddWithValue("@roomid", roomid);
-                            roomBookingCmd.Parameters.AddWithValue("@datearrive", dateArrive);
-                            roomBookingCmd.Parameters.AddWithValue("@datedepart", dateDepart);
-                            roomBookingCmd.Parameters.AddWithValue("@remark", remark);
-                            roomBookingCmd.ExecuteNonQuery();
-                            MessageBox.Show("Reservasjon for rom " + roomid + " i tidsrommet fra " + dateArrive + 
-                                            " til " + dateDepart + " er lagret i databasen.");
-                            // Clear flowlayoutpanel and set parameter to enable drag and drop
-                            flowLayoutPanel1.Controls.Clear();
-                            roomChecked = 0;
+                            newRoomBookingCmd.Parameters.AddWithValue("@guestid", guestid);
+                            newRoomBookingCmd.Parameters.AddWithValue("@roomid", roomid);
+                            newRoomBookingCmd.Parameters.AddWithValue("@datearrive", datearrive);
+                            newRoomBookingCmd.Parameters.AddWithValue("@datedepart", datedepart);
+                            newRoomBookingCmd.Parameters.AddWithValue("@remark", remark);
+                            newRoomBookingCmd.ExecuteNonQuery();
+                            // Refresh data and close form
+                            bookingForm.DisplayDefaultRoom();
+                            this.Close();
+                            bookingForm.labelStatus.Text = "Reservasjon for romnummer " + roomid + " er lagret i databasen.";
                         }
                     }
-                    // Catch exceptions and display in message box
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
+                    // Catch exceptions and display in statusline
+                    catch (Exception ex) { bookingForm.labelStatus.Text = ex.Message; }
                     // Make sure connection is closed
                     finally
                     {
-                        if (conn.State == System.Data.ConnectionState.Open)
-                        {
-                            conn.Close();
-                        }
+                        if (conn.State == System.Data.ConnectionState.Open) { conn.Close(); }
                     }
                 }
             }
@@ -252,13 +242,14 @@ namespace HMS
         // Button 'Avbryt'
         private void buttonNewBookingCancel_Click(object sender, EventArgs e)
         {
+            bookingForm.DisplayDefaultRoom();
             this.Close();
         }
 
         // Event handler for listBoxGuest mousedrag
         private void listBoxGuest_MouseMove(object sender, MouseEventArgs e)
         {
-            if (roomChecked == 0)
+            if (!roomchecked)
             {
                 if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
                 {
@@ -270,7 +261,7 @@ namespace HMS
         // Event handler for listBoxGuest mousedown
         private void listBoxGuest_MouseDown(object sender, MouseEventArgs e)
         {
-            if (roomChecked == 0)
+            if (!roomchecked)
             {
                 listBoxGuest.DoDragDrop(listBoxGuest.GetItemText(listBoxGuest.SelectedValue), DragDropEffects.All);
             }
@@ -279,7 +270,7 @@ namespace HMS
         // Event handler for available room panel dragover
         private void panelRoom_DragOver(object sender, DragEventArgs e)
         {
-            if (roomChecked == 0)
+            if (!roomchecked)
             {
                 e.Effect = DragDropEffects.Copy;
             }
@@ -288,7 +279,7 @@ namespace HMS
         // Event handler for available room panel dragdrop
         private void panelRoom_DragDrop(object sender, DragEventArgs e)
         {
-            if (roomChecked == 0)
+            if (!roomchecked)
             {
                 // item contains object that is dragged from listbox
                 // c contains controller that object is dragged onto
@@ -296,26 +287,39 @@ namespace HMS
                 Control c = (Control)sender;
                 if (item != null)
                 {
+                    roomchecked = true;
+                    roomid = c.Name;
                     c.BackColor = Color.Lime;
-                    roomChecked = 1;
-                    DBConn.QueryID = c.Name;
                 }
+            }
+        }
+
+        // Event handler for available room panel click
+        private void panelRoom_Click(object sender, EventArgs e)
+        {
+            if (!roomchecked)
+            {
+                // c contains controller that is clicked
+                Control c = (Control)sender;
+                roomchecked = true;
+                roomid = c.Name;
+                c.BackColor = Color.Lime;
             }
         }
 
         // Validate input
         private void ValidateInput()
         {
-            validInput = true;
+            validinput = true;
             if (datePickerArrival.Value.Date < DateTime.Today)
             {
-                validInput = false;
+                validinput = false;
                 MessageBox.Show("Ankomstdato kan ikke være tidligere enn i dag.");
                 datePickerArrival.Focus();
             }
             if (datePickerDeparture.Value.Date <= datePickerArrival.Value.Date)
             {
-                validInput = false;
+                validinput = false;
                 MessageBox.Show("Avreisedato kan ikke være tidligere eller samme dag som ankomstdato.");
                 datePickerDeparture.Focus();
             }

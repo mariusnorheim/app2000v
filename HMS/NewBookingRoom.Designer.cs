@@ -101,6 +101,7 @@
             // buttonSearchGuest
             // 
             this.buttonSearchGuest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.buttonSearchGuest.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonSearchGuest.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.buttonSearchGuest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSearchGuest.Font = new System.Drawing.Font("Bahnschrift", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -115,6 +116,7 @@
             // buttonSearchRoomBookingAvailable
             // 
             this.buttonSearchRoomBookingAvailable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.buttonSearchRoomBookingAvailable.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonSearchRoomBookingAvailable.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.buttonSearchRoomBookingAvailable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSearchRoomBookingAvailable.Font = new System.Drawing.Font("Bahnschrift", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -180,6 +182,7 @@
             // buttonNewBookingCancel
             // 
             this.buttonNewBookingCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.buttonNewBookingCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonNewBookingCancel.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.buttonNewBookingCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonNewBookingCancel.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -203,6 +206,7 @@
             // buttonNewBookingConfirm
             // 
             this.buttonNewBookingConfirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.buttonNewBookingConfirm.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonNewBookingConfirm.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.buttonNewBookingConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonNewBookingConfirm.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
