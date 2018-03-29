@@ -25,7 +25,7 @@ namespace HMS
         private void EditBookingRoom_Load(object sender, EventArgs e)
         {
             LoadDataBooking();
-            this.AcceptButton = this.buttonSearchGuest;
+            this.AcceptButton = buttonSearchGuest;
         }
 
         // Loading data from database into listBoxGuest and comboBoxRoomType
@@ -85,7 +85,7 @@ namespace HMS
                         }
                     }
                 }
-                // Catch exceptions and display in statusline
+                // Catch exceptions and display in labelStatus
                 catch (Exception ex) { bookingForm.labelStatus.Text = ex.Message; }
                 // Make sure connection is closed
                 finally
@@ -96,9 +96,11 @@ namespace HMS
         }
 
         // Button 'Søk gjest'
+        // Search guest archive
         private void buttonSearchGuest_Click(object sender, EventArgs e)
         {
             string searchinput = @textBoxSearch.Text.Trim();
+
             using (MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString))
             {
                 try
@@ -122,7 +124,7 @@ namespace HMS
                         }
                     }
                 }
-                // Catch exceptions and display in statusline
+                // Catch exceptions and display in labelStatus
                 catch (Exception ex) { bookingForm.labelStatus.Text = ex.Message; }
                 // Make sure connection is closed
                 finally
@@ -133,27 +135,28 @@ namespace HMS
         }
 
         // Button 'Søk rom'
+        // Display available rooms for selected date
         private void buttonSearchRoomBookingAvailable_Click(object sender, EventArgs e)
         {
+            int roomtype = Convert.ToInt32(comboBoxRoomType.SelectedValue);
+            string datearrive = datePickerArrival.Value.ToString("yyyy-MM-dd");
+            string datedepart = datePickerDeparture.Value.ToString("yyyy-MM-dd");
+
             // Clear flowlayoutpanel and set parameter to enable drag and drop
             flowLayoutPanel1.Controls.Clear();
             roomchecked = false;
 
             ValidateInput();
-            int roomtype = Convert.ToInt32(comboBoxRoomType.SelectedValue);
-            string datearrive = datePickerArrival.Value.ToString("yyyy-MM-dd");
-            string datedepart = datePickerDeparture.Value.ToString("yyyy-MM-dd");
-
+            // Check all relevant fields for input
             if (validinput)
             {
-                // Connect to database
                 using (MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString))
                 {
                     try
                     {
                         // Connect to database
                         conn.Open();
-                        // Fetch data and generate drag and drop panels to indicate available rooms
+                        // Fetch available rooms
                         query = "SELECT R.roomid FROM room as R " +
                                 "INNER JOIN room_type AS RT ON R.room_typeid = RT.room_typeid " +
                                 "WHERE RT.room_typeid =  @roomtype " +
@@ -177,6 +180,8 @@ namespace HMS
                             roomSearchCmd.Parameters.AddWithValue("@datedepart", datedepart);
                             using (MySqlDataReader roomResult = roomSearchCmd.ExecuteReader())
                             {
+                                // Generate panels to indicate available rooms
+                                // Create event handlers for click and drag and drop with values from listBoxGuest
                                 while (roomResult.Read())
                                 {
                                     Panel p = new Panel();
@@ -199,7 +204,7 @@ namespace HMS
                             }
                         }
                     }
-                    // Catch exceptions and display in statusline
+                    // Catch exceptions and display in labelStatus
                     catch (Exception ex) { bookingForm.labelStatus.Text = ex.Message; }
                     // Make sure connection is closed
                     finally
@@ -211,9 +216,14 @@ namespace HMS
         }
 
         // Button 'Lagre'
+        // Validate input and update record
         private void buttonEditBookingConfirm_Click(object sender, EventArgs e)
         {
+            // Validation variables
             Boolean checkedin = false;
+            Boolean guestchanged = false;
+            Boolean guestconfirm = true;
+            // Reference variables
             string datefrom = datePickerArrival.Value.ToString("yyyy-MM-dd");
             string dateto = datePickerDeparture.Value.ToString("yyyy-MM-dd");
             int guestid = Convert.ToInt32(listBoxGuest.SelectedValue);
@@ -243,9 +253,39 @@ namespace HMS
                                 checkedin = getCheckinStatusResult.Read();
                             }
                         }
-
                         if (checkedin) { MessageBox.Show("Romreservasjon har allerede foretatt innsjekking og kan ikke endres."); }
-                        else
+
+                        // Check if guest has changed
+                        query = "SELECT guestid FROM room_reservation " +
+                                "WHERE room_reservationid = @reservationid AND guestid = @guestid";
+                        using (MySqlCommand getGuestStatusCmd = new MySqlCommand(query, conn))
+                        {
+                            getGuestStatusCmd.Parameters.AddWithValue("@reservationid", reservationid);
+                            getGuestStatusCmd.Parameters.AddWithValue("@guestid", guestid);
+                            using (MySqlDataReader getGuestStatusResult = getGuestStatusCmd.ExecuteReader())
+                            {
+                                guestchanged = getGuestStatusResult.Read();
+                            }
+                        }
+
+                        // Give warning if guest has changed and ask for confirmation
+                        if (!guestchanged)
+                        {
+                            DialogResult guestDifferent = MessageBox.Show("Du har forandret gjest på reservasjonen\n" +
+                                                                          "Er du sikker på at du vil fortsette?", "Advarsel!", MessageBoxButtons.YesNo);
+                            if (guestDifferent == DialogResult.No)
+                            {
+                                // Cancel edit and reload data
+                                guestconfirm = false;
+                                LoadDataBooking();
+                                // Clear flowlayoutpanel and set parameter to enable drag and drop
+                                flowLayoutPanel1.Controls.Clear();
+                                roomchecked = false;
+                            }
+                        }
+
+                        // Proceed with edit if checks are passed
+                        if (!checkedin && guestconfirm)
                         {
                             // Save changes to database
                             query = "UPDATE room_reservation " +
@@ -260,14 +300,14 @@ namespace HMS
                                 editRoomBookingCmd.Parameters.AddWithValue("@datedepart", dateto);
                                 editRoomBookingCmd.Parameters.AddWithValue("@remark", remark);
                                 editRoomBookingCmd.ExecuteNonQuery();
-                                // Refresh data and close form
-                                bookingForm.DisplayDefaultRoom();
+                                // Close form and refresh data
                                 this.Close();
+                                bookingForm.DisplayDefaultRoom();
                                 bookingForm.labelStatus.Text = "Reservasjon for romnummer " + roomid + " er lagret i databasen og tidligere romnummer frigitt.";
                             }
                         }
                     }
-                    // Catch exceptions and display in statusline
+                    // Catch exceptions and display in labelStatus
                     catch (Exception ex) { bookingForm.labelStatus.Text = ex.Message; }
                     // Make sure connection is closed
                     finally
@@ -281,8 +321,8 @@ namespace HMS
         // Button 'Avbryt'
         private void buttonEditBookingCancel_Click(object sender, EventArgs e)
         {
-            bookingForm.DisplayDefaultRoom();
             this.Close();
+            bookingForm.DisplayDefaultRoom();
         }
 
         // Event handler for listBoxGuest mousedrag
@@ -346,7 +386,7 @@ namespace HMS
             }
         }
 
-        // Validate input
+        // Validate date input
         private void ValidateInput()
         {
             validinput = true;
