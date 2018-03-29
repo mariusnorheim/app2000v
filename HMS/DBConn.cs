@@ -13,7 +13,7 @@ namespace HMS
     {
         // Mysql Connection string
         public static string ConnectionString = "server=localhost;uid=root;password=;database=app2000v";
-        // QueryID reference when editing
+        // QueryID reference for new forms
         public static int QueryID;
     }
 }
