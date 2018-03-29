@@ -196,16 +196,19 @@ namespace HMS
         private void buttonNewBookingConfirm_Click(object sender, EventArgs e)
         {
             //Reference variables
-            int guestid = Convert.ToInt32(listBoxGuest.SelectedValue);
             string datearrive = datePickerArrival.Value.ToString("yyyy-MM-dd");
             string datedepart = datePickerDeparture.Value.ToString("yyyy-MM-dd");
+            int guestid = Convert.ToInt32(listBoxGuest.SelectedValue);
             string remark;
             if (string.IsNullOrWhiteSpace(textBoxRemark.Text)) { remark = null; }
             else { remark = textBoxRemark.Text; }
 
             ValidateInput();
+            // Display error messages if variable is missing
+            if (guestid == null) { MessageBox.Show("Velg gjest i boksen øverst til venstre før du prøver å lagre endringer."); }
+            if (roomid == null) { MessageBox.Show("Søk og velg rom før du prøver å lagre endringer."); }
             // Check all relevant fields for input
-            if (validinput && roomid != null && guestid != null)
+            if (validinput && guestid != null && roomid != null)
             {
                 using (MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString))
                 {

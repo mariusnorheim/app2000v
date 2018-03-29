@@ -233,8 +233,12 @@ namespace HMS
             else { remark = textBoxRemark.Text; }
 
             ValidateInput();
+            // Display error messages if variable is missing
+            if (guestid == null) { MessageBox.Show("Velg gjest i boksen øverst til venstre før du prøver å lagre endringer."); }
+            if (reservationid == null) { MessageBox.Show("Ingen referanse til reservasjon, avbryt og prøv på nytt."); }
+            if (roomid == null) { MessageBox.Show("Søk og velg rom før du prøver å lagre endringer."); }
             // Check all relevant fields for input
-            if (validinput && reservationid != null && guestid != null)
+            if (validinput && guestid != null && reservationid != null && roomid != null)
             {
                 using (MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString))
                 {
