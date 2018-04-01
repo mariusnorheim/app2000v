@@ -66,6 +66,7 @@
       <DependentUpon>Content.cs</DependentUpon>
     </Compile>
     <Compile Include="DBConn.cs" />
+    <Compile Include="DBException.cs" />
     <Compile Include="DBGetData.cs" />
     <Compile Include="EditBookingRoom.cs">
       <SubType>Form</SubType>
