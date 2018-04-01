@@ -57,20 +57,9 @@ namespace HMS
             }
             catch (MySqlException ex)
             {
-                // Handling errors based on return number
-                // - 0: Cannot connect to server
-                // - 1045: Invalid user name and/or password
-                switch (ex.Number)
-                {
-                    case 0:
-                        MessageBox.Show("Cannot connect to server.  Contact administrator");
-                        break;
-
-                    case 1045:
-                        MessageBox.Show("Invalid username/password, please try again");
-                        break;
-                }
-
+                MessageBox.Show(string.Format("An exception of type {0} was generated while performing your SQL operation. The error message returned was {1}",
+                    ex.GetType(),
+                    ex.Message));
                 return false;
             }
         }
@@ -442,6 +431,121 @@ namespace HMS
                     setDataCmd.Dispose();
                 }
 
+            }
+        }
+
+        // Begin database transactions
+        // Returns MySqlTransaction object
+        // @param1:
+        public MySqlTransaction BeginTransaction()
+        {
+            if (Connect() == true)
+            {
+                try
+                {
+                    // Return object and close connection
+                    return conn.BeginTransaction();
+                }
+
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(string.Format(
+                        "An exception of type {0} was generated while beginning your transaction. The error message returned was {1}",
+                        ex.GetType(),
+                        ex.Message));
+                    return null;
+                }
+            }
+            // No MySQL connection could be made
+            else { return null; }
+        }
+
+        // Commit the specified MySqlTransaction object
+        // @param1: MySqlTransaction object
+        public bool CommitTransaction(MySqlTransaction transaction)
+        {
+            try
+            {
+                // Make sure MySqlTransaction still exists
+                if (transaction != null)
+                {
+                    // Make sure our connection for our transaction hasnt been terminated
+                    if ((transaction.Connection != null) && (transaction.Connection.State == ConnectionState.Open))
+                        transaction.Commit();
+                    else
+                    {
+                        DBException dbexception = new DBException();
+                        dbexception.ThrowSQLException();
+                        return false;
+                    }
+                }
+                else
+                {
+                    // Raise an error (since we cannot throw a MySqlException)
+                    DBException dbexception = new DBException();
+                    dbexception.ThrowSQLException();
+                    return false;
+                }
+
+
+                return true;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("An exception of type {0} was encountered when trying to commit the transaction and an error message of {1} was generated",
+                    ex.GetType(),
+                    ex.Message);
+                return false;
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show(string.Format("An invalid operation was performed. The error message gereerated is {0}", ex.Message));
+                return false;
+            }
+        }
+
+        // Roll back the specified MySqlTransaction object if something went wrong
+        private bool RollbackTransaction(ref MySqlTransaction transaction)
+        {
+            try
+            {
+                if (transaction != null)
+                {
+                    if ((transaction.Connection != null) && (transaction.Connection.State == ConnectionState.Open))
+                        transaction.Rollback();
+                    else
+                    {
+                        DBException dbexception = new DBException();
+                        dbexception.ThrowSQLException();
+                        return false;
+                    }
+                }
+                else
+                {
+                    // Raise an error (since we cannot throw a MySqlException)
+                    DBException dbexception = new DBException();
+                    dbexception.ThrowSQLException();
+                }
+
+                return true;
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(string.Format("An exception of type {0} was generated while attepting to rollback the transaction. The error message generated is {1}",
+                    ex.GetType(), ex.Message));
+                return false;
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show(string.Format("An invalid operation was performed. The error message gereerated is {0}", ex.Message));
+                return false;
+            }
+            finally
+            {
+                if (transaction.Connection.State == ConnectionState.Open)
+                    transaction.Connection.Close();
+
+                transaction.Dispose();
             }
         }
 
