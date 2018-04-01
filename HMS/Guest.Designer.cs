@@ -1,6 +1,6 @@
 ﻿namespace HMS
 {
-    partial class Gjest
+    partial class Guest
     {
         /// <summary>
         /// Required designer variable.
@@ -49,7 +49,7 @@
             this.buttonEditGuest.Name = "buttonEditGuest";
             this.buttonEditGuest.Size = new System.Drawing.Size(80, 30);
             this.buttonEditGuest.TabIndex = 49;
-            this.buttonEditGuest.Text = "Endre";
+            this.buttonEditGuest.Text = "Edit";
             this.buttonEditGuest.UseVisualStyleBackColor = false;
             this.buttonEditGuest.Click += new System.EventHandler(this.buttonEditGuest_Click);
             // 
@@ -63,7 +63,7 @@
             this.buttonNewGuest.Name = "buttonNewGuest";
             this.buttonNewGuest.Size = new System.Drawing.Size(80, 30);
             this.buttonNewGuest.TabIndex = 48;
-            this.buttonNewGuest.Text = "Ny";
+            this.buttonNewGuest.Text = "New";
             this.buttonNewGuest.UseVisualStyleBackColor = false;
             this.buttonNewGuest.Click += new System.EventHandler(this.buttonNewGuest_Click);
             // 
@@ -74,7 +74,7 @@
             this.textBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxSearch.Font = new System.Drawing.Font("Bahnschrift Light", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxSearch.ForeColor = System.Drawing.Color.White;
-            this.textBoxSearch.Location = new System.Drawing.Point(630, 605);
+            this.textBoxSearch.Location = new System.Drawing.Point(620, 605);
             this.textBoxSearch.Margin = new System.Windows.Forms.Padding(0);
             this.textBoxSearch.MaxLength = 80;
             this.textBoxSearch.Name = "textBoxSearch";
@@ -88,11 +88,11 @@
             this.buttonSearchGuest.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.buttonSearchGuest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSearchGuest.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSearchGuest.Location = new System.Drawing.Point(935, 605);
+            this.buttonSearchGuest.Location = new System.Drawing.Point(925, 605);
             this.buttonSearchGuest.Name = "buttonSearchGuest";
-            this.buttonSearchGuest.Size = new System.Drawing.Size(50, 30);
+            this.buttonSearchGuest.Size = new System.Drawing.Size(60, 30);
             this.buttonSearchGuest.TabIndex = 51;
-            this.buttonSearchGuest.Text = "Søk";
+            this.buttonSearchGuest.Text = "Search";
             this.buttonSearchGuest.UseVisualStyleBackColor = false;
             this.buttonSearchGuest.Click += new System.EventHandler(this.buttonSearchGuest_Click);
             // 
@@ -141,7 +141,7 @@
             this.dataGridViewGuest.TabIndex = 52;
             this.dataGridViewGuest.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewGuest_CellDoubleClick);
             // 
-            // Gjest
+            // Guest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1000, 670);
@@ -150,7 +150,7 @@
             this.Controls.Add(this.textBoxSearch);
             this.Controls.Add(this.buttonEditGuest);
             this.Controls.Add(this.buttonNewGuest);
-            this.Name = "Gjest";
+            this.Name = "Guest";
             this.Load += new System.EventHandler(this.Gjest_Load);
             this.Controls.SetChildIndex(this.buttonNewGuest, 0);
             this.Controls.SetChildIndex(this.buttonEditGuest, 0);

@@ -18,7 +18,7 @@ namespace HMS
             InitializeComponent();
 
             // Default form load
-            Oversikt oversiktForm = new Oversikt();
+            Overview oversiktForm = new Overview();
             DisplayChildForm(oversiktForm);
             this.labelHeading.Text = "Oversikt";
         }
@@ -67,9 +67,9 @@ namespace HMS
         // Click handler for menu buttons
         private void buttonMenu1_Click(object sender, EventArgs e)
         {
-            Form oversiktForm = new Oversikt();
-            DisplayChildForm(oversiktForm);
-            this.labelHeading.Text = "Oversikt";
+            Form overviewForm = new Overview();
+            DisplayChildForm(overviewForm);
+            this.labelHeading.Text = "Overview";
         }
 
         private void buttonMenu2_Click(object sender, EventArgs e)
@@ -81,9 +81,9 @@ namespace HMS
 
         private void buttonMenu3_Click(object sender, EventArgs e)
         {
-            Form gjestForm = new Gjest();
-            DisplayChildForm(gjestForm);
-            this.labelHeading.Text = "Gjest";
+            Form guestForm = new Guest();
+            DisplayChildForm(guestForm);
+            this.labelHeading.Text = "Guest";
         }
 
         private void buttonMenu4_Click(object sender, EventArgs e)
@@ -95,9 +95,7 @@ namespace HMS
 
         private void buttonMenu5_Click(object sender, EventArgs e)
         {
-            Form folioForm = new Form();
-            DisplayChildForm(folioForm);
-            this.labelHeading.Text = "Folio";
+
         }
 
         private void buttonMenu6_Click(object sender, EventArgs e)

@@ -229,12 +229,12 @@ namespace HMS
             string remark;
             if (string.IsNullOrWhiteSpace(textBoxRemark.Text)) { remark = null; }
             else { remark = textBoxRemark.Text; }
-
-            ValidateInput();
             // Display error messages if variable is missing
             if (guestid == null) { MessageBox.Show("Velg gjest i boksen øverst til venstre før du prøver å lagre endringer."); }
             if (reservationid == null) { MessageBox.Show("Ingen referanse til reservasjon, avbryt og prøv på nytt."); }
             if (roomid == null) { MessageBox.Show("Søk og velg rom før du prøver å lagre endringer."); }
+
+            ValidateInput();
             // Check all relevant fields for input
             if (validinput && guestid != null && reservationid != null && roomid != null)
             {
@@ -302,19 +302,19 @@ namespace HMS
                                 editRoomBookingCmd.Parameters.AddWithValue("@datedepart", dateto);
                                 editRoomBookingCmd.Parameters.AddWithValue("@remark", remark);
                                 editRoomBookingCmd.ExecuteNonQuery();
-                                // Close form and refresh data
+                                // Close form and display statustext
                                 this.Close();
-                                bookingForm.DisplayDefaultRoom();
                                 bookingForm.labelStatus.Text = "Reservasjon for romnummer " + roomid + " er lagret i databasen og tidligere romnummer frigitt.";
                             }
                         }
                     }
                     // Catch exceptions and display in labelStatus
                     catch (Exception ex) { MessageBox.Show(ex.Message); }
-                    // Make sure connection is closed
+                    // Make sure connection is closed and refresh data
                     finally
                     {
                         if (conn.State == System.Data.ConnectionState.Open) { conn.Close(); }
+                        bookingForm.DisplayDefaultRoom();
                     }
                 }
             }

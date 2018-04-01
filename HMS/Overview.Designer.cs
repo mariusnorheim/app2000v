@@ -1,6 +1,6 @@
 ﻿namespace HMS
 {
-    partial class Oversikt
+    partial class Overview
     {
         /// <summary>
         /// Required designer variable.

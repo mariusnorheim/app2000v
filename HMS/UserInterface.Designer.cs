@@ -101,9 +101,9 @@
             this.labelMenu1.ForeColor = System.Drawing.Color.Silver;
             this.labelMenu1.Location = new System.Drawing.Point(10, 35);
             this.labelMenu1.Name = "labelMenu1";
-            this.labelMenu1.Size = new System.Drawing.Size(119, 17);
+            this.labelMenu1.Size = new System.Drawing.Size(116, 17);
             this.labelMenu1.TabIndex = 3;
-            this.labelMenu1.Text = ":: R E S E P S J O N";
+            this.labelMenu1.Text = ":: R E C E P T I O N";
             // 
             // labelMenu2
             // 
@@ -130,7 +130,7 @@
             this.buttonMenu1.Name = "buttonMenu1";
             this.buttonMenu1.Size = new System.Drawing.Size(140, 30);
             this.buttonMenu1.TabIndex = 6;
-            this.buttonMenu1.Text = "Oversikt";
+            this.buttonMenu1.Text = "Overview";
             this.buttonMenu1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonMenu1.UseVisualStyleBackColor = false;
             this.buttonMenu1.Click += new System.EventHandler(this.buttonMenu1_Click);
@@ -166,7 +166,7 @@
             this.buttonMenu3.Name = "buttonMenu3";
             this.buttonMenu3.Size = new System.Drawing.Size(140, 30);
             this.buttonMenu3.TabIndex = 8;
-            this.buttonMenu3.Text = "Gjest";
+            this.buttonMenu3.Text = "Guest";
             this.buttonMenu3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonMenu3.UseVisualStyleBackColor = false;
             this.buttonMenu3.Click += new System.EventHandler(this.buttonMenu3_Click);
@@ -184,7 +184,7 @@
             this.buttonMenu4.Name = "buttonMenu4";
             this.buttonMenu4.Size = new System.Drawing.Size(140, 30);
             this.buttonMenu4.TabIndex = 9;
-            this.buttonMenu4.Text = "Regning";
+            this.buttonMenu4.Text = "Folio";
             this.buttonMenu4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonMenu4.UseVisualStyleBackColor = false;
             this.buttonMenu4.Click += new System.EventHandler(this.buttonMenu4_Click);
@@ -202,7 +202,7 @@
             this.buttonMenu5.Name = "buttonMenu5";
             this.buttonMenu5.Size = new System.Drawing.Size(140, 30);
             this.buttonMenu5.TabIndex = 10;
-            this.buttonMenu5.Text = "Arkiv";
+            this.buttonMenu5.Text = "Archive";
             this.buttonMenu5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonMenu5.UseVisualStyleBackColor = false;
             this.buttonMenu5.Click += new System.EventHandler(this.buttonMenu5_Click);
@@ -220,7 +220,7 @@
             this.buttonMenu6.Name = "buttonMenu6";
             this.buttonMenu6.Size = new System.Drawing.Size(140, 30);
             this.buttonMenu6.TabIndex = 11;
-            this.buttonMenu6.Text = "Gjøremål";
+            this.buttonMenu6.Text = "To-do";
             this.buttonMenu6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonMenu6.UseVisualStyleBackColor = false;
             this.buttonMenu6.Click += new System.EventHandler(this.buttonMenu6_Click);
@@ -238,7 +238,7 @@
             this.buttonMenu7.Name = "buttonMenu7";
             this.buttonMenu7.Size = new System.Drawing.Size(140, 30);
             this.buttonMenu7.TabIndex = 12;
-            this.buttonMenu7.Text = "Rengjøring";
+            this.buttonMenu7.Text = "Housekeeping";
             this.buttonMenu7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonMenu7.UseVisualStyleBackColor = false;
             this.buttonMenu7.Click += new System.EventHandler(this.buttonMenu7_Click);
@@ -256,7 +256,7 @@
             this.buttonMenu8.Name = "buttonMenu8";
             this.buttonMenu8.Size = new System.Drawing.Size(140, 30);
             this.buttonMenu8.TabIndex = 14;
-            this.buttonMenu8.Text = "Vedlikehold";
+            this.buttonMenu8.Text = "Maintainance";
             this.buttonMenu8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonMenu8.UseVisualStyleBackColor = false;
             this.buttonMenu8.Click += new System.EventHandler(this.buttonMenu8_Click);
@@ -274,7 +274,7 @@
             this.buttonMenu9.Name = "buttonMenu9";
             this.buttonMenu9.Size = new System.Drawing.Size(140, 30);
             this.buttonMenu9.TabIndex = 20;
-            this.buttonMenu9.Text = "Betaling";
+            this.buttonMenu9.Text = "Payment";
             this.buttonMenu9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonMenu9.UseVisualStyleBackColor = false;
             this.buttonMenu9.Click += new System.EventHandler(this.buttonMenu9_Click);
@@ -292,7 +292,7 @@
             this.buttonMenu10.Name = "buttonMenu10";
             this.buttonMenu10.Size = new System.Drawing.Size(140, 30);
             this.buttonMenu10.TabIndex = 21;
-            this.buttonMenu10.Text = "Brukere";
+            this.buttonMenu10.Text = "Users";
             this.buttonMenu10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonMenu10.UseVisualStyleBackColor = false;
             this.buttonMenu10.Click += new System.EventHandler(this.buttonMenu10_Click);
@@ -358,7 +358,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(140, 30);
             this.button1.TabIndex = 25;
-            this.button1.Text = "Planløsning";
+            this.button1.Text = "Floorplan";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.UseVisualStyleBackColor = false;
             // 

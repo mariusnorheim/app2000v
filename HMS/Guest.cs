@@ -1,60 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 namespace HMS
 {
-    public partial class Folio : HMS.Content
+    public partial class Guest : HMS.Content
     {
         private string query;
 
-        public Folio()
+        public Guest()
         {
             InitializeComponent();
         }
 
-        private void Folio_Load(object sender, System.EventArgs e)
+        private void Gjest_Load(object sender, System.EventArgs e)
         {
-            LoadDataFolio();
-            this.AcceptButton = buttonSearchFolio;
+            LoadDataGuest();
+            this.AcceptButton = buttonSearchGuest;
         }
 
-        // Load dataGridViewFolio
-        public void LoadDataGridViewFolio()
+        // Load dataGridViewGuest
+        public void LoadDataGridViewGuest()
         {
             // Hide ID and make readable table headers
-            dataGridViewFolio.Columns[0].Visible = false;
-            dataGridViewFolio.Columns[1].HeaderText = "Fornavn";
-            dataGridViewFolio.Columns[2].HeaderText = "Etternavn";
-            dataGridViewFolio.Columns[3].HeaderText = "Romnummer";
-            dataGridViewFolio.Columns[4].HeaderText = "Total kostnad";
-            dataGridViewFolio.Columns[5].HeaderText = "Forfallsdato";
-            dataGridViewFolio.Columns[6].HeaderText = "Laget av";
-            dataGridViewFolio.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewGuest.Columns[0].Visible = false;
+            dataGridViewGuest.Columns[1].HeaderText = "Fornavn";
+            dataGridViewGuest.Columns[2].HeaderText = "Etternavn";
+            dataGridViewGuest.Columns[3].HeaderText = "Adresse";
+            dataGridViewGuest.Columns[4].HeaderText = "Postkode";
+            dataGridViewGuest.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewGuest.Columns[5].HeaderText = "By";
+            dataGridViewGuest.Columns[6].HeaderText = "Telefon";
+            dataGridViewGuest.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         }
 
-        // Load dataset to datagridview
-        public void LoadDataFolio()
+        // Load dataset
+        public void LoadDataGuest()
         {
             // Fetch dataset
             DBGetData getData = new DBGetData();
-            DataSet folioDS = getData.GetFoliosAll(1);
+            DataSet guestDS = getData.GetGuestsAll();
 
-            if (folioDS != null)
+            if (guestDS != null)
             {
                 // No tables fetched
-                if (folioDS.Tables.Count == 0)
+                if (guestDS.Tables.Count == 0)
                 {
                     labelStatus.Text = "No datatable found, contact administrator.";
                     return;
                 }
                 // No rows fetched
-                else if (folioDS.Tables[0].Rows.Count == 0)
+                else if (guestDS.Tables[0].Rows.Count == 0)
                 {
                     labelStatus.Text = "No datarows found for this month.";
                     return;
@@ -66,9 +62,9 @@ namespace HMS
                 }
 
                 // Set the dataset as source for datagridview and make sure its displayed
-                dataGridViewFolio.DataSource = folioDS;
-                dataGridViewFolio.DataMember = "GetFolios_Active";
-                LoadDataGridViewFolio();
+                dataGridViewGuest.DataSource = guestDS;
+                dataGridViewGuest.DataMember = "GetGuests_All";
+                LoadDataGridViewGuest();
             }
         }
 
@@ -77,7 +73,7 @@ namespace HMS
         private void dataGridViewGuest_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             // Set database record ID for reference
-            DBConn.QueryID = Convert.ToInt32(this.dataGridViewFolio.CurrentRow.Cells[0].Value);
+            DBConn.QueryID = Convert.ToInt32(this.dataGridViewGuest.CurrentRow.Cells[0].Value);
             Form editForm = new EditGuest();
             editForm.ShowDialog();
         }
@@ -89,36 +85,43 @@ namespace HMS
         }
 
         // Button 'New'
-        private void buttonNewFolio_Click(object sender, EventArgs e)
+        // Open specialized add form
+        private void buttonNewGuest_Click(object sender, EventArgs e)
         {
-
+            Form editForm = new NewGuest();
+            editForm.ShowDialog();
         }
 
         // Button 'Edit'
-        private void buttonEditFolio_Click(object sender, EventArgs e)
+        // Open specialized edit form
+        private void buttonEditGuest_Click(object sender, EventArgs e)
         {
-
+            // Set database record ID for reference
+            DBConn.QueryID = Convert.ToInt32(this.dataGridViewGuest.CurrentRow.Cells[0].Value);
+            Form editForm = new EditGuest();
+            editForm.ShowDialog();
         }
 
         // Button 'Search'
-        private void buttonSearchFolio_Click(object sender, EventArgs e)
+        // Searches result in guest table from textinput
+        private void buttonSearchGuest_Click(object sender, EventArgs e)
         {
             string searchinput = @textBoxSearch.Text.Trim();
 
             // Fetch dataset
             DBGetData getData = new DBGetData();
-            DataSet folioDS = getData.GetFoliosSearch(searchinput);
+            DataSet guestDS = getData.GetGuestsSearch(searchinput);
 
-            if (folioDS != null)
+            if (guestDS != null)
             {
                 // No tables fetched
-                if (folioDS.Tables.Count == 0)
+                if (guestDS.Tables.Count == 0)
                 {
                     labelStatus.Text = "No datatable found, contact administrator.";
                     return;
                 }
                 // No rows fetched
-                else if (folioDS.Tables[0].Rows.Count == 0)
+                else if (guestDS.Tables[0].Rows.Count == 0)
                 {
                     labelStatus.Text = "No datarows found for this month.";
                     return;
@@ -130,9 +133,9 @@ namespace HMS
                 }
 
                 // Set the dataset as source for datagridview and make sure its displayed
-                dataGridViewFolio.DataSource = folioDS;
-                dataGridViewFolio.DataMember = "GetFolios_Search";
-                LoadDataGridViewFolio();
+                dataGridViewGuest.DataSource = guestDS;
+                dataGridViewGuest.DataMember = "GetGuests_Search";
+                LoadDataGridViewGuest();
             }
         }
     }

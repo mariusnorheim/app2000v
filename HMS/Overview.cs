@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace HMS
 {
-    public partial class Oversikt : HMS.Content
+    public partial class Overview : HMS.Content
     {
-        public Oversikt()
+        public Overview()
         {
             InitializeComponent();
         }

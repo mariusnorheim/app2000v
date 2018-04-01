@@ -61,9 +61,9 @@
             this.label1.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(65, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 16);
+            this.label1.Size = new System.Drawing.Size(66, 16);
             this.label1.TabIndex = 52;
-            this.label1.Text = "Fornavn";
+            this.label1.Text = "Firstname";
             // 
             // textBoxLastname
             // 
@@ -81,9 +81,9 @@
             this.label2.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(65, 45);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 16);
+            this.label2.Size = new System.Drawing.Size(64, 16);
             this.label2.TabIndex = 54;
-            this.label2.Text = "Etternavn";
+            this.label2.Text = "Lastname";
             // 
             // textBoxAddress
             // 
@@ -122,9 +122,9 @@
             this.label4.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(65, 130);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(22, 16);
+            this.label4.Size = new System.Drawing.Size(29, 16);
             this.label4.TabIndex = 58;
-            this.label4.Text = "By";
+            this.label4.Text = "City";
             // 
             // textBoxPostcode
             // 
@@ -142,9 +142,9 @@
             this.label5.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(65, 157);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(61, 16);
+            this.label5.Size = new System.Drawing.Size(60, 16);
             this.label5.TabIndex = 60;
-            this.label5.Text = "Postkode";
+            this.label5.Text = "Postcode";
             // 
             // textBoxTelephone
             // 
@@ -162,9 +162,9 @@
             this.label6.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(65, 184);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(58, 16);
+            this.label6.Size = new System.Drawing.Size(52, 16);
             this.label6.TabIndex = 62;
-            this.label6.Text = "Telefon *";
+            this.label6.Text = "Phone *";
             // 
             // buttonNewGuestConfirm
             // 
@@ -177,7 +177,7 @@
             this.buttonNewGuestConfirm.Name = "buttonNewGuestConfirm";
             this.buttonNewGuestConfirm.Size = new System.Drawing.Size(60, 28);
             this.buttonNewGuestConfirm.TabIndex = 65;
-            this.buttonNewGuestConfirm.Text = "Lagre";
+            this.buttonNewGuestConfirm.Text = "Save";
             this.buttonNewGuestConfirm.UseVisualStyleBackColor = false;
             this.buttonNewGuestConfirm.Click += new System.EventHandler(this.buttonNewGuestConfirm_Click);
             // 
@@ -192,7 +192,7 @@
             this.buttonNewGuestCancel.Name = "buttonNewGuestCancel";
             this.buttonNewGuestCancel.Size = new System.Drawing.Size(60, 28);
             this.buttonNewGuestCancel.TabIndex = 64;
-            this.buttonNewGuestCancel.Text = "Avbryt";
+            this.buttonNewGuestCancel.Text = "Cancel";
             this.buttonNewGuestCancel.UseVisualStyleBackColor = false;
             this.buttonNewGuestCancel.Click += new System.EventHandler(this.buttonNewGuestCancel_Click);
             // 
@@ -202,9 +202,9 @@
             this.label7.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(132, 240);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(231, 14);
+            this.label7.Size = new System.Drawing.Size(226, 14);
             this.label7.TabIndex = 81;
-            this.label7.Text = "Felt markert med * må ikke fylles ut";
+            this.label7.Text = "Fields marked with * can be empty";
             // 
             // NewGuest
             // 
@@ -227,7 +227,7 @@
             this.Controls.Add(this.label1);
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "NewGuest";
-            this.Text = "Ny gjest";
+            this.Text = "New guest";
             this.ResumeLayout(false);
             this.PerformLayout();
 

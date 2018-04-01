@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 namespace HMS
 {
     public partial class NewGuest : HMS.PopupForm
     {
-        Gjest guestForm = (Gjest)Application.OpenForms["Gjest"];
-        private string query;
+        Guest guestForm = (Guest)Application.OpenForms["Guest"];
 
         public NewGuest()
         {
             InitializeComponent();
         }
 
-        // Button 'Lagre'
+        // Button 'Save'
         // Insert record into database
         private void buttonNewGuestConfirm_Click(object sender, EventArgs e)
         {
@@ -26,52 +24,28 @@ namespace HMS
             string telephone = textBoxTelephone.Text;
 
             // Check for null or empty input
-            if (string.IsNullOrWhiteSpace(firstname)) { MessageBox.Show("Fornavn ikke fylt ut eller kun tomrom"); }
-            if (string.IsNullOrWhiteSpace(lastname)) { MessageBox.Show("Etternavn ikke fylt ut eller kun tomrom"); }
-            if (string.IsNullOrWhiteSpace(address)) { MessageBox.Show("Adresse ikke fylt ut eller kun tomrom"); }
-            if (string.IsNullOrWhiteSpace(city)) { MessageBox.Show("By ikke fylt ut eller kun tomrom"); }
-            if (string.IsNullOrWhiteSpace(postcode)) { MessageBox.Show("Postkode ikke fylt ut eller kun tomrom"); }
-            if (string.IsNullOrWhiteSpace(telephone)) { telephone = null; }
+            if (string.IsNullOrWhiteSpace(firstname)) { MessageBox.Show("Firstname field is not filled in"); }
+            if (string.IsNullOrWhiteSpace(lastname)) { MessageBox.Show("Lastname field is not filled in"); }
+            if (string.IsNullOrWhiteSpace(address)) { MessageBox.Show("Address field is not filled in"); }
+            if (string.IsNullOrWhiteSpace(city)) { MessageBox.Show("City field is not filled in"); }
+            if (string.IsNullOrWhiteSpace(postcode)) { MessageBox.Show("Postcode field is not filled in"); }
+            // TODO: returns error if null. code IF statement in SQL to skip field if null?
+            if (string.IsNullOrWhiteSpace(telephone)) { telephone = (string)Convert.DBNull; }
 
             if (!string.IsNullOrWhiteSpace(firstname) && !string.IsNullOrWhiteSpace(lastname) && !string.IsNullOrWhiteSpace(address)
                 && !string.IsNullOrWhiteSpace(city) && !string.IsNullOrWhiteSpace(postcode))
             {
-                using (MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString))
-                {
-                    try
-                    {
-                        // Connect to database
-                        conn.Open();
-                        // Save record to database
-                        query = "INSERT INTO guest (firstname, lastname, address, city, postcode, telephone) " +
-                                "VALUES (@firstname, @lastname, @address, @city, @postcode, @telephone)";
-                        using (MySqlCommand newGuestCmd = new MySqlCommand(query, conn))
-                        {
-                            newGuestCmd.Parameters.AddWithValue("@firstname", firstname);
-                            newGuestCmd.Parameters.AddWithValue("@lastname", lastname);
-                            newGuestCmd.Parameters.AddWithValue("@address", address);
-                            newGuestCmd.Parameters.AddWithValue("@city", city);
-                            newGuestCmd.Parameters.AddWithValue("@postcode", postcode);
-                            newGuestCmd.Parameters.AddWithValue("@telephone", telephone);
-                            newGuestCmd.ExecuteNonQuery();
-                            // Close form and refresh data
-                            this.Close();
-                            guestForm.LoadDataGuest();
-                            guestForm.labelStatus.Text = "Gjest med navn " + firstname + " " + lastname + " er lagt til i databasen.";
-                        }
-                    }
-                    // Catch exceptions and display in MessageBox
-                    catch (Exception ex) { MessageBox.Show(ex.Message); }
-                    // Make sure connection is closed
-                    finally
-                    {
-                        if (conn.State == System.Data.ConnectionState.Open) { conn.Close(); }
-                    }
-                }
+                // Execute save
+                DBGetData setData = new DBGetData();
+                setData.AddGuest(firstname, lastname, address, city, postcode, telephone);
+                // Close form
+                this.Close();
+                guestForm.labelStatus.Text = "Gjest med navn " + firstname + " " + lastname + " er lagt til i databasen.";
+                guestForm.LoadDataGuest();
             }
         }
 
-        // Button 'Avbryt'
+        // Button 'Cancel'
         private void buttonNewGuestCancel_Click(object sender, EventArgs e)
         {
             this.Close();

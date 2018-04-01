@@ -203,10 +203,11 @@ namespace HMS
             if (string.IsNullOrWhiteSpace(textBoxRemark.Text)) { remark = null; }
             else { remark = textBoxRemark.Text; }
 
-            ValidateInput();
             // Display error messages if variable is missing
             if (guestid == null) { MessageBox.Show("Velg gjest i boksen øverst til venstre før du prøver å lagre endringer."); }
             if (roomid == null) { MessageBox.Show("Søk og velg rom før du prøver å lagre endringer."); }
+
+            ValidateInput();
             // Check all relevant fields for input
             if (validinput && guestid != null && roomid != null)
             {
@@ -227,18 +228,19 @@ namespace HMS
                             newRoomBookingCmd.Parameters.AddWithValue("@datedepart", datedepart);
                             newRoomBookingCmd.Parameters.AddWithValue("@remark", remark);
                             newRoomBookingCmd.ExecuteNonQuery();
-                            // Close form and refresh data
+                            // Close form and display statustext
                             this.Close();
-                            bookingForm.DisplayDefaultRoom();
                             bookingForm.labelStatus.Text = "Reservasjon for romnummer " + roomid + " er lagret i databasen.";
                         }
                     }
-                    // Catch exceptions and display in labelStatus
-                    catch (Exception ex) { bookingForm.labelStatus.Text = ex.Message; }
-                    // Make sure connection is closed
+                    // Catch exceptions and display in MessageBox
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+                    // Make sure connection is closed and refresh data
                     finally
                     {
                         if (conn.State == System.Data.ConnectionState.Open) { conn.Close(); }
+                        bookingForm.DisplayDefaultRoom();
+                        bookingForm.dataGridViewRoom.Refresh();
                     }
                 }
             }
@@ -256,29 +258,20 @@ namespace HMS
         {
             if (!roomchecked)
             {
-                if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
-                {
-                    DragDropEffects dropEffect = listBoxGuest.DoDragDrop(listBoxGuest.SelectedValue, DragDropEffects.Move);
-                }
+                if ((e.Button & MouseButtons.Left) == MouseButtons.Left) { DragDropEffects dropEffect = listBoxGuest.DoDragDrop(listBoxGuest.SelectedValue, DragDropEffects.Move); }
             }
         }
 
         // Event handler for listBoxGuest mousedown
         private void listBoxGuest_MouseDown(object sender, MouseEventArgs e)
         {
-            if (!roomchecked)
-            {
-                listBoxGuest.DoDragDrop(listBoxGuest.GetItemText(listBoxGuest.SelectedValue), DragDropEffects.All);
-            }
+            if (!roomchecked) { listBoxGuest.DoDragDrop(listBoxGuest.GetItemText(listBoxGuest.SelectedValue), DragDropEffects.All); }
         }
 
         // Event handler for available room panel dragover
         private void panelRoom_DragOver(object sender, DragEventArgs e)
         {
-            if (!roomchecked)
-            {
-                e.Effect = DragDropEffects.Copy;
-            }
+            if (!roomchecked) { e.Effect = DragDropEffects.Copy; }
         }
 
         // Event handler for available room panel dragdrop

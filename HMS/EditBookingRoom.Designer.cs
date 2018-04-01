@@ -56,7 +56,7 @@
             this.buttonEditBookingConfirm.Name = "buttonEditBookingConfirm";
             this.buttonEditBookingConfirm.Size = new System.Drawing.Size(60, 28);
             this.buttonEditBookingConfirm.TabIndex = 74;
-            this.buttonEditBookingConfirm.Text = "Lagre";
+            this.buttonEditBookingConfirm.Text = "Save";
             this.buttonEditBookingConfirm.UseVisualStyleBackColor = false;
             this.buttonEditBookingConfirm.Click += new System.EventHandler(this.buttonEditBookingConfirm_Click);
             // 
@@ -102,7 +102,7 @@
             this.buttonSearchRoomBookingAvailable.Name = "buttonSearchRoomBookingAvailable";
             this.buttonSearchRoomBookingAvailable.Size = new System.Drawing.Size(70, 26);
             this.buttonSearchRoomBookingAvailable.TabIndex = 70;
-            this.buttonSearchRoomBookingAvailable.Text = "Søk rom";
+            this.buttonSearchRoomBookingAvailable.Text = "Find room";
             this.buttonSearchRoomBookingAvailable.UseVisualStyleBackColor = false;
             this.buttonSearchRoomBookingAvailable.Click += new System.EventHandler(this.buttonSearchRoomBookingAvailable_Click);
             // 
@@ -117,7 +117,7 @@
             this.buttonEditBookingCancel.Name = "buttonEditBookingCancel";
             this.buttonEditBookingCancel.Size = new System.Drawing.Size(60, 28);
             this.buttonEditBookingCancel.TabIndex = 69;
-            this.buttonEditBookingCancel.Text = "Avbryt";
+            this.buttonEditBookingCancel.Text = "Cancel";
             this.buttonEditBookingCancel.UseVisualStyleBackColor = false;
             this.buttonEditBookingCancel.Click += new System.EventHandler(this.buttonEditBookingCancel_Click);
             // 
@@ -125,41 +125,41 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(335, 102);
+            this.label6.Location = new System.Drawing.Point(330, 102);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(59, 16);
+            this.label6.Size = new System.Drawing.Size(54, 16);
             this.label6.TabIndex = 67;
-            this.label6.Text = "Merknad";
+            this.label6.Text = "Remark";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(336, 45);
+            this.label3.Location = new System.Drawing.Point(331, 45);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 16);
+            this.label3.Size = new System.Drawing.Size(68, 16);
             this.label3.TabIndex = 66;
-            this.label3.Text = "Avreise";
+            this.label3.Text = "Departure";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(336, 17);
+            this.label2.Location = new System.Drawing.Point(331, 17);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 16);
+            this.label2.Size = new System.Drawing.Size(49, 16);
             this.label2.TabIndex = 65;
-            this.label2.Text = "Ankomst";
+            this.label2.Text = "Arrival";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(336, 74);
+            this.label1.Location = new System.Drawing.Point(331, 74);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 16);
+            this.label1.Size = new System.Drawing.Size(65, 16);
             this.label1.TabIndex = 64;
-            this.label1.Text = "Romtype";
+            this.label1.Text = "Roomtype";
             // 
             // comboBoxRoomType
             // 
@@ -196,11 +196,11 @@
             this.buttonSearchGuest.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             this.buttonSearchGuest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSearchGuest.Font = new System.Drawing.Font("Bahnschrift", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSearchGuest.Location = new System.Drawing.Point(241, 140);
+            this.buttonSearchGuest.Location = new System.Drawing.Point(251, 140);
             this.buttonSearchGuest.Name = "buttonSearchGuest";
-            this.buttonSearchGuest.Size = new System.Drawing.Size(70, 26);
+            this.buttonSearchGuest.Size = new System.Drawing.Size(60, 26);
             this.buttonSearchGuest.TabIndex = 60;
-            this.buttonSearchGuest.Text = "Søk gjest";
+            this.buttonSearchGuest.Text = "Search";
             this.buttonSearchGuest.UseVisualStyleBackColor = false;
             this.buttonSearchGuest.Click += new System.EventHandler(this.buttonSearchGuest_Click);
             // 
@@ -213,7 +213,7 @@
             this.textBoxSearch.Location = new System.Drawing.Point(10, 140);
             this.textBoxSearch.MaxLength = 80;
             this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(230, 26);
+            this.textBoxSearch.Size = new System.Drawing.Size(240, 26);
             this.textBoxSearch.TabIndex = 73;
             // 
             // EditBookingRoom
@@ -237,7 +237,7 @@
             this.Controls.Add(this.textBoxSearch);
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "EditBookingRoom";
-            this.Text = "Endre booking";
+            this.Text = "Edit booking";
             this.Load += new System.EventHandler(this.EditBookingRoom_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
