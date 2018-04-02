@@ -11,7 +11,7 @@ namespace HMS
         Booking bookingForm = (Booking)Application.OpenForms["Booking"];
         private Boolean roomchecked;
         private Boolean validinput;
-        private int reservationid = DBConn.QueryID;
+        private int reservationid = DBGetData.QueryID;
         private string roomid;
         private string query;
 
@@ -304,7 +304,7 @@ namespace HMS
                                 editRoomBookingCmd.ExecuteNonQuery();
                                 // Close form and display statustext
                                 this.Close();
-                                bookingForm.labelStatus.Text = "Reservasjon for romnummer " + roomid + " er lagret i databasen og tidligere romnummer frigitt.";
+                                new StatusMessage("Reservation for roomnumber " + roomid + " saved in database and previous roomnumber released.");
                             }
                         }
                     }
