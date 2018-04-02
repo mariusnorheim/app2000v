@@ -29,20 +29,14 @@ namespace HMS
             if (string.IsNullOrWhiteSpace(address)) { MessageBox.Show("Address field is not filled in"); }
             if (string.IsNullOrWhiteSpace(city)) { MessageBox.Show("City field is not filled in"); }
             if (string.IsNullOrWhiteSpace(postcode)) { MessageBox.Show("Postcode field is not filled in"); }
-            // TODO: returns error if null. code IF statement in SQL to skip field if null?
-            if (string.IsNullOrWhiteSpace(telephone)) { telephone = (string)Convert.DBNull; }
+            if (string.IsNullOrWhiteSpace(telephone)) { telephone = null; }
 
-            if (!string.IsNullOrWhiteSpace(firstname) && !string.IsNullOrWhiteSpace(lastname) && !string.IsNullOrWhiteSpace(address)
-                && !string.IsNullOrWhiteSpace(city) && !string.IsNullOrWhiteSpace(postcode))
-            {
-                // Execute save
-                DBGetData setData = new DBGetData();
-                setData.AddGuest(firstname, lastname, address, city, postcode, telephone);
-                // Close form
-                this.Close();
-                guestForm.labelStatus.Text = "Gjest med navn " + firstname + " " + lastname + " er lagt til i databasen.";
-                guestForm.LoadDataGuest();
-            }
+            // Execute save
+            DBSetData.AddGuest(firstname, lastname, address, city, postcode, telephone);
+            // Close form
+            this.Close();
+            new StatusMessage("Guest with name " + firstname + " " + lastname + " is added to the database.");
+            guestForm.LoadDataGuest();
         }
 
         // Button 'Cancel'

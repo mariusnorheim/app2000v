@@ -7,7 +7,7 @@ namespace HMS
     public partial class EditGuest : HMS.PopupForm
     {
         Guest guestForm = (Guest)Application.OpenForms["Guest"];
-        int guestid = DBConn.QueryID;
+        int guestid = DBGetData.QueryID;
 
         public EditGuest()
         {
@@ -18,18 +18,17 @@ namespace HMS
         private void LoadDataGuest()
         {
             // Fetch data
-            DBGetData setData = new DBGetData();
-            List<string>[] guestData = setData.GetGuestData(guestid);
+            List<string> guestData = DBGetData.GetGuestData(guestid);
 
             // Insert values to textboxes
-            if (guestData.Length > 0)
+            if (guestData.Count > 0)
             {
-                textBoxFirstname.Text = guestData.GetValue(0).ToString();
-                textBoxLastname.Text = guestData.GetValue(1).ToString();
-                textBoxAddress.Text = guestData.GetValue(2).ToString();
-                textBoxCity.Text = guestData.GetValue(3).ToString();
-                textBoxPostcode.Text = guestData.GetValue(4).ToString();
-                if (guestData.Length == 5) { textBoxTelephone.Text = guestData.GetValue(5).ToString(); }
+                textBoxFirstname.Text = Convert.ToString(guestData[0]);
+                textBoxLastname.Text = Convert.ToString(guestData[1]);
+                textBoxAddress.Text = Convert.ToString(guestData[2]);
+                textBoxCity.Text = Convert.ToString(guestData[3]);
+                textBoxPostcode.Text = Convert.ToString(guestData[4]);
+                textBoxTelephone.Text = Convert.ToString(guestData[5]);
             }
         }
 
@@ -50,20 +49,18 @@ namespace HMS
             if (string.IsNullOrWhiteSpace(address)) { MessageBox.Show("Address field is not filled in"); }
             if (string.IsNullOrWhiteSpace(city)) { MessageBox.Show("City field is not filled in"); }
             if (string.IsNullOrWhiteSpace(postcode)) { MessageBox.Show("Postcode field is not filled in"); }
-            // TODO: returns error if null. code IF statement in SQL to skip field if null?
-            if (string.IsNullOrWhiteSpace(telephone)) { telephone = (string)Convert.DBNull; }
 
             if(!string.IsNullOrWhiteSpace(firstname) && !string.IsNullOrWhiteSpace(lastname) && !string.IsNullOrWhiteSpace(address) 
                 && !string.IsNullOrWhiteSpace(city) && !string.IsNullOrWhiteSpace(postcode))
             {
+                if (string.IsNullOrWhiteSpace(telephone)) { telephone = null; }
                 // Execute save
-                DBGetData setData = new DBGetData();
-                setData.EditGuest(guestid, firstname, lastname, address, city, postcode, telephone);
+                DBSetData.EditGuest(guestid, firstname, lastname, address, city, postcode, telephone);
 
                 // Close form and refresh data
                 this.Close();
-                guestForm.labelStatus.Text = "Guest with name " + firstname + " " + lastname + " is updated in the database.";
                 guestForm.LoadDataGuest();
+                new StatusMessage("Guest with name " + firstname + " " + lastname + " is updated in the database.");
             }
         }
 
