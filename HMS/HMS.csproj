@@ -66,8 +66,8 @@
       <DependentUpon>Content.cs</DependentUpon>
     </Compile>
     <Compile Include="DBConn.cs" />
-    <Compile Include="DBException.cs" />
     <Compile Include="DBGetData.cs" />
+    <Compile Include="DBSetData.cs" />
     <Compile Include="EditBookingRoom.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +125,7 @@
     </Compile>
     <Compile Include="PasswordHasher.cs" />
     <Compile Include="RNG.cs" />
+    <Compile Include="StatusMessage.cs" />
     <Compile Include="UserInfo.cs" />
     <Compile Include="UserInterface.cs">
       <SubType>Form</SubType>
