@@ -230,7 +230,7 @@ namespace HMS
                             newRoomBookingCmd.ExecuteNonQuery();
                             // Close form and display statustext
                             this.Close();
-                            bookingForm.labelStatus.Text = "Reservasjon for romnummer " + roomid + " er lagret i databasen.";
+                            new StatusMessage("Reservation for roomnumber " + roomid + " saved in database.");
                         }
                     }
                     // Catch exceptions and display in MessageBox
