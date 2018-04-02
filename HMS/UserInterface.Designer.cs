@@ -50,7 +50,10 @@
             this.panelContent = new System.Windows.Forms.Panel();
             this.panelTop = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.labelStatusMessage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitterMenu
@@ -333,7 +336,7 @@
             // 
             this.panelContent.Location = new System.Drawing.Point(200, 30);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(1000, 670);
+            this.panelContent.Size = new System.Drawing.Size(1000, 650);
             this.panelContent.TabIndex = 23;
             // 
             // panelTop
@@ -362,12 +365,31 @@
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.UseVisualStyleBackColor = false;
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.panel1.Controls.Add(this.labelStatusMessage);
+            this.panel1.Location = new System.Drawing.Point(200, 680);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1000, 20);
+            this.panel1.TabIndex = 26;
+            // 
+            // labelStatusMessage
+            // 
+            this.labelStatusMessage.AutoSize = true;
+            this.labelStatusMessage.Font = new System.Drawing.Font("Verdana", 9.75F);
+            this.labelStatusMessage.Location = new System.Drawing.Point(2, 2);
+            this.labelStatusMessage.Name = "labelStatusMessage";
+            this.labelStatusMessage.Size = new System.Drawing.Size(0, 16);
+            this.labelStatusMessage.TabIndex = 0;
+            // 
             // UserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.ClientSize = new System.Drawing.Size(1200, 700);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBoxLogo);
             this.Controls.Add(this.labelHeading);
@@ -396,6 +418,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hotel Management System";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -424,5 +448,7 @@
         private System.Windows.Forms.Panel panelContent;
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panel1;
+        public System.Windows.Forms.Label labelStatusMessage;
     }
 }

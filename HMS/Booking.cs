@@ -116,27 +116,26 @@ namespace HMS
             DateTime datefrom = new DateTime(today.Year, today.Month, 1);
             DateTime dateto = datefrom.AddMonths(1).AddDays(-1);
             // Fetch dataset
-            DBGetData getData = new DBGetData();
-            DataSet roomreservationDS = getData.GetRoomBookingsBetweenDates(datefrom, dateto);
+            DataSet roomreservationDS = DBGetData.GetRoomBookingsBetweenDates(datefrom, dateto);
 
             if (roomreservationDS != null)
             {
                 // No tables fetched
                 if (roomreservationDS.Tables.Count == 0)
                 {
-                    labelStatus.Text = "No datatable found, contact administrator.";
+                    new StatusMessage("No datatable found, contact administrator.");
                     return;
                 }
                 // No rows fetched
                 else if (roomreservationDS.Tables[0].Rows.Count == 0)
                 {
-                    labelStatus.Text = "No datarows found for this month.";
+                    new StatusMessage("No datarows found for this month.");
                     return;
                 }
                 // Clear labelStatus for previous messages
                 else
                 {
-                    labelStatus.Text = "";
+                    new StatusMessage("");
                 }
 
                 // Set the dataset as source for datagridview and make sure its displayed
@@ -151,27 +150,26 @@ namespace HMS
         private void buttonDisplayRoomAll_Click(object sender, EventArgs e)
         {
             // Fetch dataset
-            DBGetData getdata = new DBGetData();
-            DataSet roomreservationDS = getdata.GetRoomBookingsAll(1);
+            DataSet roomreservationDS = DBGetData.GetRoomBookingsAll(1);
 
             if (roomreservationDS != null)
             {
                 // No tables fetched
                 if (roomreservationDS.Tables.Count == 0)
                 {
-                    labelStatus.Text = "No datatable found, contact administrator.";
+                    new StatusMessage("No datatable found, contact administrator.");
                     return;
                 }
                 // No rows fetched
                 else if (roomreservationDS.Tables[0].Rows.Count == 0)
                 {
-                    labelStatus.Text = "No datarows found in table.";
+                    new StatusMessage("No datarows found in table.");
                     return;
                 }
                 // Clear labelStatus for previous messages
                 else
                 {
-                    labelStatus.Text = "";
+                    new StatusMessage("");
                 }
 
                 // Set the dataset as source for datagridview and make sure its displayed
@@ -197,27 +195,26 @@ namespace HMS
             DateTime dateto = datefrom.AddDays(7);
 
             // Fetch dataset
-            DBGetData getData = new DBGetData();
-            DataSet roomreservationDS = getData.GetRoomBookingsBetweenDates(datefrom, dateto);
+            DataSet roomreservationDS = DBGetData.GetRoomBookingsBetweenDates(datefrom, dateto);
 
             if (roomreservationDS != null)
             {
                 // No tables fetched
                 if (roomreservationDS.Tables.Count == 0)
                 {
-                    labelStatus.Text = "No datatable found, contact administrator.";
+                    new StatusMessage("No datatable found, contact administrator.");
                     return;
                 }
                 // No rows fetched
                 else if (roomreservationDS.Tables[0].Rows.Count == 0)
                 {
-                    labelStatus.Text = "No datarows found for this week.";
+                    new StatusMessage("No datarows found for this week.");
                     return;
                 }
                 // Clear labelStatus for previous messages
                 else
                 {
-                    labelStatus.Text = "";
+                    new StatusMessage("");
                 }
 
                 // Set the dataset as source for datagridview and make sure its displayed
@@ -235,27 +232,26 @@ namespace HMS
             DateTime today = DateTime.Today;
 
             // Fetch dataset
-            DBGetData getData = new DBGetData();
-            DataSet roomreservationDS = getData.GetRoomBookingsSpesificDate(today);
+            DataSet roomreservationDS = DBGetData.GetRoomBookingsSpesificDate(today);
 
             if (roomreservationDS != null)
             {
                 // No tables fetched
                 if (roomreservationDS.Tables.Count == 0)
                 {
-                    labelStatus.Text = "No datatable found, contact administrator.";
+                    new StatusMessage("No datatable found, contact administrator.");
                     return;
                 }
                 // No rows fetched
                 else if (roomreservationDS.Tables[0].Rows.Count == 0)
                 {
-                    labelStatus.Text = "No datarows found for today.";
+                    new StatusMessage("No datarows found for today.");
                     return;
                 }
                 // Clear labelStatus for previous messages
                 else
                 {
-                    labelStatus.Text = "";
+                    new StatusMessage("");
                 }
 
                 // Set the dataset as source for datagridview and make sure its displayed
@@ -293,7 +289,7 @@ namespace HMS
                         }
                     }
                     // Catch exceptions and display in labelStatus
-                    catch (Exception ex) { this.labelStatus.Text = ex.Message; }
+                    catch (Exception ex) { new StatusMessage(ex.Message); }
                     // Make sure connection is closed
                     finally
                     {
@@ -301,11 +297,11 @@ namespace HMS
                     }
                 }
 
-                if (checkedin) { this.labelStatus.Text = "Romreservasjon har allerede foretatt innsjekking og kan ikke endres."; }
+                if (checkedin) { new StatusMessage("Room reservation has already checked in and cant be changed."); }
                 else
                 {
                     // Set database record ID for reference
-                    DBConn.QueryID = Convert.ToInt32(this.dataGridViewRoom.CurrentRow.Cells[0].Value);
+                    DBGetData.QueryID = Convert.ToInt32(this.dataGridViewRoom.CurrentRow.Cells[0].Value);
                     Form editForm = new EditBookingRoom();
                     editForm.ShowDialog();
                 }
@@ -348,7 +344,7 @@ namespace HMS
                         }
                     }
                     // Catch exceptions and display in labelStatus
-                    catch (Exception ex) { this.labelStatus.Text = ex.Message; }
+                    catch (Exception ex) { new StatusMessage(ex.Message); }
                     // Make sure connection is closed
                     finally
                     {
@@ -356,11 +352,11 @@ namespace HMS
                     }
                 }
 
-                if (checkedin) { this.labelStatus.Text = "Romreservasjonen har allerede foretatt innsjekking og kan ikke endres."; }
+                if (checkedin) { new StatusMessage("Room reservation has already checked in and cant be changed."); }
                 else
                 {
                     // Set database record ID for reference
-                    DBConn.QueryID = Convert.ToInt32(this.dataGridViewRoom.CurrentRow.Cells[0].Value);
+                    DBGetData.QueryID = Convert.ToInt32(this.dataGridViewRoom.CurrentRow.Cells[0].Value);
                     Form editForm = new EditBookingRoom();
                     editForm.ShowDialog();
                 }
@@ -397,7 +393,7 @@ namespace HMS
                             }
                         }
 
-                        if (checkedin) { this.labelStatus.Text = "Romreservasjonen har allerede foretatt innsjekking og kan ikke slettes."; }
+                        if (checkedin) { new StatusMessage("Room reservation has already checked in and cant be deleted."); }
                         else
                         {
                             // Save entry to database
@@ -408,12 +404,12 @@ namespace HMS
                             {
                                 roomBookingDeleteCmd.Parameters.AddWithValue("@reservationid", reservationid);
                                 roomBookingDeleteCmd.ExecuteNonQuery();
-                                this.labelStatus.Text = "Reservasjon fjernet fra aktiv liste.";
+                                new StatusMessage("Room reservation removed from active list.");
                             }
                         }
                     }
                     // Catch exceptions and display in labelStatus
-                    catch (Exception ex) { this.labelStatus.Text = ex.Message; }
+                    catch (Exception ex) { new StatusMessage(ex.Message); }
                     // Make sure connection is closed and refresh data
                     finally
                     {
@@ -469,7 +465,7 @@ namespace HMS
                             }
                         }
 
-                        if (checkedin) { this.labelStatus.Text = "Romreservasjonen har allerede foretatt innsjekking."; }
+                        if (checkedin) { new StatusMessage("Room reservation has already checked in."); }
 
                         // Check that date for checkin is today
                         query = "SELECT datefrom FROM room_reservation " +
@@ -487,7 +483,7 @@ namespace HMS
                             }
                         }
 
-                        if (!checkindate) { this.labelStatus.Text = "Romreservasjonen er ikke markert for innsjekking i dag."; }
+                        if (!checkindate) { new StatusMessage("Room reservation not marked for checkin today."); }
 
                         // Check if room is clean
                         query = "SELECT code FROM housekeeping " +
@@ -505,19 +501,18 @@ namespace HMS
                                     {
                                         case 0:
                                             roomstatus = 0;
-                                            this.labelStatus.Text =
-                                                "Rommet er utilgjengelig på grunn av vedlikehold, " +
-                                                "vennligst endre reservasjonen eller oppgrader kunden.";
+                                            new StatusMessage("Room unavailable due to maintainance, " +
+                                                "please change reservation or upgrade guest.");
                                             break;
                                         case 1:
                                             roomstatus = 1;
-                                            this.labelStatus.Text = "Rommet trenger inspeksjon, " +
-                                                                    "vennligst endre reservasjonen eller send personalet inn umiddelbart.";
+                                            new StatusMessage("Room needs inspection, " +
+                                                              "please change reservation or send staff immediately.");
                                             break;
                                         case 2:
                                             roomstatus = 1;
-                                            this.labelStatus.Text = "Rommet trenger rengjøring av personalet, " +
-                                                                    "vennligst endre reservasjonen eller send personalet inn umiddelbart.";
+                                            new StatusMessage("Room needs cleaning, " +
+                                                              "please change reservation or send staff immediately.");
                                             break;
                                     }
                                 }
@@ -674,14 +669,13 @@ namespace HMS
                             {
                                 setRoomCheckinCmd.Parameters.AddWithValue("@reservationid", reservationid);
                                 setRoomCheckinCmd.ExecuteNonQuery();
-                                this.labelStatus.Text =
-                                    "Reservasjonen for romnummer " + roomid +
-                                    " er flagget som innsjekket og folio lagt til.";
+                                new StatusMessage("Reservation for roomnumber " + roomid +
+                                                  " is flagged as checked in and folio created.");
                             }
                         }
                     }
                     // Catch exceptions and display in labelStatus
-                    catch (Exception ex) { this.labelStatus.Text = ex.Message; }
+                    catch (Exception ex) { new StatusMessage(ex.Message); }
                     // Make sure connection is closed and refresh data
                     finally
                     {
@@ -737,7 +731,7 @@ namespace HMS
                             }
                         }
 
-                        if (checkedout) { this.labelStatus.Text = "Romreservasjonen har ikke sjekket inn eller allerede foretatt utsjekking."; }
+                        if (checkedout) { new StatusMessage("Room reservation has not checked in or is already checked out."); }
 
                         else
                         {
@@ -817,7 +811,7 @@ namespace HMS
                                     {
                                         setMessageInactiveCmd.Parameters.AddWithValue("@guestid", guestid);
                                         setMessageInactiveCmd.ExecuteNonQuery();
-                                        this.labelStatus.Text = "Meldinger markert som inaktive.";
+                                        new StatusMessage("Read messages marked as inactive.");
                                     }
                                 }
 
@@ -906,7 +900,7 @@ namespace HMS
                                                 newFolioItemCmd.Parameters.AddWithValue("@folioid", folioid);
                                                 newFolioItemCmd.Parameters.AddWithValue("@days", days);
                                                 newFolioItemCmd.ExecuteNonQuery();
-                                                this.labelStatus.Text = days + " dager trukket fra regningen.";
+                                                new StatusMessage(days + " days deducted from payment.");
                                             }
                                         }
                                     }
@@ -989,7 +983,7 @@ namespace HMS
                                 {
                                     setHousekeepingCmd.Parameters.AddWithValue("@roomid", roomid);
                                     setHousekeepingCmd.ExecuteNonQuery();
-                                    this.labelStatus.Text = "Rom flagget for rengjøring.";
+                                    new StatusMessage("Room flagged for cleaning.");
                                 }
 
                                 // Mark booking as inactive and checked out
@@ -1000,15 +994,14 @@ namespace HMS
                                 {
                                     setMessageInactiveCmd.Parameters.AddWithValue("@reservationid", reservationid);
                                     setMessageInactiveCmd.ExecuteNonQuery();
-                                    this.labelStatus.Text =
-                                        "Reservasjonen for romnummer " + roomid +
-                                        " er flagget som utsjekket og rommet frigitt.";
+                                    new StatusMessage("Reservation for roomnumber " + roomid +
+                                        " is flagged as checked out.");
                                 }
                             }
                         }
                     }
                     // Catch exceptions and display in labelStatus
-                    catch (Exception ex) { this.labelStatus.Text = ex.Message; }
+                    catch (Exception ex) { new StatusMessage(ex.Message); }
                     // Make sure connection is closed and reload data
                     finally
                     {
@@ -1025,45 +1018,33 @@ namespace HMS
         {
             string searchinput = @textBoxSearch.Text.Trim();
 
-            using (MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString))
+            // Fetch dataset
+            DataSet roomreservationDS = DBGetData.GetRoomBookingsSearch(searchinput);
+
+            if (roomreservationDS != null)
             {
-                try
+                // No tables fetched
+                if (roomreservationDS.Tables.Count == 0)
                 {
-                    // Connect to database
-                    conn.Open();
-                    query = "SELECT * FROM room_reservation_active " +
-                            "WHERE CONCAT(firstname, ' ', lastname) LIKE @search " +
-                            "OR roomid LIKE @search";
-                    using (MySqlCommand bookingRoomSearchCmd = new MySqlCommand(query, conn))
-                    {
-                        bookingRoomSearchCmd.Parameters.AddWithValue("@search", "%" + searchinput + "%");
-                        using (MySqlDataAdapter bookingRoomSearchAdapter = new MySqlDataAdapter(bookingRoomSearchCmd))
-                        {
-                            // Populate a new data set to datagridview
-                            DataSet bookingRoomSearchDS = new DataSet();
-                            bookingRoomSearchAdapter.Fill(bookingRoomSearchDS, "room_reservation");
-                            dataGridViewRoom.DataSource = bookingRoomSearchDS;
-                            dataGridViewRoom.DataMember = "room_reservation";
-                            // Hide ID and make readable table headers
-                            dataGridViewRoom.Columns[0].Visible = false;
-                            dataGridViewRoom.Columns[1].HeaderText = "Fornavn";
-                            dataGridViewRoom.Columns[2].HeaderText = "Etternavn";
-                            dataGridViewRoom.Columns[3].HeaderText = "Rom";
-                            dataGridViewRoom.Columns[4].HeaderText = "Innsjekket";
-                            dataGridViewRoom.Columns[5].HeaderText = "Romtype";
-                            dataGridViewRoom.Columns[6].HeaderText = "Ankomst";
-                            dataGridViewRoom.Columns[7].HeaderText = "Avreise";
-                            dataGridViewRoom.Columns[8].HeaderText = "Merknad";
-                        }
-                    }
+                    new StatusMessage("No datatable found, contact administrator.");
+                    return;
                 }
-                // Catch exceptions and display in labelStatus
-                catch (Exception ex) { this.labelStatus.Text = ex.Message; }
-                // Make sure connection is closed
-                finally
+                // No rows fetched
+                else if (roomreservationDS.Tables[0].Rows.Count == 0)
                 {
-                    if (conn.State == System.Data.ConnectionState.Open) { conn.Close(); }
+                    new StatusMessage("No datarows found for search.");
+                    return;
                 }
+                // Clear labelStatus for previous messages
+                else
+                {
+                    new StatusMessage("");
+                }
+
+                // Set the dataset as source for datagridview and make sure its displayed
+                dataGridViewRoom.DataSource = roomreservationDS;
+                dataGridViewRoom.DataMember = "GetRoomReservations_Search";
+                LoadDataGridViewRoom();
             }
         }
 
@@ -1103,30 +1084,30 @@ namespace HMS
             dataGridViewRoom.Visible = false;
             dataGridViewHall.Visible = true;
             // Hide ID and make readable table headers
-            dataGridViewRoom.Columns[0].Name = "ReservationID";
-            dataGridViewRoom.Columns[0].Visible = false;
-            dataGridViewRoom.Columns[1].Name = "HallID";
-            dataGridViewRoom.Columns[1].Visible = false;
-            dataGridViewRoom.Columns[2].Name = "Firstname";
-            dataGridViewRoom.Columns[2].HeaderText = "Firstname";
-            dataGridViewRoom.Columns[3].Name = "Lastname";
-            dataGridViewRoom.Columns[3].HeaderText = "Lastname";
-            dataGridViewRoom.Columns[4].Name = "Hall";
-            dataGridViewRoom.Columns[4].HeaderText = "Room";
-            dataGridViewRoom.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewRoom.Columns[5].Name = "Checkedin";
-            dataGridViewRoom.Columns[5].HeaderText = "Checkedin";
-            dataGridViewRoom.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewRoom.Columns[6].Name = "Halltype";
-            dataGridViewRoom.Columns[6].HeaderText = "Roomtype";
-            dataGridViewRoom.Columns[7].Name = "Timefrom";
-            dataGridViewRoom.Columns[7].HeaderText = "Event start";
-            dataGridViewRoom.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewRoom.Columns[8].Name = "Timeto";
-            dataGridViewRoom.Columns[8].HeaderText = "Event end";
-            dataGridViewRoom.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewRoom.Columns[9].Name = "Remark";
-            dataGridViewRoom.Columns[9].HeaderText = "Remark";
+            dataGridViewHall.Columns[0].Name = "ReservationID";
+            dataGridViewHall.Columns[0].Visible = false;
+            dataGridViewHall.Columns[1].Name = "HallID";
+            dataGridViewHall.Columns[1].Visible = false;
+            dataGridViewHall.Columns[2].Name = "Firstname";
+            dataGridViewHall.Columns[2].HeaderText = "Firstname";
+            dataGridViewHall.Columns[3].Name = "Lastname";
+            dataGridViewHall.Columns[3].HeaderText = "Lastname";
+            dataGridViewHall.Columns[4].Name = "Hall";
+            dataGridViewHall.Columns[4].HeaderText = "Room";
+            dataGridViewHall.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewHall.Columns[5].Name = "Checkedin";
+            dataGridViewHall.Columns[5].HeaderText = "Checkedin";
+            dataGridViewHall.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewHall.Columns[6].Name = "Halltype";
+            dataGridViewHall.Columns[6].HeaderText = "Roomtype";
+            dataGridViewHall.Columns[7].Name = "Timefrom";
+            dataGridViewHall.Columns[7].HeaderText = "Event start";
+            dataGridViewHall.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewHall.Columns[8].Name = "Timeto";
+            dataGridViewHall.Columns[8].HeaderText = "Event end";
+            dataGridViewHall.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewHall.Columns[9].Name = "Remark";
+            dataGridViewHall.Columns[9].HeaderText = "Remark";
         }
 
         // Default hall display (monthly)
@@ -1138,27 +1119,26 @@ namespace HMS
             DateTime dateto = datefrom.AddMonths(1).AddDays(-1);
 
             // Fetch dataset
-            DBGetData getData = new DBGetData();
-            DataSet hallreservationDS = getData.GetHallBookingsBetweenDates(datefrom, dateto);
+            DataSet hallreservationDS = DBGetData.GetHallBookingsBetweenDates(datefrom, dateto);
 
             if (hallreservationDS != null)
             {
                 // No tables fetched
                 if (hallreservationDS.Tables.Count == 0)
                 {
-                    labelStatus.Text = "No datatable found, contact administrator.";
+                    new StatusMessage("No datatable found, contact administrator.");
                     return;
                 }
                 // No rows fetched
                 else if (hallreservationDS.Tables[0].Rows.Count == 0)
                 {
-                    labelStatus.Text = "No datarows found for this month.";
+                    new StatusMessage("No datarows found for this month.");
                     return;
                 }
                 // Clear labelStatus for previous messages
                 else
                 {
-                    labelStatus.Text = "";
+                    new StatusMessage("");
                 }
 
                 // Set the dataset as source for datagridview and make sure its displayed
@@ -1173,33 +1153,32 @@ namespace HMS
         private void buttonDisplayHallAll_Click(object sender, EventArgs e)
         {
             // Fetch dataset
-            DBGetData getData = new DBGetData();
-            DataSet hallreservationDS = getData.GetHallBookingsAll(1);
+            DataSet hallreservationDS = DBGetData.GetHallBookingsAll(1);
 
             if (hallreservationDS != null)
             {
                 // No tables fetched
                 if (hallreservationDS.Tables.Count == 0)
                 {
-                    labelStatus.Text = "No datatable found, contact administrator.";
+                    new StatusMessage("No datatable found, contact administrator.");
                     return;
                 }
                 // No rows fetched
                 else if (hallreservationDS.Tables[0].Rows.Count == 0)
                 {
-                    labelStatus.Text = "No datarows found in table.";
+                    new StatusMessage("No datarows found in table.");
                     return;
                 }
                 // Clear labelStatus for previous messages
                 else
                 {
-                    labelStatus.Text = "";
+                    new StatusMessage("");
                 }
 
                 // Set the dataset as source for datagridview and make sure its displayed
-                dataGridViewRoom.DataSource = hallreservationDS;
-                dataGridViewRoom.DataMember = "GetHallReservations_All";
-                LoadDataGridViewRoom();
+                dataGridViewHall.DataSource = hallreservationDS;
+                dataGridViewHall.DataMember = "GetHallReservations_All";
+                LoadDataGridViewHall();
             }
         }
 
@@ -1249,17 +1228,17 @@ namespace HMS
                         }
                     }
 
-                    if (checkedin) { this.labelStatus.Text = "Hallreservasjon har allerede foretatt innsjekking og kan ikke endres."; }
+                    if (checkedin) { new StatusMessage("Hallreservasjon har allerede foretatt innsjekking og kan ikke endres."); }
                     else
                     {
                         // Set database record ID for reference
-                        DBConn.QueryID = Convert.ToInt32(this.dataGridViewHall.CurrentRow.Cells[0].Value);
+                        DBGetData.QueryID = Convert.ToInt32(this.dataGridViewHall.CurrentRow.Cells[0].Value);
                         Form editForm = new EditBookingRoom();
                         editForm.ShowDialog();
                     }
                 }
                 // Catch exceptions and display in labelStatus
-                catch (Exception ex) { this.labelStatus.Text = ex.Message; }
+                catch (Exception ex) { new StatusMessage(ex.Message); }
                 // Make sure connection is closed
                 finally
                 {

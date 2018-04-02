@@ -11,8 +11,6 @@ namespace HMS
 {
     public partial class Folio : HMS.Content
     {
-        private string query;
-
         public Folio()
         {
             InitializeComponent();
@@ -42,27 +40,26 @@ namespace HMS
         public void LoadDataFolio()
         {
             // Fetch dataset
-            DBGetData getData = new DBGetData();
-            DataSet folioDS = getData.GetFoliosAll(1);
+            DataSet folioDS = DBGetData.GetFoliosAll(1);
 
             if (folioDS != null)
             {
                 // No tables fetched
                 if (folioDS.Tables.Count == 0)
                 {
-                    labelStatus.Text = "No datatable found, contact administrator.";
+                    new StatusMessage("No datatable found, contact administrator.");
                     return;
                 }
                 // No rows fetched
                 else if (folioDS.Tables[0].Rows.Count == 0)
                 {
-                    labelStatus.Text = "No datarows found for this month.";
+                    new StatusMessage("No datarows found for this month.");
                     return;
                 }
                 // Clear labelStatus for previous messages
                 else
                 {
-                    labelStatus.Text = "";
+                    new StatusMessage("");
                 }
 
                 // Set the dataset as source for datagridview and make sure its displayed
@@ -77,7 +74,7 @@ namespace HMS
         private void dataGridViewGuest_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             // Set database record ID for reference
-            DBConn.QueryID = Convert.ToInt32(this.dataGridViewFolio.CurrentRow.Cells[0].Value);
+            DBGetData.QueryID = Convert.ToInt32(this.dataGridViewFolio.CurrentRow.Cells[0].Value);
             Form editForm = new EditGuest();
             editForm.ShowDialog();
         }
@@ -106,27 +103,26 @@ namespace HMS
             string searchinput = @textBoxSearch.Text.Trim();
 
             // Fetch dataset
-            DBGetData getData = new DBGetData();
-            DataSet folioDS = getData.GetFoliosSearch(searchinput);
+            DataSet folioDS = DBGetData.GetFoliosSearch(searchinput);
 
             if (folioDS != null)
             {
                 // No tables fetched
                 if (folioDS.Tables.Count == 0)
                 {
-                    labelStatus.Text = "No datatable found, contact administrator.";
+                    new StatusMessage("No datatable found, contact administrator.");
                     return;
                 }
                 // No rows fetched
                 else if (folioDS.Tables[0].Rows.Count == 0)
                 {
-                    labelStatus.Text = "No datarows found for this month.";
+                    new StatusMessage("No datarows found for this month.");
                     return;
                 }
                 // Clear labelStatus for previous messages
                 else
                 {
-                    labelStatus.Text = "";
+                    new StatusMessage("");
                 }
 
                 // Set the dataset as source for datagridview and make sure its displayed

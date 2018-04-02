@@ -144,7 +144,7 @@
             // Guest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(1000, 670);
+            this.ClientSize = new System.Drawing.Size(1000, 650);
             this.Controls.Add(this.dataGridViewGuest);
             this.Controls.Add(this.buttonSearchGuest);
             this.Controls.Add(this.textBoxSearch);
@@ -152,11 +152,6 @@
             this.Controls.Add(this.buttonNewGuest);
             this.Name = "Guest";
             this.Load += new System.EventHandler(this.Gjest_Load);
-            this.Controls.SetChildIndex(this.buttonNewGuest, 0);
-            this.Controls.SetChildIndex(this.buttonEditGuest, 0);
-            this.Controls.SetChildIndex(this.textBoxSearch, 0);
-            this.Controls.SetChildIndex(this.buttonSearchGuest, 0);
-            this.Controls.SetChildIndex(this.dataGridViewGuest, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGuest)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

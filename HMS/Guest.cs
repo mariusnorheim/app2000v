@@ -6,8 +6,6 @@ namespace HMS
 {
     public partial class Guest : HMS.Content
     {
-        private string query;
-
         public Guest()
         {
             InitializeComponent();
@@ -38,27 +36,26 @@ namespace HMS
         public void LoadDataGuest()
         {
             // Fetch dataset
-            DBGetData getData = new DBGetData();
-            DataSet guestDS = getData.GetGuestsAll();
+            DataSet guestDS = DBGetData.GetGuestsAll();
 
             if (guestDS != null)
             {
                 // No tables fetched
                 if (guestDS.Tables.Count == 0)
                 {
-                    labelStatus.Text = "No datatable found, contact administrator.";
+                    new StatusMessage("No datatable found, contact administrator.");
                     return;
                 }
                 // No rows fetched
                 else if (guestDS.Tables[0].Rows.Count == 0)
                 {
-                    labelStatus.Text = "No datarows found for this month.";
+                    new StatusMessage("No datarows found for this month.");
                     return;
                 }
                 // Clear labelStatus for previous messages
                 else
                 {
-                    labelStatus.Text = "";
+                    new StatusMessage("");
                 }
 
                 // Set the dataset as source for datagridview and make sure its displayed
@@ -73,7 +70,7 @@ namespace HMS
         private void dataGridViewGuest_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             // Set database record ID for reference
-            DBConn.QueryID = Convert.ToInt32(this.dataGridViewGuest.CurrentRow.Cells[0].Value);
+            DBGetData.QueryID = Convert.ToInt32(this.dataGridViewGuest.CurrentRow.Cells[0].Value);
             Form editForm = new EditGuest();
             editForm.ShowDialog();
         }
@@ -97,7 +94,7 @@ namespace HMS
         private void buttonEditGuest_Click(object sender, EventArgs e)
         {
             // Set database record ID for reference
-            DBConn.QueryID = Convert.ToInt32(this.dataGridViewGuest.CurrentRow.Cells[0].Value);
+            DBGetData.QueryID = Convert.ToInt32(this.dataGridViewGuest.CurrentRow.Cells[0].Value);
             Form editForm = new EditGuest();
             editForm.ShowDialog();
         }
@@ -109,27 +106,26 @@ namespace HMS
             string searchinput = @textBoxSearch.Text.Trim();
 
             // Fetch dataset
-            DBGetData getData = new DBGetData();
-            DataSet guestDS = getData.GetGuestsSearch(searchinput);
+            DataSet guestDS = DBGetData.GetGuestsSearch(searchinput);
 
             if (guestDS != null)
             {
                 // No tables fetched
                 if (guestDS.Tables.Count == 0)
                 {
-                    labelStatus.Text = "No datatable found, contact administrator.";
+                    new StatusMessage("No datatable found, contact administrator.");
                     return;
                 }
                 // No rows fetched
                 else if (guestDS.Tables[0].Rows.Count == 0)
                 {
-                    labelStatus.Text = "No datarows found for this month.";
+                    new StatusMessage("No datarows found for this month.");
                     return;
                 }
                 // Clear labelStatus for previous messages
                 else
                 {
-                    labelStatus.Text = "";
+                    new StatusMessage("");
                 }
 
                 // Set the dataset as source for datagridview and make sure its displayed
