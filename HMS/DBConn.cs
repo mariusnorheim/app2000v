@@ -75,16 +75,17 @@ namespace HMS
             }
         }
 
-        // Return dataset from MySQL stored procedure
-        // @param1: Stored Procedure name to be executed
-        // @param2: List of parameters related to query
-        public DataSet GetDataSet(string procedureName, List<DbParameter> parameters = null)
+        // Return dataset from MySQL query
+        // @param1: Query to be executed
+        // @param2: CommandType
+        // @param2: List of parameters
+        public DataSet GetDataSet(string query, CommandType commandType, List<DbParameter> parameters = null)
         {
             // No MySQL connection could be made
             if (Connect() == false) { return null; }
 
-            MySqlCommand getDataCmd = new MySqlCommand(procedureName, conn);
-            getDataCmd.CommandType = System.Data.CommandType.StoredProcedure;
+            MySqlCommand getDataCmd = new MySqlCommand(query, conn);
+            getDataCmd.CommandType = commandType;
 
             if (parameters != null)
             {
@@ -140,8 +141,7 @@ namespace HMS
             try
             {
                 // Fill adapter for use on DataGridView
-                getDataAdapter.Fill(getDataset, procedureName);
-                Disconnect();
+                getDataAdapter.Fill(getDataset, query);
             }
             // Catch exceptions and display in labelStatus
             catch (MySqlException ex)
@@ -153,6 +153,7 @@ namespace HMS
             }
             finally
             {
+                Disconnect();
                 getDataCmd.Dispose();
                 getDataAdapter.Dispose();
             }
@@ -160,16 +161,18 @@ namespace HMS
             return getDataset;
         }
 
-        // Return list of reader results from MySQL stored procedure
-        // @param1: Stored Procedure name to be executed
-        // @param2: List of parameters related to query
-        public List<string> Reader(string procedureName, List<DbParameter> parameters = null)
+
+        // Return MySqlDataReader results from MySQL query
+        // @param1: Query to be executed
+        // @param2: CommandType
+        // @param3: List of parameters
+        public MySqlDataReader Read(string query, CommandType commandType, List<DbParameter> parameters = null)
         {
             // No MySQL connection could be made
             if (Connect() == false) { return null; }
 
-            MySqlCommand getDataCmd = new MySqlCommand(procedureName, conn);
-            getDataCmd.CommandType = System.Data.CommandType.StoredProcedure;
+            MySqlCommand getDataCmd = new MySqlCommand(query, conn);
+            getDataCmd.CommandType = commandType;
 
             if (parameters != null)
             {
@@ -219,23 +222,13 @@ namespace HMS
                 }
             }
 
-            MySqlDataReader getDataResult = getDataCmd.ExecuteReader();
-            List<string> resultList = new List<string>();
+            // Do not dispose, need to keep until result is read
+            MySqlDataReader getResult = getDataCmd.ExecuteReader(CommandBehavior.CloseConnection);
 
             try
             {
-                // Fetch result in reader
-                while (getDataResult.Read())
-                {
-                    for (int i = 0; i < getDataResult.FieldCount; i++)
-                    {
-                        if (getDataResult.GetValue(i) == null || getDataResult.GetValue(i) == DBNull.Value)  { resultList.Add(string.Empty); }
-                        else { resultList.Add((string)getDataResult.GetValue(i)); }
-                    }
-                }
-
-                getDataResult.Close();
-                Disconnect();
+                // Return reader results
+                return getResult;
             }
 
             // Catch exceptions and display in labelStatus
@@ -246,25 +239,20 @@ namespace HMS
                 new StatusMessage(ex.Message);
                 return null;
             }
-            finally
-            {
-                getDataCmd.Dispose();
-                getDataResult.Dispose();
-            }
-
-            return resultList;
         }
 
-        // Return count of rows matched from MySQL stored procedure
-        // @param1: Stored Procedure name to be executed
-        // @param2: List of parameters related to query
-        public int Count(string procedureName, List<DbParameter> parameters = null)
+
+        // Return count of rows matched from MySQL query
+        // @param1: Query to be executed
+        // @param2: CommandType
+        // @param3: List of parameters
+        public int Count(string query, CommandType commandType, List<DbParameter> parameters = null)
         {
             // No MySQL connection could be made
             if (Connect() == false) { return 0; }
 
-            MySqlCommand getDataCmd = new MySqlCommand(procedureName, conn);
-            getDataCmd.CommandType = System.Data.CommandType.StoredProcedure;
+            MySqlCommand getDataCmd = new MySqlCommand(query, conn);
+            getDataCmd.CommandType = commandType;
 
             if (parameters != null)
             {
@@ -320,34 +308,34 @@ namespace HMS
             {
                 // Fetch number of rows matched
                 count = Convert.ToInt32(getDataCmd.ExecuteScalar());
-                Disconnect();
             }
             // Catch exceptions and display in labelStatus
             catch (MySqlException ex)
             {
-                //UserInterface uiForm = (UserInterface)Application.OpenForms["UserInterface"];
-                //uiForm.labelStatus.Text = ex.Message;
                 new StatusMessage(ex.Message);
                 return 0;
             }
             finally
             {
+                Disconnect();
                 getDataCmd.Dispose();
             }
 
             return count;
         }
 
-        // Executes stored procedure into SQL
-        // @param1: Stored Procedure name to be executed
-        // @param2: List of parameters related to query
-        public void Execute(string procedureName, List<DbParameter> parameters = null)
+
+        // Executes MySQL query
+        // @param1: Query to be executed
+        // @param2: CommandType
+        // @param3: List of parameters
+        public void Execute(string query, CommandType commandType, List<DbParameter> parameters = null)
         {
             // No MySQL connection could be made
             if (Connect() == false) { MessageBox.Show("Database connection failed."); }
 
-            MySqlCommand setDataCmd = new MySqlCommand(procedureName, conn);
-            setDataCmd.CommandType = System.Data.CommandType.StoredProcedure;
+            MySqlCommand setDataCmd = new MySqlCommand(query, conn);
+            setDataCmd.CommandType = commandType;
 
             if (parameters != null)
             {
@@ -399,23 +387,19 @@ namespace HMS
 
             try
             {
-                // Execute procedure
+                // Execute
                 setDataCmd.ExecuteNonQuery();
-                Disconnect();
             }
             // Catch exceptions and display in labelStatus
             catch (MySqlException ex)
             {
-                //UserInterface uiForm = (UserInterface)Application.OpenForms["UserInterface"];
-                //uiForm.labelStatus.Text = ex.Message;
                 new StatusMessage(ex.Message);
             }
             finally
             {
+                Disconnect();
                 setDataCmd.Dispose();
             }
         }
-
-
     }
 }

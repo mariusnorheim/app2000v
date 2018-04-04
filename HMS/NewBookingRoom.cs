@@ -141,7 +141,7 @@ namespace HMS
                                 "FROM room_reservation AS RR " +
                                 "LEFT JOIN room AS R ON RR.roomid = R.roomid " +
                                 "WHERE (RR.datefrom BETWEEN @datearrive AND @datedepart " +
-                                "OR RR.dateto BETWEEN @datearrive AND @datedepart) " +
+                                "OR DATE_SUB(RR.dateto, INTERVAL 1 DAY) BETWEEN @datearrive AND @datedepart) " +
                                 "AND RR.isactive ='1' " +
                                 ") AND roomid NOT IN ( " +
                                 "SELECT R.roomid " +
