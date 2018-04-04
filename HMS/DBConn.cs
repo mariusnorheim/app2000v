@@ -146,8 +146,6 @@ namespace HMS
             // Catch exceptions and display in labelStatus
             catch (MySqlException ex)
             {
-                //UserInterface uiForm = (UserInterface)Application.OpenForms["UserInterface"];
-                //uiForm.labelStatus.Text = ex.Message;
                 new StatusMessage(ex.Message);
                 return null;
             }
@@ -234,8 +232,6 @@ namespace HMS
             // Catch exceptions and display in labelStatus
             catch (MySqlException ex)
             {
-                //UserInterface uiForm = (UserInterface)Application.OpenForms["UserInterface"];
-                //uiForm.labelStatus.Text = ex.Message;
                 new StatusMessage(ex.Message);
                 return null;
             }
