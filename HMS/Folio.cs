@@ -64,7 +64,7 @@ namespace HMS
 
                 // Set the dataset as source for datagridview and make sure its displayed
                 dataGridViewFolio.DataSource = folioDS;
-                dataGridViewFolio.DataMember = "Get_Folio_Active";
+                dataGridViewFolio.DataMember = "GetFolios_Active";
                 LoadDataGridViewFolio();
             }
         }
@@ -127,7 +127,7 @@ namespace HMS
 
                 // Set the dataset as source for datagridview and make sure its displayed
                 dataGridViewFolio.DataSource = folioDS;
-                dataGridViewFolio.DataMember = "Get_Folio_Search";
+                dataGridViewFolio.DataMember = "GetFolios_Search";
                 LoadDataGridViewFolio();
             }
         }

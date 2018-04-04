@@ -35,8 +35,8 @@ namespace HMS
             DBSetData.AddGuest(firstname, lastname, address, city, postcode, telephone);
             // Close form
             this.Close();
-            guestForm.LoadDataGuest();
             new StatusMessage("Guest with name " + firstname + " " + lastname + " is added to the database.");
+            guestForm.LoadDataGuest();
         }
 
         // Button 'Cancel'

@@ -140,7 +140,7 @@ namespace HMS
 
                 // Set the dataset as source for datagridview and make sure its displayed
                 dataGridViewRoom.DataSource = roomreservationDS;
-                dataGridViewRoom.DataMember = "Get_RR_BetweenDates";
+                dataGridViewRoom.DataMember = "GetRoomReservations_BetweenDates";
                 LoadDataGridViewRoom();
             }
         }
@@ -174,7 +174,7 @@ namespace HMS
 
                 // Set the dataset as source for datagridview and make sure its displayed
                 dataGridViewRoom.DataSource = roomreservationDS;
-                dataGridViewRoom.DataMember = "Get_RR_All";
+                dataGridViewRoom.DataMember = "GetRoomReservations_All";
                 LoadDataGridViewRoom();
             }
         }
@@ -219,7 +219,7 @@ namespace HMS
 
                 // Set the dataset as source for datagridview and make sure its displayed
                 dataGridViewRoom.DataSource = roomreservationDS;
-                dataGridViewRoom.DataMember = "Get_RR_BetweenDates";
+                dataGridViewRoom.DataMember = "GetRoomReservations_BetweenDates";
                 LoadDataGridViewRoom();
             }
         }
@@ -256,7 +256,7 @@ namespace HMS
 
                 // Set the dataset as source for datagridview and make sure its displayed
                 dataGridViewRoom.DataSource = roomreservationDS;
-                dataGridViewRoom.DataMember = "Get_RR_SpesificDate";
+                dataGridViewRoom.DataMember = "GetRoomReservations_SpesificDate";
                 LoadDataGridViewRoom();
             }
         }
@@ -270,7 +270,33 @@ namespace HMS
 
             if (reservationid != null)
             {
-                if (DBGetData.GetRoomCheckedin(reservationid) > 0) { checkedin = true; }
+                using (MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString))
+                {
+                    try
+                    {
+                        // Connect to database
+                        conn.Open();
+                        // Check that room is not already checked in to
+                        query = "SELECT ischeckedin FROM room_reservation_active " +
+                                "WHERE room_reservationid = @reservationid AND ischeckedin = '1'";
+                        using (MySqlCommand getCheckinStatusCmd = new MySqlCommand(query, conn))
+                        {
+                            getCheckinStatusCmd.Parameters.AddWithValue("@reservationid", reservationid);
+                            using (MySqlDataReader getCheckinStatusResult = getCheckinStatusCmd.ExecuteReader())
+                            {
+                                checkedin = getCheckinStatusResult.Read();
+                            }
+                        }
+                    }
+                    // Catch exceptions and display in labelStatus
+                    catch (Exception ex) { new StatusMessage(ex.Message); }
+                    // Make sure connection is closed
+                    finally
+                    {
+                        if (conn.State == System.Data.ConnectionState.Open) { conn.Close(); }
+                    }
+                }
+
                 if (checkedin) { new StatusMessage("Room reservation has already checked in and cant be changed."); }
                 else
                 {
@@ -299,7 +325,33 @@ namespace HMS
 
             if (reservationid != null)
             {
-                if (DBGetData.GetRoomCheckedin(reservationid) > 0) { checkedin = true; }
+                using (MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString))
+                {
+                    try
+                    {
+                        // Connect to database
+                        conn.Open();
+                        // Check that room is not already checked in to
+                        query = "SELECT ischeckedin FROM room_reservation_active " +
+                                "WHERE room_reservationid = @reservationid AND ischeckedin = '1'";
+                        using (MySqlCommand getCheckinStatusCmd = new MySqlCommand(query, conn))
+                        {
+                            getCheckinStatusCmd.Parameters.AddWithValue("@reservationid", reservationid);
+                            using (MySqlDataReader getCheckinStatusResult = getCheckinStatusCmd.ExecuteReader())
+                            {
+                                checkedin = getCheckinStatusResult.Read();
+                            }
+                        }
+                    }
+                    // Catch exceptions and display in labelStatus
+                    catch (Exception ex) { new StatusMessage(ex.Message); }
+                    // Make sure connection is closed
+                    finally
+                    {
+                        if (conn.State == System.Data.ConnectionState.Open) { conn.Close(); }
+                    }
+                }
+
                 if (checkedin) { new StatusMessage("Room reservation has already checked in and cant be changed."); }
                 else
                 {
@@ -323,13 +375,47 @@ namespace HMS
                                                           "\nEr du sikker på at du vil fortsette?", "Slett", MessageBoxButtons.YesNo);
             if (reservationid != null && confirmCheckin == DialogResult.Yes)
             {
-                if (DBGetData.GetRoomCheckedin(reservationid) > 0) { checkedin = true; }
-                if (checkedin) { new StatusMessage("Room reservation has already checked in and cant be deleted."); }
-                else
+                using (MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString))
                 {
-                    // Save entry to database
-                    DBSetData.DeleteRoomReservation(reservationid);
-                    new StatusMessage("Room reservation removed from active list.");
+                    try
+                    {
+                        // Connect to database
+                        conn.Open();
+                        // Check that room is not already checked in to
+                        query = "SELECT ischeckedin FROM room_reservation_active " +
+                                "WHERE room_reservationid = @reservationid AND ischeckedin = '1'";
+                        using (MySqlCommand getCheckinStatusCmd = new MySqlCommand(query, conn))
+                        {
+                            getCheckinStatusCmd.Parameters.AddWithValue("@reservationid", reservationid);
+                            using (MySqlDataReader getCheckinStatusResult = getCheckinStatusCmd.ExecuteReader())
+                            {
+                                checkedin = getCheckinStatusResult.Read();
+                            }
+                        }
+
+                        if (checkedin) { new StatusMessage("Room reservation has already checked in and cant be deleted."); }
+                        else
+                        {
+                            // Save entry to database
+                            query = "UPDATE room_reservation " +
+                                    "SET isactive = 0 " +
+                                    "WHERE room_reservationid = @reservationid";
+                            using (MySqlCommand roomBookingDeleteCmd = new MySqlCommand(query, conn))
+                            {
+                                roomBookingDeleteCmd.Parameters.AddWithValue("@reservationid", reservationid);
+                                roomBookingDeleteCmd.ExecuteNonQuery();
+                                new StatusMessage("Room reservation removed from active list.");
+                            }
+                        }
+                    }
+                    // Catch exceptions and display in labelStatus
+                    catch (Exception ex) { new StatusMessage(ex.Message); }
+                    // Make sure connection is closed and refresh data
+                    finally
+                    {
+                        if (conn.State == System.Data.ConnectionState.Open) { conn.Close(); }
+                        DisplayDefaultRoom();
+                    }
                 }
             }
         }
@@ -344,94 +430,258 @@ namespace HMS
             // Validation variables
             Boolean checkedin = false;
             Boolean checkindate = true;
+            Boolean folioexists = false;
             Boolean roomcleared = true;
             // Roomstatus values: 0 = deny checkin, 1 = warning, 2 = no flag
             int roomstatus = 2;
             // Reference variables
             string adminid = UserInfo.UserID;
-            int reservationid = Convert.ToInt32(this.dataGridViewRoom.CurrentRow.Cells[0].Value);
+            int billingitemid = 0;
+            long folioid;
+            int guestid;
             int roomid = Convert.ToInt32(this.dataGridViewRoom.CurrentRow.Cells[3].Value);
+            int reservationid = Convert.ToInt32(this.dataGridViewRoom.CurrentRow.Cells[0].Value);
 
             // Confirm checkin
             DialogResult confirmCheckin = MessageBox.Show("Sjekker inn romnummer " + roomid +
                                                            "\nEr du sikker på at du vil fortsette?", "Sjekk inn", MessageBoxButtons.YesNo);
             if (confirmCheckin == DialogResult.Yes)
-            {
-                // Check that reservation is not already checked in
-                if (DBGetData.GetRoomCheckedin(reservationid) > 0) { checkedin = true; }
-                if (checkedin) { new StatusMessage("Room reservation has already checked in."); }
-
-                // Check that reservation checkin date is today
-                MySqlDataReader getRoomCheckinDate = DBGetData.GetRoomCheckinDate(reservationid);
-                if (getRoomCheckinDate.Read())
+            { 
+                using (MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString))
                 {
-                    DateTime date = Convert.ToDateTime(getRoomCheckinDate[0]);
-                    if (date != DateTime.Today) { checkindate = false; }
-                    if (!checkindate) { new StatusMessage("Room reservation not marked for checkin today."); }
-                    getRoomCheckinDate.Close();
-                }
-
-                // Check if room is clean
-                MySqlDataReader getHousekeepingCode = DBGetData.GetRoomHousekeeping(roomid);
-                if (getHousekeepingCode.Read())
-                {
-                    int code = Convert.ToInt32(getHousekeepingCode[0]);
-                    switch (code)
+                    try
                     {
-                        case 0:
-                            roomstatus = 0;
-                            new StatusMessage("Room unavailable due to maintainance, " +
-                                "please change reservation or upgrade guest.");
-                            break;
-                        case 1:
-                            roomstatus = 1;
-                            new StatusMessage("Room needs inspection, " +
-                                              "please change reservation or send staff immediately.");
-                            break;
-                        case 2:
-                            roomstatus = 1;
-                            new StatusMessage("Room needs cleaning, " +
-                                              "please change reservation or send staff immediately.");
-                            break;
+                        // Connect to database
+                        conn.Open();
+                        // Check that room is not already checked in to
+                        query = "SELECT ischeckedin FROM room_reservation " +
+                                "WHERE room_reservationid = @reservationid AND ischeckedin = '1'";
+                        using (MySqlCommand getCheckinStatusCmd = new MySqlCommand(query, conn))
+                        {
+                            getCheckinStatusCmd.Parameters.AddWithValue("@reservationid", reservationid);
+                            using (MySqlDataReader getCheckinStatusResult = getCheckinStatusCmd.ExecuteReader())
+                            {
+                                checkedin = getCheckinStatusResult.Read();
+                            }
+                        }
+
+                        if (checkedin) { new StatusMessage("Room reservation has already checked in."); }
+
+                        // Check that date for checkin is today
+                        query = "SELECT datefrom FROM room_reservation " +
+                                "WHERE room_reservationid = @reservationid";
+                        using (MySqlCommand getCheckinDateCmd = new MySqlCommand(query, conn))
+                        {
+                            getCheckinDateCmd.Parameters.AddWithValue("@reservationid", reservationid);
+                            using (MySqlDataReader getCheckinDateResult = getCheckinDateCmd.ExecuteReader())
+                            {
+                                if (getCheckinDateResult.Read())
+                                {
+                                    DateTime date = getCheckinDateResult.GetDateTime(0);
+                                    if (date != DateTime.Today) { checkindate = false; }
+                                }
+                            }
+                        }
+
+                        if (!checkindate) { new StatusMessage("Room reservation not marked for checkin today."); }
+
+                        // Check if room is clean
+                        query = "SELECT code FROM housekeeping " +
+                                "WHERE roomid = @roomid AND isactive = '1'";
+                        using (MySqlCommand getHousekeepingStatusCmd = new MySqlCommand(query, conn))
+                        {
+                            getHousekeepingStatusCmd.Parameters.AddWithValue("@roomid", roomid);
+                            using (MySqlDataReader getHousekeepingsResult = getHousekeepingStatusCmd.ExecuteReader())
+                            {
+                                // Room is marked with a code in the database
+                                if (getHousekeepingsResult.Read())
+                                {
+                                    int code = getHousekeepingsResult.GetInt32(0);
+                                    switch (code)
+                                    {
+                                        case 0:
+                                            roomstatus = 0;
+                                            new StatusMessage("Room unavailable due to maintainance, " +
+                                                "please change reservation or upgrade guest.");
+                                            break;
+                                        case 1:
+                                            roomstatus = 1;
+                                            new StatusMessage("Room needs inspection, " +
+                                                              "please change reservation or send staff immediately.");
+                                            break;
+                                        case 2:
+                                            roomstatus = 1;
+                                            new StatusMessage("Room needs cleaning, " +
+                                                              "please change reservation or send staff immediately.");
+                                            break;
+                                    }
+                                }
+                            }
+                        }
+
+                        // Check if room is cleared for checkin
+                        switch (roomstatus)
+                        {
+                            // Deny checkin of a room that is flagged as inactive
+                            case 0:
+                                roomcleared = false;
+                                break;
+                            // Option to continue if room has a warning code and other arrangements cant be made
+                            case 1:
+                                DialogResult continueCheckin = MessageBox.Show(
+                                    "Rommet er flagget for rengjøring og bør inspiseres" +
+                                    "\nEr du sikker på at du vil fortsette?", "Advarsel!", MessageBoxButtons.YesNo);
+                                if (continueCheckin == DialogResult.Yes)
+                                {
+                                    roomcleared = true;
+                                }
+                                else if (continueCheckin == DialogResult.No)
+                                {
+                                    roomcleared = false;
+                                }
+
+                                break;
+                            // No code on room
+                            case 2:
+                                roomcleared = true;
+                                break;
+                        }
+
+                        // Proceed with checkin
+                        if (!checkedin && checkindate && roomcleared)
+                        {
+                            // Fetch guestid
+                            query = "SELECT guestid FROM room_reservation " +
+                                    "WHERE room_reservationid = @reservationid";
+                            using (MySqlCommand getGuestidCmd = new MySqlCommand(query, conn))
+                            {
+                                getGuestidCmd.Parameters.AddWithValue("@reservationid", reservationid);
+                                using (MySqlDataReader getGuestidResult = getGuestidCmd.ExecuteReader())
+                                {
+                                    getGuestidResult.Read();
+                                    guestid = getGuestidResult.GetInt32(0);
+                                }
+                            }
+
+                            // Fetch room type for folio_item
+                            query = "SELECT room_type.room_typeid FROM room_reservation " +
+                                    "LEFT JOIN room ON room_reservation.roomid = room.roomid " +
+                                    "LEFT JOIN room_type ON room.room_typeid = room_type.room_typeid " +
+                                    "WHERE room_reservationid = @reservationid";
+                            using (MySqlCommand getRoomtypeCmd = new MySqlCommand(query, conn))
+                            {
+                                getRoomtypeCmd.Parameters.AddWithValue("@reservationid", reservationid);
+                                using (MySqlDataReader getRoomtypeResult = getRoomtypeCmd.ExecuteReader())
+                                {
+                                    getRoomtypeResult.Read();
+                                    int roomtypeid = getRoomtypeResult.GetInt32(0);
+                                    switch (roomtypeid)
+                                    {
+                                        case 1:
+                                            billingitemid = 1;
+                                            break;
+                                        case 2:
+                                            billingitemid = 2;
+                                            break;
+                                        case 3:
+                                            billingitemid = 3;
+                                            break;
+                                        case 4:
+                                            billingitemid = 4;
+                                            break;
+                                        case 5:
+                                            billingitemid = 5;
+                                            break;
+                                        case 6:
+                                            billingitemid = 6;
+                                            break;
+                                    }
+                                }
+                            }
+
+                            // Check if unpaid folio exists
+                            query = "SELECT folioid FROM folio " +
+                                    "WHERE guestid = @guestid AND paiddate IS NULL";
+                            using (MySqlCommand getFolioCmd = new MySqlCommand(query, conn))
+                            {
+                                getFolioCmd.Parameters.AddWithValue("@guestid", guestid);
+                                using (MySqlDataReader getFolioResult = getFolioCmd.ExecuteReader())
+                                {
+                                    if (getFolioResult.Read())
+                                    {
+                                        folioexists = true;
+                                        folioid = getFolioResult.GetInt32(0);
+                                        // Add new folio items for room charge to existing folio
+                                        query = "INSERT INTO folio_item (folioid, billing_itemid, createddate, createdby) " +
+                                                "VALUES (@folioid, @billingitemid, CURDATE(), @adminid)";
+                                        using (MySqlCommand newFolioItemCmd = new MySqlCommand(query, conn))
+                                        {
+                                            newFolioItemCmd.Parameters.AddWithValue("@folioid", folioid);
+                                            newFolioItemCmd.Parameters.AddWithValue("@billingitemid", billingitemid);
+                                            newFolioItemCmd.Parameters.AddWithValue("@adminid", adminid);
+                                            // Calculate amount of days and add a folio item for every day
+                                            DateTime datefrom = Convert.ToDateTime(this.dataGridViewRoom.CurrentRow.Cells[6].Value.ToString());
+                                            DateTime dateto = Convert.ToDateTime(this.dataGridViewRoom.CurrentRow.Cells[7].Value.ToString());
+                                            int days = Convert.ToInt32(Math.Floor((dateto - datefrom).TotalDays));
+
+                                            for (int i = 0; i < days; i++) { newFolioItemCmd.ExecuteNonQuery(); }
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (!folioexists)
+                            {
+                                // Create new folio if none exists
+                                query = "INSERT INTO folio (guestid, createddate, createdby) " +
+                                        "VALUES (@guestid, CURDATE(), @adminid)";
+                                using (MySqlCommand newFolioCmd = new MySqlCommand(query, conn))
+                                {
+                                    newFolioCmd.Parameters.AddWithValue("@guestid", guestid);
+                                    newFolioCmd.Parameters.AddWithValue("@adminid", adminid);
+                                    newFolioCmd.ExecuteNonQuery();
+                                    // Save id for use in folio_item table
+                                    folioid = newFolioCmd.LastInsertedId;
+                                }
+
+                                // Add new folio items for room charge
+                                query = "INSERT INTO folio_item (folioid, billing_itemid, createddate, createdby) " +
+                                        "VALUES (@folioid, @billingitemid, CURDATE(), @adminid)";
+                                using (MySqlCommand newFolioItemCmd = new MySqlCommand(query, conn))
+                                {
+                                    newFolioItemCmd.Parameters.AddWithValue("@folioid", folioid);
+                                    newFolioItemCmd.Parameters.AddWithValue("@billingitemid", billingitemid);
+                                    newFolioItemCmd.Parameters.AddWithValue("@adminid", adminid);
+                                    // Calculate amount of days and add a folio item for every day
+                                    DateTime datefrom = Convert.ToDateTime(this.dataGridViewRoom.CurrentRow.Cells[6].Value.ToString());
+                                    DateTime dateto = Convert.ToDateTime(this.dataGridViewRoom.CurrentRow.Cells[7].Value.ToString());
+                                    int days = Convert.ToInt32(Math.Floor((dateto - datefrom).TotalDays));
+
+                                    for (int i = 0; i < days; i++) { newFolioItemCmd.ExecuteNonQuery(); }
+                                }
+                            }
+
+                            // Mark room as checked in
+                            query = "UPDATE room_reservation " +
+                                    "SET ischeckedin = 1 " +
+                                    "WHERE room_reservationid = @reservationid";
+                            using (MySqlCommand setRoomCheckinCmd = new MySqlCommand(query, conn))
+                            {
+                                setRoomCheckinCmd.Parameters.AddWithValue("@reservationid", reservationid);
+                                setRoomCheckinCmd.ExecuteNonQuery();
+                                new StatusMessage("Reservation for roomnumber " + roomid +
+                                                  " is flagged as checked in and folio created.");
+                            }
+                        }
                     }
-
-                    getHousekeepingCode.Close();
-                }
-
-                // Check if room is cleared for checkin
-                switch (roomstatus)
-                {
-                    // Deny checkin of a room that is flagged as inactive
-                    case 0:
-                        roomcleared = false;
-                        break;
-                    // Option to continue if room has a warning code and other arrangements cant be made
-                    case 1:
-                        DialogResult continueCheckin = MessageBox.Show(
-                            "Rommet er flagget for rengjøring og bør inspiseres" +
-                            "\nEr du sikker på at du vil fortsette?", "Advarsel!", MessageBoxButtons.YesNo);
-                        if (continueCheckin == DialogResult.Yes)
-                        {
-                            roomcleared = true;
-                        }
-                        else if (continueCheckin == DialogResult.No)
-                        {
-                            roomcleared = false;
-                        }
-
-                        break;
-                    // No code on room
-                    case 2:
-                        roomcleared = true;
-                        break;
-                }
-
-                // Proceed with checkin
-                if (!checkedin && checkindate && roomcleared && reservationid != null && adminid != null)
-                {
-                    // Execute stored procedure for checking
-                    DBSetData.CheckkinRoomReservation(reservationid, adminid);
-                    new StatusMessage("Room reservation for roomnumber " + roomid + " has been flagged as checked in and folio was added.");
+                    // Catch exceptions and display in labelStatus
+                    catch (Exception ex) { new StatusMessage(ex.Message); }
+                    // Make sure connection is closed and refresh data
+                    finally
+                    {
+                        if (conn.State == System.Data.ConnectionState.Open) { conn.Close(); }
+                        DisplayDefaultRoom();
+                    }
                 }
             }
         }
@@ -893,7 +1143,7 @@ namespace HMS
 
                 // Set the dataset as source for datagridview and make sure its displayed
                 dataGridViewHall.DataSource = hallreservationDS;
-                dataGridViewHall.DataMember = "Get_HR_BetweenDates";
+                dataGridViewHall.DataMember = "GetHallReservations_BetweenDates";
                 LoadDataGridViewHall();
             }
         }
@@ -927,7 +1177,7 @@ namespace HMS
 
                 // Set the dataset as source for datagridview and make sure its displayed
                 dataGridViewHall.DataSource = hallreservationDS;
-                dataGridViewHall.DataMember = "Get_HR_All";
+                dataGridViewHall.DataMember = "GetHallReservations_All";
                 LoadDataGridViewHall();
             }
         }
