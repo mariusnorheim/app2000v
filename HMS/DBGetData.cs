@@ -20,7 +20,7 @@ namespace HMS
         }
 
         //
-        //  Booking data
+        // Room booking data
         //
         public static DataSet GetRoomBookingsAll(int isActive)
         {
@@ -28,7 +28,7 @@ namespace HMS
             parameters.Add(new MySqlParameter("active", isActive));
 
             DBConn dbconn = new DBConn();
-            return dbconn.GetDataSet("GetRoomReservations_All", parameters);
+            return dbconn.GetDataSet("Get_RR_All", CommandType.StoredProcedure, parameters);
         }
 
         public static DataSet GetRoomBookingsBetweenDates(DateTime datefrom, DateTime dateto)
@@ -38,7 +38,7 @@ namespace HMS
             parameters.Add(new MySqlParameter("dt", dateto));
 
             DBConn dbconn = new DBConn();
-            return dbconn.GetDataSet("GetRoomReservations_BetweenDates", parameters);
+            return dbconn.GetDataSet("Get_RR_BetweenDates", CommandType.StoredProcedure, parameters);
         }
 
         public static DataSet GetRoomBookingsSpesificDate(DateTime date)
@@ -47,7 +47,7 @@ namespace HMS
             parameters.Add(new MySqlParameter("ds", date));
 
             DBConn dbconn = new DBConn();
-            return dbconn.GetDataSet("GetRoomReservations_SpesificDate", parameters);
+            return dbconn.GetDataSet("Get_RR_SpesificDate", CommandType.StoredProcedure, parameters);
         }
 
         public static DataSet GetRoomBookingsSearch(string input)
@@ -56,16 +56,46 @@ namespace HMS
             parameters.Add(new MySqlParameter("Search", "%" + input + "%"));
 
             DBConn dbconn = new DBConn();
-            return dbconn.GetDataSet("GetRoomReservations_Search", parameters);
+            return dbconn.GetDataSet("Get_RR_Search", CommandType.StoredProcedure, parameters);
         }
 
+        public static int GetRoomCheckedin(int reservationid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("rrid", reservationid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.Count("RR_Check_Checkedin", CommandType.StoredProcedure, parameters);
+        }
+
+        public static MySqlDataReader GetRoomCheckinDate(int reservationid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("rrid", reservationid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.ExecuteReader("RR_Check_CheckinDate", CommandType.StoredProcedure, parameters);
+        }
+
+        public static MySqlDataReader GetRoomHousekeeping(int roomid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("rid", roomid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.ExecuteReader("RR_Check_Housekeeping", CommandType.StoredProcedure, parameters);
+        }
+
+        //
+        // Hall booking data
+        //
         public static DataSet GetHallBookingsAll(int isActive)
         {
             List<DbParameter> parameters = new List<DbParameter>();
             parameters.Add(new MySqlParameter("active", isActive));
 
             DBConn dbconn = new DBConn();
-            return dbconn.GetDataSet("GetHallReservations_All", parameters);
+            return dbconn.GetDataSet("Get_HR_All", CommandType.StoredProcedure, parameters);
         }
 
         public static DataSet GetHallBookingsBetweenDates(DateTime datefrom, DateTime dateto)
@@ -75,7 +105,7 @@ namespace HMS
             parameters.Add(new MySqlParameter("dt", dateto));
 
             DBConn dbconn = new DBConn();
-            return dbconn.GetDataSet("GetHallReservations_BetweenDates", parameters);
+            return dbconn.GetDataSet("Get_HR_BetweenDates", CommandType.StoredProcedure, parameters);
         }
 
         public static DataSet GetHallBookingsSpesificDate(DateTime date)
@@ -84,7 +114,7 @@ namespace HMS
             parameters.Add(new MySqlParameter("ds", date));
 
             DBConn dbconn = new DBConn();
-            return dbconn.GetDataSet("GetHallReservations_SpesificDate", parameters);
+            return dbconn.GetDataSet("Get_HR_SpesificDate", CommandType.StoredProcedure, parameters);
         }
 
 
@@ -94,7 +124,7 @@ namespace HMS
         public static DataSet GetGuestsAll()
         {
             DBConn dbconn = new DBConn();
-            return dbconn.GetDataSet("GetGuests_All", null);
+            return dbconn.GetDataSet("Get_Guest_All", CommandType.StoredProcedure, null);
         }
 
         public static DataSet GetGuestsSearch(string input)
@@ -103,7 +133,7 @@ namespace HMS
             parameters.Add(new MySqlParameter("Search", "%" + input + "%"));
 
             DBConn dbconn = new DBConn();
-            return dbconn.GetDataSet("GetGuests_Search", parameters);
+            return dbconn.GetDataSet("Get_Guest_Search", CommandType.StoredProcedure, parameters);
         }
 
         public static List<string> GetGuestData(int guestid)
@@ -112,7 +142,7 @@ namespace HMS
             parameters.Add(new MySqlParameter("gid", guestid));
 
             DBConn dbconn = new DBConn();
-            return dbconn.Reader("GetGuestData", parameters);
+            return dbconn.Reader("Get_Guest_Data", CommandType.StoredProcedure, parameters);
         }
 
 
@@ -125,7 +155,7 @@ namespace HMS
             parameters.Add(new MySqlParameter("active", isActive));
 
             DBConn dbconn = new DBConn();
-            return dbconn.GetDataSet("GetFolios_Active", parameters);
+            return dbconn.GetDataSet("Get_Folio_Active", CommandType.StoredProcedure, parameters);
         }
 
         public static DataSet GetFoliosSearch(string input)
@@ -134,7 +164,7 @@ namespace HMS
             parameters.Add(new MySqlParameter("Search", "%" + input + "%"));
 
             DBConn dbconn = new DBConn();
-            return dbconn.GetDataSet("GetFolios_Search", parameters);
+            return dbconn.GetDataSet("Get_Folio_Search", CommandType.StoredProcedure, parameters);
         }
     }
 }

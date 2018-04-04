@@ -60,7 +60,7 @@ namespace HMS
 
                 // Set the dataset as source for datagridview and make sure its displayed
                 dataGridViewGuest.DataSource = guestDS;
-                dataGridViewGuest.DataMember = "GetGuests_All";
+                dataGridViewGuest.DataMember = "Get_Guest_All";
                 LoadDataGridViewGuest();
             }
         }
@@ -130,7 +130,7 @@ namespace HMS
 
                 // Set the dataset as source for datagridview and make sure its displayed
                 dataGridViewGuest.DataSource = guestDS;
-                dataGridViewGuest.DataMember = "GetGuests_Search";
+                dataGridViewGuest.DataMember = "Get_Guest_Search";
                 LoadDataGridViewGuest();
             }
         }
