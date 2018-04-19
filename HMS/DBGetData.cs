@@ -34,8 +34,8 @@ namespace HMS
         public static DataSet GetRoomBookingsBetweenDates(DateTime datefrom, DateTime dateto)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("df", datefrom));
-            parameters.Add(new MySqlParameter("dt", dateto));
+            parameters.Add(new MySqlParameter("dFrom", datefrom));
+            parameters.Add(new MySqlParameter("dTo", dateto));
 
             DBConn dbconn = new DBConn();
             return dbconn.GetDataSet("Get_RR_BetweenDates", CommandType.StoredProcedure, parameters);
@@ -44,7 +44,7 @@ namespace HMS
         public static DataSet GetRoomBookingsSpesificDate(DateTime date)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("ds", date));
+            parameters.Add(new MySqlParameter("dSearch", date));
 
             DBConn dbconn = new DBConn();
             return dbconn.GetDataSet("Get_RR_SpesificDate", CommandType.StoredProcedure, parameters);
@@ -53,16 +53,17 @@ namespace HMS
         public static DataSet GetRoomBookingsSearch(string input)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("Search", "%" + input + "%"));
+            parameters.Add(new MySqlParameter("search", "%" + input + "%"));
 
             DBConn dbconn = new DBConn();
             return dbconn.GetDataSet("Get_RR_Search", CommandType.StoredProcedure, parameters);
         }
 
+        // Validations
         public static int GetRoomCheckedin(int reservationid)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("rrid", reservationid));
+            parameters.Add(new MySqlParameter("reservationid", reservationid));
 
             DBConn dbconn = new DBConn();
             return dbconn.Count("RR_Check_Checkedin", CommandType.StoredProcedure, parameters);
@@ -71,10 +72,10 @@ namespace HMS
         public static MySqlDataReader GetRoomCheckinDate(int reservationid)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("rrid", reservationid));
+            parameters.Add(new MySqlParameter("reservationid", reservationid));
 
             DBConn dbconn = new DBConn();
-            return dbconn.ExecuteReader("RR_Check_CheckinDate", CommandType.StoredProcedure, parameters);
+            return dbconn.Read("RR_Check_CheckinDate", CommandType.StoredProcedure, parameters);
         }
 
         public static MySqlDataReader GetRoomHousekeeping(int roomid)
@@ -83,8 +84,54 @@ namespace HMS
             parameters.Add(new MySqlParameter("rid", roomid));
 
             DBConn dbconn = new DBConn();
-            return dbconn.ExecuteReader("RR_Check_Housekeeping", CommandType.StoredProcedure, parameters);
+            return dbconn.Read("RR_Check_Housekeeping", CommandType.StoredProcedure, parameters);
         }
+
+        public static int GetRoomCheckedout(int reservationid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("reservationid", reservationid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.Count("RR_Check_Checkedout", CommandType.StoredProcedure, parameters);
+        }
+
+        public static MySqlDataReader GetRoomCheckoutDate(int reservationid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("reservationid", reservationid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.Read("RR_Check_CheckoutDate", CommandType.StoredProcedure, parameters);
+        }
+
+        public static MySqlDataReader GetRoomMessages(int reservationid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("reservationid", reservationid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.Read("Get_RR_Messages", CommandType.StoredProcedure, parameters);
+        }
+
+        public static int GetRoomCount(int reservationid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("reservationid", reservationid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.Count("Get_RR_Roomcount", CommandType.StoredProcedure, parameters);
+        }
+
+        public static MySqlDataReader GetRoomCheckoutTotal(int reservationid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("reservationid", reservationid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.Read("RR_Checkout_FolioTotal", CommandType.StoredProcedure, parameters);
+        }
+
 
         //
         // Hall booking data
@@ -101,8 +148,8 @@ namespace HMS
         public static DataSet GetHallBookingsBetweenDates(DateTime datefrom, DateTime dateto)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("df", datefrom));
-            parameters.Add(new MySqlParameter("dt", dateto));
+            parameters.Add(new MySqlParameter("dFrom", datefrom));
+            parameters.Add(new MySqlParameter("dTo", dateto));
 
             DBConn dbconn = new DBConn();
             return dbconn.GetDataSet("Get_HR_BetweenDates", CommandType.StoredProcedure, parameters);
@@ -111,7 +158,7 @@ namespace HMS
         public static DataSet GetHallBookingsSpesificDate(DateTime date)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("ds", date));
+            parameters.Add(new MySqlParameter("dSearch", date));
 
             DBConn dbconn = new DBConn();
             return dbconn.GetDataSet("Get_HR_SpesificDate", CommandType.StoredProcedure, parameters);
@@ -130,19 +177,19 @@ namespace HMS
         public static DataSet GetGuestsSearch(string input)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("Search", "%" + input + "%"));
+            parameters.Add(new MySqlParameter("search", "%" + input + "%"));
 
             DBConn dbconn = new DBConn();
             return dbconn.GetDataSet("Get_Guest_Search", CommandType.StoredProcedure, parameters);
         }
 
-        public static List<string> GetGuestData(int guestid)
+        public static MySqlDataReader GetGuestData(int guestid)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("gid", guestid));
+            parameters.Add(new MySqlParameter("GuestID", guestid));
 
             DBConn dbconn = new DBConn();
-            return dbconn.Reader("Get_Guest_Data", CommandType.StoredProcedure, parameters);
+            return dbconn.Read("Get_Guest_Data", CommandType.StoredProcedure, parameters);
         }
 
 
@@ -161,7 +208,7 @@ namespace HMS
         public static DataSet GetFoliosSearch(string input)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("Search", "%" + input + "%"));
+            parameters.Add(new MySqlParameter("search", "%" + input + "%"));
 
             DBConn dbconn = new DBConn();
             return dbconn.GetDataSet("Get_Folio_Search", CommandType.StoredProcedure, parameters);

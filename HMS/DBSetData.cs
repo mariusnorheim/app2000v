@@ -17,21 +17,58 @@ namespace HMS
         public static void DeleteRoomReservation(int reservationid)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("rrid", reservationid));
+            parameters.Add(new MySqlParameter("reservationid", reservationid));
 
             DBConn dbconn = new DBConn();
             dbconn.Execute("DeleteRoomReservation", CommandType.StoredProcedure, parameters);
         }
 
-        public static void CheckkinRoomReservation(int reservationid, String adminid)
+        public static void CheckinRoomReservation(int reservationid, String adminid)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("rrid", reservationid));
-            parameters.Add(new MySqlParameter("aid", adminid));
+            parameters.Add(new MySqlParameter("reservationid", reservationid));
+            parameters.Add(new MySqlParameter("adminid", adminid)); 
 
             DBConn dbconn = new DBConn();
             dbconn.Execute("RR_Checkin", CommandType.StoredProcedure, parameters);
         }
+
+        public static void UpdateMessagesRoomReservation(int reservationid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("reservationid", reservationid));
+
+            DBConn dbconn = new DBConn();
+            dbconn.Execute("Set_RR_Messages_Inactive", CommandType.StoredProcedure, parameters);
+        }
+
+        public static void CheckoutRoomReservation(int reservationid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("reservationid", reservationid));
+
+            DBConn dbconn = new DBConn();
+            dbconn.Execute("RR_Checkout", CommandType.StoredProcedure, parameters);
+        }
+
+        public static void CheckoutFolioPaid(int reservationid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("reservationid", reservationid));
+
+            DBConn dbconn = new DBConn();
+            dbconn.Execute("Set_RR_FolioPaid", CommandType.StoredProcedure, parameters);
+        }
+
+        public static void CheckoutFolioDue(int reservationid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("reservationid", reservationid));
+
+            DBConn dbconn = new DBConn();
+            dbconn.Execute("Set_RR_FolioDue", CommandType.StoredProcedure, parameters);
+        }
+
 
         //
         // Guest data
@@ -39,13 +76,13 @@ namespace HMS
         public static void AddGuest(string firstname, string lastname, string address, string city, string postcode, string telephone)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("fname", firstname));
-            parameters.Add(new MySqlParameter("lname", lastname));
-            parameters.Add(new MySqlParameter("addr", address));
-            parameters.Add(new MySqlParameter("cty", city));
-            parameters.Add(new MySqlParameter("pcode", postcode));
-            if (telephone != null) { parameters.Add(new MySqlParameter("tel", telephone)); }
-            else { parameters.Add(new MySqlParameter("tel", Convert.DBNull)); }
+            parameters.Add(new MySqlParameter("Firstname", firstname));
+            parameters.Add(new MySqlParameter("Lastname", lastname));
+            parameters.Add(new MySqlParameter("Address", address));
+            parameters.Add(new MySqlParameter("City", city));
+            parameters.Add(new MySqlParameter("Postcode", postcode));
+            if (telephone != null) { parameters.Add(new MySqlParameter("Telephone", telephone)); }
+            else { parameters.Add(new MySqlParameter("Telephone", Convert.DBNull)); }
 
             DBConn dbconn = new DBConn();
             dbconn.Execute("Set_Guest_Add", CommandType.StoredProcedure, parameters);
@@ -54,14 +91,14 @@ namespace HMS
         public static void EditGuest(int guestid, string firstname, string lastname, string address, string city, string postcode, string telephone)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("gid", guestid));
-            parameters.Add(new MySqlParameter("fname", firstname));
-            parameters.Add(new MySqlParameter("lname", lastname));
-            parameters.Add(new MySqlParameter("addr", address));
-            parameters.Add(new MySqlParameter("cty", city));
-            parameters.Add(new MySqlParameter("pcode", postcode));
-            if (telephone != null) { parameters.Add(new MySqlParameter("tel", telephone)); }
-            else { parameters.Add(new MySqlParameter("tel", Convert.DBNull)); }
+            parameters.Add(new MySqlParameter("GuestID", guestid));
+            parameters.Add(new MySqlParameter("Firstname", firstname));
+            parameters.Add(new MySqlParameter("Lastname", lastname));
+            parameters.Add(new MySqlParameter("Address", address));
+            parameters.Add(new MySqlParameter("City", city));
+            parameters.Add(new MySqlParameter("Postcode", postcode));
+            if (telephone != null) { parameters.Add(new MySqlParameter("Telephone", telephone)); }
+            else { parameters.Add(new MySqlParameter("Telephone", Convert.DBNull)); }
 
             DBConn dbconn = new DBConn();
             dbconn.Execute("Set_Guest_Edit", CommandType.StoredProcedure, parameters);
