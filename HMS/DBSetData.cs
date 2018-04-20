@@ -17,7 +17,7 @@ namespace HMS
         public static void DeleteRoomReservation(int reservationid)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("reservationid", reservationid));
+            parameters.Add(new MySqlParameter("ReservationID", reservationid));
 
             DBConn dbconn = new DBConn();
             dbconn.Execute("DeleteRoomReservation", CommandType.StoredProcedure, parameters);
@@ -26,8 +26,8 @@ namespace HMS
         public static void CheckinRoomReservation(int reservationid, String adminid)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("reservationid", reservationid));
-            parameters.Add(new MySqlParameter("adminid", adminid)); 
+            parameters.Add(new MySqlParameter("ReservationID", reservationid));
+            parameters.Add(new MySqlParameter("AdminID", adminid)); 
 
             DBConn dbconn = new DBConn();
             dbconn.Execute("RR_Checkin", CommandType.StoredProcedure, parameters);
@@ -36,7 +36,7 @@ namespace HMS
         public static void UpdateMessagesRoomReservation(int reservationid)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("reservationid", reservationid));
+            parameters.Add(new MySqlParameter("ReservationID", reservationid));
 
             DBConn dbconn = new DBConn();
             dbconn.Execute("Set_RR_Messages_Inactive", CommandType.StoredProcedure, parameters);
@@ -45,7 +45,7 @@ namespace HMS
         public static void CheckoutRoomReservation(int reservationid)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("reservationid", reservationid));
+            parameters.Add(new MySqlParameter("ReservationID", reservationid));
 
             DBConn dbconn = new DBConn();
             dbconn.Execute("RR_Checkout", CommandType.StoredProcedure, parameters);
@@ -54,7 +54,7 @@ namespace HMS
         public static void CheckoutFolioPaid(int reservationid)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("reservationid", reservationid));
+            parameters.Add(new MySqlParameter("ReservationID", reservationid));
 
             DBConn dbconn = new DBConn();
             dbconn.Execute("Set_RR_FolioPaid", CommandType.StoredProcedure, parameters);
@@ -63,7 +63,7 @@ namespace HMS
         public static void CheckoutFolioDue(int reservationid)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("reservationid", reservationid));
+            parameters.Add(new MySqlParameter("ReservationID", reservationid));
 
             DBConn dbconn = new DBConn();
             dbconn.Execute("Set_RR_FolioDue", CommandType.StoredProcedure, parameters);
