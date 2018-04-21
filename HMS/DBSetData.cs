@@ -14,16 +14,16 @@ namespace HMS
         //
         // Booking data
         //
-        public static void DeleteRoomReservation(int reservationid)
+        public static void RoomreservationDelete(int reservationid)
         {
             List<DbParameter> parameters = new List<DbParameter>();
             parameters.Add(new MySqlParameter("ReservationID", reservationid));
 
             DBConn dbconn = new DBConn();
-            dbconn.Execute("DeleteRoomReservation", CommandType.StoredProcedure, parameters);
+            dbconn.Execute("Set_RR_Inactive", CommandType.StoredProcedure, parameters);
         }
 
-        public static void CheckinRoomReservation(int reservationid, String adminid)
+        public static void RoomreservationCheckin(int reservationid, String adminid)
         {
             List<DbParameter> parameters = new List<DbParameter>();
             parameters.Add(new MySqlParameter("ReservationID", reservationid));
@@ -33,16 +33,7 @@ namespace HMS
             dbconn.Execute("RR_Checkin", CommandType.StoredProcedure, parameters);
         }
 
-        public static void UpdateMessagesRoomReservation(int reservationid)
-        {
-            List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("ReservationID", reservationid));
-
-            DBConn dbconn = new DBConn();
-            dbconn.Execute("Set_RR_Messages_Inactive", CommandType.StoredProcedure, parameters);
-        }
-
-        public static void CheckoutRoomReservation(int reservationid)
+        public static void RoomreservationCheckout(int reservationid)
         {
             List<DbParameter> parameters = new List<DbParameter>();
             parameters.Add(new MySqlParameter("ReservationID", reservationid));
@@ -51,7 +42,16 @@ namespace HMS
             dbconn.Execute("RR_Checkout", CommandType.StoredProcedure, parameters);
         }
 
-        public static void CheckoutFolioPaid(int reservationid)
+        public static void RoomreservationUpdateMessages(int reservationid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("ReservationID", reservationid));
+
+            DBConn dbconn = new DBConn();
+            dbconn.Execute("Set_RR_Messages_Inactive", CommandType.StoredProcedure, parameters);
+        }
+
+        public static void RoomreservationFolioPaid(int reservationid)
         {
             List<DbParameter> parameters = new List<DbParameter>();
             parameters.Add(new MySqlParameter("ReservationID", reservationid));
@@ -60,7 +60,7 @@ namespace HMS
             dbconn.Execute("Set_RR_FolioPaid", CommandType.StoredProcedure, parameters);
         }
 
-        public static void CheckoutFolioDue(int reservationid)
+        public static void RoomreservationFolioDue(int reservationid)
         {
             List<DbParameter> parameters = new List<DbParameter>();
             parameters.Add(new MySqlParameter("ReservationID", reservationid));
@@ -69,11 +69,39 @@ namespace HMS
             dbconn.Execute("Set_RR_FolioDue", CommandType.StoredProcedure, parameters);
         }
 
+        public static void RoomreservationAdd(int guestid, string roomid, string datefrom, string dateto, string remark)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("GID", guestid));
+            parameters.Add(new MySqlParameter("RID", roomid));
+            parameters.Add(new MySqlParameter("DFrom", datefrom));
+            parameters.Add(new MySqlParameter("DTo", dateto));
+            if (remark != null) { parameters.Add(new MySqlParameter("Remark", remark)); }
+            else { parameters.Add(new MySqlParameter("Remark", Convert.DBNull)); }
+
+            DBConn dbconn = new DBConn();
+            dbconn.Execute("Set_RR_Add", CommandType.StoredProcedure, parameters);
+        }
+
+        public static void RoomreservationEdit(int reservationid, int guestid, string roomid, string datefrom, string dateto, string remark)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("ReservationID", reservationid));
+            parameters.Add(new MySqlParameter("GID", guestid));
+            parameters.Add(new MySqlParameter("RID", roomid));
+            parameters.Add(new MySqlParameter("DFrom", datefrom));
+            parameters.Add(new MySqlParameter("DTo", dateto));
+            if (remark != null) { parameters.Add(new MySqlParameter("Remark", remark)); }
+            else { parameters.Add(new MySqlParameter("Remark", Convert.DBNull)); }
+
+            DBConn dbconn = new DBConn();
+            dbconn.Execute("Set_RR_Edit", CommandType.StoredProcedure, parameters);
+        }
 
         //
         // Guest data
         //
-        public static void AddGuest(string firstname, string lastname, string address, string city, string postcode, string telephone)
+        public static void GuestAdd(string firstname, string lastname, string address, string city, string postcode, string telephone)
         {
             List<DbParameter> parameters = new List<DbParameter>();
             parameters.Add(new MySqlParameter("Firstname", firstname));
@@ -88,10 +116,10 @@ namespace HMS
             dbconn.Execute("Set_Guest_Add", CommandType.StoredProcedure, parameters);
         }
 
-        public static void EditGuest(int guestid, string firstname, string lastname, string address, string city, string postcode, string telephone)
+        public static void GuestEdit(int guestid, string firstname, string lastname, string address, string city, string postcode, string telephone)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("GuestID", guestid));
+            parameters.Add(new MySqlParameter("GID", guestid));
             parameters.Add(new MySqlParameter("Firstname", firstname));
             parameters.Add(new MySqlParameter("Lastname", lastname));
             parameters.Add(new MySqlParameter("Address", address));

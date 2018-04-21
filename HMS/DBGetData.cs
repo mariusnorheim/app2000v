@@ -66,7 +66,7 @@ namespace HMS
             parameters.Add(new MySqlParameter("ReservationID", reservationid));
 
             DBConn dbconn = new DBConn();
-            return dbconn.Count("RR_Check_Checkedin", CommandType.StoredProcedure, parameters);
+            return dbconn.GetCount("RR_Check_Checkedin", CommandType.StoredProcedure, parameters);
         }
 
         public static MySqlDataReader GetRoomCheckinDate(int reservationid)
@@ -75,16 +75,16 @@ namespace HMS
             parameters.Add(new MySqlParameter("ReservationID", reservationid));
 
             DBConn dbconn = new DBConn();
-            return dbconn.Read("RR_Check_CheckinDate", CommandType.StoredProcedure, parameters);
+            return dbconn.GetReader("RR_Check_CheckinDate", CommandType.StoredProcedure, parameters);
         }
 
         public static MySqlDataReader GetRoomHousekeeping(int roomid)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("RoomID", roomid));
+            parameters.Add(new MySqlParameter("rID", roomid));
 
             DBConn dbconn = new DBConn();
-            return dbconn.Read("RR_Check_Housekeeping", CommandType.StoredProcedure, parameters);
+            return dbconn.GetReader("RR_Check_Housekeeping", CommandType.StoredProcedure, parameters);
         }
 
         public static int GetRoomCheckedout(int reservationid)
@@ -93,7 +93,7 @@ namespace HMS
             parameters.Add(new MySqlParameter("ReservationID", reservationid));
 
             DBConn dbconn = new DBConn();
-            return dbconn.Count("RR_Check_Checkedout", CommandType.StoredProcedure, parameters);
+            return dbconn.GetCount("RR_Check_Checkedout", CommandType.StoredProcedure, parameters);
         }
 
         public static MySqlDataReader GetRoomCheckoutDate(int reservationid)
@@ -102,7 +102,7 @@ namespace HMS
             parameters.Add(new MySqlParameter("ReservationID", reservationid));
 
             DBConn dbconn = new DBConn();
-            return dbconn.Read("RR_Check_CheckoutDate", CommandType.StoredProcedure, parameters);
+            return dbconn.GetReader("RR_Check_CheckoutDate", CommandType.StoredProcedure, parameters);
         }
 
         public static MySqlDataReader GetRoomMessages(int reservationid)
@@ -111,7 +111,7 @@ namespace HMS
             parameters.Add(new MySqlParameter("ReservationID", reservationid));
 
             DBConn dbconn = new DBConn();
-            return dbconn.Read("Get_RR_Messages", CommandType.StoredProcedure, parameters);
+            return dbconn.GetReader("Get_RR_Messages", CommandType.StoredProcedure, parameters);
         }
 
         public static int GetRoomCount(int reservationid)
@@ -120,7 +120,7 @@ namespace HMS
             parameters.Add(new MySqlParameter("ReservationID", reservationid));
 
             DBConn dbconn = new DBConn();
-            return dbconn.Count("RR_Check_Roomcount", CommandType.StoredProcedure, parameters);
+            return dbconn.GetCount("RR_Check_Roomcount", CommandType.StoredProcedure, parameters);
         }
 
         public static MySqlDataReader GetRoomCheckoutTotal(int reservationid)
@@ -129,7 +129,58 @@ namespace HMS
             parameters.Add(new MySqlParameter("ReservationID", reservationid));
 
             DBConn dbconn = new DBConn();
-            return dbconn.Read("Get_RR_FolioTotal", CommandType.StoredProcedure, parameters);
+            return dbconn.GetReader("Get_RR_FolioTotal", CommandType.StoredProcedure, parameters);
+        }
+
+        public static DataSet GetGuestList()
+        {
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_RR_GuestList", CommandType.StoredProcedure);
+        }
+
+        public static DataSet GetRoomtypeList()
+        {
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_RR_RoomtypeList", CommandType.StoredProcedure);
+        }
+
+        public static DataSet GetGuestListSearch(string input)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("Search", "%" + input + "%"));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_RR_GuestListSearch", CommandType.StoredProcedure, parameters);
+        }
+
+        public static MySqlDataReader GetAvailableRooms(int roomtypeid, string datefrom, string dateto)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("RoomTypeID", roomtypeid));
+            parameters.Add(new MySqlParameter("dFrom", datefrom));
+            parameters.Add(new MySqlParameter("dTo", dateto));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetReader("Get_RR_AvailableRooms", CommandType.StoredProcedure, parameters);
+        }
+
+        public static MySqlDataReader GetRoomreservationData(int reservationid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("ReservationID", reservationid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetReader("Get_RR_Data", CommandType.StoredProcedure, parameters);
+        }
+
+        public static MySqlDataReader GetRoomreservationGuest(int reservationid, int guestid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("ReservationID", reservationid));
+            parameters.Add(new MySqlParameter("GID", guestid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetReader("Get_RR_GuestChange", CommandType.StoredProcedure, parameters);
         }
 
 
@@ -171,7 +222,7 @@ namespace HMS
         public static DataSet GetGuestsAll()
         {
             DBConn dbconn = new DBConn();
-            return dbconn.GetDataSet("Get_Guest_All", CommandType.StoredProcedure, null);
+            return dbconn.GetDataSet("Get_Guest_All", CommandType.StoredProcedure);
         }
 
         public static DataSet GetGuestsSearch(string input)
@@ -186,10 +237,10 @@ namespace HMS
         public static MySqlDataReader GetGuestData(int guestid)
         {
             List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("GuestID", guestid));
+            parameters.Add(new MySqlParameter("GID", guestid));
 
             DBConn dbconn = new DBConn();
-            return dbconn.Read("Get_Guest_Data", CommandType.StoredProcedure, parameters);
+            return dbconn.GetReader("Get_Guest_Data", CommandType.StoredProcedure, parameters);
         }
 
 

@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace HMS
 {
@@ -18,17 +18,17 @@ namespace HMS
         private void LoadDataGuest()
         {
             // Fetch data
-            List<string> guestData = DBGetData.GetGuestData(guestid);
+            MySqlDataReader getGuestData = DBGetData.GetGuestData(guestid);
 
             // Insert values to textboxes
-            if (guestData.Count > 0)
+            if (getGuestData.Read())
             {
-                textBoxFirstname.Text = Convert.ToString(guestData[0]);
-                textBoxLastname.Text = Convert.ToString(guestData[1]);
-                textBoxAddress.Text = Convert.ToString(guestData[2]);
-                textBoxCity.Text = Convert.ToString(guestData[3]);
-                textBoxPostcode.Text = Convert.ToString(guestData[4]);
-                textBoxTelephone.Text = Convert.ToString(guestData[5]);
+                textBoxFirstname.Text = Convert.ToString(getGuestData[0]);
+                textBoxLastname.Text = Convert.ToString(getGuestData[1]);
+                textBoxAddress.Text = Convert.ToString(getGuestData[2]);
+                textBoxCity.Text = Convert.ToString(getGuestData[3]);
+                textBoxPostcode.Text = Convert.ToString(getGuestData[4]);
+                textBoxTelephone.Text = Convert.ToString(getGuestData[5]);
             }
         }
 
@@ -55,7 +55,7 @@ namespace HMS
             {
                 if (string.IsNullOrWhiteSpace(telephone)) { telephone = null; }
                 // Execute save
-                DBSetData.EditGuest(guestid, firstname, lastname, address, city, postcode, telephone);
+                DBSetData.GuestEdit(guestid, firstname, lastname, address, city, postcode, telephone);
 
                 // Close form and refresh data
                 this.Close();

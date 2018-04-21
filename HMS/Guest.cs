@@ -22,13 +22,13 @@ namespace HMS
         {
             // Hide ID and make readable table headers
             dataGridViewGuest.Columns[0].Visible = false;
-            dataGridViewGuest.Columns[1].HeaderText = "Fornavn";
-            dataGridViewGuest.Columns[2].HeaderText = "Etternavn";
-            dataGridViewGuest.Columns[3].HeaderText = "Adresse";
-            dataGridViewGuest.Columns[4].HeaderText = "Postkode";
+            dataGridViewGuest.Columns[1].HeaderText = "Firstname";
+            dataGridViewGuest.Columns[2].HeaderText = "Lastname";
+            dataGridViewGuest.Columns[3].HeaderText = "Address";
+            dataGridViewGuest.Columns[4].HeaderText = "Postcode";
             dataGridViewGuest.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewGuest.Columns[5].HeaderText = "By";
-            dataGridViewGuest.Columns[6].HeaderText = "Telefon";
+            dataGridViewGuest.Columns[5].HeaderText = "City";
+            dataGridViewGuest.Columns[6].HeaderText = "Telephone";
             dataGridViewGuest.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         }
 
@@ -93,10 +93,13 @@ namespace HMS
         // Open specialized edit form
         private void buttonEditGuest_Click(object sender, EventArgs e)
         {
-            // Set database record ID for reference
-            DBGetData.QueryID = Convert.ToInt32(this.dataGridViewGuest.CurrentRow.Cells[0].Value);
-            Form editForm = new EditGuest();
-            editForm.ShowDialog();
+            if (dataGridViewGuest.SelectedRows.Count > 0)
+            {
+                // Set database record ID for reference
+                DBGetData.QueryID = Convert.ToInt32(this.dataGridViewGuest.CurrentRow.Cells[0].Value);
+                Form editForm = new EditGuest();
+                editForm.ShowDialog();
+            }
         }
 
         // Button 'Search'

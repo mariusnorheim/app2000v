@@ -32,7 +32,7 @@ namespace HMS
             if (string.IsNullOrWhiteSpace(telephone)) { telephone = null; }
 
             // Execute save
-            DBSetData.AddGuest(firstname, lastname, address, city, postcode, telephone);
+            DBSetData.GuestAdd(firstname, lastname, address, city, postcode, telephone);
             // Close form
             this.Close();
             guestForm.LoadDataGuest();

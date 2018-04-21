@@ -267,7 +267,7 @@ namespace HMS
         {
             Boolean checkedin = false;
 
-            if (dataGridViewRoom.SelectedRows.Count > 0)
+            if (dataGridViewRoom.SelectedRows.Count > 0 && dataGridViewRoom.CurrentRow != null)
             {
                 int reservationid = Convert.ToInt32(dataGridViewRoom.CurrentRow.Cells[0].Value);
 
@@ -297,7 +297,7 @@ namespace HMS
         {
             Boolean checkedin = false;
 
-            if (dataGridViewRoom.SelectedRows.Count > 0)
+            if (dataGridViewRoom.SelectedRows.Count > 0 && dataGridViewRoom.CurrentRow != null)
             {
                 int reservationid = Convert.ToInt32(dataGridViewRoom.CurrentRow.Cells[0].Value);
 
@@ -317,13 +317,15 @@ namespace HMS
         // Remove isactive flag on selected record
         private void buttonDeleteBookingRoom_Click(object sender, EventArgs e)
         {
-            if (dataGridViewRoom.SelectedRows.Count > 0)
+            Boolean checkedin = false;
+
+            if (dataGridViewRoom.SelectedRows.Count > 0 && dataGridViewRoom.CurrentRow != null)
             {
-                Boolean checkedin = false;
                 int reservationid = Convert.ToInt32(dataGridViewRoom.CurrentRow.Cells[0].Value);
+                int roomid = Convert.ToInt32(dataGridViewRoom.CurrentRow.Cells[3].Value);
 
                 // Confirm delete
-                DialogResult confirmCheckin = MessageBox.Show("Deleting room reservation with id " + reservationid +
+                DialogResult confirmCheckin = MessageBox.Show("Deleting room reservation for room " + roomid +
                                                               "\nAre you sure you want to continue?", "Warning!", MessageBoxButtons.YesNo);
 
                 if (confirmCheckin == DialogResult.Yes)
@@ -333,11 +335,10 @@ namespace HMS
                     else
                     {
                         // Save entry to database
-                        DBSetData.DeleteRoomReservation(reservationid);
+                        DBSetData.RoomreservationDelete(reservationid);
+                        DisplayDefaultRoom();
                         new StatusMessage("Room reservation removed from active list.");
                     }
-
-                    DisplayDefaultRoom();
                 }
             }
         }
@@ -348,7 +349,7 @@ namespace HMS
         private void buttonCheckinRoom_Click(object sender, EventArgs e)
         {
             // Make sure datagridview has selection
-            if (dataGridViewRoom.SelectedRows.Count > 0)
+            if (dataGridViewRoom.SelectedRows.Count > 0 && dataGridViewRoom.CurrentRow != null)
             {
                 // Validation variables
                 Boolean checkedin = false;
@@ -358,8 +359,8 @@ namespace HMS
                 int roomstatus = 2;
                 // Reference variables
                 string adminid = UserInfo.UserID;
-                int reservationid = Convert.ToInt32(this.dataGridViewRoom.CurrentRow.Cells[0].Value);
-                int roomid = Convert.ToInt32(this.dataGridViewRoom.CurrentRow.Cells[3].Value);
+                int reservationid = Convert.ToInt32(dataGridViewRoom.CurrentRow.Cells[0].Value);
+                int roomid = Convert.ToInt32(dataGridViewRoom.CurrentRow.Cells[3].Value);
 
                 // Confirm checkin
                 DialogResult confirmCheckin = MessageBox.Show("Checking in roomnumber " + roomid +
@@ -416,7 +417,7 @@ namespace HMS
                         // Option to continue if room has a warning code and other arrangements cant be made
                         case 1:
                             DialogResult continueCheckin = MessageBox.Show(
-                                "Room is flagged for cleaning and should be inspected" +
+                                "Room is flagged for cleaning or inspection" +
                                 "\nAre you sure you want to continue?", "Warning!", MessageBoxButtons.YesNo);
                             if (continueCheckin == DialogResult.Yes) { roomcleared = true; }
                             else if (continueCheckin == DialogResult.No) { roomcleared = false; }
@@ -429,13 +430,12 @@ namespace HMS
                     }
 
                     // Proceed with checkin
-                    if (!checkedin && checkindate && roomcleared && dataGridViewRoom.CurrentRow.Cells[0].Value != null || dataGridViewRoom.CurrentRow.Cells[3].Value != null)
+                    if (!checkedin && checkindate && roomcleared)
                     {
-                        DBSetData.CheckinRoomReservation(reservationid, adminid);
-                        new StatusMessage("Room reservation for roomnumber " + roomid + " has been flagged as checked in and folio was added.");
+                        DBSetData.RoomreservationCheckin(reservationid, adminid);
+                        DisplayDefaultRoom();
+                        new StatusMessage("Room reservation for room " + roomid + " has been flagged as checked in and folio was added.");
                     }
-
-                    DisplayDefaultRoom();
                 }
             }
         }
@@ -447,15 +447,15 @@ namespace HMS
         private void buttonCheckoutRoom_Click(object sender, EventArgs e)
         {
             // Make sure datagridview has selection
-            if (dataGridViewRoom.SelectedRows.Count > 0)
+            if (dataGridViewRoom.SelectedRows.Count > 0 && dataGridViewRoom.CurrentRow != null)
             {
                 // Validation variables
                 Boolean checkedout = false;
                 Boolean checkoutdate = true;
                 Boolean message = false;
                 // Reference variables
-                int roomid = Convert.ToInt32(this.dataGridViewRoom.CurrentRow.Cells[3].Value);
-                int reservationid = Convert.ToInt32(this.dataGridViewRoom.CurrentRow.Cells[0].Value);
+                int roomid = Convert.ToInt32(dataGridViewRoom.CurrentRow.Cells[3].Value);
+                int reservationid = Convert.ToInt32(dataGridViewRoom.CurrentRow.Cells[0].Value);
 
                 // Confirm checkout
                 DialogResult confirmCheckout = MessageBox.Show("Checking out roomnumber " + roomid +
@@ -489,25 +489,26 @@ namespace HMS
                     MySqlDataReader getRoomMessages = DBGetData.GetRoomMessages(reservationid);
                     while (getRoomMessages.Read())
                     {
+                        message = true;
                         MessageBox.Show("Date recieved: " + getRoomMessages.GetDateTime(0) +
                             "\nFrom: " + getRoomMessages.GetString(1) +
                             "\n\n" + getRoomMessages.GetString(2),
                             "Message to guest");
-                        message = true;
                     }
                     getRoomMessages.Dispose();
 
                     // Mark messages as inactive if any
-                    if (message) { DBSetData.UpdateMessagesRoomReservation(reservationid); }
+                    if (message) { DBSetData.RoomreservationUpdateMessages(reservationid); }
 
                     // Check if guest has more than one room reservation checked in
                     int roomcount = DBGetData.GetRoomCount(reservationid);
 
-                    if (!checkedout && checkoutdate && dataGridViewRoom.CurrentRow.Cells[0].Value != null || dataGridViewRoom.CurrentRow.Cells[3].Value != null)
+                    if (!checkedout && checkoutdate)
                     {
                         // Do checkout process
-                        DBSetData.CheckoutRoomReservation(reservationid);
-                        new StatusMessage("Room reservation for roomnumber " + roomid + " has been flagged for housekeeping and checked out.");
+                        DBSetData.RoomreservationCheckout(reservationid);
+                        DisplayDefaultRoom();
+                        new StatusMessage("Room reservation for room " + roomid + " has been flagged for housekeeping and checked out.");
 
                         // Print customer folio total for the last room checkout
                         if (roomcount == 1)
@@ -525,16 +526,14 @@ namespace HMS
                                                                                "Payment options", MessageBoxButtons.YesNo);
 
                                 // Mark folio as paid
-                                if (paymentCheckout == DialogResult.Yes) { DBSetData.CheckoutFolioPaid(reservationid); }
+                                if (paymentCheckout == DialogResult.Yes) { DBSetData.RoomreservationFolioPaid(reservationid); }
                                 // Mark folio with duedate
-                                else if (paymentCheckout == DialogResult.No) { DBSetData.CheckoutFolioDue(reservationid); }
+                                else if (paymentCheckout == DialogResult.No) { DBSetData.RoomreservationFolioDue(reservationid); }
                             }
 
                             getFolioTotal.Dispose();
                         }
                     }
-
-                    DisplayDefaultRoom();
                 }
             }
         }
@@ -620,13 +619,13 @@ namespace HMS
             dataGridViewHall.Columns[3].Name = "Lastname";
             dataGridViewHall.Columns[3].HeaderText = "Lastname";
             dataGridViewHall.Columns[4].Name = "Hall";
-            dataGridViewHall.Columns[4].HeaderText = "Room";
+            dataGridViewHall.Columns[4].HeaderText = "Hall";
             dataGridViewHall.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewHall.Columns[5].Name = "Checkedin";
             dataGridViewHall.Columns[5].HeaderText = "Checkedin";
             dataGridViewHall.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewHall.Columns[6].Name = "Halltype";
-            dataGridViewHall.Columns[6].HeaderText = "Roomtype";
+            dataGridViewHall.Columns[6].HeaderText = "Halltype";
             dataGridViewHall.Columns[7].Name = "Timefrom";
             dataGridViewHall.Columns[7].HeaderText = "Event start";
             dataGridViewHall.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
