@@ -147,6 +147,7 @@ namespace HMS
             catch (MySqlException ex)
             {
                 new StatusMessage(ex.Message);
+                MessageBox.Show(ex.Message);
                 return null;
             }
             finally
@@ -164,7 +165,7 @@ namespace HMS
         // @param1: Query to be executed
         // @param2: CommandType
         // @param3: List of parameters
-        public MySqlDataReader Read(string query, CommandType commandType, List<DbParameter> parameters = null)
+        public MySqlDataReader GetReader(string query, CommandType commandType, List<DbParameter> parameters = null)
         {
             // No MySQL connection could be made
             if (Connect() == false) { return null; }
@@ -242,7 +243,7 @@ namespace HMS
         // @param1: Query to be executed
         // @param2: CommandType
         // @param3: List of parameters
-        public int Count(string query, CommandType commandType, List<DbParameter> parameters = null)
+        public int GetCount(string query, CommandType commandType, List<DbParameter> parameters = null)
         {
             // No MySQL connection could be made
             if (Connect() == false) { return 0; }
