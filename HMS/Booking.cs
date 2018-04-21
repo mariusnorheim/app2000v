@@ -733,44 +733,7 @@ namespace HMS
         // Open specialized edit form
         private void dataGridViewHall_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            Boolean checkedin = false;
-            int reservationid = Convert.ToInt32(this.dataGridViewHall.CurrentRow.Cells[0].Value);
-
-            using (MySqlConnection conn = new MySqlConnection(DBConn.ConnectionString))
-            {
-                try
-                {
-                    // Connect to database
-                    conn.Open();
-                    // Check that hall is not already checked in to
-                    query = "SELECT ischeckedin FROM hall_reservation " +
-                            "WHERE hall_reservationid = @reservationid AND ischeckedin = '1'";
-                    using (MySqlCommand getCheckinStatusCmd = new MySqlCommand(query, conn))
-                    {
-                        getCheckinStatusCmd.Parameters.AddWithValue("@reservationid", reservationid);
-                        using (MySqlDataReader getCheckinStatusResult = getCheckinStatusCmd.ExecuteReader())
-                        {
-                            checkedin = getCheckinStatusResult.Read();
-                        }
-                    }
-
-                    if (checkedin) { new StatusMessage("Hallreservasjon har allerede foretatt innsjekking og kan ikke endres."); }
-                    else
-                    {
-                        // Set database record ID for reference
-                        DBGetData.QueryID = Convert.ToInt32(this.dataGridViewHall.CurrentRow.Cells[0].Value);
-                        Form editForm = new EditBookingRoom();
-                        editForm.ShowDialog();
-                    }
-                }
-                // Catch exceptions and display in labelStatus
-                catch (Exception ex) { new StatusMessage(ex.Message); }
-                // Make sure connection is closed
-                finally
-                {
-                    if (conn.State == System.Data.ConnectionState.Open) { conn.Close(); }
-                }
-            }
+            // TODO: Same as room doubleclick, but for hall
         }
 
         // Button 'Ny' in the hall section, open new form
