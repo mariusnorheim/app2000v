@@ -131,5 +131,47 @@ namespace HMS
             DBConn dbconn = new DBConn();
             dbconn.Execute("Set_Guest_Edit", CommandType.StoredProcedure, parameters);
         }
+
+        //
+        // Folio data
+        //
+        public static void FolioPaidDate(int folioid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("FID", folioid));
+
+            DBConn dbconn = new DBConn();
+            dbconn.Execute("Set_Folio_PaidDate", CommandType.StoredProcedure, parameters);
+        }
+
+        public static void FolioDueDate(int folioid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("FID", folioid));
+
+            DBConn dbconn = new DBConn();
+            dbconn.Execute("Set_Folio_DueDate", CommandType.StoredProcedure, parameters);
+        }
+
+        public static void FolioAdd(int guestid, string adminid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("GID", guestid));
+            parameters.Add(new MySqlParameter("AdminID", adminid));
+
+            DBConn dbconn = new DBConn();
+            dbconn.Execute("Set_Folio_Add", CommandType.StoredProcedure, parameters);
+        }
+
+        public static void FolioItemAdd(int folioid, int billingitemid, string adminid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("FID", folioid));
+            parameters.Add(new MySqlParameter("BIID", billingitemid));
+            parameters.Add(new MySqlParameter("AdminID", adminid));
+
+            DBConn dbconn = new DBConn();
+            dbconn.Execute("Set_FolioItem_Add", CommandType.StoredProcedure, parameters);
+        }
     }
 }

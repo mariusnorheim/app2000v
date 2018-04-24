@@ -22,7 +22,7 @@ namespace HMS
         //
         // Room booking data
         //
-        public static DataSet GetRoomBookingsAll(int isActive)
+        public static DataSet GetRoomBookingDGVAll(int isActive)
         {
             List<DbParameter> parameters = new List<DbParameter>();
             parameters.Add(new MySqlParameter("Active", isActive));
@@ -31,7 +31,7 @@ namespace HMS
             return dbconn.GetDataSet("Get_RR_All", CommandType.StoredProcedure, parameters);
         }
 
-        public static DataSet GetRoomBookingsBetweenDates(DateTime datefrom, DateTime dateto)
+        public static DataSet GetRoomBookingDGVBetweenDates(DateTime datefrom, DateTime dateto)
         {
             List<DbParameter> parameters = new List<DbParameter>();
             parameters.Add(new MySqlParameter("dFrom", datefrom));
@@ -41,7 +41,7 @@ namespace HMS
             return dbconn.GetDataSet("Get_RR_BetweenDates", CommandType.StoredProcedure, parameters);
         }
 
-        public static DataSet GetRoomBookingsSpesificDate(DateTime date)
+        public static DataSet GetRoomBookingDGVSpesificDate(DateTime date)
         {
             List<DbParameter> parameters = new List<DbParameter>();
             parameters.Add(new MySqlParameter("dSearch", date));
@@ -50,7 +50,7 @@ namespace HMS
             return dbconn.GetDataSet("Get_RR_SpesificDate", CommandType.StoredProcedure, parameters);
         }
 
-        public static DataSet GetRoomBookingsSearch(string input)
+        public static DataSet GetRoomBookingDGVSearch(string input)
         {
             List<DbParameter> parameters = new List<DbParameter>();
             parameters.Add(new MySqlParameter("Search", "%" + input + "%"));
@@ -219,13 +219,13 @@ namespace HMS
         //
         // Guest data
         //
-        public static DataSet GetGuestsAll()
+        public static DataSet GetGuestDGVAll()
         {
             DBConn dbconn = new DBConn();
             return dbconn.GetDataSet("Get_Guest_All", CommandType.StoredProcedure);
         }
 
-        public static DataSet GetGuestsSearch(string input)
+        public static DataSet GetGuestDGVSearch(string input)
         {
             List<DbParameter> parameters = new List<DbParameter>();
             parameters.Add(new MySqlParameter("Search", "%" + input + "%"));
@@ -247,22 +247,94 @@ namespace HMS
         //
         // Folio data
         //
-        public static DataSet GetFoliosAll(int isActive)
+        public static DataSet GetFolioDGVAll()
         {
-            List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("Active", isActive));
-
             DBConn dbconn = new DBConn();
-            return dbconn.GetDataSet("Get_Folio_Active", CommandType.StoredProcedure, parameters);
+            return dbconn.GetDataSet("Get_Folio_Active", CommandType.StoredProcedure);
         }
 
-        public static DataSet GetFoliosSearch(string input)
+        public static DataSet GetFolioDGVDue()
+        {
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_Folio_Due", CommandType.StoredProcedure);
+        }
+
+        public static DataSet GetFolioDGVSearch(string input)
         {
             List<DbParameter> parameters = new List<DbParameter>();
             parameters.Add(new MySqlParameter("Search", "%" + input + "%"));
 
             DBConn dbconn = new DBConn();
             return dbconn.GetDataSet("Get_Folio_Search", CommandType.StoredProcedure, parameters);
+        }
+
+        public static MySqlDataReader GetFolioData(int folioid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("FID", folioid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetReader("Get_Folio_Data", CommandType.StoredProcedure, parameters);
+        }
+
+        public static MySqlDataReader GetFolioDueDate(int folioid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("FID", folioid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetReader("Folio_Check_DueDate", CommandType.StoredProcedure, parameters);
+        }
+
+        public static MySqlDataReader GetFolioPaidDate(int folioid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("FID", folioid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetReader("Folio_Check_PaidDate", CommandType.StoredProcedure, parameters);
+        }
+
+        public static int GetFolioRoomreservation(int folioid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("FID", folioid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetCount("Folio_Check_RoomReservation", CommandType.StoredProcedure, parameters);
+        }
+
+        public static int GetFolioHallreservation(int folioid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("FID", folioid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetCount("Folio_Check_HallReservation", CommandType.StoredProcedure, parameters);
+        }
+
+        public static DataSet GetBillingItemList()
+        {
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_Folio_BillingItemList", CommandType.StoredProcedure);
+        }
+
+        public static int GetFolioExists(int guestid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("GID", guestid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetCount("Folio_Check_Exists", CommandType.StoredProcedure, parameters);
+        }
+
+        public static MySqlDataReader GetFolioid(int guestid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("GID", guestid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetReader("Get_Folio_ID", CommandType.StoredProcedure, parameters);
         }
     }
 }
