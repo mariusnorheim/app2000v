@@ -20,6 +20,9 @@ namespace HMS
         private string uid;
         private string password;
 
+        // Temporary
+        public static string ConnectionString = "SERVER=localhost;DATABASE=app2000v;UID=root;PASSWORD=;";
+
         public DBConn()
         {
             Init();
