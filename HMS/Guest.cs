@@ -36,7 +36,7 @@ namespace HMS
         public void LoadDataGuest()
         {
             // Fetch dataset
-            DataSet guestDS = DBGetData.GetGuestsAll();
+            DataSet guestDS = DBGetData.GetGuestDGVAll();
 
             if (guestDS != null)
             {
@@ -69,10 +69,13 @@ namespace HMS
         // Open specialized edit form
         private void dataGridViewGuest_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Set database record ID for reference
-            DBGetData.QueryID = Convert.ToInt32(this.dataGridViewGuest.CurrentRow.Cells[0].Value);
-            Form editForm = new EditGuest();
-            editForm.ShowDialog();
+            if (dataGridViewGuest.SelectedRows.Count > 0 && dataGridViewGuest.CurrentRow != null)
+            {
+                // Set database record ID for reference
+                DBGetData.QueryID = Convert.ToInt32(this.dataGridViewGuest.CurrentRow.Cells[0].Value);
+                Form editForm = new EditGuest();
+                editForm.ShowDialog();
+            }
         }
 
         // TextBox 'Search' click event, empty placeholder text
@@ -93,7 +96,7 @@ namespace HMS
         // Open specialized edit form
         private void buttonEditGuest_Click(object sender, EventArgs e)
         {
-            if (dataGridViewGuest.SelectedRows.Count > 0)
+            if (dataGridViewGuest.SelectedRows.Count > 0 && dataGridViewGuest.CurrentRow != null)
             {
                 // Set database record ID for reference
                 DBGetData.QueryID = Convert.ToInt32(this.dataGridViewGuest.CurrentRow.Cells[0].Value);
@@ -109,7 +112,7 @@ namespace HMS
             string searchinput = @textBoxSearch.Text.Trim();
 
             // Fetch dataset
-            DataSet guestDS = DBGetData.GetGuestsSearch(searchinput);
+            DataSet guestDS = DBGetData.GetGuestDGVSearch(searchinput);
 
             if (guestDS != null)
             {
