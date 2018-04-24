@@ -116,7 +116,7 @@ namespace HMS
             DateTime datefrom = new DateTime(today.Year, today.Month, 1);
             DateTime dateto = datefrom.AddMonths(1).AddDays(-1);
             // Fetch dataset
-            DataSet roomreservationDS = DBGetData.GetRoomBookingsBetweenDates(datefrom, dateto);
+            DataSet roomreservationDS = DBGetData.GetRoomBookingDGVBetweenDates(datefrom, dateto);
 
             if (roomreservationDS != null)
             {
@@ -150,7 +150,7 @@ namespace HMS
         private void buttonDisplayRoomAll_Click(object sender, EventArgs e)
         {
             // Fetch dataset
-            DataSet roomreservationDS = DBGetData.GetRoomBookingsAll(1);
+            DataSet roomreservationDS = DBGetData.GetRoomBookingDGVAll(1);
 
             if (roomreservationDS != null)
             {
@@ -195,7 +195,7 @@ namespace HMS
             DateTime dateto = datefrom.AddDays(7);
 
             // Fetch dataset
-            DataSet roomreservationDS = DBGetData.GetRoomBookingsBetweenDates(datefrom, dateto);
+            DataSet roomreservationDS = DBGetData.GetRoomBookingDGVBetweenDates(datefrom, dateto);
 
             if (roomreservationDS != null)
             {
@@ -232,7 +232,7 @@ namespace HMS
             DateTime today = DateTime.Today;
 
             // Fetch dataset
-            DataSet roomreservationDS = DBGetData.GetRoomBookingsSpesificDate(today);
+            DataSet roomreservationDS = DBGetData.GetRoomBookingDGVSpesificDate(today);
 
             if (roomreservationDS != null)
             {
@@ -545,7 +545,7 @@ namespace HMS
             string searchinput = @textBoxSearch.Text.Trim();
 
             // Fetch dataset
-            DataSet roomreservationDS = DBGetData.GetRoomBookingsSearch(searchinput);
+            DataSet roomreservationDS = DBGetData.GetRoomBookingDGVSearch(searchinput);
 
             if (roomreservationDS != null)
             {
