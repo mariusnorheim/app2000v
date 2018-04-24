@@ -21,6 +21,7 @@ namespace HMS
 
         string query;
         // Add a default superuser to the database
+        /*
         public void AddDefaultSuperUser()
         {
             // Generate new salt and hash password
@@ -45,6 +46,7 @@ namespace HMS
             }
             catch (Exception ex) { this.labelStatus.Text = ex.Message; }
         }
+        */
 
         private void CheckLogin()
         {

@@ -157,7 +157,6 @@ namespace HMS
             }
         }
              
-
         // Button 'Lagre'
         // Validate input and insert into database
         private void buttonNewBookingConfirm_Click(object sender, EventArgs e)
@@ -191,7 +190,7 @@ namespace HMS
             }
         }
 
-        // Button 'Avbryt'
+        // Button 'Cancel'
         private void buttonNewBookingCancel_Click(object sender, EventArgs e)
         {
             bookingForm.DisplayDefaultRoom();

@@ -36,6 +36,10 @@
             this.buttonNewFolio = new System.Windows.Forms.Button();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.buttonSearchFolio = new System.Windows.Forms.Button();
+            this.buttonSetDuedate = new System.Windows.Forms.Button();
+            this.buttonSetPaid = new System.Windows.Forms.Button();
+            this.buttonDisplayDue = new System.Windows.Forms.Button();
+            this.buttonDisplayAll = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFolio)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,7 +87,7 @@
             this.dataGridViewFolio.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewFolio.Size = new System.Drawing.Size(970, 550);
             this.dataGridViewFolio.TabIndex = 37;
-            this.dataGridViewFolio.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewGuest_CellDoubleClick);
+            this.dataGridViewFolio.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFolio_CellDoubleClick);
             // 
             // buttonEditFolio
             // 
@@ -142,10 +146,76 @@
             this.buttonSearchFolio.UseVisualStyleBackColor = false;
             this.buttonSearchFolio.Click += new System.EventHandler(this.buttonSearchFolio_Click);
             // 
+            // buttonSetDuedate
+            // 
+            this.buttonSetDuedate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonSetDuedate.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.buttonSetDuedate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSetDuedate.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSetDuedate.Location = new System.Drawing.Point(186, 605);
+            this.buttonSetDuedate.Name = "buttonSetDuedate";
+            this.buttonSetDuedate.Size = new System.Drawing.Size(80, 30);
+            this.buttonSetDuedate.TabIndex = 50;
+            this.buttonSetDuedate.Text = "Due date";
+            this.buttonSetDuedate.UseVisualStyleBackColor = false;
+            this.buttonSetDuedate.Click += new System.EventHandler(this.buttonSetDuedate_Click);
+            // 
+            // buttonSetPaid
+            // 
+            this.buttonSetPaid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonSetPaid.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.buttonSetPaid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSetPaid.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSetPaid.Location = new System.Drawing.Point(272, 605);
+            this.buttonSetPaid.Name = "buttonSetPaid";
+            this.buttonSetPaid.Size = new System.Drawing.Size(80, 30);
+            this.buttonSetPaid.TabIndex = 51;
+            this.buttonSetPaid.Text = "Paid";
+            this.buttonSetPaid.UseVisualStyleBackColor = false;
+            this.buttonSetPaid.Click += new System.EventHandler(this.buttonSetPaid_Click);
+            // 
+            // buttonDisplayDue
+            // 
+            this.buttonDisplayDue.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonDisplayDue.FlatAppearance.BorderSize = 0;
+            this.buttonDisplayDue.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonDisplayDue.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonDisplayDue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDisplayDue.Font = new System.Drawing.Font("Ubuntu", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDisplayDue.Location = new System.Drawing.Point(945, 24);
+            this.buttonDisplayDue.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonDisplayDue.Name = "buttonDisplayDue";
+            this.buttonDisplayDue.Size = new System.Drawing.Size(40, 24);
+            this.buttonDisplayDue.TabIndex = 58;
+            this.buttonDisplayDue.Text = "Due";
+            this.buttonDisplayDue.UseVisualStyleBackColor = true;
+            this.buttonDisplayDue.Click += new System.EventHandler(this.buttonDisplayDue_Click);
+            // 
+            // buttonDisplayAll
+            // 
+            this.buttonDisplayAll.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonDisplayAll.FlatAppearance.BorderSize = 0;
+            this.buttonDisplayAll.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonDisplayAll.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.buttonDisplayAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDisplayAll.Font = new System.Drawing.Font("Ubuntu", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDisplayAll.Location = new System.Drawing.Point(902, 24);
+            this.buttonDisplayAll.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonDisplayAll.Name = "buttonDisplayAll";
+            this.buttonDisplayAll.Size = new System.Drawing.Size(40, 24);
+            this.buttonDisplayAll.TabIndex = 59;
+            this.buttonDisplayAll.Text = "All";
+            this.buttonDisplayAll.UseVisualStyleBackColor = true;
+            this.buttonDisplayAll.Click += new System.EventHandler(this.buttonDisplayAll_Click);
+            // 
             // Folio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1000, 650);
+            this.Controls.Add(this.buttonDisplayAll);
+            this.Controls.Add(this.buttonDisplayDue);
+            this.Controls.Add(this.buttonSetPaid);
+            this.Controls.Add(this.buttonSetDuedate);
             this.Controls.Add(this.buttonSearchFolio);
             this.Controls.Add(this.textBoxSearch);
             this.Controls.Add(this.buttonEditFolio);
@@ -160,11 +230,14 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dataGridViewFolio;
         private System.Windows.Forms.Button buttonEditFolio;
         private System.Windows.Forms.Button buttonNewFolio;
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Button buttonSearchFolio;
+        private System.Windows.Forms.Button buttonSetDuedate;
+        private System.Windows.Forms.Button buttonSetPaid;
+        private System.Windows.Forms.Button buttonDisplayDue;
+        private System.Windows.Forms.Button buttonDisplayAll;
+        public System.Windows.Forms.DataGridView dataGridViewFolio;
     }
 }

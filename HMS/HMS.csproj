@@ -98,6 +98,12 @@
     <Compile Include="NewBookingRoom.Designer.cs">
       <DependentUpon>NewBookingRoom.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewFolio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewFolio.Designer.cs">
+      <DependentUpon>NewFolio.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewGuest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +164,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewBookingRoom.resx">
       <DependentUpon>NewBookingRoom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewFolio.resx">
+      <DependentUpon>NewFolio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewGuest.resx">
       <DependentUpon>NewGuest.cs</DependentUpon>

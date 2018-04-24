@@ -19,7 +19,6 @@ namespace HMS
         {
             // Fetch data
             MySqlDataReader getGuestData = DBGetData.GetGuestData(guestid);
-
             // Insert values to textboxes
             if (getGuestData.Read())
             {
@@ -30,6 +29,8 @@ namespace HMS
                 textBoxPostcode.Text = Convert.ToString(getGuestData[4]);
                 textBoxTelephone.Text = Convert.ToString(getGuestData[5]);
             }
+
+            getGuestData.Dispose();
         }
 
         // Button 'Lagre'
@@ -58,8 +59,9 @@ namespace HMS
                 DBSetData.GuestEdit(guestid, firstname, lastname, address, city, postcode, telephone);
 
                 // Close form and refresh data
-                this.Close();
                 guestForm.LoadDataGuest();
+                guestForm.Refresh();
+                this.Close();
                 new StatusMessage("Guest with name " + firstname + " " + lastname + " is updated in the database.");
             }
         }
@@ -67,8 +69,9 @@ namespace HMS
         // Button 'Cancel'
         private void buttonNewGuestCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
             guestForm.LoadDataGuest();
+            guestForm.Refresh();
+            this.Close();
         }
     }
 }
