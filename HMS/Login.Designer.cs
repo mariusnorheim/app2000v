@@ -72,9 +72,9 @@
             this.labelUsername.Font = new System.Drawing.Font("Ubuntu", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUsername.Location = new System.Drawing.Point(70, 300);
             this.labelUsername.Name = "labelUsername";
-            this.labelUsername.Size = new System.Drawing.Size(76, 17);
+            this.labelUsername.Size = new System.Drawing.Size(69, 17);
             this.labelUsername.TabIndex = 2;
-            this.labelUsername.Text = "Brukernavn";
+            this.labelUsername.Text = "Username";
             // 
             // labelPassword
             // 
@@ -83,21 +83,21 @@
             this.labelPassword.Font = new System.Drawing.Font("Ubuntu", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPassword.Location = new System.Drawing.Point(70, 360);
             this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(56, 17);
+            this.labelPassword.Size = new System.Drawing.Size(65, 17);
             this.labelPassword.TabIndex = 3;
-            this.labelPassword.Text = "Passord";
+            this.labelPassword.Text = "Password";
             // 
             // buttonLogin
             // 
             this.buttonLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.buttonLogin.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonLogin.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.buttonLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonLogin.Font = new System.Drawing.Font("Ubuntu", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonLogin.Location = new System.Drawing.Point(75, 408);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(250, 30);
             this.buttonLogin.TabIndex = 4;
-            this.buttonLogin.Text = "Logg inn";
+            this.buttonLogin.Text = "Login";
             this.buttonLogin.UseVisualStyleBackColor = false;
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
