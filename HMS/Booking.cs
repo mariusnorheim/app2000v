@@ -13,8 +13,6 @@ namespace HMS
 {
     public partial class Booking : HMS.Content
     {
-        private string query;
-
         public Booking()
         {
             InitializeComponent();
@@ -325,10 +323,10 @@ namespace HMS
                 int roomid = Convert.ToInt32(dataGridViewRoom.CurrentRow.Cells[3].Value);
 
                 // Confirm delete
-                DialogResult confirmCheckin = MessageBox.Show("Deleting room reservation for room " + roomid +
+                DialogResult confirmDelete = MessageBox.Show("Deleting room reservation for room " + roomid +
                                                               "\nAre you sure you want to continue?", "Warning!", MessageBoxButtons.YesNo);
 
-                if (confirmCheckin == DialogResult.Yes)
+                if (confirmDelete == DialogResult.Yes)
                 {
                     if (DBGetData.GetRoomCheckedin(reservationid) > 0) { checkedin = true; }
                     if (checkedin) { new StatusMessage("Room reservation has already checked in and cant be deleted."); }
@@ -358,7 +356,7 @@ namespace HMS
                 // Roomstatus values: 0 = deny checkin, 1 = warning, 2 = no flag
                 int roomstatus = 2;
                 // Reference variables
-                string adminid = UserInfo.UserID;
+                string adminid = UserInfo.AdminID;
                 int reservationid = Convert.ToInt32(dataGridViewRoom.CurrentRow.Cells[0].Value);
                 int roomid = Convert.ToInt32(dataGridViewRoom.CurrentRow.Cells[3].Value);
 
