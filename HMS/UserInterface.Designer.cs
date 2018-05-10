@@ -295,7 +295,7 @@
             this.buttonMenu10.Name = "buttonMenu10";
             this.buttonMenu10.Size = new System.Drawing.Size(140, 30);
             this.buttonMenu10.TabIndex = 21;
-            this.buttonMenu10.Text = "Users";
+            this.buttonMenu10.Text = "User";
             this.buttonMenu10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonMenu10.UseVisualStyleBackColor = false;
             this.buttonMenu10.Click += new System.EventHandler(this.buttonMenu10_Click);

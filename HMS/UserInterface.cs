@@ -100,7 +100,9 @@ namespace HMS
 
         private void buttonMenu6_Click(object sender, EventArgs e)
         {
-
+            Form todoForm = new Todo();
+            DisplayChildForm(todoForm);
+            this.labelHeading.Text = "To-do";
         }
 
         private void buttonMenu7_Click(object sender, EventArgs e)
@@ -120,7 +122,16 @@ namespace HMS
 
         private void buttonMenu10_Click(object sender, EventArgs e)
         {
-
+            if(UserInfo.SuperUser == 1)
+            {
+                Form userForm = new User();
+                DisplayChildForm(userForm);
+                this.labelHeading.Text = "User";
+            }
+            else
+            {
+                new StatusMessage("This area requires superuser access.");
+            }
         }
     }
 }
