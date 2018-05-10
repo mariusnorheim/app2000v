@@ -9,7 +9,7 @@ namespace HMS
     public static class UserInfo
     {
         // TODO: Sett tom før deployment
-        public static string UserID = "admin";
-        public static int SuperUser;
+        public static string AdminID = "admin";
+        public static int SuperUser = 1;
     }
 }

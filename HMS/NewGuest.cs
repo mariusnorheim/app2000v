@@ -24,19 +24,23 @@ namespace HMS
             string telephone = textBoxTelephone.Text;
 
             // Check for null or empty input
-            if (string.IsNullOrWhiteSpace(firstname)) { MessageBox.Show("Firstname field is not filled in"); }
-            if (string.IsNullOrWhiteSpace(lastname)) { MessageBox.Show("Lastname field is not filled in"); }
-            if (string.IsNullOrWhiteSpace(address)) { MessageBox.Show("Address field is not filled in"); }
-            if (string.IsNullOrWhiteSpace(city)) { MessageBox.Show("City field is not filled in"); }
-            if (string.IsNullOrWhiteSpace(postcode)) { MessageBox.Show("Postcode field is not filled in"); }
-            if (string.IsNullOrWhiteSpace(telephone)) { telephone = null; }
+            if(string.IsNullOrWhiteSpace(firstname)) { MessageBox.Show("Firstname field is not filled in"); }
+            if(string.IsNullOrWhiteSpace(lastname)) { MessageBox.Show("Lastname field is not filled in"); }
+            if(string.IsNullOrWhiteSpace(address)) { MessageBox.Show("Address field is not filled in"); }
+            if(string.IsNullOrWhiteSpace(city)) { MessageBox.Show("City field is not filled in"); }
+            if(string.IsNullOrWhiteSpace(postcode)) { MessageBox.Show("Postcode field is not filled in"); }
+            if(string.IsNullOrWhiteSpace(telephone)) { telephone = null; }
 
             // Execute save
-            DBSetData.GuestAdd(firstname, lastname, address, city, postcode, telephone);
-            // Close form
-            this.Close();
-            guestForm.LoadDataGuest();
-            new StatusMessage("Guest with name " + firstname + " " + lastname + " is added to the database.");
+            if(!string.IsNullOrWhiteSpace(firstname) && !string.IsNullOrWhiteSpace(lastname) && !string.IsNullOrWhiteSpace(address)
+                && !string.IsNullOrWhiteSpace(city) && !string.IsNullOrWhiteSpace(postcode))
+            {
+                DBSetData.GuestAdd(firstname, lastname, address, city, postcode, telephone);
+                // Close form
+                this.Close();
+                guestForm.LoadDataGuest();
+                new StatusMessage("Guest with name " + firstname + " " + lastname + " is added to the database.");
+            }
         }
 
         // Button 'Cancel'
