@@ -77,7 +77,7 @@ namespace HMS
                 comboBoxRoomType.DataSource = roomtypeListDS.Tables[0];
             }
 
-            // Highlight values
+            // Highlight existing values
             MySqlDataReader getValues = DBGetData.GetRoomreservationData(reservationid);
             if (getValues.Read())
             {
@@ -199,10 +199,11 @@ namespace HMS
                 // Check all relevant fields for input
                 if (validinput)
                 {
+                    // Check if reservation is checked in
                     if (DBGetData.GetRoomCheckedin(reservationid) > 0) { checkedin = true; }
                     if (checkedin) { new StatusMessage("Room reservation has already checked in."); }
 
-                    // Check that reservation checkin date is today
+                    // Check if guestid has changed
                     MySqlDataReader getReservationGuest = DBGetData.GetRoomreservationGuest(reservationid, guestid);
                     if (getReservationGuest.Read()) { guestchanged = true; }
                     getReservationGuest.Dispose();
@@ -210,8 +211,8 @@ namespace HMS
                     // Give warning if guest has changed and ask for confirmation
                     if (!guestchanged)
                     {
-                        DialogResult guestDifferent = MessageBox.Show("Du har forandret gjest på reservasjonen\n" +
-                                                                      "Er du sikker på at du vil fortsette?", "Advarsel!", MessageBoxButtons.YesNo);
+                        DialogResult guestDifferent = MessageBox.Show("You have changed the guest for this reservation" +
+                                                                      "\nAre you sure you want to continue?", "Warning!", MessageBoxButtons.YesNo);
                         if (guestDifferent == DialogResult.No)
                         {
                             // Cancel edit and reload data
@@ -311,13 +312,13 @@ namespace HMS
             if (datePickerArrival.Value.Date < DateTime.Today)
             {
                 validinput = false;
-                MessageBox.Show("Ankomstdato kan ikke være tidligere enn i dag.");
+                MessageBox.Show("Arrival date can not be earlier than today.");
                 datePickerArrival.Focus();
             }
             if (datePickerDeparture.Value.Date <= datePickerArrival.Value.Date)
             {
                 validinput = false;
-                MessageBox.Show("Avreisedato kan ikke være tidligere eller samme dag som ankomstdato.");
+                MessageBox.Show("Departure date can not be earlier or same date as arrival.");
                 datePickerDeparture.Focus();
             }
         }

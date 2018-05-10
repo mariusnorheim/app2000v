@@ -256,13 +256,13 @@ namespace HMS
             if (datePickerArrival.Value.Date < DateTime.Today)
             {
                 validinput = false;
-                MessageBox.Show("Arrival date can not be earlier than today");
+                MessageBox.Show("Arrival date can not be earlier than today.");
                 datePickerArrival.Focus();
             }
             if (datePickerDeparture.Value.Date <= datePickerArrival.Value.Date)
             {
                 validinput = false;
-                MessageBox.Show("Departure date can not be earlier or same date as arrival");
+                MessageBox.Show("Departure date can not be earlier or same date as arrival.");
                 datePickerDeparture.Focus();
             }
         }
