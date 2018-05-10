@@ -19,6 +19,45 @@ namespace HMS
             set => queryID = value;
         }
 
+        //UserID reference for user management
+        private static string userID;
+        public static string UserID
+        {
+            get => userID;
+            set => userID = value;
+        }
+
+        //
+        // Login data
+        //
+        public static MySqlDataReader GetLoginData(string userid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("UID", userid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetReader("Get_Login_Data", CommandType.StoredProcedure, parameters);
+        }
+
+        public static int GetLoginUsername(string userid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("UID", userid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetCount("Login_Check_Username", CommandType.StoredProcedure, parameters);
+        }
+
+        public static int GetLoginMatch(string userid, string password)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("UID", userid));
+            parameters.Add(new MySqlParameter("PW", password));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetCount("Login_Check_Match", CommandType.StoredProcedure, parameters);
+        }
+
         //
         // Room booking data
         //
@@ -335,6 +374,61 @@ namespace HMS
 
             DBConn dbconn = new DBConn();
             return dbconn.GetReader("Get_Folio_ID", CommandType.StoredProcedure, parameters);
+        }
+
+        public static MySqlDataReader GetFolioGuest(int folioid, int guestid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("FID", folioid));
+            parameters.Add(new MySqlParameter("GID", guestid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetReader("Get_Folio_GuestChange", CommandType.StoredProcedure, parameters);
+        }
+
+        //
+        // Todo
+        //
+        public static DataSet GetTodoDGVActive()
+        {
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_Todo_Active", CommandType.StoredProcedure);
+        }
+
+        public static DataSet GetTodoDGVSearch(string input)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("Search", "%" + input + "%"));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_Todo_Search", CommandType.StoredProcedure, parameters);
+        }
+
+        //
+        // User
+        //
+        public static DataSet GetUserDGVActive()
+        {
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_User_Active", CommandType.StoredProcedure);
+        }
+
+        public static DataSet GetUserDGVSearch(string input)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("Search", "%" + input + "%"));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_User_Search", CommandType.StoredProcedure, parameters);
+        }
+
+        public static MySqlDataReader GetUserData(string adminid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("AID", adminid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetReader("Get_User_Data", CommandType.StoredProcedure, parameters);
         }
     }
 }

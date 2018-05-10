@@ -173,5 +173,60 @@ namespace HMS
             DBConn dbconn = new DBConn();
             dbconn.Execute("Set_FolioItem_Add", CommandType.StoredProcedure, parameters);
         }
+
+        //
+        // Todo data
+        //
+
+
+        //
+        // User data
+        //
+        public static void UserAdd(string adminid, string firstname, string lastname, string password, string salt, int superuser)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("AID", adminid));
+            parameters.Add(new MySqlParameter("FName", firstname));
+            parameters.Add(new MySqlParameter("LName", lastname));
+            parameters.Add(new MySqlParameter("PW", password));
+            parameters.Add(new MySqlParameter("S", salt));
+            parameters.Add(new MySqlParameter("SU", superuser));
+
+            DBConn dbconn = new DBConn();
+            dbconn.Execute("Set_User_Add", CommandType.StoredProcedure, parameters);
+        }
+
+        public static void UserEdit(string adminid, string firstname, string lastname, int superuser, int active)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("AID", adminid));
+            parameters.Add(new MySqlParameter("FName", firstname));
+            parameters.Add(new MySqlParameter("LName", lastname));
+            parameters.Add(new MySqlParameter("SU", superuser));
+            parameters.Add(new MySqlParameter("Active", active));
+
+            DBConn dbconn = new DBConn();
+            dbconn.Execute("Set_User_Edit", CommandType.StoredProcedure, parameters);
+        }
+
+        public static void UserPasswordChange(string adminid, string password, string salt)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("AID", adminid));
+            parameters.Add(new MySqlParameter("PW", password));
+            parameters.Add(new MySqlParameter("S", salt));
+
+            DBConn dbconn = new DBConn();
+            dbconn.Execute("Set_User_Password", CommandType.StoredProcedure, parameters);
+        }
+
+        public static void UserDelete(string adminid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("AID", adminid));
+
+            DBConn dbconn = new DBConn();
+            dbconn.Execute("Set_User_Inactive", CommandType.StoredProcedure, parameters);
+        }
     }
 }
