@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
@@ -112,9 +108,19 @@ namespace HMS
             if (dataGridViewFolio.SelectedRows.Count > 0 && dataGridViewFolio.CurrentRow != null)
             {
                 // Set database record ID for reference
-                DBGetData.QueryID = Convert.ToInt32(this.dataGridViewFolio.CurrentRow.Cells[0].Value);
-                Form editForm = new EditGuest();
-                editForm.ShowDialog();
+                int folioid = Convert.ToInt32(this.dataGridViewFolio.CurrentRow.Cells[0].Value);
+                DBGetData.QueryID = folioid;
+                Boolean duedate = false;
+
+                MySqlDataReader getFolioDueStatus = DBGetData.GetFolioDueDate(folioid);
+                if (getFolioDueStatus.Read()) { duedate = true; }
+                getFolioDueStatus.Dispose();
+                if (duedate) { new StatusMessage("Folio has existing due date, cant make changes."); }
+                else
+                {
+                    Form editForm = new EditFolio();
+                    editForm.ShowDialog();
+                }
             }
         }
 
@@ -134,7 +140,23 @@ namespace HMS
         // Button 'Edit'
         private void buttonEditFolio_Click(object sender, EventArgs e)
         {
+            if (dataGridViewFolio.SelectedRows.Count > 0 && dataGridViewFolio.CurrentRow != null)
+            {
+                // Set database record ID for reference
+                int folioid = Convert.ToInt32(this.dataGridViewFolio.CurrentRow.Cells[0].Value);
+                DBGetData.QueryID = folioid;
+                Boolean duedate = false;
 
+                MySqlDataReader getFolioDueStatus = DBGetData.GetFolioDueDate(folioid);
+                if (getFolioDueStatus.Read()) { duedate = true; }
+                getFolioDueStatus.Dispose();
+                if (duedate) { new StatusMessage("Folio has existing due date, cant make changes."); }
+                else
+                {
+                    Form editForm = new EditFolio();
+                    editForm.ShowDialog();
+                }
+            }
         }
 
         private void buttonSetDuedate_Click(object sender, EventArgs e)
@@ -161,7 +183,7 @@ namespace HMS
                     MySqlDataReader getFolioDueStatus = DBGetData.GetFolioDueDate(folioid);
                     if (getFolioDueStatus.Read()) { duedate = true; }
                     getFolioDueStatus.Dispose();
-                    if (duedate) { new StatusMessage("Folio has already been paid or has existing due date."); }
+                    if (duedate) { new StatusMessage("Folio already has existing due date."); }
 
                     if (DBGetData.GetFolioRoomreservation(folioid) > 0) { roomreservation = true; }
                     if (roomreservation) { new StatusMessage("Folio owner has an active room reservation, cannot mark with due date until after checkout."); }

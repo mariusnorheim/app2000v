@@ -1,26 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
 namespace HMS
 {
-    public partial class NewFolio : HMS.PopupForm
+    public partial class EditFolio : HMS.PopupForm
     {
         Folio folioForm = (Folio)Application.OpenForms["Folio"];
+        int folioid = DBGetData.QueryID;
 
-        public NewFolio()
+        public EditFolio()
         {
             InitializeComponent();
             this.AcceptButton = buttonSearchGuest;
         }
 
-        private void NewFolio_Load(object sender, EventArgs e)
+        private void EditFolio_Load(object sender, EventArgs e)
         {
             LoadDataFolio();
         }
 
-        // Load data from guest and billing_item tables into listboxes
+        // Load data from guest, billing_item and folio_item tables into listboxes
         private void LoadDataFolio()
         {
             // Fetch dataset for guestlist
@@ -74,6 +79,15 @@ namespace HMS
             // Set value and display member for listBoxFolioItem
             listBoxFolioItem.ValueMember = "billing_itemid";
             listBoxFolioItem.DisplayMember = "billing_itemname";
+
+            // Highlight existing values
+            MySqlDataReader getValues = DBGetData.GetFolioData(folioid);
+            if (getValues.Read())
+            {
+                listBoxGuest.SelectedValue = Convert.ToInt32(getValues[0]);
+            }
+
+            getValues.Dispose();
         }
 
         // Button 'Search'
@@ -129,52 +143,55 @@ namespace HMS
 
         // Button 'Save'
         // Validate input and insert into database
-        private void buttonNewFolioConfirm_Click(object sender, EventArgs e)
+        private void buttonEditFolioConfirm_Click(object sender, EventArgs e)
         {
-            Boolean folioexists = false;
-
             // Validate that guest is selcted and folio has items
             if (listBoxGuest.SelectedIndex > -1 && listBoxFolioItem.Items.Count > 0)
             {
                 // Reference variables
+                Boolean guestchanged = false;
+                Boolean guestconfirm = true;
                 int guestid = Convert.ToInt32(listBoxGuest.SelectedValue);
                 string adminid = UserInfo.AdminID;
 
-                // Check -> Folio does not exist
-                if (DBGetData.GetFolioExists(guestid) > 0) { folioexists = true; }
-                if (folioexists) { MessageBox.Show("Guest already has an active folio, add any changes to existing."); }
+                // Check if guestid has changed
+                MySqlDataReader getFolioGuest = DBGetData.GetFolioGuest(folioid, guestid);
+                if (getFolioGuest.Read()) { guestchanged = true; }
+                getFolioGuest.Dispose();
 
-                if (!folioexists)
+                // Give warning if guest has changed and ask for confirmation
+                if (!guestchanged)
                 {
-                    // Create new folio
-                    DBSetData.FolioAdd(guestid, adminid);
-                    // Fetch newly created folioid
-                    MySqlDataReader getFolioid = DBGetData.GetFolioid(guestid);
-                    if (getFolioid.Read())
+                    DialogResult guestDifferent = MessageBox.Show("You have changed the guest for this folio" +
+                                                                  "\nAre you sure you want to continue?", "Warning!", MessageBoxButtons.YesNo);
+                    if (guestDifferent == DialogResult.No)
                     {
-                        // Add folio items to folio
-                        int folioid = getFolioid.GetInt32(0);
-
-                        foreach (DataRowView drv in listBoxFolioItem.Items)
-                        {
-                            int billingitemid = int.Parse(drv.Row[listBoxFolioItem.ValueMember].ToString());
-                            DBSetData.FolioItemAdd(folioid, billingitemid, adminid);
-                        }
+                        // Cancel edit and reload data
+                        guestconfirm = false;
+                        LoadDataFolio();
                     }
-                    else { MessageBox.Show("Could not fetch newly created folioid, try again or contact administrator."); }
-                    getFolioid.Dispose();
+                }
+
+                if (guestconfirm)
+                {
+                    // Add new folio items to folio
+                    foreach (DataRowView drv in listBoxFolioItem.Items)
+                    {
+                        int billingitemid = int.Parse(drv.Row[listBoxFolioItem.ValueMember].ToString());
+                        DBSetData.FolioItemAdd(folioid, billingitemid, adminid);
+                    }
 
                     // Refresh datagridview, close form and display new StatusMessage
                     folioForm.LoadDataFolio();
                     folioForm.dataGridViewFolio.Refresh();
                     this.Close();
-                    new StatusMessage("Folio with " + listBoxFolioItem.Items.Count + " items added.");
+                    new StatusMessage("Folio populated with " + listBoxFolioItem.Items.Count + " additional items.");
                 }
             }
         }
 
         // Button 'Cancel'
-        private void buttonNewFolioCancel_Click(object sender, EventArgs e)
+        private void buttonEditFolioCancel_Click(object sender, EventArgs e)
         {
             folioForm.LoadDataFolio();
             this.Close();
