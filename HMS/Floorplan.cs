@@ -20,15 +20,19 @@ namespace HMS
             LoadDataRoom();
         }
 
-        // Load dataGridViewFloorplan
+        // Load dataGridViewFloorplanRoom
         public void LoadDataGridViewRoom()
         {
             this.AcceptButton = buttonSearchRoom;
             dataGridViewFloorplanRoom.Visible = true;
             dataGridViewFloorplanHall.Visible = false;
+            buttonDisplayRoom.Visible = true;
+            buttonDisplayRoomtype.Visible = true;
             buttonNewRoom.Visible = true;
             buttonEditRoom.Visible = true;
             buttonSearchRoom.Visible = true;
+            buttonDisplayHall.Visible = false;
+            buttonDisplayHalltype.Visible = false;
             buttonNewHall.Visible = false;
             buttonEditHall.Visible = false;
             buttonSearchHall.Visible = false;
@@ -71,16 +75,84 @@ namespace HMS
             }
         }
 
+        // Load dataGridViewFloorplanRoomtype
+        public void LoadDataGridViewRoomtype()
+        {
+            // TODO: Add roomtype datagridview and buttons
+            this.AcceptButton = buttonSearchRoom;
+            dataGridViewFloorplanRoom.Visible = true;
+            dataGridViewFloorplanHall.Visible = false;
+            buttonDisplayRoom.Visible = true;
+            buttonDisplayRoomtype.Visible = true;
+            buttonNewRoom.Visible = true;
+            buttonEditRoom.Visible = true;
+            buttonSearchRoom.Visible = true;
+            buttonDisplayHall.Visible = false;
+            buttonDisplayHalltype.Visible = false;
+            buttonNewHall.Visible = false;
+            buttonEditHall.Visible = false;
+            buttonSearchHall.Visible = false;
+
+            // Hide ID and make readable table headers
+            dataGridViewFloorplanRoom.Columns[0].HeaderText = "Room number";
+            dataGridViewFloorplanRoom.Columns[1].HeaderText = "Room type";
+        }
+
+        // Load dataset to datagridview
+        public void LoadDataRoomtype()
+        {
+            // Fetch dataset
+            DataSet roomtypeDS = DBGetData.GetFloorplanDGVRoom();
+
+            if(roomtypeDS != null)
+            {
+                // No tables fetched
+                if(roomtypeDS.Tables.Count == 0)
+                {
+                    new StatusMessage("No datatable found, contact administrator.");
+                    return;
+                }
+                // No rows fetched
+                else if(roomtypeDS.Tables[0].Rows.Count == 0)
+                {
+                    new StatusMessage("No datarows found in room.");
+                    return;
+                }
+                // Clear labelStatus for previous messages
+                else
+                {
+                    new StatusMessage("");
+                }
+
+                // Set the dataset as source for datagridview and make sure its displayed
+                dataGridViewFloorplanRoom.DataSource = roomtypeDS;
+                dataGridViewFloorplanRoom.DataMember = "Get_Floorplan_Room";
+                LoadDataGridViewRoomtype();
+            }
+        }
+
         // Button 'Room'
-        private void buttonDisplayRoom_Click(object sender, EventArgs e)
+        private void buttonSubMenu1_Click(object sender, EventArgs e)
         {
             LoadDataRoom();
         }
 
         // Button 'Hall'
-        private void buttonDisplayHall_Click(object sender, EventArgs e)
+        private void buttonSubMenu2_Click(object sender, EventArgs e)
         {
             LoadDataHall();
+        }
+
+        // Display 'Room'
+        private void buttonDisplayRoom_Click(object sender, EventArgs e)
+        {
+            LoadDataRoom();
+        }
+
+        // Display 'Roomtype'
+        private void buttonDisplayRoomtype_Click(object sender, EventArgs e)
+        {
+            LoadDataGridViewRoomtype();
         }
 
         // DataGridViewFloorplanRoom double click
@@ -164,9 +236,13 @@ namespace HMS
             this.AcceptButton = buttonSearchHall;
             dataGridViewFloorplanHall.Visible = true;
             dataGridViewFloorplanRoom.Visible = false;
+            buttonDisplayHall.Visible = true;
+            buttonDisplayHalltype.Visible = true;
             buttonNewHall.Visible = true;
             buttonEditHall.Visible = true;
             buttonSearchHall.Visible = true;
+            buttonDisplayRoom.Visible = false;
+            buttonDisplayRoomtype.Visible = false;
             buttonNewRoom.Visible = false;
             buttonEditRoom.Visible = false;
             buttonSearchRoom.Visible = false;
@@ -208,6 +284,18 @@ namespace HMS
                 dataGridViewFloorplanHall.DataMember = "Get_Floorplan_Hall";
                 LoadDataGridViewHall();
             }
+        }
+
+        // Display 'Hall'
+        private void buttonDisplayHall_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // Display 'Halltype'
+        private void buttonDisplayHalltype_Click(object sender, EventArgs e)
+        {
+
         }
 
         // DataGridViewFloorplanHall double click
