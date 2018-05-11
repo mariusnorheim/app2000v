@@ -237,7 +237,7 @@
             this.Controls.Add(this.textBoxSearch);
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "EditBookingRoom";
-            this.Text = "Edit booking";
+            this.Text = "Edit room booking";
             this.Load += new System.EventHandler(this.EditBookingRoom_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -49,6 +49,7 @@ namespace HMS
                 // Close form
                 this.Close();
                 userForm.LoadDataUser();
+                userForm.Refresh();
                 new StatusMessage("User with login " + adminid + " is added to the database.");
             }
         }

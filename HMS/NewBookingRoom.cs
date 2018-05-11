@@ -183,7 +183,7 @@ namespace HMS
                     DBSetData.RoomreservationAdd(guestid, roomid, datefrom, dateto, remark);
                     // Refresh datagridview, close form and display new StatusMessage
                     bookingForm.DisplayDefaultRoom();
-                    bookingForm.dataGridViewRoom.Refresh();
+                    bookingForm.Refresh();
                     this.Close();
                     new StatusMessage("Reservation for roomnumber " + roomid + " saved in database.");
                 }

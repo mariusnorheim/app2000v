@@ -83,8 +83,8 @@ namespace HMS
         // Button 'New'
         private void buttonNewUser_Click(object sender, EventArgs e)
         {
-            Form editForm = new NewUser();
-            editForm.ShowDialog();
+            Form userForm = new NewUser();
+            userForm.ShowDialog();
         }
 
         // Button 'Edit'

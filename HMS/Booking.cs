@@ -335,6 +335,7 @@ namespace HMS
                         // Save entry to database
                         DBSetData.RoomreservationDelete(reservationid);
                         DisplayDefaultRoom();
+                        this.Refresh();
                         new StatusMessage("Room reservation removed from active list.");
                     }
                 }
@@ -432,6 +433,7 @@ namespace HMS
                     {
                         DBSetData.RoomreservationCheckin(reservationid, adminid);
                         DisplayDefaultRoom();
+                        this.Refresh();
                         new StatusMessage("Room reservation for room " + roomid + " has been flagged as checked in and folio was added.");
                     }
                 }
@@ -506,6 +508,7 @@ namespace HMS
                         // Do checkout process
                         DBSetData.RoomreservationCheckout(reservationid);
                         DisplayDefaultRoom();
+                        this.Refresh();
                         new StatusMessage("Room reservation for room " + roomid + " has been flagged for housekeeping and checked out.");
 
                         // Print customer folio total for the last room checkout

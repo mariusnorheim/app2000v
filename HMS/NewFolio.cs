@@ -166,7 +166,7 @@ namespace HMS
 
                     // Refresh datagridview, close form and display new StatusMessage
                     folioForm.LoadDataFolio();
-                    folioForm.dataGridViewFolio.Refresh();
+                    folioForm.Refresh();
                     this.Close();
                     new StatusMessage("Folio with " + listBoxFolioItem.Items.Count + " items added.");
                 }

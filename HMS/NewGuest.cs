@@ -39,6 +39,7 @@ namespace HMS
                 // Close form
                 this.Close();
                 guestForm.LoadDataGuest();
+                guestForm.Refresh();
                 new StatusMessage("Guest with name " + firstname + " " + lastname + " is added to the database.");
             }
         }

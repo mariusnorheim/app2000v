@@ -37,16 +37,16 @@ namespace HMS
             // Fetch dataset
             DataSet folioDS = DBGetData.GetFolioDGVAll();
 
-            if (folioDS != null)
+            if(folioDS != null)
             {
                 // No tables fetched
-                if (folioDS.Tables.Count == 0)
+                if(folioDS.Tables.Count == 0)
                 {
                     new StatusMessage("No datatable found, contact administrator.");
                     return;
                 }
                 // No rows fetched
-                else if (folioDS.Tables[0].Rows.Count == 0)
+                else if(folioDS.Tables[0].Rows.Count == 0)
                 {
                     new StatusMessage("No datarows found in folio.");
                     return;
@@ -74,16 +74,16 @@ namespace HMS
             // Fetch dataset
             DataSet folioDS = DBGetData.GetFolioDGVDue();
 
-            if (folioDS != null)
+            if(folioDS != null)
             {
                 // No tables fetched
-                if (folioDS.Tables.Count == 0)
+                if(folioDS.Tables.Count == 0)
                 {
                     new StatusMessage("No datatable found, contact administrator.");
                     return;
                 }
                 // No rows fetched
-                else if (folioDS.Tables[0].Rows.Count == 0)
+                else if(folioDS.Tables[0].Rows.Count == 0)
                 {
                     new StatusMessage("No datarows found in folio marked with due date.");
                     return;
@@ -230,10 +230,10 @@ namespace HMS
                     if (paiddate) { new StatusMessage("Folio has already been paid."); }
 
                     if (DBGetData.GetFolioRoomreservation(folioid) > 0) { roomreservation = true; }
-                    if (roomreservation) { new StatusMessage("Folio owner has an active room reservation, cannot mark with due date until after checkout."); }
+                    if (roomreservation) { new StatusMessage("Folio owner has an active room reservation, cannot mark with paid date until after checkout."); }
 
                     if (DBGetData.GetFolioHallreservation(folioid) > 0) { hallreservation = true; }
-                    if (hallreservation) { new StatusMessage("Folio owner has an active hall reservation, cannot mark with due date until after checkout."); }
+                    if (hallreservation) { new StatusMessage("Folio owner has an active hall reservation, cannot mark with paid date until after checkout."); }
 
                     if (!paiddate && !roomreservation && !hallreservation)
                     {
