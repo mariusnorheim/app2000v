@@ -413,6 +413,44 @@ namespace HMS
 
 
         //
+        // Housekeeping data
+        //
+        public static DataSet GetHousekeepingDGVActive()
+        {
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_Housekeeping_Active", CommandType.StoredProcedure);
+        }
+
+        public static DataSet GetHousekeepingDGVSearch(string input)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("Search", "%" + input + "%"));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_Housekeeping_Search", CommandType.StoredProcedure, parameters);
+        }
+
+
+        //
+        // Maintainance data
+        //
+        public static DataSet GetMaintainanceDGVActive()
+        {
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_Maintainance_Active", CommandType.StoredProcedure);
+        }
+
+        public static DataSet GetMaintainanceDGVSearch(string input)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("Search", "%" + input + "%"));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_Maintainance_Search", CommandType.StoredProcedure, parameters);
+        }
+
+
+        //
         // User data
         //
         public static DataSet GetUserDGVActive()
