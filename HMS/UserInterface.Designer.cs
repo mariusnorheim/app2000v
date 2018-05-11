@@ -49,7 +49,7 @@
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.panelContent = new System.Windows.Forms.Panel();
             this.panelTop = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonMenu11 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelStatusMessage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
@@ -348,22 +348,23 @@
             this.panelTop.TabIndex = 24;
             this.panelTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTop_MouseMove);
             // 
-            // button1
+            // buttonMenu11
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(86)))), ((int)(((byte)(118)))));
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(30, 445);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(140, 30);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "Floorplan";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.UseVisualStyleBackColor = false;
+            this.buttonMenu11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            this.buttonMenu11.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonMenu11.FlatAppearance.BorderSize = 0;
+            this.buttonMenu11.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(86)))), ((int)(((byte)(118)))));
+            this.buttonMenu11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
+            this.buttonMenu11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMenu11.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonMenu11.Location = new System.Drawing.Point(30, 445);
+            this.buttonMenu11.Name = "buttonMenu11";
+            this.buttonMenu11.Size = new System.Drawing.Size(140, 30);
+            this.buttonMenu11.TabIndex = 25;
+            this.buttonMenu11.Text = "Floorplan";
+            this.buttonMenu11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonMenu11.UseVisualStyleBackColor = false;
+            this.buttonMenu11.Click += new System.EventHandler(this.buttonMenu11_Click);
             // 
             // panel1
             // 
@@ -390,7 +391,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.ClientSize = new System.Drawing.Size(1200, 700);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonMenu11);
             this.Controls.Add(this.pictureBoxLogo);
             this.Controls.Add(this.labelHeading);
             this.Controls.Add(this.labelTitle);
@@ -447,7 +448,7 @@
         private System.Windows.Forms.PictureBox pictureBoxLogo;
         private System.Windows.Forms.Panel panelContent;
         private System.Windows.Forms.Panel panelTop;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonMenu11;
         private System.Windows.Forms.Panel panel1;
         public System.Windows.Forms.Label labelStatusMessage;
     }

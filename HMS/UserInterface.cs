@@ -107,12 +107,16 @@ namespace HMS
 
         private void buttonMenu7_Click(object sender, EventArgs e)
         {
-
+            Form housekeepingForm = new Housekeeping();
+            DisplayChildForm(housekeepingForm);
+            this.labelHeading.Text = "Housekeeping";
         }
 
         private void buttonMenu8_Click(object sender, EventArgs e)
         {
-
+            Form maintainanceForm = new Maintainance();
+            DisplayChildForm(maintainanceForm);
+            this.labelHeading.Text = "Maintainance";
         }
 
         private void buttonMenu9_Click(object sender, EventArgs e)
@@ -127,6 +131,20 @@ namespace HMS
                 Form userForm = new User();
                 DisplayChildForm(userForm);
                 this.labelHeading.Text = "User";
+            }
+            else
+            {
+                new StatusMessage("This area requires superuser access.");
+            }
+        }
+
+        private void buttonMenu11_Click(object sender, EventArgs e)
+        {
+            if(UserInfo.SuperUser == 1)
+            {
+                Form floorplanForm = new Floorplan();
+                DisplayChildForm(floorplanForm);
+                this.labelHeading.Text = "Floorplan";
             }
             else
             {
