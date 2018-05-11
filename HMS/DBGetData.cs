@@ -58,6 +58,7 @@ namespace HMS
             return dbconn.GetCount("Login_Check_Match", CommandType.StoredProcedure, parameters);
         }
 
+
         //
         // Room booking data
         //
@@ -98,7 +99,6 @@ namespace HMS
             return dbconn.GetDataSet("Get_RR_Search", CommandType.StoredProcedure, parameters);
         }
 
-        // Validations
         public static int GetRoomCheckedin(int reservationid)
         {
             List<DbParameter> parameters = new List<DbParameter>();
@@ -254,6 +254,12 @@ namespace HMS
             return dbconn.GetDataSet("Get_HR_SpesificDate", CommandType.StoredProcedure, parameters);
         }
 
+        public static DataSet GetHalltypeList()
+        {
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_HR_HalltypeList", CommandType.StoredProcedure);
+        }
+
 
         //
         // Guest data
@@ -386,8 +392,9 @@ namespace HMS
             return dbconn.GetReader("Get_Folio_GuestChange", CommandType.StoredProcedure, parameters);
         }
 
+
         //
-        // Todo
+        // Todo data
         //
         public static DataSet GetTodoDGVActive()
         {
@@ -404,8 +411,9 @@ namespace HMS
             return dbconn.GetDataSet("Get_Todo_Search", CommandType.StoredProcedure, parameters);
         }
 
+
         //
-        // User
+        // User data
         //
         public static DataSet GetUserDGVActive()
         {
@@ -429,6 +437,76 @@ namespace HMS
 
             DBConn dbconn = new DBConn();
             return dbconn.GetReader("Get_User_Data", CommandType.StoredProcedure, parameters);
+        }
+
+
+        //
+        // Floorplan data
+        //
+        public static DataSet GetFloorplanDGVRoom()
+        {
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_Floorplan_Room", CommandType.StoredProcedure);
+        }
+
+        public static DataSet GetFloorplanDGVRoomSearch(string input)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("Search", "%" + input + "%"));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_Floorplan_RoomSearch", CommandType.StoredProcedure, parameters);
+        }
+
+        public static DataSet GetFloorplanDGVHall()
+        {
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_Floorplan_Hall", CommandType.StoredProcedure);
+        }
+
+        public static DataSet GetFloorplanDGVHallSearch(string input)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("Search", "%" + input + "%"));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_Floorplan_HallSearch", CommandType.StoredProcedure, parameters);
+        }
+
+        public static MySqlDataReader GetFloorplanRoomData(int roomid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("RID", roomid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetReader("Get_Floorplan_Room_Data", CommandType.StoredProcedure, parameters);
+        }
+
+        public static int GetFloorplanRoomExists(int roomid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("RID", roomid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetCount("Floorplan_Check_Room_Exists", CommandType.StoredProcedure, parameters);
+        }
+
+        public static MySqlDataReader GetFloorplanHallData(int hallid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("HID", hallid));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetReader("Get_Floorplan_Hall_Data", CommandType.StoredProcedure, parameters);
+        }
+
+        public static int GetFloorplanHallExists(string hallname)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("Hname", hallname));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetCount("Floorplan_Check_Hall_Exists", CommandType.StoredProcedure, parameters);
         }
     }
 }

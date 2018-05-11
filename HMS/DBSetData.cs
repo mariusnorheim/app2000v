@@ -98,6 +98,7 @@ namespace HMS
             dbconn.Execute("Set_RR_Edit", CommandType.StoredProcedure, parameters);
         }
 
+
         //
         // Guest data
         //
@@ -131,6 +132,7 @@ namespace HMS
             DBConn dbconn = new DBConn();
             dbconn.Execute("Set_Guest_Edit", CommandType.StoredProcedure, parameters);
         }
+
 
         //
         // Folio data
@@ -173,6 +175,7 @@ namespace HMS
             DBConn dbconn = new DBConn();
             dbconn.Execute("Set_FolioItem_Add", CommandType.StoredProcedure, parameters);
         }
+
 
         //
         // Todo data
@@ -227,6 +230,51 @@ namespace HMS
 
             DBConn dbconn = new DBConn();
             dbconn.Execute("Set_User_Inactive", CommandType.StoredProcedure, parameters);
+        }
+
+
+        //
+        // Floorplan data
+        //
+        public static void FloorplanRoomAdd(int roomid, int roomtypeid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("RID", roomid));
+            parameters.Add(new MySqlParameter("RTID", roomtypeid));
+
+            DBConn dbconn = new DBConn();
+            dbconn.Execute("Set_Floorplan_Room_Add", CommandType.StoredProcedure, parameters);
+        }
+
+        public static void FloorplanRoomEdit(int roomid, int roomtypeid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("RID", roomid));
+            parameters.Add(new MySqlParameter("RTID", roomtypeid));
+
+            DBConn dbconn = new DBConn();
+            dbconn.Execute("Set_Floorplan_Room_Edit", CommandType.StoredProcedure, parameters);
+        }
+
+        public static void FloorplanHallAdd(string hallname, int halltypeid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();;
+            parameters.Add(new MySqlParameter("HName", hallname));
+            parameters.Add(new MySqlParameter("HTID", halltypeid));
+
+            DBConn dbconn = new DBConn();
+            dbconn.Execute("Set_Floorplan_Hall_Add", CommandType.StoredProcedure, parameters);
+        }
+
+        public static void FloorplanHallEdit(int hallid, string hallname, int halltypeid)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("HID", hallid));
+            parameters.Add(new MySqlParameter("HName", hallname));
+            parameters.Add(new MySqlParameter("HTID", halltypeid));
+
+            DBConn dbconn = new DBConn();
+            dbconn.Execute("Set_Floorplan_Hall_Edit", CommandType.StoredProcedure, parameters);
         }
     }
 }
