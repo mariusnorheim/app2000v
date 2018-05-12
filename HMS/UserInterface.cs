@@ -83,7 +83,7 @@ namespace HMS
         {
             Form guestForm = new Guest();
             DisplayChildForm(guestForm);
-            this.labelHeading.Text = "Guest";
+            this.labelHeading.Text = "Guests";
         }
 
         private void buttonMenu4_Click(object sender, EventArgs e)
@@ -91,6 +91,13 @@ namespace HMS
             Form folioForm = new Folio();
             DisplayChildForm(folioForm);
             this.labelHeading.Text = "Folio";
+        }
+
+        private void buttonMenu12_Click(object sender, EventArgs e)
+        {
+            Form messageForm = new Messages();
+            DisplayChildForm(messageForm);
+            this.labelHeading.Text = "Messages";
         }
 
         private void buttonMenu5_Click(object sender, EventArgs e)
@@ -121,7 +128,16 @@ namespace HMS
 
         private void buttonMenu9_Click(object sender, EventArgs e)
         {
-
+            if(UserInfo.SuperUser == 1)
+            {
+                Form paymentForm = new Payment();
+                DisplayChildForm(paymentForm);
+                this.labelHeading.Text = "Payment";
+            }
+            else
+            {
+                new StatusMessage("This area requires superuser access.");
+            }
         }
 
         private void buttonMenu10_Click(object sender, EventArgs e)
@@ -130,7 +146,7 @@ namespace HMS
             {
                 Form userForm = new User();
                 DisplayChildForm(userForm);
-                this.labelHeading.Text = "User";
+                this.labelHeading.Text = "Users";
             }
             else
             {

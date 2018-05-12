@@ -52,6 +52,7 @@
             this.buttonMenu11 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelStatusMessage = new System.Windows.Forms.Label();
+            this.buttonMenu12 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -114,7 +115,7 @@
             this.labelMenu2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
             this.labelMenu2.Font = new System.Drawing.Font("Ubuntu", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelMenu2.ForeColor = System.Drawing.Color.Silver;
-            this.labelMenu2.Location = new System.Drawing.Point(10, 210);
+            this.labelMenu2.Location = new System.Drawing.Point(10, 240);
             this.labelMenu2.Name = "labelMenu2";
             this.labelMenu2.Size = new System.Drawing.Size(77, 17);
             this.labelMenu2.TabIndex = 5;
@@ -201,7 +202,7 @@
             this.buttonMenu5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
             this.buttonMenu5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMenu5.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonMenu5.Location = new System.Drawing.Point(30, 235);
+            this.buttonMenu5.Location = new System.Drawing.Point(30, 265);
             this.buttonMenu5.Name = "buttonMenu5";
             this.buttonMenu5.Size = new System.Drawing.Size(140, 30);
             this.buttonMenu5.TabIndex = 10;
@@ -219,7 +220,7 @@
             this.buttonMenu6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
             this.buttonMenu6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMenu6.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonMenu6.Location = new System.Drawing.Point(30, 270);
+            this.buttonMenu6.Location = new System.Drawing.Point(30, 300);
             this.buttonMenu6.Name = "buttonMenu6";
             this.buttonMenu6.Size = new System.Drawing.Size(140, 30);
             this.buttonMenu6.TabIndex = 11;
@@ -237,7 +238,7 @@
             this.buttonMenu7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
             this.buttonMenu7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMenu7.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonMenu7.Location = new System.Drawing.Point(30, 305);
+            this.buttonMenu7.Location = new System.Drawing.Point(30, 335);
             this.buttonMenu7.Name = "buttonMenu7";
             this.buttonMenu7.Size = new System.Drawing.Size(140, 30);
             this.buttonMenu7.TabIndex = 12;
@@ -255,7 +256,7 @@
             this.buttonMenu8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
             this.buttonMenu8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMenu8.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonMenu8.Location = new System.Drawing.Point(30, 340);
+            this.buttonMenu8.Location = new System.Drawing.Point(30, 370);
             this.buttonMenu8.Name = "buttonMenu8";
             this.buttonMenu8.Size = new System.Drawing.Size(140, 30);
             this.buttonMenu8.TabIndex = 14;
@@ -273,7 +274,7 @@
             this.buttonMenu9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
             this.buttonMenu9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMenu9.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonMenu9.Location = new System.Drawing.Point(30, 375);
+            this.buttonMenu9.Location = new System.Drawing.Point(30, 405);
             this.buttonMenu9.Name = "buttonMenu9";
             this.buttonMenu9.Size = new System.Drawing.Size(140, 30);
             this.buttonMenu9.TabIndex = 20;
@@ -291,7 +292,7 @@
             this.buttonMenu10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
             this.buttonMenu10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMenu10.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonMenu10.Location = new System.Drawing.Point(30, 410);
+            this.buttonMenu10.Location = new System.Drawing.Point(30, 440);
             this.buttonMenu10.Name = "buttonMenu10";
             this.buttonMenu10.Size = new System.Drawing.Size(140, 30);
             this.buttonMenu10.TabIndex = 21;
@@ -357,7 +358,7 @@
             this.buttonMenu11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
             this.buttonMenu11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMenu11.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonMenu11.Location = new System.Drawing.Point(30, 445);
+            this.buttonMenu11.Location = new System.Drawing.Point(30, 475);
             this.buttonMenu11.Name = "buttonMenu11";
             this.buttonMenu11.Size = new System.Drawing.Size(140, 30);
             this.buttonMenu11.TabIndex = 25;
@@ -384,12 +385,31 @@
             this.labelStatusMessage.Size = new System.Drawing.Size(0, 16);
             this.labelStatusMessage.TabIndex = 0;
             // 
+            // buttonMenu12
+            // 
+            this.buttonMenu12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            this.buttonMenu12.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonMenu12.FlatAppearance.BorderSize = 0;
+            this.buttonMenu12.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(86)))), ((int)(((byte)(118)))));
+            this.buttonMenu12.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(84)))), ((int)(((byte)(126)))));
+            this.buttonMenu12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMenu12.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonMenu12.Location = new System.Drawing.Point(30, 200);
+            this.buttonMenu12.Name = "buttonMenu12";
+            this.buttonMenu12.Size = new System.Drawing.Size(140, 30);
+            this.buttonMenu12.TabIndex = 27;
+            this.buttonMenu12.Text = "Messages";
+            this.buttonMenu12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonMenu12.UseVisualStyleBackColor = false;
+            this.buttonMenu12.Click += new System.EventHandler(this.buttonMenu12_Click);
+            // 
             // UserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.ClientSize = new System.Drawing.Size(1200, 700);
+            this.Controls.Add(this.buttonMenu12);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.buttonMenu11);
             this.Controls.Add(this.pictureBoxLogo);
@@ -451,5 +471,6 @@
         private System.Windows.Forms.Button buttonMenu11;
         private System.Windows.Forms.Panel panel1;
         public System.Windows.Forms.Label labelStatusMessage;
+        private System.Windows.Forms.Button buttonMenu12;
     }
 }
