@@ -46,12 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Arkiv.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Arkiv.Designer.cs">
-      <DependentUpon>Arkiv.cs</DependentUpon>
-    </Compile>
     <Compile Include="Booking.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +67,18 @@
     </Compile>
     <Compile Include="EditBookingRoom.Designer.cs">
       <DependentUpon>EditBookingRoom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditFloorplanHall.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditFloorplanHall.Designer.cs">
+      <DependentUpon>EditFloorplanHall.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditFloorplanRoom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditFloorplanRoom.Designer.cs">
+      <DependentUpon>EditFloorplanRoom.cs</DependentUpon>
     </Compile>
     <Compile Include="EditFolio.cs">
       <SubType>Form</SubType>
@@ -98,6 +104,12 @@
     <Compile Include="EditUser.Designer.cs">
       <DependentUpon>EditUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Floorplan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Floorplan.Designer.cs">
+      <DependentUpon>Floorplan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Folio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,11 +122,41 @@
     <Compile Include="Guest.Designer.cs">
       <DependentUpon>Guest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Housekeeping.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Housekeeping.Designer.cs">
+      <DependentUpon>Housekeeping.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Maintainance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Maintainance.Designer.cs">
+      <DependentUpon>Maintainance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Messages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Messages.Designer.cs">
+      <DependentUpon>Messages.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewBookingRoom.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="NewBookingRoom.Designer.cs">
       <DependentUpon>NewBookingRoom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewFloorplanHall.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewFloorplanHall.Designer.cs">
+      <DependentUpon>NewFloorplanHall.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewFloorplanRoom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewFloorplanRoom.Designer.cs">
+      <DependentUpon>NewFloorplanRoom.cs</DependentUpon>
     </Compile>
     <Compile Include="NewFolio.cs">
       <SubType>Form</SubType>
@@ -139,6 +181,12 @@
     </Compile>
     <Compile Include="NewUser.Designer.cs">
       <DependentUpon>NewUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Payment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Payment.Designer.cs">
+      <DependentUpon>Payment.cs</DependentUpon>
     </Compile>
     <Compile Include="PopupForm.cs">
       <SubType>Form</SubType>
@@ -183,9 +231,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Arkiv.resx">
-      <DependentUpon>Arkiv.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Booking.resx">
       <DependentUpon>Booking.cs</DependentUpon>
     </EmbeddedResource>
@@ -194,6 +239,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditBookingRoom.resx">
       <DependentUpon>EditBookingRoom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditFloorplanHall.resx">
+      <DependentUpon>EditFloorplanHall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditFloorplanRoom.resx">
+      <DependentUpon>EditFloorplanRoom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditFolio.resx">
       <DependentUpon>EditFolio.cs</DependentUpon>
@@ -207,14 +258,32 @@
     <EmbeddedResource Include="EditUser.resx">
       <DependentUpon>EditUser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Floorplan.resx">
+      <DependentUpon>Floorplan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Folio.resx">
       <DependentUpon>Folio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Guest.resx">
       <DependentUpon>Guest.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Housekeeping.resx">
+      <DependentUpon>Housekeeping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maintainance.resx">
+      <DependentUpon>Maintainance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Messages.resx">
+      <DependentUpon>Messages.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NewBookingRoom.resx">
       <DependentUpon>NewBookingRoom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewFloorplanHall.resx">
+      <DependentUpon>NewFloorplanHall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewFloorplanRoom.resx">
+      <DependentUpon>NewFloorplanRoom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewFolio.resx">
       <DependentUpon>NewFolio.cs</DependentUpon>
@@ -227,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewUser.resx">
       <DependentUpon>NewUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Payment.resx">
+      <DependentUpon>Payment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PopupForm.resx">
       <DependentUpon>PopupForm.cs</DependentUpon>
