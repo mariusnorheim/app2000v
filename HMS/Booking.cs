@@ -366,10 +366,6 @@ namespace HMS
                                                                "\nAre you sure you want to continue?", "Check in", MessageBoxButtons.YesNo);
                 if (confirmCheckin == DialogResult.Yes)
                 {
-                    // Check that reservation is not already checked in
-                    if (DBGetData.GetRoomCheckedin(reservationid) > 0) { checkedin = true; }
-                    if (checkedin) { new StatusMessage("Room reservation has already checked in."); }
-
                     // Check that reservation checkin date is today
                     MySqlDataReader getRoomCheckinDate = DBGetData.GetRoomCheckinDate(reservationid);
                     if (getRoomCheckinDate.Read())
@@ -379,6 +375,10 @@ namespace HMS
                         if (!checkindate) { new StatusMessage("Room reservation not marked for checkin today."); }
                     }
                     getRoomCheckinDate.Dispose();
+
+                    // Check that reservation is not already checked in
+                    if(DBGetData.GetRoomCheckedin(reservationid) > 0) { checkedin = true; }
+                    if(checkedin) { new StatusMessage("Room reservation has already checked in."); }
 
                     // Check if room is clean
                     MySqlDataReader getHousekeepingCode = DBGetData.GetRoomHousekeeping(roomid);
@@ -462,10 +462,6 @@ namespace HMS
                                                                "\nAre you sure you want to continue?", "Check out", MessageBoxButtons.YesNo);
                 if (confirmCheckout == DialogResult.Yes)
                 {
-                    // Check that reservation is not already checked in
-                    if (DBGetData.GetRoomCheckedout(reservationid) > 0) { checkedout = true; }
-                    if (checkedout) { new StatusMessage("Room reservation has not checked in or already checked out."); }
-
                     // Check that reservation checkout date is today
                     MySqlDataReader getRoomCheckoutDate = DBGetData.GetRoomCheckoutDate(reservationid);
                     if (getRoomCheckoutDate.Read())
@@ -485,26 +481,31 @@ namespace HMS
                         if (continueCheckout == DialogResult.Yes) { checkoutdate = true; }
                     }
 
-                    // Check if guest has undelivered messages
-                    MySqlDataReader getRoomMessages = DBGetData.GetRoomMessages(reservationid);
-                    while (getRoomMessages.Read())
-                    {
-                        message = true;
-                        MessageBox.Show("Date recieved: " + getRoomMessages.GetDateTime(0) +
-                            "\nFrom: " + getRoomMessages.GetString(1) +
-                            "\n\n" + getRoomMessages.GetString(2),
-                            "Message to guest");
-                    }
-                    getRoomMessages.Dispose();
-
-                    // Mark messages as inactive if any
-                    if (message) { DBSetData.RoomreservationUpdateMessages(reservationid); }
-
-                    // Check if guest has more than one room reservation checked in
-                    int roomcount = DBGetData.GetRoomCount(reservationid);
+                    // Check that reservation is checked in
+                    if(DBGetData.GetRoomCheckedin(reservationid) < 1) { checkedout = true; }
+                    if(checkedout) { new StatusMessage("Room reservation has not checked in or already checked out."); }
 
                     if (!checkedout && checkoutdate)
                     {
+                        // Check if guest has undelivered messages
+                        MySqlDataReader getRoomMessages = DBGetData.GetRoomMessages(reservationid);
+                        while(getRoomMessages.Read())
+                        {
+                            message = true;
+                            MessageBox.Show("Date recieved: " + getRoomMessages.GetDateTime(0) +
+                                "\nFrom: " + getRoomMessages.GetString(1) +
+                                "\n\n" + getRoomMessages.GetString(2),
+                                "Message to guest");
+                        }
+
+                        getRoomMessages.Dispose();
+
+                        // Mark messages as inactive if any
+                        if(message) { DBSetData.RoomreservationUpdateMessages(reservationid); }
+
+                        // Check if guest has more than one room reservation checked in
+                        int roomcount = DBGetData.GetRoomCount(reservationid);
+
                         // Do checkout process
                         DBSetData.RoomreservationCheckout(reservationid);
                         DisplayDefaultRoom();
