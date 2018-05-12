@@ -1,0 +1,72 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Booking";
+}
+
+
+<div id="room" class="section bg-lightgrey">
+    <div class="container">
+        <h2>@ViewData["Title"]</h2>
+        <div class="col-md-6 col-md-offset-3">
+            <form method="post">
+                <br />
+                <h4>Book room</h4>
+                <hr />
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="RoomBooking.DateFrom">Arrival</label>
+                        <input asp-for="RoomBooking.DateFrom" class="form-control" type="date" data-val="true" data-val-date="Arrival field is not a valid date." data-val-required="Arrival field must be filled." id="RoomInput_DateFrom" name="RoomInput.DateFrom" />
+                        <span asp-validation-for="RoomBooking.DateFrom" class="text-danger field-validation-valid" data-valmsg-for="Input.Email" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="RoomBooking.DateTo">Departure</label>
+                        <input asp-for="RoomBooking.DateTo" class="form-control" type="date" data-val="true" data-val-date="Departure field is not a valid date." data-val-required="Departure field must be filled." id="RoomInput_DateTo" name="RoomInput.DateTo" />
+                        <span asp-validation-for="RoomBooking.DateTo" class="text-danger field-validation-valid" data-valmsg-for="Input.Password" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RoomBooking.Roomtype">Roomtype</label>
+                    <select asp-for="RoomBooking.Roomtype" class="form-control" id="RoomInput_Roomtype" name="RoomInput.Roomtype" />
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="hall" class="section bg-grey">
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3">
+            <form method="post">
+                <br />
+                <h4>Book hall</h4>
+                <hr />
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="HallBooking.DateFrom">Arrival</label>
+                        <input asp-for="HallBooking.DateFrom" class="form-control" type="date" data-val="true" data-val-date="Arrival field is not a valid date." data-val-required="Arrival field must be filled." id="HallInput_DateFrom" name="HallInput.DateFrom" />
+                        <span asp-validation-for="HallBooking.DateFrom" class="text-danger field-validation-valid" data-valmsg-for="Input.Email" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="HallBooking.DateTo">Departure</label>
+                        <input asp-for="HallBooking.DateTo" class="form-control" type="date" data-val="true" data-val-date="Departure field is not a valid date." data-val-required="Departure field must be filled." id="HallInput_DateTo" name="HallInput.DateTo" />
+                        <span asp-validation-for="HallBooking.DateTo" class="text-danger field-validation-valid" data-valmsg-for="Input.Password" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HallBooking.Halltype">Halltype</label>
+                    <select asp-for="HallBooking.Halltype" class="form-control" id="HallInput_Halltype" name="HallInput.Roomtype" />
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
