@@ -14,6 +14,13 @@ namespace Web.Controllers
 {
     public class LoginController : Controller
     {
+        private LoginModel model;
+
+        public LoginController(LoginModel model)
+        {
+            this.model = model;
+        }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -25,8 +32,8 @@ namespace Web.Controllers
         {
             WebDbContext db = HttpContext.RequestServices.GetService(typeof(Web.Models.WebDbContext)) as WebDbContext;
             Boolean validLogin = false;
-            string uid = LoginModel.Email;
-            string upw = LoginModel.Password;
+            string uid = this.model.Email;
+            string upw = this.model.Password;
 
             // Fetch salt for user
             MySqlDataReader getValues = db.GetLoginData(uid);
