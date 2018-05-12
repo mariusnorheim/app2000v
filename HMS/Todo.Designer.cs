@@ -31,7 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.buttonTodoDelete = new System.Windows.Forms.Button();
+            this.buttonDeleteTodo = new System.Windows.Forms.Button();
             this.buttonSearchTodo = new System.Windows.Forms.Button();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.buttonEditTodo = new System.Windows.Forms.Button();
@@ -40,19 +40,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTodo)).BeginInit();
             this.SuspendLayout();
             // 
-            // buttonTodoDelete
+            // buttonDeleteTodo
             // 
-            this.buttonTodoDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
-            this.buttonTodoDelete.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.buttonTodoDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonTodoDelete.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonTodoDelete.Location = new System.Drawing.Point(185, 605);
-            this.buttonTodoDelete.Name = "buttonTodoDelete";
-            this.buttonTodoDelete.Size = new System.Drawing.Size(80, 30);
-            this.buttonTodoDelete.TabIndex = 56;
-            this.buttonTodoDelete.Text = "Completed";
-            this.buttonTodoDelete.UseVisualStyleBackColor = false;
-            this.buttonTodoDelete.Click += new System.EventHandler(this.buttonTodoDelete_Click);
+            this.buttonDeleteTodo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(58)))), ((int)(((byte)(58)))));
+            this.buttonDeleteTodo.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.buttonDeleteTodo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDeleteTodo.Font = new System.Drawing.Font("Bahnschrift", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDeleteTodo.Location = new System.Drawing.Point(185, 605);
+            this.buttonDeleteTodo.Name = "buttonDeleteTodo";
+            this.buttonDeleteTodo.Size = new System.Drawing.Size(80, 30);
+            this.buttonDeleteTodo.TabIndex = 56;
+            this.buttonDeleteTodo.Text = "Completed";
+            this.buttonDeleteTodo.UseVisualStyleBackColor = false;
+            this.buttonDeleteTodo.Click += new System.EventHandler(this.buttonDeleteTodo_Click);
             // 
             // buttonSearchTodo
             // 
@@ -161,7 +161,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1000, 650);
-            this.Controls.Add(this.buttonTodoDelete);
+            this.Controls.Add(this.buttonDeleteTodo);
             this.Controls.Add(this.buttonSearchTodo);
             this.Controls.Add(this.textBoxSearch);
             this.Controls.Add(this.buttonEditTodo);
@@ -177,7 +177,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button buttonTodoDelete;
+        private System.Windows.Forms.Button buttonDeleteTodo;
         private System.Windows.Forms.Button buttonSearchTodo;
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Button buttonEditTodo;

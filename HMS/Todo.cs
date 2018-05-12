@@ -96,8 +96,7 @@ namespace HMS
             // TODO: Open edit form
         }
 
-        // Button 'Delete'
-        private void buttonTodoDelete_Click(object sender, EventArgs e)
+        private void buttonDeleteTodo_Click(object sender, EventArgs e)
         {
             // TODO: Mark database entry with 'isactive = 0'
         }
