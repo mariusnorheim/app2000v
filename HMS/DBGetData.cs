@@ -126,15 +126,6 @@ namespace HMS
             return dbconn.GetReader("RR_Check_Housekeeping", CommandType.StoredProcedure, parameters);
         }
 
-        public static int GetRoomCheckedout(int reservationid)
-        {
-            List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("ReservationID", reservationid));
-
-            DBConn dbconn = new DBConn();
-            return dbconn.GetCount("RR_Check_Checkedout", CommandType.StoredProcedure, parameters);
-        }
-
         public static MySqlDataReader GetRoomCheckoutDate(int reservationid)
         {
             List<DbParameter> parameters = new List<DbParameter>();
@@ -447,6 +438,44 @@ namespace HMS
 
             DBConn dbconn = new DBConn();
             return dbconn.GetDataSet("Get_Maintainance_Search", CommandType.StoredProcedure, parameters);
+        }
+
+
+        //
+        // Messages data
+        //
+        public static DataSet GetMessageDGVActive()
+        {
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_Message_Active", CommandType.StoredProcedure);
+        }
+
+        public static DataSet GetMessageDGVSearch(string input)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("Search", "%" + input + "%"));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_Message_Search", CommandType.StoredProcedure, parameters);
+        }
+
+
+        //
+        // Payment data
+        //
+        public static DataSet GetPaymentItemDGVAll()
+        {
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_PaymentItem_All", CommandType.StoredProcedure);
+        }
+
+        public static DataSet GetPaymentItemDGVSearch(string input)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+            parameters.Add(new MySqlParameter("Search", "%" + input + "%"));
+
+            DBConn dbconn = new DBConn();
+            return dbconn.GetDataSet("Get_PaymentItem_Search", CommandType.StoredProcedure, parameters);
         }
 
 
