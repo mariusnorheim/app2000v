@@ -4,19 +4,19 @@ using System.Data;
 using System.Data.Common;
 using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using MySql.Data.MySqlClient;
-using Web.Utils;
 
 namespace Web.Models
 {
     public class WebDbContext : DbContext
     {
+        private MySqlConnection conn;
         public string ConnectionString { get; set; }
 
         public WebDbContext(string connectionString)
         {
             this.ConnectionString = connectionString;
+            conn = GetConnection();
         }
 
         private MySqlConnection GetConnection()
@@ -25,39 +25,48 @@ namespace Web.Models
         }
 
         // Login data
-        public static MySqlDataReader GetLoginData(string userid)
+        public MySqlDataReader GetLoginData(string email)
         {
-            List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("UID", userid));
+            conn.Open();
 
-            DBConn dbconn = new DBConn();
-            return dbconn.GetReader("Get_UserLogin_Data", CommandType.StoredProcedure, parameters);
+            MySqlCommand getDataCmd = new MySqlCommand("Get_UserLogin_Data", conn);
+            getDataCmd.CommandType = CommandType.StoredProcedure;
+            getDataCmd.Parameters.AddWithValue("@UID", email);
+
+            MySqlDataReader reader = getDataCmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+            return reader;
         }
 
-        public static int GetLoginUsername(string userid)
+        public int GetLoginUsername(string email)
         {
-            List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("UID", userid));
+            conn.Open();
 
-            DBConn dbconn = new DBConn();
-            return dbconn.GetCount("UserLogin_Check_Username", CommandType.StoredProcedure, parameters);
+            MySqlCommand getDataCmd = new MySqlCommand("UserLogin_Check_Username", conn);
+            getDataCmd.CommandType = CommandType.StoredProcedure;
+            getDataCmd.Parameters.AddWithValue("@UID", email);
+
+            int count = Convert.ToInt32(getDataCmd.ExecuteScalar());
+
+            conn.Close();
+            getDataCmd.Dispose();
+            return count;
         }
 
-        public static int GetLoginMatch(string userid, string password)
+        public int GetLoginMatch(string email, string password)
         {
-            List<DbParameter> parameters = new List<DbParameter>();
-            parameters.Add(new MySqlParameter("UID", userid));
-            parameters.Add(new MySqlParameter("PW", password));
+            conn.Open();
 
-            DBConn dbconn = new DBConn();
-            return dbconn.GetCount("UserLogin_Check_Match", CommandType.StoredProcedure, parameters);
+            MySqlCommand getDataCmd = new MySqlCommand("UserLogin_Check_Match", conn);
+            getDataCmd.CommandType = CommandType.StoredProcedure;
+            getDataCmd.Parameters.AddWithValue("@UID", email);
+            getDataCmd.Parameters.AddWithValue("@PW", password);
+
+            int count = Convert.ToInt32(getDataCmd.ExecuteScalar());
+
+            conn.Close();
+            getDataCmd.Dispose();
+            return count;
         }
-
-        /*
-        public DbSet<UserData> Users { get; set; }
-        public DbSet<RegisterData> Registers { get; set; }
-        public DbSet<RoomBookingData> RoomBookings { get; set; }
-        public DbSet<HallBookingData> HallBookings { get; set; }
-        */
     }
 }

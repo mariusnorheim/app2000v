@@ -5,7 +5,6 @@ using System.Configuration;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Mvc;
-using Web.Data;
 using Web.Models;
 using Web.Utils;
 using MySql.Data.MySqlClient;
@@ -14,13 +13,6 @@ namespace Web.Controllers
 {
     public class LoginController : Controller
     {
-        private LoginModel model;
-
-        public LoginController(LoginModel model)
-        {
-            this.model = model;
-        }
-
         [HttpGet]
         public IActionResult Index()
         {
@@ -32,20 +24,21 @@ namespace Web.Controllers
         {
             WebDbContext db = HttpContext.RequestServices.GetService(typeof(Web.Models.WebDbContext)) as WebDbContext;
             Boolean validLogin = false;
-            string uid = this.model.Email;
-            string upw = this.model.Password;
+            var email = model.Email;
+            var pw = model.Password;
 
             // Fetch salt for user
-            MySqlDataReader getValues = db.GetLoginData(uid);
+            MySqlDataReader getValues = db.GetLoginData(email);
             if(getValues.Read())
             {
-                string salt = getValues.GetString(0);
+                var userid = getValues.GetString(0);
+                var salt = getValues.GetString(1);
 
                 // Hash password with salt
                 PasswordHasher pwHasher = new PasswordHasher();
-                HashResult hashedPassword = pwHasher.HashStoredSalt(upw, salt, SHA512.Create());
+                HashResult hashedPassword = pwHasher.HashStoredSalt(email, salt, SHA512.Create());
 
-                if(db.GetLoginMatch(uid, hashedPassword.Digest) == 1) { validLogin = true; }
+                if(db.GetLoginMatch(email, hashedPassword.Digest) == 1) { validLogin = true; }
 
                 // Check for login match
                 if(validLogin)
@@ -57,7 +50,7 @@ namespace Web.Controllers
             }
 
             getValues.Dispose();
-            return RedirectToPage("/Login");
+            return RedirectToAction("NotLoggedIn");
         }
 
         public IActionResult LoggedIn()
@@ -67,13 +60,9 @@ namespace Web.Controllers
             return View(viewModel);
         }
 
-        /*
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult NotLoggedIn()
         {
-            _db.Users.Add(User);
-            await _db.SaveChangesAsync();
-            return RedirectToPage("/Index");
+            return View();
         }
-        */
     }
 }
