@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Web.Models;
 using Web.Utils;
@@ -14,17 +15,25 @@ namespace Web.Controllers
 {
     public class LoginController : Controller
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public LoginController(IHttpContextAccessor httpContextAccessor)
+        {
+            this._httpContextAccessor = httpContextAccessor;
+
+            // Read cookie from IHttpContextAccessor  
+            string cookieUserID = _httpContextAccessor.HttpContext.Request.Cookies["UserID"];
+        }
         public IActionResult Index()
         {
-            // Read user information cookie
-            //string userid = Request.Cookies["UserID"];
+            // TODO: Redirect user if cookie exists
             return View();
         }
 
         [HttpPost]
         public IActionResult Login(UserModel model)
         {
-            WebDbContext db = HttpContext.RequestServices.GetService(typeof(Web.Models.WebDbContext)) as WebDbContext;
+            WebDbContext db = HttpContext.RequestServices.GetService(typeof(Web.Utils.WebDbContext)) as WebDbContext;
             Boolean validLogin = false;
             var email = model.Email;
             var password = model.Password;
@@ -54,11 +63,12 @@ namespace Web.Controllers
                 if(validLogin)
                 {
                     // Save user information in cookie
-                    //CookieModel cookieModel = new CookieModel { UserID = userid };
-                    //CookieController c = new CookieController();
-                    //c.Set(cookieModel);
+                    UserModel userModel = new UserModel { UserID = userid };
+                    Cookie c = new Cookie(_httpContextAccessor);
+                    c.Set(userModel);
 
-                    //return RedirectToRoute("");
+                    // TODO: Route to booking page
+                    return RedirectToAction("Index");
                 }
                 else
                 {

@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
 
-namespace Web.Models
+namespace Web.Utils
 {
     public class WebDbContext : DbContext
     {

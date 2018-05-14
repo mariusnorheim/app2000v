@@ -5,11 +5,25 @@ namespace Web.Models
 {
     public class HallBookingModel
     {
-        [DataType(DataType.Date)]
+        public enum Hall
+        {
+            [Display(Name = "Banquet Hall")]
+            Banquet = 1,
+            Stage,
+            [Display(Name = "Outside Garden Area")]
+            Garden,
+            [Display(Name = "Outside Pool Area")]
+            Pool
+        }
+
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Arrival")]
         public DateTime DateFrom { get; set; }
 
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Departure")]
         public DateTime DateTo { get; set; }
-        public int Halltype { get; set; }
+
+        public Hall Halltype { get; set; }
     }
 }

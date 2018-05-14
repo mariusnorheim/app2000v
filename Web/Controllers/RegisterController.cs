@@ -20,7 +20,7 @@ namespace Web.Controllers
         [HttpPost]
         public IActionResult Register(UserModel model)
         {
-            WebDbContext db = HttpContext.RequestServices.GetService(typeof(Web.Models.WebDbContext)) as WebDbContext;
+            WebDbContext db = HttpContext.RequestServices.GetService(typeof(Web.Utils.WebDbContext)) as WebDbContext;
             Boolean existingid = false;
             var email = model.Email;
             var password = model.Password;

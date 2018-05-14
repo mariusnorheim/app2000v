@@ -5,15 +5,30 @@ namespace Web.Models
 {
     public class RoomBookingModel
     {
-        [DataType(DataType.Date)]
-        [Display(Name = "DateFrom")]
+        public enum Room
+        {
+            [Display(Name = "Single Room")]
+            Single = 1,
+            [Display(Name = "Double Room")]
+            Double,
+            [Display(Name = "Family Suite")]
+            Family,
+            [Display(Name = "Family Deluxe")]
+            Deluxe,
+            [Display(Name = "Executive Suite")]
+            Executive,
+            [Display(Name = "Conference Room")]
+            Conference
+        }
+
+        [DisplayFormat(DataFormatString = "{0: yyyy/MM/dd }", ApplyFormatInEditMode = true)]
+        [Display(Name = "Arrival")]
         public DateTime DateFrom { get; set; }
 
-        [DataType(DataType.Date)]
-        [Display(Name = "DateTo")]
+        [DisplayFormat(DataFormatString = "{0: yyyy/MM/dd }", ApplyFormatInEditMode = true)]
+        [Display(Name = "Departure")]
         public DateTime DateTo { get; set; }
 
-        [Display(Name = "Roomtype")]
-        public int Roomtype { get; set; }
+        public Room Roomtype { get; set; }
     }
 }

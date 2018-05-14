@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Web.Models;
+using Web.Utils;
 
 
 namespace Web
@@ -23,10 +23,6 @@ namespace Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            /*
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseInMemoryDatabase("name"));
-                */
             services.Add(new ServiceDescriptor(typeof(WebDbContext), new WebDbContext
                 (Configuration.GetConnectionString("DefaultConnection"))));
             services.AddMvc();
@@ -46,15 +42,6 @@ namespace Web
             }
 
             app.UseStaticFiles();
-            
-            /*
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
-            */
             app.UseMvcWithDefaultRoute();
         }
     }
