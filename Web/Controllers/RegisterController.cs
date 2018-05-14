@@ -18,7 +18,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(RegisterModel model)
+        public IActionResult Register(UserModel model)
         {
             WebDbContext db = HttpContext.RequestServices.GetService(typeof(Web.Models.WebDbContext)) as WebDbContext;
             Boolean existingid = false;
@@ -52,13 +52,13 @@ namespace Web.Controllers
                     db.UserAdd(email, passwordHash, salt, firstname, lastname, address, city, postcode, telephone);
 
                     // Redirect new user to login
-                    var loginModel = new LoginModel
+                    var userModel = new UserModel
                     {
                         Email = email,
                         Password = passwordHash
                     };
 
-                    return View(loginModel);
+                    return View(userModel);
                 }
             }
 

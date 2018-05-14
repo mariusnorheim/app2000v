@@ -2,8 +2,10 @@
 
 namespace Web.Models
 {
-    public class RegisterModel
+    public class UserModel
     {
+        public string UserID { get; set; }
+
         [Required]
         [EmailAddress]
         [StringLength(80)]
@@ -15,10 +17,12 @@ namespace Web.Models
 
         [Required]
         [StringLength(40)]
+        [Display(Name = "First name")]
         public string Firstname { get; set; }
 
         [Required]
         [StringLength(40)]
+        [Display(Name = "Last name")]
         public string Lastname { get; set; }
 
         [Required]

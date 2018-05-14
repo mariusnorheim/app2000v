@@ -16,11 +16,13 @@ namespace Web.Controllers
     {
         public IActionResult Index()
         {
+            // Read user information cookie
+            //string userid = Request.Cookies["UserID"];
             return View();
         }
 
         [HttpPost]
-        public IActionResult Login(LoginModel model)
+        public IActionResult Login(UserModel model)
         {
             WebDbContext db = HttpContext.RequestServices.GetService(typeof(Web.Models.WebDbContext)) as WebDbContext;
             Boolean validLogin = false;
@@ -51,29 +53,24 @@ namespace Web.Controllers
 
                 if(validLogin)
                 {
-                    // TODO: Save user information in cookies
+                    // Save user information in cookie
+                    //CookieModel cookieModel = new CookieModel { UserID = userid };
+                    //CookieController c = new CookieController();
+                    //c.Set(cookieModel);
 
-                    return RedirectToAction("LoggedInView");
+                    //return RedirectToRoute("");
                 }
                 else
                 {
-                    return RedirectToAction("NotLoggedInView");
+                    return RedirectToAction("LoginFailedView");
                 }
             }
 
             return RedirectToAction("EmptyFieldsView");
         }
 
-        // View for successful login
-        public IActionResult LoggedInView()
-        {
-            // TODO: Set ID from cookie
-            var viewModel = new LoggedInViewModel { ID = 1 };
-            return View(viewModel);
-        }
-
         // View for failed login
-        public IActionResult NotLoggedInView()
+        public IActionResult LoginFailedView()
         {
             return View();
         }

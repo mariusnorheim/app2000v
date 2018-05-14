@@ -14,14 +14,14 @@
                 <hr />
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label asp-for="RoomBooking.DateFrom">Arrival</label>
-                        <input asp-for="RoomBooking.DateFrom" class="form-control" type="date" />
-                        <span asp-validation-for="RoomBooking.DateFrom" class="text-danger field-validation-valid"></span>
+                        @Html.LabelFor(m => m.RoomBooking.DateFrom)
+                        @Html.TextBoxFor(m => m.RoomBooking.DateFrom, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.RoomBooking.DateFrom, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group col-md-6">
-                        <label asp-for="RoomBooking.DateTo">Departure</label>
-                        <input asp-for="RoomBooking.DateTo" class="form-control" type="date" />
-                        <span asp-validation-for="RoomBooking.DateTo" class="text-danger field-validation-valid"></span>
+                        @Html.LabelFor(m => m.RoomBooking.DateTo)
+                        @Html.TextBoxFor(m => m.RoomBooking.DateTo, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.RoomBooking.DateTo, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
@@ -46,14 +46,14 @@
                 <hr />
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label asp-for="HallBooking.DateFrom">Arrival</label>
-                        <input asp-for="HallBooking.DateFrom" class="form-control" type="date" />
-                        <span asp-validation-for="HallBooking.DateFrom" class="text-danger field-validation-valid"></span>
+                        @Html.LabelFor(m => m.HallBooking.DateFrom)
+                        @Html.TextBoxFor(m => m.HallBooking.DateFrom, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.HallBooking.DateFrom, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group col-md-6">
-                        <label asp-for="HallBooking.DateTo">Departure</label>
-                        <input asp-for="HallBooking.DateTo" class="form-control" type="date" />
-                        <span asp-validation-for="HallBooking.DateTo" class="text-danger field-validation-valid"></span>
+                        @Html.LabelFor(m => m.HallBooking.DateTo)
+                        @Html.TextBoxFor(m => m.HallBooking.DateTo, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.HallBooking.DateTo, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
@@ -68,4 +68,8 @@
         </div>
     </div>
 </div>
+@section Scripts {
 
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}

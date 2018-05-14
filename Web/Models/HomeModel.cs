@@ -6,11 +6,7 @@ namespace Web.Models
     {
         [BindProperty]
         public RoomBookingModel RoomBooking { get; set; }
+        [BindProperty]
         public HallBookingModel HallBooking { get; set; }
-
-        public void OnGet()
-        {
-
-        }
     }
 }
