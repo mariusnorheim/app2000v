@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Security.Cryptography;
 using Microsoft.AspNetCore.Mvc;
-using Web.Data;
 using Web.Models;
 using Web.Utils;
-using MySql.Data.MySqlClient;
 
 namespace Web.Controllers
 {
     public class RegisterController : Controller
     {
-        [HttpGet]
         public IActionResult Index()
         {
             return View();
@@ -22,42 +21,66 @@ namespace Web.Controllers
         public IActionResult Register(RegisterModel model)
         {
             WebDbContext db = HttpContext.RequestServices.GetService(typeof(Web.Models.WebDbContext)) as WebDbContext;
-
+            Boolean existingid = false;
             var email = model.Email;
-            var pw = model.Password;
+            var password = model.Password;
+            var firstname = model.Firstname;
+            var lastname = model.Lastname;
+            var address = model.Address;
+            var city = model.City;
+            var postcode = model.Postcode;
+            var telephone = model.Telephone;
 
-            // Fetch salt for user
-            MySqlDataReader getValues = db.GetLoginData(email);
-            if(getValues.Read())
+            // Validate input
+            if(!string.IsNullOrWhiteSpace(email) && !string.IsNullOrWhiteSpace(password) && !string.IsNullOrWhiteSpace(firstname)
+                && !string.IsNullOrWhiteSpace(lastname) && !string.IsNullOrWhiteSpace(address) && !string.IsNullOrWhiteSpace(city)
+                && !string.IsNullOrWhiteSpace(postcode))
             {
-                var userid = getValues.GetString(0);
-                var salt = getValues.GetString(1);
+                // Check if email already exists in db
+                if(db.GetLoginUsername(email) > 0) { existingid = true; }
+                if(existingid) { return RedirectToAction("UsernameExistsView"); }
 
-                // Hash password with salt
-                PasswordHasher pwHasher = new PasswordHasher();
-                HashResult hashedPassword = pwHasher.HashStoredSalt(email, salt, SHA512.Create());
-
-                if(db.GetLoginMatch(email, hashedPassword.Digest) == 1)
-                { validLogin = true; }
-
-                // Check for login match
-                if(validLogin)
+                // Execute save
+                if(!existingid)
                 {
-                    // TODO: Save user information in cookies
+                    // Generate new salt and hash password
+                    PasswordHasher pwHasher = new PasswordHasher();
+                    HashResult hashedPassword = pwHasher.HashNewSalt(password, 20, SHA512.Create());
+                    var salt = hashedPassword.Salt;
+                    var passwordHash = hashedPassword.Digest;
 
-                    return RedirectToAction("LoggedIn");
+                    db.UserAdd(email, passwordHash, salt, firstname, lastname, address, city, postcode, telephone);
+
+                    // Redirect new user to login
+                    var loginModel = new LoginModel
+                    {
+                        Email = email,
+                        Password = passwordHash
+                    };
+
+                    return View(loginModel);
                 }
             }
 
-            getValues.Dispose();
-            return RedirectToAction("NotLoggedIn");
+            return RedirectToAction("EmptyFieldsView");
         }
 
-        public IActionResult LoggedIn()
+        // View for existing email in database
+        public IActionResult UsernameExistsView()
         {
-            // TODO: Set ID from cookie
-            var viewModel = new LoggedInViewModel { ID = 1 };
-            return View(viewModel);
+            return View();
+        }
+
+        // View for missing input fields
+        public IActionResult EmptyFieldsView()
+        {
+            return View();
+        }
+
+        // View for error handling
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Configuration;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Mvc;
 using Web.Models;
@@ -13,7 +14,6 @@ namespace Web.Controllers
 {
     public class LoginController : Controller
     {
-        [HttpGet]
         public IActionResult Index()
         {
             return View();
@@ -25,44 +25,69 @@ namespace Web.Controllers
             WebDbContext db = HttpContext.RequestServices.GetService(typeof(Web.Models.WebDbContext)) as WebDbContext;
             Boolean validLogin = false;
             var email = model.Email;
-            var pw = model.Password;
+            var password = model.Password;
+            var userid = "";
+            var salt = "";
 
-            // Fetch salt for user
-            MySqlDataReader getValues = db.GetLoginData(email);
-            if(getValues.Read())
+            // Validate input
+            if(!string.IsNullOrWhiteSpace(email) && !string.IsNullOrWhiteSpace(password))
             {
-                var userid = getValues.GetString(0);
-                var salt = getValues.GetString(1);
+                // Fetch salt for user
+                MySqlDataReader getValues = db.GetLoginData(email);
+                if(getValues.Read())
+                {
+                    userid = getValues.GetString(0);
+                    salt = getValues.GetString(1);
+                }
+
+                getValues.Dispose();
 
                 // Hash password with salt
                 PasswordHasher pwHasher = new PasswordHasher();
-                HashResult hashedPassword = pwHasher.HashStoredSalt(email, salt, SHA512.Create());
-
-                if(db.GetLoginMatch(email, hashedPassword.Digest) == 1) { validLogin = true; }
+                HashResult hashedPassword = pwHasher.HashStoredSalt(password, salt, SHA512.Create());
 
                 // Check for login match
+                if(db.GetLoginMatch(email, hashedPassword.Digest) == 1) { validLogin = true; }
+
                 if(validLogin)
                 {
                     // TODO: Save user information in cookies
 
-                    return RedirectToAction("LoggedIn");
+                    return RedirectToAction("LoggedInView");
+                }
+                else
+                {
+                    return RedirectToAction("NotLoggedInView");
                 }
             }
 
-            getValues.Dispose();
-            return RedirectToAction("NotLoggedIn");
+            return RedirectToAction("EmptyFieldsView");
         }
 
-        public IActionResult LoggedIn()
+        // View for successful login
+        public IActionResult LoggedInView()
         {
             // TODO: Set ID from cookie
             var viewModel = new LoggedInViewModel { ID = 1 };
             return View(viewModel);
         }
 
-        public IActionResult NotLoggedIn()
+        // View for failed login
+        public IActionResult NotLoggedInView()
         {
             return View();
+        }
+
+        // View for missing input fields
+        public IActionResult EmptyFieldsView()
+        {
+            return View();
+        }
+
+        // View for error handling
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

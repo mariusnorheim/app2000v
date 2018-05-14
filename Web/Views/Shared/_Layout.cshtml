@@ -26,28 +26,26 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Luxury Resorts</a>
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand">Luxury Resorts</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Booking</a>
                         <ul class="dropdown-menu">
-                            <li><a asp-area="room" asp-controller="Home" asp-action="Index" class="dropdown-item">Room</a></li>
-                            <li><a asp-area="hall" asp-controller="Home" asp-action="Index" class="dropdown-item">Hall</a></li>
+                            <li><a href="#room" class="dropdown-item">Room</a></li>
+                            <li><a href="#hall" class="dropdown-item">Hall</a></li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-right">
-                    <a asp-area="" asp-controller="Login" asp-action="Index"><button type="button" class="btn btn-default navbar-btn">Sign in</button></a>
+                    <a asp-controller="Login" asp-action="Index"><button type="button" class="btn btn-default navbar-btn">Sign in</button></a>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container-fluid body-content">
         @RenderBody()
-    </div>
 
     <div class="container">
         <footer class="footer">
@@ -75,7 +73,6 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-
     @RenderSection("Scripts", required: false)
 </body>
 </html>
