@@ -3,8 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Web.Models
 {
-    public class RoomBookingModel
+    public class RoomBookingModel 
     {
+        public int RoomID { get; set; }
+
         public enum Room
         {
             [Display(Name = "Single Room")]
@@ -21,14 +23,15 @@ namespace Web.Models
             Conference
         }
 
-        [DisplayFormat(DataFormatString = "{0: yyyy/MM/dd }", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Arrival")]
         public DateTime DateFrom { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0: yyyy/MM/dd }", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Departure")]
         public DateTime DateTo { get; set; }
 
-        public Room Roomtype { get; set; }
+        [Required]
+        public int Roomtype { get; set; }
     }
 }

@@ -1,0 +1,10 @@
+﻿@model List<RoomModel>
+
+<table class="table">
+    @foreach(var item in Model)
+    {
+        <td>
+            @Html.DisplayFor(modelItem => item.RoomID)
+        </td>
+    }
+</table>

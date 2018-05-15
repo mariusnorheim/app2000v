@@ -10,9 +10,7 @@ namespace Web.Models
 {
     public class BookingModel
     {
-        [BindProperty]
         public RoomBookingModel RoomBooking { get; set; }
-        [BindProperty]
         public HallBookingModel HallBooking { get; set; }
     }
 }

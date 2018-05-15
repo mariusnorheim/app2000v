@@ -5,6 +5,8 @@ namespace Web.Models
 {
     public class HallBookingModel
     {
+        public int HallID { get; set; }
+
         public enum Hall
         {
             [Display(Name = "Banquet Hall")]
@@ -24,6 +26,6 @@ namespace Web.Models
         [Display(Name = "Departure")]
         public DateTime DateTo { get; set; }
 
-        public Hall Halltype { get; set; }
+        public int Halltype { get; set; }
     }
 }

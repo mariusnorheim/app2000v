@@ -59,8 +59,6 @@ namespace Web.Controllers
             return View();
         }
 
-
-
         [HttpGet]
         // View for registration model fail
         public IActionResult RegisterModelFailed()

@@ -27,7 +27,6 @@ namespace Web
         {
             services.Add(new ServiceDescriptor(typeof(WebDbContext), new WebDbContext
                 (Configuration.GetConnectionString("DefaultConnection"))));
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
@@ -50,7 +49,6 @@ namespace Web
             }
 
             app.UseStaticFiles();
-
             app.UseMvcWithDefaultRoute();
         }
     }

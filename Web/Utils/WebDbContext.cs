@@ -99,5 +99,33 @@ namespace Web.Utils
                 conn.Close();
             }
         }
+
+        // Booking data
+        public List<RoomModel> GetAvailableRooms(RoomBookingModel model)
+        {
+            List<RoomModel> list = new List<RoomModel>();
+
+            using(MySqlConnection conn = GetConnection())
+            {
+                MySqlCommand getDataCmd = new MySqlCommand("Get_RR_AvailableRooms", conn);
+                getDataCmd.CommandType = CommandType.StoredProcedure;
+                getDataCmd.Parameters.Add(new MySqlParameter("RoomTypeID", model.Roomtype));
+                getDataCmd.Parameters.Add(new MySqlParameter("dFrom", model.DateFrom));
+                getDataCmd.Parameters.Add(new MySqlParameter("dTo", model.DateTo));
+
+                using(MySqlDataReader reader = getDataCmd.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        list.Add(new RoomModel()
+                        {
+                            RoomID = reader.GetInt32(0)
+                        });
+                    }
+                }
+            }
+
+            return list;
+        }
     }
 }
