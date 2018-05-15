@@ -5,6 +5,7 @@ using System.Data.Common;
 using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
+using Web.Models;
 
 namespace Web.Utils
 {
@@ -16,7 +17,6 @@ namespace Web.Utils
         public WebDbContext(string connectionString)
         {
             this.ConnectionString = connectionString;
-            conn = GetConnection();
         }
 
         private MySqlConnection GetConnection()
@@ -25,75 +25,79 @@ namespace Web.Utils
         }
 
         // Login data
-        public MySqlDataReader GetLoginData(string email)
+        public MySqlDataReader GetLoginData(UserModel model)
         {
-            conn.Open();
-
+            MySqlConnection conn = GetConnection();
             MySqlCommand getDataCmd = new MySqlCommand("Get_UserLogin_Data", conn);
             getDataCmd.CommandType = CommandType.StoredProcedure;
-            getDataCmd.Parameters.AddWithValue("UID", email);
+            getDataCmd.Parameters.AddWithValue("UID", model.Email);
 
+            conn.Open();
             MySqlDataReader reader = getDataCmd.ExecuteReader(CommandBehavior.CloseConnection);
 
             return reader;
         }
 
-        public int GetLoginUsername(string email)
+        public int GetLoginUsername(UserModel model)
         {
-            conn.Open();
+            using(MySqlConnection conn = GetConnection())
+            {
+                MySqlCommand getDataCmd = new MySqlCommand("UserLogin_Check_Username", conn);
+                getDataCmd.CommandType = CommandType.StoredProcedure;
+                getDataCmd.Parameters.AddWithValue("UID", model.Email);
 
-            MySqlCommand getDataCmd = new MySqlCommand("UserLogin_Check_Username", conn);
-            getDataCmd.CommandType = CommandType.StoredProcedure;
-            getDataCmd.Parameters.AddWithValue("UID", email);
+                conn.Open();
+                int count = Convert.ToInt32(getDataCmd.ExecuteScalar());
+                conn.Close();
+                conn.Dispose();
 
-            int count = Convert.ToInt32(getDataCmd.ExecuteScalar());
-
-            conn.Close();
-            conn.Dispose();
-            getDataCmd.Dispose();
-
-            return count;
+                return count;
+            }
         }
 
-        public int GetLoginMatch(string email, string password)
+        public int LoginValidate(UserModel model)
         {
-            conn.Open();
+            using(MySqlConnection conn = GetConnection())
+            {
+                MySqlCommand getDataCmd = new MySqlCommand("UserLogin_Check_Match", conn);
+                getDataCmd.CommandType = CommandType.StoredProcedure;
+                getDataCmd.Parameters.AddWithValue("UID", model.Email);
+                getDataCmd.Parameters.AddWithValue("PW", model.Password);
+                getDataCmd.Parameters.AddWithValue("S", model.Salt);
 
-            MySqlCommand getDataCmd = new MySqlCommand("UserLogin_Check_Match", conn);
-            getDataCmd.CommandType = CommandType.StoredProcedure;
-            getDataCmd.Parameters.AddWithValue("UID", email);
-            getDataCmd.Parameters.AddWithValue("PW", password);
+                conn.Open();
+                int count = Convert.ToInt32(getDataCmd.ExecuteScalar());
+                conn.Close();
+                conn.Dispose();
 
-            int count = Convert.ToInt32(getDataCmd.ExecuteScalar());
-
-            conn.Close();
-            conn.Dispose();
-            getDataCmd.Dispose();
-
-            return count;
+                return count;
+            }
         }
 
         // Register data
-        public void UserAdd(string email, string password, string salt, string firstname, string lastname, string address, string city, string postcode, string telephone)
+        public void RegisterUser(UserModel model)
         {
-            conn.Open();
+            using(MySqlConnection conn = GetConnection())
+            {
+                MySqlCommand setDataCmd = new MySqlCommand("Set_WebUser_Add", conn);
+                setDataCmd.CommandType = CommandType.StoredProcedure;
+                setDataCmd.Parameters.AddWithValue("UID", model.Email);
+                setDataCmd.Parameters.AddWithValue("PW", model.Password);
+                setDataCmd.Parameters.AddWithValue("S", model.Salt);
+                setDataCmd.Parameters.AddWithValue("Firstname", model.Firstname);
+                setDataCmd.Parameters.AddWithValue("Lastname", model.Lastname);
+                setDataCmd.Parameters.AddWithValue("Address", model.Address);
+                setDataCmd.Parameters.AddWithValue("City", model.City);
+                setDataCmd.Parameters.AddWithValue("Postcode", model.Postcode);
+                if(model.Telephone != null)
+                    setDataCmd.Parameters.AddWithValue("Telephone", model.Telephone);
+                else
+                    setDataCmd.Parameters.AddWithValue("Telephone", Convert.DBNull);
 
-            MySqlCommand setDataCmd = new MySqlCommand("Set_WebUser_Add", conn);
-            setDataCmd.CommandType = CommandType.StoredProcedure;
-            setDataCmd.Parameters.AddWithValue("UID", email);
-            setDataCmd.Parameters.AddWithValue("PW", password);
-            setDataCmd.Parameters.AddWithValue("S", salt);
-            setDataCmd.Parameters.AddWithValue("Firstname", firstname);
-            setDataCmd.Parameters.AddWithValue("Lastname", lastname);
-            setDataCmd.Parameters.AddWithValue("Address", address);
-            setDataCmd.Parameters.AddWithValue("City", city);
-            setDataCmd.Parameters.AddWithValue("Postcode", postcode);
-            if(telephone != null) { setDataCmd.Parameters.AddWithValue("Telephone", telephone); }
-            else { setDataCmd.Parameters.AddWithValue("Telephone", Convert.DBNull); }
-
-            setDataCmd.ExecuteNonQuery();
-            conn.Close();
-            setDataCmd.Dispose();
+                conn.Open();
+                setDataCmd.ExecuteNonQuery();
+                conn.Close();
+            }
         }
     }
 }

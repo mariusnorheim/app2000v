@@ -28,11 +28,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-controller="Home" asp-action="Index" class="navbar-brand">Luxury Resorts</a>
+                <a asp-controller="User" asp-action="Index" class="navbar-brand">Luxury Resorts</a>
             </div>
             <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Booking</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/user/#room" class="dropdown-item">Room</a></li>
+                            <li><a href="/user/#hall" class="dropdown-item">Hall</a></li>
+                        </ul>
+                    </li>
+                </ul>
                 <ul class="nav navbar-right">
-                    <a asp-controller="Login" asp-action="UserLogin"><button type="button" class="btn btn-default navbar-btn">Sign in</button></a>
+                    <a asp-controller="User" asp-action="Logout"><button type="button" class="btn btn-default navbar-btn">Sign out</button></a>
                 </ul>
             </div>
         </div>

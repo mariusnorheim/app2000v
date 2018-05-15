@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -27,6 +28,11 @@ namespace Web
             services.Add(new ServiceDescriptor(typeof(WebDbContext), new WebDbContext
                 (Configuration.GetConnectionString("DefaultConnection"))));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Login/UserLogin/";
+                });
             services.AddMvc();
         }
 
@@ -44,6 +50,7 @@ namespace Web
             }
 
             app.UseStaticFiles();
+
             app.UseMvcWithDefaultRoute();
         }
     }

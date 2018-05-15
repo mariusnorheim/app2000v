@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Configuration;
+﻿using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Web.Models;
 using Web.Utils;
@@ -15,78 +14,137 @@ namespace Web.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
-
-        public LoginController(IHttpContextAccessor httpContextAccessor)
+        [HttpGet]
+        public IActionResult RegisterUser()
         {
-            this._httpContextAccessor = httpContextAccessor;
-
-            // Read cookie from IHttpContextAccessor  
-            string cookieUserID = _httpContextAccessor.HttpContext.Request.Cookies["UserID"];
-        }
-        public IActionResult Index()
-        {
-            // TODO: Redirect user if cookie exists
             return View();
         }
 
         [HttpPost]
-        public IActionResult Login(UserModel model)
+        public IActionResult RegisterUser([Bind] UserModel user)
         {
             WebDbContext db = HttpContext.RequestServices.GetService(typeof(Web.Utils.WebDbContext)) as WebDbContext;
-            Boolean validLogin = false;
-            var email = model.Email;
-            var password = model.Password;
-            var userid = "";
-            var salt = "";
 
-            // Validate input
-            if(!string.IsNullOrWhiteSpace(email) && !string.IsNullOrWhiteSpace(password))
+            if(ModelState.IsValid)
             {
+                // Check if email already exists in db
+                if(db.GetLoginUsername(user) > 0)
+                {
+                    return RedirectToAction("RegisterUserExists");
+                }
+
+                // Generate new salt and hash password
+                var password = user.Password.ToString();
+                PasswordHasher pwHasher = new PasswordHasher();
+                HashResult hashedPassword = pwHasher.HashNewSalt(password, 20, SHA512.Create());
+                user.Salt = hashedPassword.Salt;
+                user.Password = hashedPassword.Digest;
+
+                // Register new user
+                db.RegisterUser(user);
+
+                // Redirect to user area
+                ModelState.Clear();
+                return RedirectToAction("UserLogin");
+            }
+
+            // Model data invalid
+            return RedirectToAction("RegisterModelFailed");
+        }
+
+        [HttpGet]
+        // View for registration model invalid
+        public IActionResult RegisterUserExists()
+        {
+            return View();
+        }
+
+
+
+        [HttpGet]
+        // View for registration model fail
+        public IActionResult RegisterModelFailed()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult UserLogin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UserLogin([Bind] UserModel user)
+        {
+            WebDbContext db = HttpContext.RequestServices.GetService(typeof(Web.Utils.WebDbContext)) as WebDbContext;
+
+            ModelState.Remove("Firstname");
+            ModelState.Remove("Lastname");
+            ModelState.Remove("Address");
+            ModelState.Remove("City");
+            ModelState.Remove("Postcode");
+            ModelState.Remove("Telephone");
+
+            if(ModelState.IsValid)
+            {
+                // Set empty variables incase invalid user
+                user.Salt = "";
                 // Fetch salt for user
-                MySqlDataReader getValues = db.GetLoginData(email);
+                MySqlDataReader getValues = db.GetLoginData(user);
                 if(getValues.Read())
                 {
-                    userid = getValues.GetString(0);
-                    salt = getValues.GetString(1);
+                    user.UserID = getValues.GetString(0);
+                    user.Salt = getValues.GetString(1);
                 }
 
                 getValues.Dispose();
 
                 // Hash password with salt
+                var salt = user.Salt.ToString();
+                var password = user.Password.ToString();
                 PasswordHasher pwHasher = new PasswordHasher();
                 HashResult hashedPassword = pwHasher.HashStoredSalt(password, salt, SHA512.Create());
+                user.Password = hashedPassword.Digest;
 
-                // Check for login match
-                if(db.GetLoginMatch(email, hashedPassword.Digest) == 1) { validLogin = true; }
-
-                if(validLogin)
+                int LoginStatus = db.LoginValidate(user);
+                // Login success
+                if(LoginStatus > 0)
                 {
-                    // Save user information in cookie
-                    UserModel userModel = new UserModel { UserID = userid };
-                    Cookie c = new Cookie(_httpContextAccessor);
-                    c.Set(userModel);
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, user.UserID)
+                    };
 
-                    // TODO: Route to booking page
-                    return RedirectToAction("Index", "Home");
+                    ClaimsIdentity userIdentity = new ClaimsIdentity(claims, "login");
+                    ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
+
+                    await HttpContext.SignInAsync(principal);
+                    return RedirectToAction("Index", "User");
                 }
+
+                // Login fail
                 else
                 {
-                    return RedirectToAction("LoginFailedView");
+                    return RedirectToAction("UserLoginFailed");
                 }
             }
 
-            return RedirectToAction("EmptyFieldsView");
+            // Model data invalid
+            return RedirectToAction("UserModelFailed");
         }
 
-        // View for failed login
-        public IActionResult LoginFailedView()
+        [HttpGet]
+        // View for login fail
+        public IActionResult UserLoginFailed()
         {
             return View();
         }
 
-        // View for missing input fields
-        public IActionResult EmptyFieldsView()
+        [HttpGet]
+        // View for model invalid
+        public IActionResult UserModelFailed()
         {
             return View();
         }
