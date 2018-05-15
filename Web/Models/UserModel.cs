@@ -4,6 +4,7 @@ namespace Web.Models
 {
     public class UserModel
     {
+        string _Fullname;
         public string UserID { get; set; }
 
         [Required]
@@ -24,6 +25,11 @@ namespace Web.Models
         [StringLength(40)]
         [Display(Name = "Last name")]
         public string Lastname { get; set; }
+        public string Fullname
+        {
+            get { return _Fullname; }
+            set { _Fullname = Firstname + " " + Lastname; }
+        }
 
         [Required]
         [StringLength(100)]

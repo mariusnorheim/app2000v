@@ -68,7 +68,7 @@ namespace Web.Controllers
                     c.Set(userModel);
 
                     // TODO: Route to booking page
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {

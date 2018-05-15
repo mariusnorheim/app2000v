@@ -34,7 +34,10 @@ namespace Web.Utils
         // Remove cookie
         public void Remove()
         {
-            _httpContextAccessor.HttpContext.Response.Cookies.Delete("UserID");
+            _httpContextAccessor.HttpContext.Response.Session.Clear();
+            _httpContextAccessor.HttpContext.Response.Session.Abandon();
+            _httpContextAccessor.HttpContext.Response.Cookies.Append(new HttpCookie("ASP.NET_SessionId", ""));
+            //_httpContextAccessor.HttpContext.Response.Cookies.Delete("UserID");
         }
     }
 }

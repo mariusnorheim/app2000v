@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpContextAccessor
+@Html.Raw(httpContextAccessor.HttpContext.Request.Cookies["UserID"])
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -33,19 +35,27 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Booking</a>
                         <ul class="dropdown-menu">
-                            <li><a href="#room" class="dropdown-item">Room</a></li>
-                            <li><a href="#hall" class="dropdown-item">Hall</a></li>
+                            <li><a href="/#room" class="dropdown-item">Room</a></li>
+                            <li><a href="/#hall" class="dropdown-item">Hall</a></li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-right">
-                    <a asp-controller="Login" asp-action="Index"><button type="button" class="btn btn-default navbar-btn">Sign in</button></a>
+                    @if(!string.IsNullOrEmpty(httpContextAccessor.HttpContext.Request.Cookies["UserID"]))
+                    {
+                        <li><a href="#">Hello, @ViewData["Fullname"] !</a></li>
+                        <a asp-controller="Login" asp-action="Logout"><button type="button" class="btn btn-default navbar-btn">Sign out</button></a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Login" asp-action="Index"><button type="button" class="btn btn-default navbar-btn">Sign in</button></a>
+                    }
                 </ul>
             </div>
         </div>
     </nav>
 
-        @RenderBody()
+    @RenderBody()
 
     <div class="container">
         <footer class="footer">
