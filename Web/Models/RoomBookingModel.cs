@@ -6,7 +6,7 @@ namespace Web.Models
 {
     public class RoomBookingModel 
     {
-        public string RoomID { get; set; }
+        public int RoomID { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Arrival")]
@@ -22,7 +22,7 @@ namespace Web.Models
 
         public string Remark { get; set; }
 
-        public List<RoomModel> AvailableRooms { get; set; }
+        public List<RoomBookingModel> AvailableRooms { get; set; }
 
         public enum Room
         {

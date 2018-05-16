@@ -114,15 +114,21 @@ namespace Web.Controllers
                 // Login success
                 if(LoginStatus > 0)
                 {
+                    // Create claims
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, user.UserID)
                     };
 
-                    ClaimsIdentity userIdentity = new ClaimsIdentity(claims, "login");
+                    // Create identity
+                    ClaimsIdentity userIdentity = new ClaimsIdentity(claims, "cookie");
+                    // Create principal
                     ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
 
-                    await HttpContext.SignInAsync(principal);
+                    await HttpContext.SignInAsync(
+                        scheme: "LRSecurityScheme",
+                        principal: principal);
+
                     return RedirectToAction("Index", "User");
                 }
 

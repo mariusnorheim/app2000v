@@ -1,11 +1,19 @@
-﻿@model RoomModel
-@{
+﻿@model RoomBookingModel
     ViewData["Title"] = "Booking";
     Layout = "_LayoutUser";
 }
 
-<table class="table">
-        <td>
-            @Html.DisplayFor(m=> m.RoomID)
-        </td>
-</table>
+<div id="room" class="section bg-lightgrey">
+    <div class="container">
+        <h2>@ViewData["Title"]</h2>
+        <div class="col-md-6 col-md-offset-3">
+            <p class="alert alert-success"><strong>Booking successful!</strong> Your reservation for room number @Html.DisplayFor(m => m.RoomID) was saved in our systems.</p>
+            <br />
+            <h4>Book room</h4>
+            <hr />
+            <p>
+                <a asp-controller="User" asp-action="Index">Book another room</a>
+            </p>
+        </div>
+    </div>
+</div>

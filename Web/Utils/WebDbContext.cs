@@ -101,9 +101,9 @@ namespace Web.Utils
 
 
         // Booking data
-        public List<RoomModel> GetAvailableRooms(RoomBookingModel model)
+        public List<RoomBookingModel> GetAvailableRooms(RoomBookingModel model)
         {
-            List<RoomModel> list = new List<RoomModel>();
+            List<RoomBookingModel> list = new List<RoomBookingModel>();
 
             using(MySqlConnection conn = GetConnection())
             {
@@ -118,7 +118,7 @@ namespace Web.Utils
                 {
                     while(reader.Read())
                     {
-                        list.Add(new RoomModel()
+                        list.Add(new RoomBookingModel()
                         {
                             RoomID = reader.GetInt32(0)
                         });
@@ -149,7 +149,5 @@ namespace Web.Utils
                 conn.Close();
             }
         }
-
-
     }
 }

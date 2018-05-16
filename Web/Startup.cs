@@ -27,16 +27,13 @@ namespace Web
         {
             services.Add(new ServiceDescriptor(typeof(WebDbContext), new WebDbContext
                 (Configuration.GetConnectionString("DefaultConnection"))));
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
+            services.AddAuthentication("LRSecurityScheme")
+                .AddCookie("LRSecurityScheme", options =>
                 {
-                    options.LoginPath = "/Login/UserLogin/";
+                    options.AccessDeniedPath = new PathString("/User");
+                    options.LoginPath = new PathString("/Login/UserLogin");
                 });
             services.AddMvc();
-            services.AddAuthorization(options =>
-                {
-                    options.AddPolicy("UserOnly", policy => policy.RequireClaim("UserID"));
-                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +50,7 @@ namespace Web
             }
 
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
         }
     }

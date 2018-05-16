@@ -11,6 +11,7 @@ using Web.Utils;
 
 namespace Web.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         [HttpGet]
@@ -28,35 +29,49 @@ namespace Web.Controllers
 
         // Search available rooms
         [HttpPost]
-        public IActionResult AvailableRooms([Bind] RoomBookingModel booking)
+        public IActionResult AvailableRooms(RoomBookingModel booking)
         {
             WebDbContext db = HttpContext.RequestServices.GetService(typeof(Web.Utils.WebDbContext)) as WebDbContext;
-            var guestid = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            if(booking.DateFrom > booking.DateTo)
+            var today = DateTime.Now;
+            if(booking.DateFrom > booking.DateTo || booking.DateFrom < today.AddDays(-1))
             {
                 return View("RegisterRoomBookingModelFailed", booking);
             }
 
             if(ModelState.IsValid)
             {
-                // Return list of available rooms
+                // Return list of available rooms and convert to int values
                 booking.AvailableRooms = db.GetAvailableRooms(booking);
+                //List<int> roomlist = booking.AvailableRooms.ConvertAll<int>(Converter<RoomModel, int.Parse>);
 
                 // Select first item in list and make reservation
-                var viewModel = new RoomModel();
-                //viewModel = booking.AvailableRooms.First();
-                viewModel.RoomID = Convert.ToInt32(guestid);
-                return View("RegisterRoomBooking", viewModel);
+                booking = booking.AvailableRooms.First();
+                return RedirectToAction("RegisterRoomBooking", booking);
             }
 
             return View("Index", booking);
         }
 
-        [HttpGet]
-        // View for registration model invalid
-        public IActionResult RegisterRoomBooking(RoomModel room)
+        [HttpPost]
+        // View for registration success
+        public IActionResult RegisterRoomBooking([Bind] RoomBookingModel booking)
         {
+            WebDbContext db = HttpContext.RequestServices.GetService(typeof(Web.Utils.WebDbContext)) as WebDbContext;
+            var guestid = Convert.ToInt32(HttpContext.User.FindFirstValue(ClaimTypes.Name));
+
+            ModelState.Remove("AvailableRooms");
+            ModelState.Remove("Room");
+
+            if(ModelState.IsValid)
+            {
+                // Register new room booking
+                db.RegisterBooking(guestid, booking);
+
+                // Redirect to user area
+                ModelState.Clear();
+                return View();
+            }
+
             return View(); 
         }
 
