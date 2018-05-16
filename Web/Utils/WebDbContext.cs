@@ -24,7 +24,7 @@ namespace Web.Utils
             return new MySqlConnection(ConnectionString);
         }
 
-        // Login data
+        // User login data
         public MySqlDataReader GetLoginData(UserModel model)
         {
             MySqlConnection conn = GetConnection();
@@ -74,7 +74,6 @@ namespace Web.Utils
             }
         }
 
-        // Register data
         public void RegisterUser(UserModel model)
         {
             using(MySqlConnection conn = GetConnection())
@@ -100,6 +99,7 @@ namespace Web.Utils
             }
         }
 
+
         // Booking data
         public List<RoomModel> GetAvailableRooms(RoomBookingModel model)
         {
@@ -110,9 +110,10 @@ namespace Web.Utils
                 MySqlCommand getDataCmd = new MySqlCommand("Get_RR_AvailableRooms", conn);
                 getDataCmd.CommandType = CommandType.StoredProcedure;
                 getDataCmd.Parameters.Add(new MySqlParameter("RoomTypeID", model.Roomtype));
-                getDataCmd.Parameters.Add(new MySqlParameter("dFrom", model.DateFrom));
-                getDataCmd.Parameters.Add(new MySqlParameter("dTo", model.DateTo));
+                getDataCmd.Parameters.Add(new MySqlParameter("dFrom", model.DateFrom.ToShortDateString()));
+                getDataCmd.Parameters.Add(new MySqlParameter("dTo", model.DateTo.ToShortDateString()));
 
+                conn.Open();
                 using(MySqlDataReader reader = getDataCmd.ExecuteReader())
                 {
                     while(reader.Read())
@@ -127,5 +128,28 @@ namespace Web.Utils
 
             return list;
         }
+
+        public void RegisterBooking(int guestid, RoomBookingModel model)
+        {
+            using(MySqlConnection conn = GetConnection())
+            {
+                MySqlCommand setDataCmd = new MySqlCommand("Set_RR_Add", conn);
+                setDataCmd.CommandType = CommandType.StoredProcedure;
+                setDataCmd.Parameters.Add(new MySqlParameter("GID", guestid));
+                setDataCmd.Parameters.Add(new MySqlParameter("RID", model.RoomID));
+                setDataCmd.Parameters.Add(new MySqlParameter("DFrom", model.DateFrom));
+                setDataCmd.Parameters.Add(new MySqlParameter("DTo", model.DateTo));
+                if(model.Remark != null)
+                    setDataCmd.Parameters.Add(new MySqlParameter("Remark", model.Remark));
+                else
+                    setDataCmd.Parameters.Add(new MySqlParameter("Remark", Convert.DBNull));
+
+                conn.Open();
+                setDataCmd.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+
     }
 }

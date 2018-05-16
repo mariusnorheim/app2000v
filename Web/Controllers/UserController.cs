@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -10,9 +11,9 @@ using Web.Utils;
 
 namespace Web.Controllers
 {
-    //[Authorize]
     public class UserController : Controller
     {
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
@@ -27,26 +28,34 @@ namespace Web.Controllers
 
         // Search available rooms
         [HttpPost]
-        public async Task<IActionResult> AvailableRooms([Bind] RoomBookingModel booking)
+        public IActionResult AvailableRooms([Bind] RoomBookingModel booking)
         {
             WebDbContext db = HttpContext.RequestServices.GetService(typeof(Web.Utils.WebDbContext)) as WebDbContext;
+            var guestid = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            ModelState.Remove("Room");
+            if(booking.DateFrom > booking.DateTo)
+            {
+                return View("RegisterRoomBookingModelFailed", booking);
+            }
 
             if(ModelState.IsValid)
             {
-                // Return available rooms
-                List<RoomModel> roomList = db.GetAvailableRooms(booking);
-                return View(db.GetAvailableRooms(booking));
+                // Return list of available rooms
+                booking.AvailableRooms = db.GetAvailableRooms(booking);
+
+                // Select first item in list and make reservation
+                var viewModel = new RoomModel();
+                //viewModel = booking.AvailableRooms.First();
+                viewModel.RoomID = Convert.ToInt32(guestid);
+                return View("RegisterRoomBooking", viewModel);
             }
 
-            // Model data invalid
-            return View();
+            return View("Index", booking);
         }
 
         [HttpGet]
         // View for registration model invalid
-        public IActionResult RegisterRoomBooking()
+        public IActionResult RegisterRoomBooking(RoomModel room)
         {
             return View(); 
         }

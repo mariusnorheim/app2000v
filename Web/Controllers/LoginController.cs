@@ -14,12 +14,14 @@ namespace Web.Controllers
 {
     public class LoginController : Controller
     {
+        // View for registration form
         [HttpGet]
         public IActionResult RegisterUser()
         {
             return View();
         }
 
+        // Post action for registration form
         [HttpPost]
         public IActionResult RegisterUser([Bind] UserModel user)
         {
@@ -52,26 +54,28 @@ namespace Web.Controllers
             return RedirectToAction("RegisterModelFailed");
         }
 
-        [HttpGet]
         // View for registration model invalid
+        [HttpGet]
         public IActionResult RegisterUserExists()
         {
             return View();
         }
 
-        [HttpGet]
         // View for registration model fail
+        [HttpGet]
         public IActionResult RegisterModelFailed()
         {
             return View();
         }
 
+        // View for login form
         [HttpGet]
         public IActionResult UserLogin()
         {
             return View();
         }
 
+        // Post action for login form
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UserLogin([Bind] UserModel user)
@@ -133,15 +137,15 @@ namespace Web.Controllers
             return RedirectToAction("UserModelFailed");
         }
 
-        [HttpGet]
         // View for login fail
+        [HttpGet]
         public IActionResult UserLoginFailed()
         {
             return View();
         }
 
+        // View for login model invalid
         [HttpGet]
-        // View for model invalid
         public IActionResult UserModelFailed()
         {
             return View();

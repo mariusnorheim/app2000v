@@ -31,13 +31,9 @@
                 <a asp-controller="User" asp-action="Index" class="navbar-brand">Luxury Resorts</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Booking</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/user/#room" class="dropdown-item">Room</a></li>
-                            <li><a href="/user/#hall" class="dropdown-item">Hall</a></li>
-                        </ul>
+                <ul class="nav navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a asp-controller="User" asp-action="Index">Booking</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-right">

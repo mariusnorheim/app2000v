@@ -13,7 +13,7 @@
         {
             Text = value.ToString(),
             Value = value.ToString(),
-            Selected = (value.Equals(RoomBookingModel.Room.SingleRoom))
+            Selected = (value.Equals(Model.Roomtype))
         };
 }
 
@@ -21,6 +21,7 @@
     <div class="container">
         <h2>@ViewData["Title"]</h2>
         <div class="col-md-6 col-md-offset-3">
+            <p class="alert alert-danger"><strong>Booking failed!</strong> Arrival has to be earlier than departure, please try again.</p>
             <form method="post" action="/User/AvailableRooms">
                 <br />
                 <h4>Book room</h4>

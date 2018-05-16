@@ -33,6 +33,10 @@ namespace Web
                     options.LoginPath = "/Login/UserLogin/";
                 });
             services.AddMvc();
+            services.AddAuthorization(options =>
+                {
+                    options.AddPolicy("UserOnly", policy => policy.RequireClaim("UserID"));
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
